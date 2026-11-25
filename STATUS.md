@@ -12,6 +12,11 @@
   - TSO–DSO Q −1.29 Gvar (injecting, like Fig 4-84).
   - Trip checks met: max-V rise +5.05 kV (+4.9); Granada 25 kV/Gvar.
   - Fig 2-4 line flows are checks only (one bus per zone, S29 §9).
+- **Pre-PSCAD review done (S29 §11): proceed.** PSCAD design changes:
+  - A: two-layer unit voltage control, with a slow weak-droop outer Q loop (K ≈ 10–15 Mvar/kV per GW), so the drift
+    emerges;
+  - B: relay thresholds as offsets from the model's pre-event hub voltage;
+  - C: France source X calibrated for the 4,609 MW AC peak.
 - **Open:**
   - Spanish TSO–DSO Q +0.97 Gvar absorbing, but Fig 4-84 says the DSOs inject (−1.3 Gvar at 412 kV, 400 kV interface
     only). Suspected cause: the 3.2 % unit connection X from TRIPCAL. Next: remote voltage control (AVR line-drop

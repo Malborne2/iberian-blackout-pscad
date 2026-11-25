@@ -720,6 +720,51 @@ if FAST and FP is not None:                                 # final state throug
     pp.runpp(net, init="results")
     print(f"fastpf vs pandapower at the final state: max dV {np.abs(vf - net.res_bus.vm_pu.values).max():.1e} pu, "
           f"max d gen Q {np.abs(qf - net.res_gen.q_mvar.values).max():.1e} Mvar; total load flows {CNT['runpp']} in {CNT['t_pf']:.1f} s, fallbacks {CNT.get('fallback', 0)}")
+if os.environ.get("DRIFTCHK", "1") == "1":                 # static 12:32:00 -> 12:32:57 drift check (RUNLOG S29 sec 11)
+    # drivers, imposed statically: RES set-point down-ramp ~270 MW ([CA] p.88: 480 MW observable RES incl. the 208 MW of
+    # trips), trips 2a north / 2b south 104 + 104 MW [inf split] ([FR] p.122), +317 MW net load from lost rooftop PV
+    # (event 1, [FR] p.122; emergent in PSCAD, imposed here) spread with demand. Report response: France export -1,030 MW,
+    # Olmedilla (VAL) 413 -> 428 kV, S.Servan (BAD) 411 -> 424 kV ([CA] p.39, p.87-88), 400 kV max 421.8 kV at 12:32:57 (Fig 3-7a).
+    NOR_, SOU_ = {"CYL", "NW", "N", "ARA", "CAT"}, {"WAN", "GRA", "SCE", "BAD", "CAC"}
+    ires_ = [i_ for i_, n in zip(net.sgen.index, net.sgen.name) if n.startswith("RES") and n.split()[-1] in ES]
+    keep_s = net.sgen.loc[ires_, ["p_mw", "q_mvar"]].copy(); keep_p = dict(P0); Vk_ = FP.V.copy() if FP is not None else None
+    keep_vm = net.gen.vm_pu.copy(); Q_U0 = [net.res_gen.at[GI[n], "q_mvar"] for n in ("G1 Almaraz II", "G2 Cat nuclear A", "G3 Cat nuclear B", "G4 N thermal", "G5 N hydro", "G6 SW CCGT", "G7 E CCGT")]
+    v0_ = net.res_bus.vm_pu.values.copy()
+    def xfer():
+        return (sum(flow(z, {"FR"}) for z in ES) + HVDC_FR, sum(flow(z, {"PT-N", "PT-S"}) for z in ES), flow("WAN", {"MA-B"}))
+    f0_ = xfer(); tot_ = net.sgen.loc[ires_, "p_mw"].sum()
+    for i_ in ires_:
+        z = net.sgen.at[i_, "name"].split()[-1]; p = net.sgen.at[i_, "p_mw"]
+        zt = sum(net.sgen.at[j, "p_mw"] for j in ires_ if net.sgen.at[j, "name"].split()[-1] in (NOR_ if z in NOR_ else SOU_))
+        cut = 270 * p / tot_ + (104 * p / zt if z in NOR_ | SOU_ else 0)
+        net.sgen.at[i_, "p_mw"] = p - cut; net.sgen.at[i_, "q_mvar"] = a.kpf * (p - cut)
+    pes_ = sum(P0[z] for z in ES)
+    for z in ES: P0[z] += 317 * keep_p[z] / pes_
+    solve(full=True)
+    if os.environ.get("DRIFT_QHOLD", "0") == "1":           # units keep their 12:32:00 Q (no AVR action), the report's
+        GU_ = [GI[n] for n in ("G1 Almaraz II", "G2 Cat nuclear A", "G3 Cat nuclear B", "G4 N thermal", "G5 N hydro", "G6 SW CCGT", "G7 E CCGT")]
+        q00_ = {i_: q for i_, q in zip(GU_, Q_U0)}          # "insufficient absorption / flat Q" ([CA] p.111-112) as a bound
+        KD_ = float(os.environ.get("DRIFT_DROOP", 0))       # Mvar/kV per GW of unit P: Q = Q0 - KD * P/1000 * dV(400 kV side)
+        hv_ = {i_: B[GEN_ZONE[n]] for n, i_ in GI.items() if i_ in GU_}; vh0_ = {i_: v0_[hv_[i_]] for i_ in GU_}
+        for it_ in range(200):
+            tq_ = {i_: q00_[i_] - KD_ * abs(net.gen.at[i_, "p_mw"]) / 1000 * 400 * (net.res_bus.vm_pu[hv_[i_]] - vh0_[i_]) for i_ in GU_}
+            dq_ = {i_: net.res_gen.at[i_, "q_mvar"] - tq_[i_] for i_ in GU_}
+            if max(abs(v) for v in dq_.values()) < 1.0: break
+            for i_ in GU_: net.gen.at[i_, "vm_pu"] -= float(np.clip(dq_[i_] / 8000.0, -0.003, 0.003))   # absorbing more (dq<0) -> raise set-point
+            solve(full=True)
+        print(f"   DRIFT_QHOLD (droop {KD_} Mvar/kV per GW): unit Q law met after {it_ + 1} iterations (max dQ {max(abs(v) for v in dq_.values()):.1f} Mvar)")
+    v1_ = net.res_bus.vm_pu.values.copy(); f1_ = xfer()
+    SPB_ = [B[z] for z in ES] + [B[f"{z}-TS"] for z in TSX]; nmb_ = {B[z]: z for z in ES}; nmb_.update({B[f"{z}-TS"]: f"{z}-TS" for z in TSX})
+    m0_, m1_ = max(SPB_, key=lambda b: v0_[b]), max(SPB_, key=lambda b: v1_[b])
+    print(f"drift check 12:32:00->57 (static): France export {f0_[0]:.0f} -> {f1_[0]:.0f} ({f1_[0] - f0_[0]:+.0f}; report -1,030), "
+          f"PT {f1_[1] - f0_[1]:+.0f}, MA {f1_[2] - f0_[2]:+.0f} MW | VAL (Olmedilla) {400 * (v1_[B['VAL']] - v0_[B['VAL']]):+.1f} kV (report +15), "
+          f"BAD-TS (S.Servan) {400 * (v1_[B['BAD-TS']] - v0_[B['BAD-TS']]):+.1f} kV (report +13) | max {400 * v0_[m0_]:.1f} at {nmb_[m0_]} -> "
+          f"{400 * v1_[m1_]:.1f} at {nmb_[m1_]} (report 421.8 at 12:32:57)")
+    print("   zone dV: " + "  ".join(f"{nmb_[b]} {400 * (v1_[b] - v0_[b]):+.1f}" for b in SPB_))
+    net.sgen.loc[ires_, ["p_mw", "q_mvar"]] = keep_s.values; P0.update(keep_p)
+    net.gen.vm_pu = keep_vm
+    if Vk_ is not None: FP.V = Vk_
+    solve(full=True)
 if TRIPCAL or os.environ.get("TRIPCHK", "1") == "1":
     d3, d4 = trip_dv(); print(f"trip gate: 4a+4b at BAD-TS {d4:+.2f} kV (target {TRIP_T['E4']}), Granada at GRA {d3:+.2f} kV "
                               f"= {d3 / (-a.kpf * 355) * 1000:.0f} kV/Gvar (report 18-42); unit connection X {VKG[0]:.2f} %")

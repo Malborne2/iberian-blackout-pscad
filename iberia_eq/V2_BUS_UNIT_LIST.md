@@ -66,6 +66,18 @@ whenever the report gives its trigger: a voltage, a frequency, or a correlation 
 | G9 | France | FR | as ib6 | — | Fig 4-91 tie calibration |
 | G10 | Morocco | MA | 570–750 export from Spain | ties trip at 16a/16b, 12:33:20.229 and 20.473 | Fig 2-41, Fig 2-22; size [EXT] (O4 below) |
 
+**Unit voltage control in two layers (S29 §11, change A).**
+- **Fast:** AVR with ≈ 80 % line-drop compensation on the 15 % step-up, for the seconds-scale trip steps.
+- **Slow:** outer Q loop (T ≈ 20 s [inf]) toward Q0 − K·P·ΔV(400 kV), with K ≈ 10–15 Mvar/kV per GW.
+  - Report data point: Fig 4-2 → 4-3, ≈ 6.5.
+  - Without it the 12:32 drift does not emerge (+1–3 kV vs the report's +13–15).
+
+**Relay thresholds as offsets (S29 §11, change B):** threshold = V_model(12:32:00) + (V_trip − V_12:32:00 from the
+report), because zone hubs are averages.
+
+**France source (change C):** its impedance is calibrated in PSCAD for the 4,609 MW AC import at loss of synchronism
+([CA] p.54; ≈ 38 Ω total; ties 15.9 Ω).
+
 **Unit step-up and AVR (S29 §5, §10).**
 - The accepted pre-event state uses a 3 % connection reactance for Spanish units G1–G7.
 - Build each unit with a realistic step-up (≈ 15 % on rating) and an AVR with reactive line-drop compensation of

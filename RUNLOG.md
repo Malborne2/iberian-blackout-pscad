@@ -251,6 +251,87 @@ MADW=200), TRIPCAL=0. Shifts are ≤ 0.6 GW: MAD +587, CAT +280, ARA +236, CAC �
 **For PSCAD:** the 3 % unit connection X is the network-side equivalent of a realistic 15 % step-up with ≈ 80 % AVR
 line-drop compensation (S29 §5). Build it that way (V2 list §2).
 
+### 11. Pre-PSCAD review of the accepted state (owner request) — verdict: proceed, with three design changes (agent: claude-main)
+**New static checks** (in `pp_v2.py`, printed every run; `pp_v2_angles.py`):
+
+1. **12:32 drift (`DRIFTCHK`, default on).**
+   - Applied the minute's drivers statically:
+     - RES set-point down-ramp 270 MW ([CA] p.88), forced;
+     - 2a/2b trips 104 + 104 MW, forced;
+     - +317 MW net load from lost rooftop PV, emergent in PSCAD.
+   - With units as ideal voltage controllers (PV), France export falls −769 MW, but voltages rise only
+     **+1.4…+3 kV**. The report has VAL/Olmedilla +15, BAD/S.Serván +13, Granada +9 kV.
+   - With unit Q following a weak droop (`DRIFT_QHOLD=1 DRIFT_DROOP=k`, Mvar/kV per GW of unit P, 400 kV side; the
+     loop leaves ≤ 120 Mvar unresolved):
+
+     | droop | France export | VAL | BAD-TS | GRA |
+     |---|---|---|---|---|
+     | PV (ideal) | −769 | +1.4 | +3.1 | +0.9 |
+     | 15 | **−1,018** | +10.5 | **+15.4** | — |
+     | 10 | −1,097 | +12.9 | +19.1 | +17.4 |
+     | 6.5 | −1,170 | **+15.3** | +22.7 | — |
+     | 0 (flat Q) | −1,447 | +23.1 | +33.6 | — |
+     | report | −1,030 | +15 | +13 | +9 |
+
+   - **The drift is emergent from the report's own drivers if the units' minute-scale Q response is weak, ≈ 10–15
+     Mvar/kV per GW.** Data point: Fig 4-2 → 4-3, South-Spain PO 7.4 units 74 → 185 Mvar over a ≈ 13 kV rise, i.e.
+     ≈ 6.5 Mvar/kV per GW. Ideal AVRs kill the drift (the S27 F0 "missing drift").
+2. **Angle WAN−CAT +56.6°** (spread 59°). The report gives ≈ 80° Carmona – S.Llogaia during the oscillations, when
+   exports were ≈ 1 GW higher. Plausible.
+3. **France ties:** 15.9 Ω in parallel (N–FR 33.3, CAT–FR 30.4). pandapower treats France as ideal at its hub, so the
+   PSCAD France source impedance is free.
+   - The committee gives 4,609 MW AC import at loss of synchronism ([CA] p.54), so V²/X_tot ≈ 38 Ω (Spain to France
+     centre).
+   - v1's calibrated 76 Ω tie gave a 6 % short peak with a different Spanish network, so it does not carry over.
+
+**Design changes for the PSCAD build** (V2 list updated):
+- **A. SyncUnit voltage control in two layers.**
+  - Fast AVR with ≈ 80 % line-drop compensation on a 15 % step-up (network sees ≈ 3 %, S29 §5/§10): the
+    seconds-scale trip steps.
+  - **Slow outer Q controller** (T ≈ 20 s [inf]) that returns Q to Q0 − K·P·ΔV, with K ≈ 10–15 Mvar/kV per GW:
+    the minute-scale drift.
+  - One southern unit with flat Q ([CA] p.111) is an option.
+  - Bench on the 2-bus case.
+- **B. Relay thresholds as offsets.** Zone hubs are averages; e.g. GRA is 412.5 kV in the model vs Caparacena 409
+  kV at 12:32:00. Each plant's threshold = V_model(12:32:00) + (V_trip − V_12:32:00) from the report.
+  - Example: Granada needs +8.9 kV. An absolute 417.9 kV would trip it about 30 s early.
+- **C. France source X** calibrated in PSCAD for the 4,609 MW AC peak at loss of synchronism (start ≈ 20 Ω behind the
+  hub), then against Fig 4-91.
+- Minor: drop the CAC–PT-N equivalent (714 Ω, carries nothing). Fig 3-7a's "max 421.8 kV at 12:32:57" (S27 digitised)
+  conflicts with the committee's local values (Olmedilla 428, "> 430 kV in several nodes at 12:33:00"); use the
+  committee's local values for the drift.
+
+**v1 lessons and their status:**
+
+| v1 problem | v2 status |
+|---|---|
+| Drift missing (F0) | explained: ideal AVRs; fixed by change A |
+| Granada alone did not cascade (Case B, margin 0.020 pu) | the drift now raises the south 13–19 kV statically, so the trip points are reached by the drift; change B sets timing |
+| Snapshot freezes machine parameters | any H/AVR change → cold settle; settle once with the final unit data |
+| `fixed_load` fallback to constant Z | `varrlc` exponential loads (benched) |
+| Rooftop PV 10 Hz oscillation | latched trip (benched) |
+| Pump torque-step swing | one motor per stage (benched) |
+| 2-machine island collapse after separation | v2 has 10 generators + 3 embedded + 7 pumps (Table 2-4 inertia) |
+| Tie peak 6 % short | change C |
+| PSCAD crashes on canvas edits (7×) | scripted builds, save after each step, one case per instance |
+| Ø path | build only in `C:\PSCAD_work` |
+| Node limit 200 | estimate 190–200 unchanged (no buses added in S29); skeleton build first |
+| Run time (20 µs, switching plants) | ≈ 95 s per replay (12:32:00 → 12:33:30) plus settle: hours per run, ≤ 8 in parallel; parked-relay passes first |
+
+**Emergent vs forced** (plan criterion):
+- **Emergent:** the 12:32 drift, the trip of every Table 3-3 plant (12 relays), rooftop PV, the frequency defence
+  (pumps 49.5 / 49.3 Hz, 6 LFDD steps), the France out-of-step trip, and the Portuguese DG frequency stages.
+- **Forced** (cause outside the model or unknown):
+  - the 2a/2b trips and the 270 MW AGC down-ramp;
+  - the Morocco ties (Moroccan UF relay, setting unknown; could be emergent at ≈ 49.3–49.4 Hz [inf]);
+  - lines 9, 36a/b, 42; cluster 50;
+  - the nuclear trips (could be emergent UF relays: Almaraz tripped at 46.15 Hz, Ascó at 45.89 Hz [CA] p.53).
+- Later RES waves: aggregate relays with fitted settings.
+
+**Verdict:** the state is fit for the fidelity objective. It holds the report's static data, and its static responses
+(trip steps, drift with weak unit Q, France export change) have the report's sizes. Proceed to the PSCAD skeleton
+build, with changes A–C in the design.
+
 ## Session 28 — 2026-11-25 — agent: claude-mac (local macOS copy, **no PSCAD**): pandapower v2 load flow continued
 
 **Scope:** continue the pandapower v2 calibration from S27 §34 on a local copy (pandapower 3.5.6 in a venv, Python
