@@ -213,6 +213,50 @@ event replay is ≈ 3 h, so runs must be few, short and parallel.
 - `build_v2.py` and `run_v2.py` now default to `C:\PSCAD_work2sld`. The previous generator is kept as
   `build_v2_grid.py`.
 
+### 9. First health runs: the single-line case dies at t = 0, the old case loses synchronism; error capture fixed (2026-11-26, agent: claude-main)
+
+Correction to §8: the folder is `C:\PSCAD_work\v2sld` (the text shows `C:\PSCAD_work2sld`, a lost `\v`).
+
+**sld_health12 (single-line case) — EMTDC abort at t = 0.** The owner saw the build errors in PSCAD; `run_v2.py` kept
+waiting. PSCAD messages (read with the new `iberia_eq/pscad/pscad_msgs.py <port>`):
+`Short circuited or parallel ideal voltage source between nodes 0 and 35 of subsystem 1`,
+`ERROR: Abnormal termination of EMTDC by SCTEST`, status code 2000, plus 11 × `varrlc: Inductance value is too small`.
+- **Cause:** the exponential-load chain (freq-meas → realpole → x^y → gain) is coded in DSOUT, after the network
+  solution (`Main.f`: `LLoad_MA = 0.509296 * XLLoad_MA` in `MainOut`). varrlc reads R/L in DSDYN. At t = 0 the
+  signal storage is 0, so every exponential-load branch is a 0 Ω short in parallel with the SyncUnit start-up sources.
+- **Fix:** `iberia_eq/pscad/add_varrlc0.py` adds `v2:varrlc0`, the library varrlc unchanged except a Constant `X0`
+  (the branch's 1 pu R or L) and `MERGE(X0, R, R <= 0)` on the R/L input. `build_v2.py` uses it for the 33
+  exponential branches. No extra nodes or pages. Rebuild: 0 errors. The remaining warnings are the intended
+  label-to-busbar bindings (`A previous declaration 'B_x' as a bus exists`) and gfortran `**-2.1` notes.
+- **Why the script missed it:** its check ignored "error" when the output also contained "Simulation has ended".
+  `run_v2.py` now:
+  - reads the PSCAD message list after the build and on every poll; skill P6.3 warnings count as errors;
+  - parses the EMTDC `Status code`; anything other than 0, or an abort line, fails the run;
+  - stops a run with no new samples for `--stall` min (default 10);
+  - on failure writes the messages and the output tail to `run.log` and exits with code 2.
+
+**health12 (old layout `C:\PSCAD_work\v2`, constant-Z loads, France Es fix): total loss of synchronism.**
+`python iberia_eq/pscad/read_v2.py health12 --win 10 12 --timeline 0.25` and `python iberia_eq/pscad/diag_v2.py health12`:
+- 0–5 s, all machine speeds held at 50.000 Hz, but the machine terminal voltages swing together, 0.64–1.26 pu with a
+  period of about 2 s. Bus means 297–460 kV. The swing starts as the RES plants ramp to full current (1–1.5 s).
+- 5 s, speeds released: frequencies separate within 1.5 s. 13 RES plants trip at 6.5 s. By 12 s: 44–88 Hz and buses
+  at 100–400 kV.
+- Reading: an excitation-side oscillation (AVR KA 40 / KF 0.03 / TF 1, outer Q loop Kdrp 4 / Kiq 0.005, load
+  compensation XCc). The rotors are released into it.
+
+**Parallel isolation runs (each in its own folder via the new `iberia_eq/pscad/make_v2_variant.py`; all visible):**
+
+| tag | change from `C:\PSCAD_work\v2` | length |
+|---|---|---|
+| v2_settle30 | none, snapshot at 28 s | 30 s |
+| v2_kd2 / v2_kd8 | Kdrp 4 → 2 / 8 (8 generators) | 20 s |
+| v2_kiq01 | Kiq 0.005 → 0.01 | 20 s |
+| v2_noq | Kiq → 0 on all units (outer Q loop off) | 20 s |
+| v2_xcc0 | XCc 0.03 / 0.05 → 0 | 20 s |
+| sld_health12 | single-line case with varrlc0 | 12 s |
+
+Results follow in §10.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
