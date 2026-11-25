@@ -23,7 +23,7 @@ ap.add_argument("--env", nargs="*", default=[], help="extra KEY=VALUE flags on t
 ap.add_argument("--log", default=None, help="write stdout+stderr to this file as well")
 a, extra = ap.parse_known_args()
 
-env = dict(os.environ, **BASE_ENV, **dict(kv.split("=", 1) for kv in a.env))
+env = {**os.environ, **BASE_ENV, **dict(kv.split("=", 1) for kv in a.env)}   # later entries override (base flags can be switched off)
 if a.cold:
     env.pop("RESUME", None)
     env["STATE"] = a.state or "pp_v2_state_cold.pkl"

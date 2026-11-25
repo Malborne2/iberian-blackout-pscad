@@ -145,13 +145,25 @@ def gc(p_, q_):
     return 2 * 6371 * math.asin(math.sqrt(math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2))
 HUB_ALL = os.environ.get("HUB_ALL", "1") == "1"            # pass 4: hub-to-hub for EVERY inter-zone corridor
 OSM_KM = {k: v[1] / v[0] for k, v in pairs.items()}
+# CORR_X=fit: corridor reactances from the zonal reduction of the full OSM network (reduce_fullnet.py, RUNLOG S29 sec 8)
+CORR_X_FIT = os.environ.get("CORR_X", "hub") == "fit"
+XFIT = {}
+if CORR_X_FIT:
+    fn_ = "corridor_x_fit_open.csv" if os.environ.get("OPEN_LINES", "0") == "1" else "corridor_x_fit.csv"
+    XFIT = {tuple(sorted((r["zone_a"], r["zone_b"]))): float(r["x_fit_ohm"]) for r in csv.DictReader(open(os.path.join(HERE, fn_), encoding="utf-8"))}
+    if ("CAC", "PT-S") not in pairs: pairs[("CAC", "PT-S")] = [1, 80.0]; OSM_KM[("CAC", "PT-S")] = 80.0   # Cedillo-Falagueira [inf length]
+    print(f"CORR_X=fit: {len(XFIT)} corridor reactances from {fn_}")
 PHYS_CKM = {k: v[1] for k, v in pairs.items()}             # physical circuit-km per corridor (OSM)
+if CORR_X_FIT: PHYS_CKM[("CAC", "PT-S")] = 0.0               # its charging is already counted in CAC-PT-N (OSM mapping)
 print("corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):")
 for k in list(pairs):
     if any(z.startswith("PT") for z in k) or (HUB_ALL and all(z in CEN for z in k)):
         nc0 = pairs[k][0]; old_km = pairs[k][1] / nc0
         nc = max(nc0, a.mincirc)                            # [inf] equivalent circuits incl. parallel 220 kV paths / OSM gaps
-        pairs[k] = [nc, nc * a.route * gc(CEN[k[0]], CEN[k[1]]) * (PT_TIE_K * (PT_TIE_SW if set(k) & {"CAC", "BAD", "WAN"} else 1.0) if any(z.startswith("PT") for z in k) else 1.0)]
+        if CORR_X_FIT and tuple(sorted(k)) in XFIT:        # length such that X_KM * L / nc = fitted reactance
+            pairs[k] = [nc, nc * XFIT[tuple(sorted(k))] * nc / X_KM]
+        else:
+            pairs[k] = [nc, nc * a.route * gc(CEN[k[0]], CEN[k[1]]) * (PT_TIE_K * (PT_TIE_SW if set(k) & {"CAC", "BAD", "WAN"} else 1.0) if any(z.startswith("PT") for z in k) else 1.0)]
         OSM_KM[k] = old_km
         print(f"   {k[0]:>4s}-{k[1]:<5s} x{nc0}->{nc}: {old_km:5.0f} -> {pairs[k][1] / nc:5.0f}")
 zkm = {r["zone"]: float(r["circuit_km_incl_half_ties"]) for r in csv.DictReader(open(os.path.join(HERE, f"zone_km{SFX}.csv"), encoding="utf-8"))}
@@ -169,10 +181,14 @@ internal_ckm = {z: max(0.0, zkm[z] - ties_ckm.get(z, 0)) for z in zkm}
 # generate ~1 Gvar against the Portuguese unit (circulating Q, RUNLOG S29) [inf]
 OPEN_LINES = os.environ.get("OPEN_LINES", "0") == "1"
 if OPEN_LINES:
-    for z_, km_ in {"CAT": 30.0, "VAL": 13.0, "ARA": 145.0}.items():
-        internal_ckm[z_] = max(0.0, internal_ckm[z_] - km_)
-    k_ = ("ARA", "VAL"); nc_, ckm_ = pairs[k_]; n2_ = max(1, nc_ - 1); pairs[k_] = [n2_, ckm_ / nc_ * n2_]
-    print(f"OPEN_LINES: internal charging -30/-13/-145 km (CAT/VAL/ARA); ARA-VAL x{nc_} -> x{n2_}")
+    if os.environ.get("CORR_X", "hub") == "fit":           # only Pierola-Sentmenat (41 km x2) is in the OSM line list (S29 sec 8)
+        internal_ckm["CAT"] = max(0.0, internal_ckm["CAT"] - 82.0)
+        print("OPEN_LINES (fit mode): CAT internal charging -82 circuit-km (Pierola-Sentmenat); reactances from the reduced network")
+    else:
+        for z_, km_ in {"CAT": 30.0, "VAL": 13.0, "ARA": 145.0}.items():
+            internal_ckm[z_] = max(0.0, internal_ckm[z_] - km_)
+        k_ = ("ARA", "VAL"); nc_, ckm_ = pairs[k_]; n2_ = max(1, nc_ - 1); pairs[k_] = [n2_, ckm_ / nc_ * n2_]
+        print(f"OPEN_LINES: internal charging -30/-13/-145 km (CAT/VAL/ARA); ARA-VAL x{nc_} -> x{n2_}")
 
 net = pp.create_empty_network(f_hz=50, sn_mva=100)
 B = {b: pp.create_bus(net, vn_kv=400, name=b) for b in BUSES}
@@ -184,6 +200,8 @@ for (za, zb), (nc, ckm) in pairs.items():
     if CHG_PHYS: CTOT[i_] = C_NF_KM * PHYS_CKM[(za, zb)]
 for (za, zb), (nc, km, kind) in EXTRA.items():
     c = 230.0 if kind == "cable" else C_NF_KM; x = 0.12 if kind == "cable" else a.xk * X_KM      # [inf] 400 kV cable
+    if CORR_X_FIT and tuple(sorted((za, zb))) in XFIT and kind == "ohl":
+        x = XFIT[tuple(sorted((za, zb)))] * nc / km
     pp.create_line_from_parameters(net, B[za], B[zb], length_km=km, r_ohm_per_km=0.02, x_ohm_per_km=x,
                                    c_nf_per_km=c, max_i_ka=2.0, parallel=nc, name=f"{za}-{zb}")
 for z, x in TSX.items():                                   # hub -> TS: equivalent 400 kV line, X calibrated to Table 4-26
@@ -512,7 +530,8 @@ def resid(x):
     setx(x)
     try:
         solve(full=True)
-    except Exception:
+    except Exception as ex_:
+        if os.environ.get("LSDBG"): print("  resid exception:", type(ex_).__name__, str(ex_)[:120], flush=True)
         net.converged = False; return np.full(NRES, 50.0)
     V = net.res_bus.vm_pu; qg = unitq()
     r = [400 * (V[B[VB(z)]] - VT[z] / 400) for z in VT]                                       # kV
@@ -523,7 +542,8 @@ def resid(x):
     qfr = sum(qflow(z, {"FR"}) for z in ES); qma = qflow("WAN", {"MA-B"}); qpt = sum(qflow(z, {"PT-N", "PT-S"}) for z in ES)
     r += [(-(qg["G1 Almaraz II"] + qg["G6 SW CCGT"] + qg["G7 E CCGT"]) - 74) / 50]   # Fig 4-2: PO 7.4 units, South Spain, 74 Mvar absorbed
     r += [(qfr - QTIE["FR"]) / 50, (qma - QTIE["MA"]) / 50, (qpt - 100) / 50]          # ES->PT tie Q now a target (Fig 2-93)
-    if a.flowcal: r += [(flow("CAC", {"MAD"}) - FLOWT[("CAC", "MAD")]) / 50]
+    if a.flowcal: r += [(flow("CAC", {"MAD"}) - FLOWT[("CAC", "MAD")]) / float(os.environ.get("MADW", 50))]   # MADW: weight (MW per unit)
+    if float(os.environ.get("MADREG", 0)) > 0: r += [float(os.environ["MADREG"]) * (P0["MAD"] - P0_MAD0) / 1000]   # penalty per GW of Madrid shift (S29 sec 8)
     if FLOW2: r += [(flow(k_[0], {k_[1]}) - t_) / 100 for k_, t_ in F2T.values()]
     if PTSPLIT: r += [(flow("NW", {"PT-N"}) + flow("CYL", {"PT-N"}) - 200) / 50]       # Fig 2-41 exact: North -> Portugal 200 MW
     if OBJ2:                                                 # identifiability terms (S28): pin the null directions found by SVD=1
@@ -544,7 +564,7 @@ def resid(x):
 
 
 P0_MAD0, P0_WAN0 = P0["MAD"], P0["WAN"]
-NRES = len(VT) + len(QAREA) + 8 + (1 if a.flowcal else 0) + len(KZ) + (1 if PTSPLIT else 0) + (2 if TRIPCAL else 0) + (3 if FLOW2 else 0) + ((len(GEN_AREA) + 1 + len(CAL) + 1) if OBJ2 else 0)
+NRES = len(VT) + len(QAREA) + 8 + (1 if a.flowcal else 0) + (1 if float(os.environ.get('MADREG', 0)) > 0 else 0) + len(KZ) + (1 if PTSPLIT else 0) + (2 if TRIPCAL else 0) + (3 if FLOW2 else 0) + ((len(GEN_AREA) + 1 + len(CAL) + 1) if OBJ2 else 0)
 
 
 def calib_ls(tag=""):
@@ -552,10 +572,34 @@ def calib_ls(tag=""):
     lo = np.concatenate([np.full(len(KZ), -6.0), np.full(len(KG), 0.85), [0.7, 0.5, 0.9, 0.85, -1.5, 3.0]] + ([[0.45]] if PTSPLIT else []) + ([[-1.0, -1.5, -1.5]] if FLOW2 else []) + ([[0.03]] if KNOB_VKG else []))
     hi = np.concatenate([np.full(len(KZ), 6.0), np.full(len(KG), 1.15), [1.3, 1.5, 1.1, 1.15, 1.5, 6.0]] + ([[0.70]] if PTSPLIT else []) + ([[1.0, 1.5, 1.5]] if FLOW2 else []) + ([[0.25]] if KNOB_VKG else []))
     x0 = np.clip(x0, lo + 1e-6, hi - 1e-6)
+    if os.environ.get("RESDUMP"):                           # print the residual groups at the start and the end
+        RD_ = lambda r_: f"V {np.sum(r_[:len(VT)]**2):.1f} | other {np.sum(r_[len(VT):]**2):.1f}"
     c0 = dict(CNT); t0 = time.perf_counter()
-    sol = least_squares(resid, x0, bounds=(lo, hi), x_scale="jac", diff_step=float(os.environ.get("DSTEP", 1e-3)), max_nfev=400)
-    setx(sol.x); solve(full=True)
-    r = resid(sol.x)
+    # frozen knobs are taken OUT of the optimisation (a knob squeezed between near-equal bounds, or one resting on a
+    # bound, made trf stop after 2-3 evaluations: S29 sec 8). MADFIX=1 freezes the Madrid demand shift at 0.
+    free = np.ones(len(x0), bool)
+    if os.environ.get("MADFIX") == "1":
+        im_ = len(KZ) + len(KG) + 4; x0[im_] = 0.0; free[im_] = False
+    def _fill(xf):
+        xx = x0.copy(); xx[free] = xf; return xx
+    tol_ = float(os.environ.get("LSTOL", 1e-8))
+    if os.environ.get("LSPROBE"):
+        r0_ = resid(_fill(x0[free]))
+        for j_, nm_ in ((0, "shunt GRA +0.1 Gvar"), (len(KZ), "vm G1 +0.005")):
+            xp_ = x0.copy(); xp_[j_] += 0.1 if j_ == 0 else 0.005; r1_ = resid(xp_)
+            print(f"  PROBE {nm_}: |dr| {np.abs(r1_ - r0_).max():.4g}, V GRA {400 * net.res_bus.vm_pu[B['GRA']]:.2f} kV, FAST {FP is not None}", flush=True)
+        xf0_ = x0[free].copy(); r0_ = resid(_fill(xf0_)); g_ = np.zeros(len(xf0_)); J_ = []
+        for j_ in range(len(xf0_)):
+            h_ = 1e-3 * max(1.0, abs(xf0_[j_])); xp_ = xf0_.copy(); xp_[j_] += h_; J_.append((resid(_fill(xp_)) - r0_) / h_)
+        J_ = np.array(J_).T; g_ = J_.T @ r0_
+        print(f"  PROBE manual: |r| {np.linalg.norm(r0_):.3g}, |J^T r| {np.abs(g_).max():.3g} (knob {int(np.argmax(np.abs(g_)))}), "
+              f"rank J {np.linalg.matrix_rank(J_, 1e-6)} of {len(xf0_)}; r0 repeat diff {np.abs(resid(_fill(xf0_)) - r0_).max():.2e}", flush=True)
+        resid(x0)
+    sol = least_squares(lambda xf: resid(_fill(xf)), x0[free], bounds=(lo[free], hi[free]), x_scale=("jac" if os.environ.get("LSXS", "jac") == "jac" else 1.0), method=os.environ.get("LSMETHOD", "trf"),
+                        diff_step=float(os.environ.get("DSTEP", 1e-3)), max_nfev=int(os.environ.get("LSNFEV", 400)), xtol=tol_, ftol=tol_, gtol=tol_)
+    xs = _fill(sol.x); setx(xs); solve(full=True)
+    if os.environ.get("LSDBG"): print(f"  least_squares status {sol.status}: {sol.message}; free knobs {int(free.sum())}; |grad| {np.abs(sol.grad).max():.3g}; active {np.flatnonzero(sol.active_mask).tolist()}", flush=True)
+    r = resid(xs)
     print(f"  {tag} least_squares: nfev {sol.nfev}, max |V err| {np.abs(r[:len(VT)]).max():.2f} kV, "
           f"max other err {np.abs(r[len(VT):len(VT) + len(QAREA) + 9]).max() * 50:.0f} (MW/Mvar) | njev {sol.njev}, "
           f"resid calls {CNT['resid'] - c0['resid']}, load flows {CNT['runpp'] - c0['runpp']} "
@@ -596,6 +640,7 @@ elif not a.quick:
     for i_, n in zip(net.line.index, net.line.name):        # PT ties: names like "CAC-PT-N"
         za = n.split("-")[0]; zb = n[len(za) + 1:]
         OSMI[i_] = OSM_KM.get((za, zb), OSM_KM.get((zb, za), HUB_KM[i_])) if (za, zb) in OSM_KM or (zb, za) in OSM_KM else HUB_KM[i_]
+    if CORR_X_FIT: OSMI = dict(HUB_KM)                    # fitted reactances: no length continuation, lengths fixed (S29 sec 8)
     def setstep(fl, fv):
         for i_ in net.line.index:
             net.line.at[i_, "length_km"] = OSMI[i_] + (HUB_KM[i_] - OSMI[i_]) * fl

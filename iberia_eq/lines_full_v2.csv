@@ -1,0 +1,429 @@
+a,b,name_a,name_b,zone_a,zone_b,lat_a,lon_a,lat_b,lon_b,km,circuits
+way/144487932,way/144787749,Subestación de Arcos de la Frontera,Subestación de Don Rodrigo,WAN,WAN,36.67154,-5.82060,37.24519,-5.84346,64.99,2
+way/144487932,way/170961288,Subestación de Arcos de la Frontera,Subestación de La Roda de Andalucía,WAN,SCE,36.67154,-5.82060,37.25486,-4.77701,142.97,2
+way/144487932,way/216251164,Subestación de Arcos de la Frontera,Subestación Vallesol,WAN,WAN,36.67154,-5.82060,36.66970,-5.82795,0.60,1
+way/144487932,way/97199647,Subestación de Arcos de la Frontera,Subestación de Pinar del Rey,WAN,WAN,36.67154,-5.82060,36.24847,-5.41159,62.58,2
+way/144787749,way/181664117,Subestación de Don Rodrigo,Subestación Colectora Promotores Carmona,WAN,WAN,37.24519,-5.84346,37.55717,-5.75906,41.06,2
+way/144787749,way/1493949519,Subestación de Don Rodrigo,Subestación Matallana,WAN,WAN,37.24519,-5.84346,37.28489,-5.78223,7.38,1
+relation/17148268,way/28683005,Subestación Almaraz,Subestación de Villaviciosa,CAC,MAD,39.80711,-5.69323,40.34701,-3.90544,167.81,2
+relation/17148268,way/27936937,Subestación Almaraz,Subestación de Morata,CAC,MAD,39.80711,-5.69323,40.25598,-3.44301,217.04,2
+relation/17148268,way/145461765,Subestación Almaraz,Subestación de Guadalquivir Medio,CAC,SCE,39.80711,-5.69323,38.04871,-4.19301,248.53,1
+relation/17148268,way/651711449,Subestación Almaraz,SE Servan,CAC,BAD,39.80711,-5.69323,38.80645,-6.51526,142.59,2
+relation/17148268,way/1032009205,Subestación Almaraz,SET Planta Fotovoltaica Francisco Pizarro,CAC,CAC,39.80711,-5.69323,39.56434,-5.66691,30.78,1
+way/27936937,way/168358225,Subestación de Morata,SET Arañuelo,MAD,CAC,40.25598,-3.44301,39.95042,-5.58971,192.94,2
+way/27936937,way/1252105002,Subestación de Morata,SET San Fernando,MAD,MAD,40.25598,-3.44301,40.44396,-3.50827,24.38,2
+way/27936937,way/226886241,Subestación de Morata,Belinchon,MAD,MAD,40.25598,-3.44301,40.03418,-3.07982,40.75,1
+way/168358225,way/168357739,SET Arañuelo,Subestación de Valdecaballeros,CAC,SCE,39.95042,-5.58971,39.29119,-5.18250,101.13,2
+way/168358225,way/1168861008,SET Arañuelo,Talayuela Solar,CAC,CAC,39.95042,-5.58971,39.91365,-5.40675,21.42,1
+way/27949649,way/27668869,Subestación de Moraleja,Subestación de Galapagar,MAD,MAD,40.25996,-3.87508,40.59822,-4.00502,45.40,2
+way/170424447,way/168357739,Subestación de Guillena,Subestación de Valdecaballeros,WAN,SCE,37.63635,-6.09743,39.29119,-5.18250,206.71,2
+way/170424447,relation/20290680,Subestación de Guillena,Subestación de Bienvenida,WAN,BAD,37.63635,-6.09743,38.31791,-6.19755,76.77,1
+way/170424447,way/170424446,Subestación de Guillena,Subestación de Puebla de Guzmán,WAN,WAN,37.63635,-6.09743,37.54861,-7.24135,120.66,2
+way/170424447,way/170424455,Subestación de Guillena,Subestación de Palos de la Frontera,WAN,WAN,37.63635,-6.09743,37.18473,-6.88294,98.35,2
+way/170424447,way/144767090,Subestación de Guillena,SE Brovales,WAN,BAD,37.63635,-6.09743,38.32039,-6.70313,118.59,2
+way/170424447,way/1487830852,Subestación de Guillena,Subestación Promotores Guillena,WAN,WAN,37.63635,-6.09743,37.63201,-6.09058,0.58,1
+way/170424447,way/1487830852,Subestación de Guillena,Subestación Promotores Guillena,WAN,WAN,37.63635,-6.09743,37.63201,-6.09058,0.43,1
+way/170424447,way/1487830852,Subestación de Guillena,Subestación Promotores Guillena,WAN,WAN,37.63635,-6.09743,37.63201,-6.09058,0.59,1
+way/168357739,way/576439241,Subestación de Valdecaballeros,Subestación de Brazatortas,SCE,SCE,39.29119,-5.18250,38.65243,-4.25376,111.57,2
+way/168357739,way/593535391,Subestación de Valdecaballeros,SET Mesa de Copa,SCE,SCE,39.29119,-5.18250,39.21994,-5.37657,19.86,1
+relation/17444204,way/159930931,Subestación La Lora,Subestación de Barcina,N,N,42.59077,-3.85976,42.77709,-3.21547,57.09,1
+relation/17444204,way/47842260,Subestación La Lora,Subestación Eléctrica de Herrera,N,N,42.59077,-3.85976,42.59446,-4.34295,40.25,1
+way/159930931,way/202891403,Subestación de Barcina,Subestación de Güeñes,N,N,42.77709,-3.21547,43.21886,-3.03033,55.71,1
+way/159930931,way/86512030,Subestación de Barcina,Santa Engracia,N,N,42.77709,-3.21547,42.34762,-2.26368,94.83,1
+way/159930931,way/85817084,Subestación de Barcina,Subestación eléctrica de Grijota 440 kV,N,CYL,42.77709,-3.21547,42.07169,-4.55574,139.64,1
+way/159930931,way/196202213,Subestación de Barcina,Subestación de Itxaso,N,N,42.77709,-3.21547,43.06146,-2.27398,87.35,1
+way/85817084,way/47842260,Subestación eléctrica de Grijota 440 kV,Subestación Eléctrica de Herrera,CYL,N,42.07169,-4.55574,42.59446,-4.34295,61.20,1
+way/85817084,way/74384031,Subestación eléctrica de Grijota 440 kV,Subestación de La Mudarra,CYL,CYL,42.07169,-4.55574,41.78964,-4.93661,45.93,1
+way/85817084,way/144327157,Subestación eléctrica de Grijota 440 kV,Subestación de Villarino,CYL,CYL,42.07169,-4.55574,41.25507,-6.48749,195.17,1
+way/47842260,way/202891403,Subestación Eléctrica de Herrera,Subestación de Güeñes,N,N,42.59446,-4.34295,43.21886,-3.03033,136.82,1
+way/47842260,way/81152317,Subestación Eléctrica de Herrera,Subestacion de Vilecha,N,NW,42.59446,-4.34295,42.55267,-5.57560,101.66,1
+way/47842260,way/118057369,Subestación Eléctrica de Herrera,Subestacion de Velilla del Río Carrión,N,NW,42.59446,-4.34295,42.82195,-4.85826,49.63,1
+way/1432060227,way/51188420,Subestación Edificio ICE,Central Eléctrica de Alcántara,CAC,CAC,39.72342,-6.87893,39.72432,-6.87721,0.73,4
+way/1432060227,way/51188420,Subestación Edificio ICE,Central Eléctrica de Alcántara,CAC,CAC,39.72342,-6.87893,39.72432,-6.87721,0.17,1
+way/1432060227,way/51188420,Subestación Edificio ICE,Central Eléctrica de Alcántara,CAC,CAC,39.72342,-6.87893,39.72432,-6.87721,0.12,1
+way/1432060227,way/1432060229,Subestación Edificio ICE,Subestación FV Tagus IV,CAC,CAC,39.72342,-6.87893,39.64971,-6.97404,14.59,1
+way/51188420,way/84526032,Central Eléctrica de Alcántara,Subestación de Cedillo,CAC,CAC,39.72432,-6.87721,39.66434,-7.53322,62.66,1
+way/189577215,way/74384031,Central Térmica de La Robla,Subestación de La Mudarra,NW,CYL,42.79424,-5.63393,41.78964,-4.93661,126.58,2
+way/189577215,way/173535816,Central Térmica de La Robla,SET La Robla,NW,NW,42.79424,-5.63393,42.79586,-5.63743,0.36,1
+way/189577215,way/173535816,Central Térmica de La Robla,SET La Robla,NW,NW,42.79424,-5.63393,42.79586,-5.63743,0.35,1
+way/189577215,way/173535816,Central Térmica de La Robla,SET La Robla,NW,NW,42.79424,-5.63393,42.79586,-5.63743,0.26,1
+way/189577215,way/173535816,Central Térmica de La Robla,SET La Robla,NW,NW,42.79424,-5.63393,42.79586,-5.63743,0.21,1
+way/74384031,way/144138420,Subestación de La Mudarra,Subestación de Olmedo,CYL,CYL,41.78964,-4.93661,41.32021,-4.72692,55.81,1
+way/74384031,way/190236352,Subestación de La Mudarra,Subestación de Almazán,CYL,MAD,41.78964,-4.93661,41.43772,-2.50261,207.43,1
+way/74384031,way/170511092,Subestación de La Mudarra,Subestación Tordesillas,CYL,CYL,41.78964,-4.93661,41.50680,-5.01289,33.59,1
+way/74384031,way/1227066186,Subestación de La Mudarra,SET Las Mazuelas,CYL,CYL,41.78964,-4.93661,41.79355,-4.93752,0.28,1
+way/86512030,way/181906370,Santa Engracia,La Serna,N,ARA,42.34762,-2.26368,42.09745,-1.66746,57.71,1
+way/86512030,way/831327268,Santa Engracia,Arubal,N,N,42.34762,-2.26368,42.41845,-2.24974,8.10,2
+way/134884956,way/1493646686,Subestación de Hinojosa,SE Saucelle II,CYL,CYL,41.01721,-6.73355,41.03478,-6.80339,6.30,1
+way/134884956,way/47911346,Subestación de Hinojosa,Subestación de Aldeadávila II,CYL,CYL,41.01721,-6.73355,41.20773,-6.67876,21.55,2
+way/104370242,way/187645709,Subestación Eléctrica do Mesón do Vento,Subestación Eléctrica da Central Térmica das Pontes de García Rodríguez,NW,NW,43.16705,-8.35579,43.43942,-7.86055,64.14,2
+way/104370242,way/187645709,Subestación Eléctrica do Mesón do Vento,Subestación Eléctrica da Central Térmica das Pontes de García Rodríguez,NW,NW,43.16705,-8.35579,43.43942,-7.86055,51.83,1
+way/104370242,way/1218840772,Subestación Eléctrica do Mesón do Vento,SET Sileda ADIF,NW,NW,43.16705,-8.35579,42.74792,-8.25235,49.50,2
+way/187645709,way/169883205,Subestación Eléctrica da Central Térmica das Pontes de García Rodríguez,Subestación de Boimente,NW,NW,43.43942,-7.86055,43.58909,-7.55294,31.69,1
+way/187645709,way/489953309,Subestación Eléctrica da Central Térmica das Pontes de García Rodríguez,Subestación Eléctrica de Xove,NW,NW,43.43942,-7.86055,43.69328,-7.50390,42.29,1
+way/145171008,way/226886241,Subestación de Minglanilla,Belinchon,VAL,MAD,39.52480,-1.56517,40.03418,-3.07982,146.36,1
+way/145171008,way/1277630152,Subestación de Minglanilla,Subestación de Olmedilla,VAL,VAL,39.52480,-1.56517,39.63831,-2.08475,46.64,1
+way/145171008,way/1278864373,Subestación de Minglanilla,?,VAL,VAL,39.52480,-1.56517,39.46019,-0.98759,50.66,1
+way/145171008,way/1277780445,Subestación de Minglanilla,?,VAL,VAL,39.52480,-1.56517,39.52405,-1.56473,0.03,1
+way/145171008,way/1277780445,Subestación de Minglanilla,?,VAL,VAL,39.52480,-1.56517,39.52405,-1.56473,0.03,1
+way/145171008,way/1277780472,Subestación de Minglanilla,?,VAL,VAL,39.52480,-1.56517,39.52496,-1.56713,0.04,1
+way/226886241,way/260018670,Belinchon,Subestación de Santa Cruz de la Zarza,MAD,MAD,40.03418,-3.07982,39.98178,-3.11396,7.05,2
+way/226886241,way/1358349622,Belinchon,Subestación Colectora Belinchón,MAD,MAD,40.03418,-3.07982,40.03430,-3.07548,0.25,1
+way/127787669,way/143207685,Subestación Eléctrica Aragón,Subestación de Peñaflor,ARA,ARA,41.21730,-0.28047,41.72173,-0.74180,69.99,1
+way/127787669,way/126881765,Subestación Eléctrica Aragón,Subestación de Morella,ARA,ARA,41.21730,-0.28047,40.61098,-0.19540,73.98,1
+way/127787669,way/145302700,Subestación Eléctrica Aragón,?,ARA,CAT,41.21730,-0.28047,41.20447,0.57112,73.05,2
+way/127787669,way/169867119,Subestación Eléctrica Aragón,SET Peaker,ARA,ARA,41.21730,-0.28047,41.28002,-0.21836,8.74,1
+way/127787669,way/71531354,Subestación Eléctrica Aragón,Subestacion de Peñalba,ARA,ARA,41.21730,-0.28047,41.52572,-0.10033,39.63,2
+way/127787669,way/1263279632,Subestación Eléctrica Aragón,SET Mudéjar Promotores,ARA,ARA,41.21730,-0.28047,41.02458,-0.38433,22.38,2
+way/144138420,way/283348372,Subestación de Olmedo,Subestación de Lastras del Pozo,CYL,CYL,41.32021,-4.72692,40.88083,-4.33939,59.42,1
+way/190236352,way/169999915,Subestación de Almazán,Subestación de Fuendetodos,MAD,ARA,41.43772,-2.50261,41.33679,-0.97666,136.72,1
+way/196202213,way/115680075,Subestación de Itxaso,Subestación de Arrazua,N,N,43.06146,-2.27398,42.88379,-2.60341,35.48,1
+way/196202213,FR,Subestación de Itxaso,FR,N,FR,43.06146,-2.27398,0.00000,0.00000,33.66,1
+way/84526032,way/144599061,Subestación de Cedillo,Subestação de Falagueira,CAC,PT,39.66434,-7.53322,39.52813,-7.74094,24.66,1
+way/84526032,way/1499389789,Subestación de Cedillo,Subestación de la Central Hidroeléctrica de Cedillo,CAC,CAC,39.66434,-7.53322,39.66387,-7.53989,0.55,1
+way/84526032,way/1499389789,Subestación de Cedillo,Subestación de la Central Hidroeléctrica de Cedillo,CAC,CAC,39.66434,-7.53322,39.66387,-7.53989,0.54,1
+way/84526032,way/1499389789,Subestación de Cedillo,Subestación de la Central Hidroeléctrica de Cedillo,CAC,CAC,39.66434,-7.53322,39.66387,-7.53989,0.55,1
+way/84526032,way/1499389789,Subestación de Cedillo,Subestación de la Central Hidroeléctrica de Cedillo,CAC,CAC,39.66434,-7.53322,39.66387,-7.53989,0.54,1
+way/73511619,way/103158873,Subestación Eléctrica La Aparecida,Subestación Eléctrica da Pobra de Trives,NW,NW,42.03356,-6.86205,42.34430,-7.28112,60.21,2
+way/73511619,way/701397734,Subestación Eléctrica La Aparecida,Subestación Eléctrica de Arbillera,NW,NW,42.03356,-6.86205,42.04771,-6.54361,28.88,2
+way/170511092,way/701397734,Subestación Tordesillas,Subestación Eléctrica de Arbillera,CYL,NW,41.50680,-5.01289,42.04771,-6.54361,146.56,2
+way/170511092,way/144327157,Subestación Tordesillas,Subestación de Villarino,CYL,CYL,41.50680,-5.01289,41.25507,-6.48749,129.03,2
+way/77654729,way/127922062,?,?,VAL,VAL,39.64224,-0.23665,39.64917,-0.24741,0.94,4
+way/77640470,way/34585227,SET Gaussa,Subestación de la Plana,VAL,VAL,39.65985,-0.31700,39.96679,-0.09653,39.77,1
+way/77640470,way/33771314,SET Gaussa,Subestacion electrica La Eliana,VAL,VAL,39.65985,-0.31700,39.55458,-0.51063,22.53,1
+way/77640470,way/127922062,SET Gaussa,?,VAL,VAL,39.65985,-0.31700,39.64917,-0.24741,6.96,2
+way/143483666,way/103158873,Subestación de Cartelle,Subestación Eléctrica da Pobra de Trives,NW,NW,42.25642,-8.05741,42.34430,-7.28112,66.40,2
+way/143483666,way/135457228,Subestación de Cartelle,Subestação da Central Hidroelétrica do Alto Lindoso,NW,PT,42.25642,-8.05741,41.86937,-8.20274,47.07,2
+way/143483666,way/1218840772,Subestación de Cartelle,SET Sileda ADIF,NW,NW,42.25642,-8.05741,42.74792,-8.25235,60.80,2
+way/103158873,way/103511952,Subestación Eléctrica da Pobra de Trives,La Lomba,NW,NW,42.34430,-7.28112,42.58572,-6.62415,62.13,1
+way/144327157,way/47911346,Subestación de Villarino,Subestación de Aldeadávila II,CYL,CYL,41.25507,-6.48749,41.20773,-6.67876,17.54,1
+way/181906370,way/90829734,La Serna,?,ARA,ARA,42.09745,-1.66746,42.17062,-1.67587,8.78,2
+way/28308003,way/170485453,Subestación de San Sebastián,?,MAD,MAD,40.56599,-3.59602,40.54992,-3.56670,2.56,2
+way/90829734,way/181912569,?,Subestación de Muruarte,ARA,N,42.17062,-1.67587,42.66946,-1.65454,60.35,2
+way/188618317,way/103511952,Compostilla II,La Lomba,NW,NW,42.60819,-6.56835,42.58572,-6.62415,4.55,2
+way/58928252,way/191480803,Subestación de Montearenas,Anallares,NW,NW,42.57290,-6.55022,42.83725,-6.53299,31.07,1
+way/58928252,way/81152317,Subestación de Montearenas,Subestacion de Vilecha,NW,NW,42.57290,-6.55022,42.55267,-5.57560,81.46,1
+way/58928252,way/103511952,Subestación de Montearenas,La Lomba,NW,NW,42.57290,-6.55022,42.58572,-6.62415,6.08,2
+way/75902880,way/97286424,Subestación Tajo de la Encantada,Subestación de Jordana,GRA,WAN,36.89503,-4.74563,36.44416,-5.21868,79.88,2
+way/75902880,way/170954487,Subestación Tajo de la Encantada,Subestación de Cabra,GRA,SCE,36.89503,-4.74563,37.45707,-4.49429,67.25,1
+way/75902880,way/170968145,Subestación Tajo de la Encantada,Subestación de Cártama,GRA,GRA,36.89503,-4.74563,36.75092,-4.60510,23.46,2
+way/75902880,way/487381592,Subestación Tajo de la Encantada,Subestación de Archidona,GRA,GRA,36.89503,-4.74563,37.12020,-4.41510,40.54,1
+way/97286424,way/97199647,Subestación de Jordana,Subestación de Pinar del Rey,WAN,WAN,36.44416,-5.21868,36.24847,-5.41159,29.06,2
+way/97199647,way/1316892946,Subestación de Pinar del Rey,Subestación de Central de Ciclo Combinado Campo de Gibraltar,WAN,WAN,36.24847,-5.41159,36.18417,-5.39076,9.49,2
+way/97199647,way/1262722031,Subestación de Pinar del Rey,Subestación de Los Barrios,WAN,WAN,36.24847,-5.41159,36.18464,-5.42042,10.21,2
+way/97937366,way/170946426,Subestación de Huéneja,Subestación de Caparacena,GRA,GRA,37.21655,-2.94230,37.26798,-3.72609,72.85,1
+way/97937366,way/327268322,Subestación de Huéneja,Subestación de Tabernas,GRA,SE,37.21655,-2.94230,37.07097,-2.31232,58.82,1
+way/170946426,way/1518525084,Subestación de Caparacena,Subestación Promotores Caparacena,GRA,GRA,37.26798,-3.72609,37.26893,-3.72981,0.49,1
+way/170946426,way/1518525084,Subestación de Caparacena,Subestación Promotores Caparacena,GRA,GRA,37.26798,-3.72609,37.26893,-3.72981,0.20,2
+way/170946426,way/1518525084,Subestación de Caparacena,Subestación Promotores Caparacena,GRA,GRA,37.26798,-3.72609,37.26893,-3.72981,0.25,1
+way/144554435,relation/19645437,Subestação de Lavos,Subestação da Central de Ciclo Combinado de Lares,PT,PT,40.05791,-8.83697,40.12372,-8.77535,9.27,2
+way/104020696,way/1258384938,Subestació de Sentmenat,Subestació elèctrica de Can Barba,CAT,CAT,41.61948,2.11178,41.55195,2.05697,11.81,2
+way/104020696,way/145302700,Subestació de Sentmenat,?,CAT,CAT,41.61948,2.11178,41.20447,0.57112,149.85,2
+way/104020696,way/75606778,Subestació de Sentmenat,Subestació de Pierola,CAT,CAT,41.61948,2.11178,41.52347,1.82973,41.36,2
+way/104020696,relation/10295969,Subestació de Sentmenat,Estació receptora de Calders,CAT,CAT,41.61948,2.11178,41.76693,1.93506,23.35,2
+way/145302700,way/140011919,?,Subestació de Vandellòs,CAT,CAT,41.20447,0.57112,40.97631,0.87901,37.00,2
+way/75606778,relation/16809528,Subestació de Pierola,Subestació de Begues,CAT,CAT,41.52347,1.82973,41.35544,1.90239,22.74,2
+way/118057369,way/173535816,Subestacion de Velilla del Río Carrión,SET La Robla,NW,NW,42.82195,-4.85826,42.79586,-5.63743,66.99,1
+way/118057369,way/1447258202,Subestacion de Velilla del Río Carrión,?,NW,NW,42.82195,-4.85826,42.82240,-4.86282,0.61,1
+way/118057369,way/1447258202,Subestacion de Velilla del Río Carrión,?,NW,NW,42.82195,-4.85826,42.82240,-4.86282,1.16,1
+way/118057369,way/1447258202,Subestacion de Velilla del Río Carrión,?,NW,NW,42.82195,-4.85826,42.82240,-4.86282,0.26,1
+way/165580300,way/124121964,Subestació de Viladecans,Subestació de Rubí,CAT,CAT,41.32554,2.02798,41.47325,2.00987,20.11,1
+way/165580300,relation/16809528,Subestació de Viladecans,Subestació de Begues,CAT,CAT,41.32554,2.02798,41.35544,1.90239,9.10,4
+way/124121964,way/145312949,Subestació de Rubí,Subestació elèctrica de Maials,CAT,ARA,41.47325,2.00987,41.38840,0.50519,131.49,1
+way/124121964,way/124121959,Subestació de Rubí,Subestació elèctrica de Can Jardí,CAT,CAT,41.47325,2.00987,41.47481,2.02381,0.95,1
+way/921541546,way/126987023,La Muela II,Subestación de Catadau,VAL,VAL,39.24380,-0.93170,39.25024,-0.56085,39.72,2
+way/921541546,way/265408693,La Muela II,Cortes II,VAL,VAL,39.24380,-0.93170,39.26271,-0.91905,2.16,2
+way/144385734,way/47911346,Subestação de Lagoaça,Subestación de Aldeadávila II,PT,CYL,41.21994,-6.73744,41.20773,-6.67876,5.02,1
+way/169867109,way/169999915,?,Subestación de Fuendetodos,ARA,ARA,41.29524,-0.34135,41.33679,-0.97666,55.87,1
+way/129441519,way/144915438,Subestación El Palmar,Subestación Nueva Escombreras,SE,SE,37.94075,-1.18801,37.57280,-0.94161,50.75,2
+way/129441519,way/772002801,Subestación El Palmar,?,SE,SE,37.94075,-1.18801,37.96111,-1.37866,20.86,1
+way/144608818,relation/17290041,Posto de Corte do Ribatejo,Subestação da Central Termoeléctrica do Ribatejo,PT,PT,39.01407,-8.95087,39.01204,-8.95131,0.24,1
+way/144608818,relation/17290041,Posto de Corte do Ribatejo,Subestação da Central Termoeléctrica do Ribatejo,PT,PT,39.01407,-8.95087,39.01204,-8.95131,0.32,1
+way/144608818,way/1298167959,Posto de Corte do Ribatejo,Subestação de Vila Nova da Rainha,PT,PT,39.01407,-8.95087,39.04547,-8.92795,2.23,2
+way/135457228,way/135457230,Subestação da Central Hidroelétrica do Alto Lindoso,Posto de Corte do Alto Lindoso,PT,PT,41.86937,-8.20274,41.86818,-8.20809,0.42,1
+way/135457228,way/135457230,Subestação da Central Hidroelétrica do Alto Lindoso,Posto de Corte do Alto Lindoso,PT,PT,41.86937,-8.20274,41.86818,-8.20809,0.43,1
+way/135457228,way/135457230,Subestação da Central Hidroelétrica do Alto Lindoso,Posto de Corte do Alto Lindoso,PT,PT,41.86937,-8.20274,41.86818,-8.20809,1.25,2
+way/135457230,way/132865612,Posto de Corte do Alto Lindoso,Subestação de Riba d'Ave,PT,PT,41.86818,-8.20809,41.40285,-8.38998,58.39,1
+way/135457230,way/151061884,Posto de Corte do Alto Lindoso,Subestação de Pedralva,PT,PT,41.86818,-8.20809,41.57726,-8.32263,38.51,1
+way/988035260,way/24636044,Subestação de Pegões,Subestação de Fanhões,PT,PT,38.64853,-8.60601,38.88896,-9.13727,82.53,1
+way/988035260,way/987944916,Subestação de Pegões,Subestação do Divor,PT,PT,38.64853,-8.60601,38.63334,-7.92064,68.77,1
+way/24636044,way/131715746,Subestação de Fanhões,Subestação de Rio Maior,PT,PT,38.88896,-9.13727,39.33826,-9.00119,51.80,1
+way/24636044,way/813954335,Subestação de Fanhões,Subestação de Alcochete,PT,PT,38.88896,-9.13727,38.70216,-8.89944,52.50,1
+way/132865612,way/124722161,Subestação de Riba d'Ave,Subestação de Recarei,PT,PT,41.40285,-8.38998,41.15689,-8.45421,32.89,1
+way/132865612,way/124722161,Subestação de Riba d'Ave,Subestação de Recarei,PT,PT,41.40285,-8.38998,41.15689,-8.45421,29.43,1
+way/132865612,way/151061884,Subestação de Riba d'Ave,Subestação de Pedralva,PT,PT,41.40285,-8.38998,41.57726,-8.32263,20.58,1
+way/151061884,way/1462950857,Subestação de Pedralva,Subestação de Ponte de Lima,PT,PT,41.57726,-8.32263,41.67816,-8.59387,35.78,1
+way/131715746,way/144573746,Subestação de Rio Maior,Posto de Corte do Pego,PT,PT,39.33826,-9.00119,39.46658,-8.11433,81.00,1
+way/131715746,way/1331154119,Subestação de Rio Maior,Subestação da Central Fotovoltaica de Rio Maior,PT,PT,39.33826,-9.00119,39.18310,-8.93798,19.68,1
+way/144573746,way/144599061,Posto de Corte do Pego,Subestação de Falagueira,PT,PT,39.46658,-8.11433,39.52813,-7.74094,39.57,1
+way/144573746,relation/17294947,Posto de Corte do Pego,Subestação da Central Termoelétrica do Pego,PT,PT,39.46658,-8.11433,39.46771,-8.11183,0.16,1
+way/144573746,relation/17294947,Posto de Corte do Pego,Subestação da Central Termoelétrica do Pego,PT,PT,39.46658,-8.11433,39.46771,-8.11183,0.21,1
+way/144573746,relation/17294947,Posto de Corte do Pego,Subestação da Central Termoelétrica do Pego,PT,PT,39.46658,-8.11433,39.46771,-8.11183,0.19,1
+way/144573746,relation/17294947,Posto de Corte do Pego,Subestação da Central Termoelétrica do Pego,PT,PT,39.46658,-8.11433,39.46771,-8.11183,0.18,1
+way/144573746,way/144564903,Posto de Corte do Pego,Subestação da Batalha,PT,PT,39.46658,-8.11433,39.65060,-8.78973,65.88,1
+way/52516392,way/1244663999,SE Villameca,Subestación Villameca Eolica,NW,NW,42.63170,-6.04093,42.63211,-6.03889,0.08,1
+way/52516392,way/1244663999,SE Villameca,Subestación Villameca Eolica,NW,NW,42.63170,-6.04093,42.63211,-6.03889,0.08,1
+way/52516392,way/1244663999,SE Villameca,Subestación Villameca Eolica,NW,NW,42.63170,-6.04093,42.63211,-6.03889,0.08,1
+way/124722161,way/142182853,Subestação de Recarei,Subestação de Vermoim,PT,PT,41.15689,-8.45421,41.23045,-8.60481,18.18,2
+way/124722161,way/751560789,Subestação de Recarei,Subestação da Feira,PT,PT,41.15689,-8.45421,40.95996,-8.46037,22.41,1
+way/144439472,way/144439469,Subestação de Lobagueira,Subestação de Paraimo,PT,PT,40.70186,-7.99272,40.46857,-8.47961,59.02,2
+way/144396412,way/542145772,Subestação de Armamar,Subestação do Sub-parque Eólico de Moimenta,PT,PT,41.10180,-7.66240,40.97392,-7.68871,15.13,1
+way/144439469,relation/19645437,Subestação de Paraimo,Subestação da Central de Ciclo Combinado de Lares,PT,PT,40.46857,-8.47961,40.12372,-8.77535,54.45,2
+relation/19645437,way/751560789,Subestação da Central de Ciclo Combinado de Lares,Subestação da Feira,PT,PT,40.12372,-8.77535,40.95996,-8.46037,98.56,1
+way/129055610,way/144622215,Subestação de Palmela,Subestação de Sines,PT,PT,38.57300,-8.85836,37.99752,-8.76380,96.04,1
+way/129055610,way/171253574,Subestação de Palmela,Subestação de Fernão Ferro,PT,PT,38.57300,-8.85836,38.58204,-9.12059,27.54,2
+way/129055610,way/813954335,Subestação de Palmela,Subestação de Alcochete,PT,PT,38.57300,-8.85836,38.70216,-8.89944,15.92,1
+way/144599061,way/144601080,Subestação de Falagueira,Subestação de Estremoz,PT,PT,39.52813,-7.74094,38.88961,-7.52891,88.25,1
+way/144601080,way/987944916,Subestação de Estremoz,Subestação do Divor,PT,PT,38.88961,-7.52891,38.63334,-7.92064,51.80,1
+way/144601080,way/742612300,Subestação de Estremoz,Subestação de Tração do Alandroal,PT,PT,38.88961,-7.52891,38.73886,-7.27659,32.34,2
+way/144622215,relation/17294973,Subestação de Sines,Subestação da Central Termoeléctrica de Sines,PT,PT,37.99752,-8.76380,37.93044,-8.80328,11.31,2
+way/144622215,relation/17294973,Subestação de Sines,Subestação da Central Termoeléctrica de Sines,PT,PT,37.99752,-8.76380,37.93044,-8.80328,11.76,2
+way/144622215,way/144635505,Subestação de Sines,Subestação de Ferreira do Alentejo,PT,PT,37.99752,-8.76380,38.05511,-8.12778,59.26,1
+way/144635505,way/144639174,Subestação de Ferreira do Alentejo,Subestação de Alqueva,PT,PT,38.05511,-8.12778,38.18595,-7.49836,63.75,1
+way/144635505,way/1322975653,Subestação de Ferreira do Alentejo,Subestação de Panóias,PT,PT,38.05511,-8.12778,37.75984,-8.34729,43.50,2
+way/144639174,way/648169311,Subestação de Alqueva,Subestação da Central Hidroelétrica de Alqueva 2,PT,PT,38.18595,-7.49836,38.19383,-7.49706,0.46,2
+way/648169311,way/1256744849,Subestação da Central Hidroelétrica de Alqueva 2,Subestação da Central Hidroelétrica de Alqueva 1,PT,PT,38.19383,-7.49706,38.19706,-7.49641,0.72,1
+way/144767090,relation/20290680,SE Brovales,Subestación de Bienvenida,BAD,BAD,38.32039,-6.70313,38.31791,-6.19755,44.83,1
+way/144767090,way/144767084,SE Brovales,SET Balboa,BAD,BAD,38.32039,-6.70313,38.32584,-6.71261,1.12,1
+way/144767090,way/1485775385,SE Brovales,SET Balboa,BAD,BAD,38.32039,-6.70313,38.32441,-6.71235,0.79,2
+way/144767090,way/651711449,SE Brovales,SE Servan,BAD,BAD,38.32039,-6.70313,38.80645,-6.51526,66.18,2
+way/144767090,way/1172185252,SE Brovales,SET Apicio,BAD,BAD,38.32039,-6.70313,38.23793,-6.58915,21.42,1
+relation/20290680,way/788716327,Subestación de Bienvenida,?,BAD,BAD,38.31791,-6.19755,38.42222,-6.22351,12.25,1
+relation/20290680,way/1246916016,Subestación de Bienvenida,?,BAD,BAD,38.31791,-6.19755,38.28655,-6.16035,5.37,1
+way/144767084,way/829082641,SET Balboa,?,BAD,BAD,38.32584,-6.71261,38.32706,-6.71410,0.16,1
+way/144767084,way/1485775385,SET Balboa,SET Balboa,BAD,BAD,38.32584,-6.71261,38.32441,-6.71235,0.35,1
+way/1485775385,way/829082643,SET Balboa,Siderúrgica Balboa,BAD,BAD,38.32441,-6.71235,38.32033,-6.71359,0.33,1
+way/181664117,way/1487830852,Subestación Colectora Promotores Carmona,Subestación Promotores Guillena,WAN,WAN,37.55717,-5.75906,37.63201,-6.09058,30.65,2
+way/144915438,way/171251565,Subestación Nueva Escombreras,Subestación de Rocamora,SE,SE,37.57280,-0.94161,38.14780,-0.94621,64.70,1
+way/144915438,way/144915428,Subestación Nueva Escombreras,Subestación Escombreras,SE,SE,37.57280,-0.94161,37.56426,-0.95503,1.82,1
+way/144909723,way/144909722,Subestación La Asomada,Subestación Litoral,SE,SE,37.63341,-0.96108,36.97825,-1.90800,132.83,1
+way/144909723,way/777446899,Subestación La Asomada,Subestación Fausita,SE,SE,37.63341,-0.96108,37.56433,-0.94943,9.60,1
+way/171251565,way/144942113,Subestación de Rocamora,Subestación de Pinilla,SE,SE,38.14780,-0.94621,38.76454,-1.60211,91.17,2
+way/171251565,way/171256169,Subestación de Rocamora,ST Beneixama,SE,VAL,38.14780,-0.94621,38.71901,-0.72256,67.27,1
+way/144909709,way/981933507,ST Totana,Subestación Totana Adif,SE,SE,37.76564,-1.44573,37.71862,-1.54453,10.74,2
+way/777446899,way/144915428,Subestación Fausita,Subestación Escombreras,SE,SE,37.56433,-0.94943,37.56426,-0.95503,0.62,1
+way/144931782,way/1489081301,Subestación de Ayora,SE7 Preconcentradora 400/132 kV,VAL,VAL,39.04137,-1.00742,39.04191,-1.00884,0.13,1
+way/144931782,way/504178826,Subestación de Ayora,Campanario,VAL,SE,39.04137,-1.00742,38.88297,-1.27823,34.45,1
+way/1278864373,way/144933376,?,Subestación de Requena,VAL,VAL,39.46019,-0.98759,39.45922,-0.98822,0.26,1
+way/1278864373,way/144933376,?,Subestación de Requena,VAL,VAL,39.46019,-0.98759,39.45922,-0.98822,0.07,1
+way/144933376,way/144940509,Subestación de Requena,Requena,VAL,VAL,39.45922,-0.98822,39.46596,-0.97057,1.92,2
+way/1277630152,way/144941889,Subestación de Olmedilla,Subestación Eléctrica Romica,VAL,SE,39.63831,-2.08475,39.04358,-1.79979,74.68,2
+way/1277630152,way/1277630100,Subestación de Olmedilla,?,VAL,VAL,39.63831,-2.08475,39.63936,-2.08354,0.14,1
+way/1277630152,way/1277630100,Subestación de Olmedilla,?,VAL,VAL,39.63831,-2.08475,39.63936,-2.08354,0.14,1
+way/1277630152,way/1277630100,Subestación de Olmedilla,?,VAL,VAL,39.63831,-2.08475,39.63936,-2.08354,0.09,1
+way/1277630152,way/1277630103,Subestación de Olmedilla,?,VAL,VAL,39.63831,-2.08475,39.63867,-2.08627,0.05,1
+way/1277630152,way/1277630103,Subestación de Olmedilla,?,VAL,VAL,39.63831,-2.08475,39.63867,-2.08627,0.09,1
+way/1277630152,way/1277630103,Subestación de Olmedilla,?,VAL,VAL,39.63831,-2.08475,39.63867,-2.08627,0.09,1
+way/1277630152,way/1277630103,Subestación de Olmedilla,?,VAL,VAL,39.63831,-2.08475,39.63867,-2.08627,0.08,1
+way/1277630152,way/1277630103,Subestación de Olmedilla,?,VAL,VAL,39.63831,-2.08475,39.63867,-2.08627,0.08,1
+way/144941889,way/144942113,Subestación Eléctrica Romica,Subestación de Pinilla,SE,SE,39.04358,-1.79979,38.76454,-1.60211,35.91,2
+way/144941889,way/148488880,Subestación Eléctrica Romica,Subestación de Galera,SE,SE,39.04358,-1.79979,39.10536,-1.95770,17.85,2
+way/144942113,way/504178826,Subestación de Pinilla,Campanario,SE,SE,38.76454,-1.60211,38.88297,-1.27823,40.15,1
+way/931032666,way/169523046,Subestació elèctrica de l'Espluga de Francolí,Subestació elèctrica de l'Espluga de Francolí,CAT,CAT,41.40426,1.12404,41.40506,1.12517,0.07,1
+way/931032666,way/169523046,Subestació elèctrica de l'Espluga de Francolí,Subestació elèctrica de l'Espluga de Francolí,CAT,CAT,41.40426,1.12404,41.40506,1.12517,0.10,1
+way/931032666,way/169523046,Subestació elèctrica de l'Espluga de Francolí,Subestació elèctrica de l'Espluga de Francolí,CAT,CAT,41.40426,1.12404,41.40506,1.12517,0.06,1
+way/931032666,way/169523046,Subestació elèctrica de l'Espluga de Francolí,Subestació elèctrica de l'Espluga de Francolí,CAT,CAT,41.40426,1.12404,41.40506,1.12517,0.13,1
+way/931032666,way/169523046,Subestació elèctrica de l'Espluga de Francolí,Subestació elèctrica de l'Espluga de Francolí,CAT,CAT,41.40426,1.12404,41.40506,1.12517,0.13,1
+way/129767234,way/145312949,Subestación de Mequinenza,Subestació elèctrica de Maials,ARA,ARA,41.36822,0.27693,41.38840,0.50519,20.25,1
+way/145312949,way/1266109989,Subestació elèctrica de Maials,Subestació elèctrica de Maials,ARA,ARA,41.38840,0.50519,41.38778,0.50549,0.03,1
+way/226363063,way/1237239896,Subestación de Trillo,Villanueva de los Escuderos II,MAD,VAL,40.70328,-2.62574,40.02976,-2.32060,83.71,2
+way/226363063,way/1431026204,Subestación de Trillo,Subestación Uma,MAD,MAD,40.70328,-2.62574,40.70918,-2.64137,1.24,1
+way/1237239896,way/1277630103,Villanueva de los Escuderos II,?,VAL,VAL,40.02976,-2.32060,39.63867,-2.08627,47.21,2
+way/1237239896,way/181652542,Villanueva de los Escuderos II,Villanueva de los Escuderos II,VAL,VAL,40.02976,-2.32060,40.03031,-2.32287,1.73,2
+way/1237239896,way/181652542,Villanueva de los Escuderos II,Villanueva de los Escuderos II,VAL,VAL,40.02976,-2.32060,40.03031,-2.32287,0.40,1
+way/576439241,way/145461765,Subestación de Brazatortas,Subestación de Guadalquivir Medio,SCE,SCE,38.65243,-4.25376,38.04871,-4.19301,74.59,2
+way/169999915,way/627293640,Subestación de Fuendetodos,SET Muniesa,ARA,ARA,41.33679,-0.97666,41.03300,-0.83972,41.07,2
+way/627293640,way/1028926498,SET Muniesa,SET Promotores Muniesa,ARA,ARA,41.03300,-0.83972,41.03280,-0.84092,0.05,1
+way/627293640,way/145823172,SET Muniesa,Subestación de Mezquita,ARA,ARA,41.03300,-0.83972,40.72417,-0.84939,38.02,2
+way/1218840772,way/1218840771,SET Sileda ADIF,SET Sileda REE,NW,NW,42.74792,-8.25235,42.74675,-8.25104,0.33,1
+way/1218840772,way/1218840771,SET Sileda ADIF,SET Sileda REE,NW,NW,42.74792,-8.25235,42.74675,-8.25104,0.35,1
+way/1218840772,way/1218840771,SET Sileda ADIF,SET Sileda REE,NW,NW,42.74792,-8.25235,42.74675,-8.25104,0.23,1
+way/1218840772,way/1218840771,SET Sileda ADIF,SET Sileda REE,NW,NW,42.74792,-8.25235,42.74675,-8.25104,0.22,1
+way/169523046,way/169523042,Subestació elèctrica de l'Espluga de Francolí,Subestació elèctrica de Les Comes,CAT,CAT,41.40506,1.12517,41.40413,1.12665,0.15,1
+way/169729505,way/683892938,Subestació de Bescanó (MAT),La Farga,CAT,CAT,41.97248,2.69583,42.06246,2.88311,20.31,4
+FR,way/146826566,FR,?,FR,N,0.00000,0.00000,43.25625,-1.97537,2.20,2
+way/71531354,way/931181199,Subestacion de Peñalba,Peñalba,ARA,ARA,41.52572,-0.10033,41.52649,-0.10036,0.06,1
+way/71531354,way/931181199,Subestacion de Peñalba,Peñalba,ARA,ARA,41.52572,-0.10033,41.52649,-0.10036,0.06,1
+way/145461765,way/170954487,Subestación de Guadalquivir Medio,Subestación de Cabra,SCE,SCE,38.04871,-4.19301,37.45707,-4.49429,71.51,1
+way/145461765,way/170954487,Subestación de Guadalquivir Medio,Subestación de Cabra,SCE,SCE,38.04871,-4.19301,37.45707,-4.49429,72.55,2
+way/170954487,way/170961288,Subestación de Cabra,Subestación de La Roda de Andalucía,SCE,SCE,37.45707,-4.49429,37.25486,-4.77701,40.53,2
+way/170014037,way/931602168,Terrer Vega,Terrer Vega (Adif),ARA,ARA,41.32095,-1.70571,41.32164,-1.70594,0.06,1
+way/170014037,way/931602168,Terrer Vega,Terrer Vega (Adif),ARA,ARA,41.32095,-1.70571,41.32164,-1.70594,0.06,1
+way/135806477,way/931574994,Subestación Rueda de Jalón,Rueda de Jalón,ARA,ARA,41.64984,-1.29658,41.65032,-1.29751,0.07,1
+way/135806477,way/931574994,Subestación Rueda de Jalón,Rueda de Jalón,ARA,ARA,41.64984,-1.29658,41.65032,-1.29751,0.07,1
+way/135806477,node/13137839467,Subestación Rueda de Jalón,SET Pre Rueda,ARA,ARA,41.64984,-1.29658,41.64789,-1.29103,0.53,1
+way/170485453,way/1252105002,?,SET San Fernando,MAD,MAD,40.54992,-3.56670,40.44396,-3.50827,12.80,2
+way/327268322,way/1518713742,Subestación de Tabernas,Subestación Tabernas Renovables,SE,SE,37.07097,-2.31232,37.07010,-2.31596,0.27,1
+way/1518525084,way/487381592,Subestación Promotores Caparacena,Subestación de Archidona,GRA,GRA,37.26893,-3.72981,37.12020,-4.41510,64.01,1
+way/1518525084,way/1042227719,Subestación Promotores Caparacena,Subestación de Baza,GRA,GRA,37.26893,-3.72981,37.55924,-2.74734,121.71,2
+way/487381592,way/1517819534,Subestación de Archidona,S6,GRA,GRA,37.12020,-4.41510,37.12037,-4.44461,2.62,1
+way/181652542,way/181652541,Villanueva de los Escuderos II,Villanueva de los Escuderos I,VAL,VAL,40.03031,-2.32287,40.03413,-2.32406,0.25,2
+way/1487830852,way/1484773439,Subestación Promotores Guillena,Subestación La Reunión,WAN,WAN,37.63201,-6.09058,37.54931,-6.08711,9.92,1
+way/169883205,way/489953309,Subestación de Boimente,Subestación Eléctrica de Xove,NW,NW,43.58909,-7.55294,43.69328,-7.50390,13.13,1
+way/169883205,way/189184555,Subestación de Boimente,Subestación Eléctrica de Pesoz,NW,NW,43.58909,-7.55294,43.24302,-6.86584,81.43,2
+way/489953309,way/188737728,Subestación Eléctrica de Xove,Subestación Aluminio,NW,NW,43.69328,-7.50390,43.70191,-7.47888,1.41,1
+way/489953309,way/188737728,Subestación Eléctrica de Xove,Subestación Aluminio,NW,NW,43.69328,-7.50390,43.70191,-7.47888,1.34,1
+way/189184531,way/219501437,Estacion de Salas,Subestación de El Palo,NW,NW,43.36633,-6.30197,43.27021,-6.67670,34.36,2
+way/189184531,way/1117748463,Estacion de Salas,Subestación de Salas 132/400 kV,NW,NW,43.36633,-6.30197,43.36631,-6.30070,0.06,1
+way/219501437,way/189184555,Subestación de El Palo,Subestación Eléctrica de Pesoz,NW,NW,43.27021,-6.67670,43.24302,-6.86584,16.38,2
+way/51247251,way/931733590,Subestación de Medinaceli,Medinaceli (Adif),MAD,MAD,41.10606,-2.37449,41.10552,-2.37375,0.07,1
+way/51247251,way/931733590,Subestación de Medinaceli,Medinaceli (Adif),MAD,MAD,41.10606,-2.37449,41.10552,-2.37375,0.06,1
+way/430071597,way/196207063,Iberduero S.a.,Subestación Eléctrica de Hernani,N,N,43.25697,-1.97496,43.25982,-1.96859,0.42,2
+way/430071597,way/196207063,Iberduero S.a.,Subestación Eléctrica de Hernani,N,N,43.25697,-1.97496,43.25982,-1.96859,0.52,1
+way/201459319,way/791358190,Subestação de Tavira,Subestação da Central Solar de Alcoutim,PT,PT,37.34472,-7.76610,37.38240,-7.69945,8.10,1
+way/1277630100,way/153232112,?,ST Moncada,VAL,VAL,39.63936,-2.08354,39.71598,-1.93129,19.38,2
+way/222895334,way/1175744923,SE Manzanares,Subestación Manzanares colectora,SCE,SCE,39.04485,-3.34431,39.04744,-3.34174,0.22,1
+way/340399370,way/256334221,Estació transmissora de Santa Llogaia d'Àlguema,Estació transformadora de Santa Llogaia d'Àlguema,CAT,CAT,42.22994,2.94652,42.23039,2.94425,0.07,1
+way/340399370,way/256334221,Estació transmissora de Santa Llogaia d'Àlguema,Estació transformadora de Santa Llogaia d'Àlguema,CAT,CAT,42.22994,2.94652,42.23039,2.94425,0.10,1
+way/340399370,way/223307054,Estació transmissora de Santa Llogaia d'Àlguema,Subestació de Santa Llogaia d'Àlguema,CAT,CAT,42.22994,2.94652,42.22970,2.94834,0.10,1
+way/340399370,way/223307054,Estació transmissora de Santa Llogaia d'Àlguema,Subestació de Santa Llogaia d'Àlguema,CAT,CAT,42.22994,2.94652,42.22970,2.94834,0.11,1
+way/191458480,way/189184555,Subestación Eléctrica de Sanzo,Subestación Eléctrica de Pesoz,NW,NW,43.24266,-6.85469,43.24302,-6.86584,1.02,2
+way/191458480,way/189184555,Subestación Eléctrica de Sanzo,Subestación Eléctrica de Pesoz,NW,NW,43.24266,-6.85469,43.24302,-6.86584,1.28,1
+way/504178826,way/1236451628,Campanario,SET Campanario Renovables,SE,SE,38.88297,-1.27823,38.88107,-1.28089,0.41,1
+way/753364578,relation/19040600,Posto de Corte de Vieira do Minho,Subestação da Central Hidroelétrica de Frades,PT,PT,41.67065,-8.03041,41.69345,-8.02757,3.20,1
+way/753364578,relation/19040600,Posto de Corte de Vieira do Minho,Subestação da Central Hidroelétrica de Frades,PT,PT,41.67065,-8.03041,41.69345,-8.02757,1.78,2
+way/753364578,relation/19040600,Posto de Corte de Vieira do Minho,Subestação da Central Hidroelétrica de Frades,PT,PT,41.67065,-8.03041,41.69345,-8.02757,1.32,2
+way/753364578,way/964625644,Posto de Corte de Vieira do Minho,Subestação de Ribeira de Pena,PT,PT,41.67065,-8.03041,41.55090,-7.81214,26.30,2
+way/434238959,way/591669458,SET Cerrato,Subestacion de Tracción Dueñas,CYL,CYL,41.88872,-4.38173,41.86889,-4.51347,12.35,1
+way/694016335,way/1462950857,Subestação de Vila Nova de Famalicão,Subestação de Ponte de Lima,PT,PT,41.35863,-8.61288,41.67816,-8.59387,45.25,1
+way/651711449,way/1164100988,SE Servan,Sub-1 Colectora San Serván,BAD,BAD,38.80645,-6.51526,38.80493,-6.52178,0.41,1
+way/1263279632,way/683693772,SET Mudéjar Promotores,Subestacion De Mudéjar,ARA,ARA,41.02458,-0.38433,41.02291,-0.38216,0.55,2
+way/1263279632,way/683693772,SET Mudéjar Promotores,Subestacion De Mudéjar,ARA,ARA,41.02458,-0.38433,41.02291,-0.38216,0.43,2
+way/1263279632,way/683693772,SET Mudéjar Promotores,Subestacion De Mudéjar,ARA,ARA,41.02458,-0.38433,41.02291,-0.38216,0.39,1
+way/229184275,way/675714143,?,Subestación Peñarrubia,SE,SE,38.52320,-1.33281,38.52179,-1.33334,0.09,1
+way/675714143,way/1488478024,Subestación Peñarrubia,SET colectora La Alquería,SE,SE,38.52179,-1.33334,38.52088,-1.33039,0.21,2
+way/1272548315,way/941947459,Subestación Buniel,SET Adif Buniel,N,N,42.32270,-3.82060,42.32224,-3.81968,0.03,1
+way/1272548315,way/941947459,Subestación Buniel,SET Adif Buniel,N,N,42.32270,-3.82060,42.32224,-3.81968,0.02,1
+way/768087809,way/767739005,Posto de Corte do Alto Tâmega,Subestação de Gouvães,PT,PT,41.57121,-7.72911,41.53763,-7.76588,5.17,2
+way/768087809,way/1421833203,Posto de Corte do Alto Tâmega,Subestação da Central Hidroelétrica do Alto Tâmega,PT,PT,41.57121,-7.72911,41.57384,-7.73126,0.26,1
+way/768087809,way/1421833203,Posto de Corte do Alto Tâmega,Subestação da Central Hidroelétrica do Alto Tâmega,PT,PT,41.57121,-7.72911,41.57384,-7.73126,0.25,1
+way/767739005,way/964625644,Subestação de Gouvães,Subestação de Ribeira de Pena,PT,PT,41.53763,-7.76588,41.55090,-7.81214,5.47,2
+way/767739005,way/964625644,Subestação de Gouvães,Subestação de Ribeira de Pena,PT,PT,41.53763,-7.76588,41.55090,-7.81214,5.75,1
+way/964625644,way/1123377073,Subestação de Ribeira de Pena,Posto de Corte de Daivões,PT,PT,41.55090,-7.81214,41.52342,-7.86151,6.05,1
+way/1123377073,way/1259166797,Posto de Corte de Daivões,Subestação da Central Hidroelétrica de Daivões,PT,PT,41.52342,-7.86151,41.52381,-7.86560,0.10,2
+way/986410926,way/986410945,SE Ciudad Rodrigo,SET Cuidad Rodrigo,CYL,CYL,40.64228,-6.55115,40.61255,-6.56016,4.05,1
+way/1277780472,way/1120397197,?,Subestación SSP,VAL,VAL,39.52496,-1.56713,39.48311,-2.10149,48.31,1
+way/1277780472,way/1277780459,?,Minglanilla-Generación,VAL,VAL,39.52496,-1.56713,39.52697,-1.56730,0.16,2
+way/1172185252,way/1448240979,SET Apicio,SE Segura de Leon,BAD,BAD,38.23793,-6.58915,38.19899,-6.39725,18.24,1
+way/1032009205,way/1484018453,SET Planta Fotovoltaica Francisco Pizarro,subestación elevadora PSFV Campo de Arañuelo 30/400 kV,CAC,CAC,39.56434,-5.66691,39.54492,-5.69646,2.40,2
+way/1448249985,way/1246115410,Subestación Pizarroso I,?,CAC,CAC,39.79768,-6.35837,39.60541,-6.33947,23.69,1
+way/1448249985,way/989699715,Subestación Pizarroso I,SE Cañaveral,CAC,CAC,39.79768,-6.35837,39.79926,-6.36039,0.17,1
+way/1267694217,way/1447429837,SET CARMONITA,CARMONITA 400/220,BAD,BAD,39.09502,-6.36921,39.09804,-6.36881,0.23,1
+node/13137939428,node/13137939439,SET Las Mareas 30/400 kV,SET Almendra Promotores,ARA,ARA,41.31770,0.25031,41.35532,0.21313,5.60,2
+node/13137939439,node/13137897860,SET Almendra Promotores,SET Almendrales 400 kV,ARA,ARA,41.35532,0.21313,41.33338,0.20098,2.73,1
+way/1497273186,way/1497273183,Subestación de Fontefría,Subestación Eléctrica de Beariz,NW,NW,42.25226,-8.31663,42.48922,-8.24951,29.93,2
+way/58928252,way/74384031,Subestación de Montearenas,Subestación de La Mudarra,NW,CYL,42.57290,-6.55022,41.78964,-4.93661,168.99,1
+way/226886241,way/27936937,Belinchon,Subestación de Morata,MAD,MAD,40.03418,-3.07982,40.25598,-3.44301,54.86,1
+way/1277630152,way/226886241,Subestación de Olmedilla,Belinchon,VAL,MAD,39.63831,-2.08475,40.03418,-3.07982,100.65,1
+way/151168335,way/24636044,Subestação Alto de Mira,Subestação de Fanhões,PT,PT,38.77803,-9.23887,38.88896,-9.13727,16.81,2
+way/144608818,way/24636044,Posto de Corte do Ribatejo,Subestação de Fanhões,PT,PT,39.01407,-8.95087,38.88896,-9.13727,23.36,2
+way/58928252,way/74384031,Subestación de Montearenas,Subestación de La Mudarra,NW,CYL,42.57290,-6.55022,41.78964,-4.93661,171.99,2
+way/691036111,way/98603324,Subestación Puerto de la Cruz,Subestación de Tarifa,WAN,WAN,36.07225,-5.61512,36.03232,-5.60606,8.11,2
+way/691036111,way/97199647,Subestación Puerto de la Cruz,Subestación de Pinar del Rey,WAN,WAN,36.07225,-5.61512,36.24847,-5.41159,32.88,2
+way/124722161,way/142182853,Subestação de Recarei,Subestação de Vermoim,PT,PT,41.15689,-8.45421,41.23045,-8.60481,31.58,1
+way/142182853,way/694016335,Subestação de Vermoim,Subestação de Vila Nova de Famalicão,PT,PT,41.23045,-8.60481,41.35863,-8.61288,36.55,2
+way/144396412,way/144439472,Subestação de Armamar,Subestação de Lobagueira,PT,PT,41.10180,-7.66240,40.70186,-7.99272,61.04,1
+way/124722161,way/144396412,Subestação de Recarei,Subestação de Armamar,PT,PT,41.15689,-8.45421,41.10180,-7.66240,73.35,1
+way/129441519,way/171251565,Subestación El Palmar,Subestación de Rocamora,SE,SE,37.94075,-1.18801,38.14780,-0.94621,78.40,2
+way/129441519,way/144909722,Subestación El Palmar,Subestación Litoral,SE,SE,37.94075,-1.18801,36.97825,-1.90800,153.33,2
+way/126987023,way/144933376,Subestación de Catadau,Subestación de Requena,VAL,VAL,39.25024,-0.56085,39.45922,-0.98822,50.41,1
+way/751560789,way/964625644,Subestação da Feira,Subestação de Ribeira de Pena,PT,PT,40.95996,-8.46037,41.55090,-7.81214,111.79,1
+relation/19040600,way/151061884,Subestação da Central Hidroelétrica de Frades,Subestação de Pedralva,PT,PT,41.69345,-8.02757,41.57726,-8.32263,29.65,2
+way/105259481,way/202891403,Subestación de Abanto,Subestación de Güeñes,N,N,43.32681,-3.09396,43.21886,-3.03033,23.99,2
+way/105259481,way/401804126,Subestación de Abanto,Subestación de Udalla,N,N,43.32681,-3.09396,43.32364,-3.46222,40.09,1
+way/101953901,way/27668869,Subestación de La Cereal,Subestación de Galapagar,MAD,MAD,40.60058,-3.72309,40.59822,-4.00502,25.88,2
+way/27668869,way/283348372,Subestación de Galapagar,Subestación de Lastras del Pozo,MAD,CYL,40.59822,-4.00502,40.88083,-4.33939,48.70,1
+way/170479580,way/27668869,Subestación de Segovia,Subestación de Galapagar,CYL,MAD,40.93992,-4.16540,40.59822,-4.00502,59.12,2
+way/170479580,way/170511092,Subestación de Segovia,Subestación Tordesillas,CYL,CYL,40.93992,-4.16540,41.50680,-5.01289,110.90,2
+way/27949649,way/28683005,Subestación de Moraleja,Subestación de Villaviciosa,MAD,MAD,40.25996,-3.87508,40.34701,-3.90544,14.18,2
+way/27936937,way/27949649,Subestación de Morata,Subestación de Moraleja,MAD,MAD,40.25598,-3.44301,40.25996,-3.87508,44.94,2
+way/104020696,way/124121964,Subestació de Sentmenat,Subestació de Rubí,CAT,CAT,41.61948,2.11178,41.47325,2.00987,30.91,1
+way/169729505,way/178294745,Subestació de Bescanó (MAT),Subestació de Vic,CAT,CAT,41.97248,2.69583,41.95704,2.28218,40.40,2
+way/104020696,way/178294745,Subestació de Sentmenat,Subestació de Vic,CAT,CAT,41.61948,2.11178,41.95704,2.28218,53.12,1
+way/124121964,way/140011919,Subestació de Rubí,Subestació de Vandellòs,CAT,CAT,41.47325,2.00987,40.97631,0.87901,133.62,1
+way/340399370,way/683892938,Estació transmissora de Santa Llogaia d'Àlguema,La Farga,CAT,CAT,42.22994,2.94652,42.06246,2.88311,19.82,2
+way/190058570,way/43842955,Subestacion de Lada,Subestación Soto de Ribera,NW,NW,43.30523,-5.69808,43.31374,-5.88682,15.48,1
+way/43842955,way/51822825,Subestación Soto de Ribera,Subestación de Aguayo,NW,N,43.31374,-5.88682,43.11955,-4.01994,198.39,1
+way/1240967180,way/196215046,Amorebieta,Subestación de Gatika,N,N,43.23596,-2.74929,43.34961,-2.88060,19.47,1
+way/196215046,way/202891403,Subestación de Gatika,Subestación de Güeñes,N,N,43.34961,-2.88060,43.21886,-3.03033,38.69,1
+way/1240967180,way/196202213,Amorebieta,Subestación de Itxaso,N,N,43.23596,-2.74929,43.06146,-2.27398,49.44,1
+way/124722161,way/751560789,Subestação de Recarei,Subestação da Feira,PT,PT,41.15689,-8.45421,40.95996,-8.46037,49.78,1
+way/144439469,way/751560789,Subestação de Paraimo,Subestação da Feira,PT,PT,40.46857,-8.47961,40.95996,-8.46037,60.27,1
+way/144439469,way/144564903,Subestação de Paraimo,Subestação da Batalha,PT,PT,40.46857,-8.47961,39.65060,-8.78973,101.00,1
+way/126987023,way/60351390,Subestación de Catadau,Subestació elèctrica de Torrent,VAL,VAL,39.25024,-0.56085,39.42355,-0.45467,27.87,1
+way/33771314,way/60351390,Subestacion electrica La Eliana,Subestació elèctrica de Torrent,VAL,VAL,39.55458,-0.51063,39.42355,-0.45467,28.25,1
+way/144931782,way/921541546,Subestación de Ayora,La Muela II,VAL,VAL,39.04137,-1.00742,39.24380,-0.93170,34.40,1
+way/126987023,way/171256169,Subestación de Catadau,ST Beneixama,VAL,VAL,39.25024,-0.56085,38.71901,-0.72256,62.65,1
+way/145171008,way/921541546,Subestación de Minglanilla,La Muela II,VAL,VAL,39.52480,-1.56517,39.24380,-0.93170,90.18,1
+way/145171008,way/33771314,Subestación de Minglanilla,Subestacion electrica La Eliana,VAL,VAL,39.52480,-1.56517,39.55458,-0.51063,96.78,1
+way/173535816,way/43842955,SET La Robla,Subestación Soto de Ribera,NW,NW,42.79586,-5.63743,43.31374,-5.88682,64.74,1
+way/173535816,way/190058570,SET La Robla,Subestacion de Lada,NW,NW,42.79586,-5.63743,43.30523,-5.69808,72.23,1
+way/103511952,way/188618317,La Lomba,Compostilla II,NW,NW,42.58572,-6.62415,42.60819,-6.56835,4.91,2
+way/188618317,way/58928252,Compostilla II,Subestación de Montearenas,NW,NW,42.60819,-6.56835,42.57290,-6.55022,6.54,2
+way/165580300,way/200253359,Subestació de Viladecans,Subestació Garraf,CAT,CAT,41.32554,2.02798,41.25505,1.71926,27.98,1
+way/33771314,way/34585227,Subestacion electrica La Eliana,Subestación de la Plana,VAL,VAL,39.55458,-0.51063,39.96679,-0.09653,61.52,1
+way/140011919,way/200253359,Subestació de Vandellòs,Subestació Garraf,CAT,CAT,40.97631,0.87901,41.25505,1.71926,88.29,1
+way/140011919,way/34585227,Subestació de Vandellòs,Subestación de la Plana,CAT,VAL,40.97631,0.87901,39.96679,-0.09653,155.43,1
+relation/17148268,relation/20290680,Subestación Almaraz,Subestación de Bienvenida,CAC,BAD,39.80711,-5.69323,38.31791,-6.19755,180.73,1
+way/146826566,way/196207064,?,Subestación Eléctrica de Azpeitia,N,N,43.25625,-1.97537,43.21265,-2.25240,26.77,1
+way/196207064,way/196215046,Subestación Eléctrica de Azpeitia,Subestación de Gatika,N,N,43.21265,-2.25240,43.34961,-2.88060,56.06,1
+way/190110739,way/43842955,Estacion de Tabiella,Subestación Soto de Ribera,NW,NW,43.57482,-5.89831,43.31374,-5.88682,38.89,1
+way/163194137,way/201459319,Subestação de Portimão,Subestação de Tavira,PT,PT,37.19870,-8.51592,37.34472,-7.76610,80.30,1
+way/144622215,way/163194137,Subestação de Sines,Subestação de Portimão,PT,PT,37.99752,-8.76380,37.19870,-8.51592,97.67,1
+way/51188420,way/989699715,Central Eléctrica de Alcántara,SE Cañaveral,CAC,CAC,39.72432,-6.87721,39.79926,-6.36039,50.22,2
+relation/17148268,way/989699715,Subestación Almaraz,SE Cañaveral,CAC,CAC,39.80711,-5.69323,39.79926,-6.36039,71.25,2
+way/168358225,way/989699715,SET Arañuelo,SE Cañaveral,CAC,CAC,39.95042,-5.58971,39.79926,-6.36039,74.07,2
+way/134884956,way/989699715,Subestación de Hinojosa,SE Cañaveral,CYL,CAC,41.01721,-6.73355,39.79926,-6.36039,171.19,2
+way/144909722,way/327268322,Subestación Litoral,Subestación de Tabernas,SE,SE,36.97825,-1.90800,37.07097,-2.31232,36.69,1
+way/173535816,way/52516392,SET La Robla,SE Villameca,NW,NW,42.79586,-5.63743,42.63170,-6.04093,37.93,1
+relation/19645437,way/144554435,Subestação da Central de Ciclo Combinado de Lares,Subestação de Lavos,PT,PT,40.12372,-8.77535,40.05791,-8.83697,11.55,2
+way/188618317,way/52516392,Compostilla II,SE Villameca,NW,NW,42.60819,-6.56835,42.63170,-6.04093,44.54,1
+way/188618317,way/47842260,Compostilla II,Subestación Eléctrica de Herrera,NW,N,42.60819,-6.56835,42.59446,-4.34295,191.72,1
+way/1266081844,way/181906370,Subestación de Magallón,La Serna,ARA,ARA,41.84665,-1.38109,42.09745,-1.66746,71.32,1
+way/1266081844,way/143207685,Subestación de Magallón,Subestación de Peñaflor,ARA,ARA,41.84665,-1.38109,41.72173,-0.74180,91.35,1
+way/101953901,way/28308003,Subestación de La Cereal,Subestación de San Sebastián,MAD,MAD,40.60058,-3.72309,40.56599,-3.59602,9.82,2
+way/24791388,way/28308003,Subestación eléctrica de Fuencarral,Subestación de San Sebastián,MAD,MAD,40.51955,-3.67192,40.56599,-3.59602,12.24,2
+way/144385734,way/144396412,Subestação de Lagoaça,Subestação de Armamar,PT,PT,41.21994,-6.73744,41.10180,-7.66240,86.15,1
+way/1266081844,way/135806477,Subestación de Magallón,Subestación Rueda de Jalón,ARA,ARA,41.84665,-1.38109,41.64984,-1.29658,25.27,2
+way/226363063,way/51247251,Subestación de Trillo,Subestación de Medinaceli,MAD,MAD,40.70328,-2.62574,41.10606,-2.37449,58.22,2
+way/170014037,way/51247251,Terrer Vega,Subestación de Medinaceli,ARA,MAD,41.32095,-1.70571,41.10606,-2.37449,69.18,2
+way/135806477,way/170014037,Subestación Rueda de Jalón,Terrer Vega,ARA,ARA,41.64984,-1.29658,41.32095,-1.70571,71.45,2
+way/1322975653,way/201459319,Subestação de Panóias,Subestação de Tavira,PT,PT,37.75984,-8.34729,37.34472,-7.76610,81.12,1
+way/103511952,way/187645709,La Lomba,Subestación Eléctrica da Central Térmica das Pontes de García Rodríguez,NW,NW,42.58572,-6.62415,43.43942,-7.86055,142.91,2
+way/126881765,way/34585227,Subestación de Morella,Subestación de la Plana,ARA,VAL,40.61098,-0.19540,39.96679,-0.09653,77.29,1
+way/126881765,way/683693772,Subestación de Morella,Subestacion De Mudéjar,ARA,ARA,40.61098,-0.19540,41.02291,-0.38216,56.32,2
+way/145823172,way/683693772,Subestación de Mezquita,Subestacion De Mudéjar,ARA,ARA,40.72417,-0.84939,41.02291,-0.38216,84.48,2
+way/118057369,way/51822825,Subestacion de Velilla del Río Carrión,Subestación de Aguayo,NW,N,42.82195,-4.85826,43.11955,-4.01994,81.65,1
+way/1258290323,way/144396412,Subestação da Central Hidroelétrica de Foz Tua,Subestação de Armamar,PT,PT,41.21576,-7.42680,41.10180,-7.66240,39.70,1
+way/170272140,way/677413570,Fuentes de la Alcarría,Subestación Loeches 1,MAD,MAD,40.74813,-2.98354,40.38777,-3.42257,67.31,2
+way/170272140,way/226363063,Fuentes de la Alcarría,Subestación de Trillo,MAD,MAD,40.74813,-2.98354,40.70328,-2.62574,73.15,2
+way/127787669,way/169867109,Subestación Eléctrica Aragón,?,ARA,ARA,41.21730,-0.28047,41.29524,-0.34135,12.05,1
+way/127787669,way/129767234,Subestación Eléctrica Aragón,Subestación de Mequinenza,ARA,ARA,41.21730,-0.28047,41.36822,0.27693,52.91,1
+way/144639174,way/144767090,Subestação de Alqueva,SE Brovales,PT,BAD,38.18595,-7.49836,38.32039,-6.70313,80.62,1
+way/434238959,way/85817084,SET Cerrato,Subestación eléctrica de Grijota 440 kV,CYL,CYL,41.88872,-4.38173,42.07169,-4.55574,26.13,1
+way/28308003,way/434238959,Subestación de San Sebastián,SET Cerrato,MAD,CYL,40.56599,-3.59602,41.88872,-4.38173,180.90,1
+way/196202213,way/202891403,Subestación de Itxaso,Subestación de Güeñes,N,N,43.06146,-2.27398,43.21886,-3.03033,74.90,2
+way/189184531,way/217745445,Estacion de Salas,Subestación de Santa María de Grado,NW,NW,43.36633,-6.30197,43.38863,-5.99480,27.04,2
+FR,way/178294745,FR,Subestació de Vic,FR,CAT,0.00000,0.00000,41.95704,2.28218,91.99,1
+way/1447258194,way/1447258202,Subestación Velilla Solar,?,NW,NW,42.73923,-4.86671,42.82240,-4.86282,9.44,2
+way/129055610,way/144608818,Subestação de Palmela,Posto de Corte do Ribatejo,PT,PT,38.57300,-8.85836,39.01407,-8.95087,56.21,1
+way/144564903,way/144608818,Subestação da Batalha,Posto de Corte do Ribatejo,PT,PT,39.65060,-8.78973,39.01407,-8.95087,80.39,1
+way/1054312727,way/84526032,SET FV SAN ANTONIO,Subestación de Cedillo,CAC,CAC,39.62853,-7.46427,39.66434,-7.53322,7.56,1
+way/105259481,way/223207745,Subestación de Abanto,Subestación de Zierbena,N,N,43.32681,-3.09396,43.35874,-3.09103,4.50,2
+way/202891403,way/223207745,Subestación de Güeñes,Subestación de Zierbena,N,N,43.21886,-3.03033,43.35874,-3.09103,16.97,1
+way/1447258194,way/1447258198,Subestación Velilla Solar,Subestación Virgen de Areños III,NW,NW,42.73923,-4.86671,42.62963,-4.85297,13.10,1
+way/170424446,way/201459319,Subestación de Puebla de Guzmán,Subestação de Tavira,WAN,PT,37.54861,-7.24135,37.34472,-7.76610,57.75,1
+way/145302700,way/931032666,?,Subestació elèctrica de l'Espluga de Francolí,CAT,CAT,41.20447,0.57112,41.40426,1.12404,54.49,2
+relation/16809528,way/931032666,Subestació de Begues,Subestació elèctrica de l'Espluga de Francolí,CAT,CAT,41.35544,1.90239,41.40426,1.12404,71.22,2
+way/115680075,way/85817084,Subestación de Arrazua,Subestación eléctrica de Grijota 440 kV,N,CYL,42.88379,-2.60341,42.07169,-4.55574,206.13,1
+way/222895334,way/576439241,SE Manzanares,Subestación de Brazatortas,SCE,SCE,39.04485,-3.34431,38.65243,-4.25376,113.71,2
+way/144554435,way/144564903,Subestação de Lavos,Subestação da Batalha,PT,PT,40.05791,-8.83697,39.65060,-8.78973,51.29,2
+way/131715746,way/144554435,Subestação de Rio Maior,Subestação de Lavos,PT,PT,39.33826,-9.00119,40.05791,-8.83697,86.30,1
+way/28308003,way/74384031,Subestación de San Sebastián,Subestación de La Mudarra,MAD,CYL,40.56599,-3.59602,41.78964,-4.93661,205.63,1
+way/144931782,way/171256169,Subestación de Ayora,ST Beneixama,VAL,VAL,39.04137,-1.00742,38.71901,-0.72256,46.37,1
+way/129055610,way/988035260,Subestação de Palmela,Subestação de Pegões,PT,PT,38.57300,-8.85836,38.64853,-8.60601,33.27,1
+way/144622215,way/988035260,Subestação de Sines,Subestação de Pegões,PT,PT,37.99752,-8.76380,38.64853,-8.60601,86.70,1
+way/189184531,way/189184557,Estacion de Salas,SET Central Térmica de Narcea,NW,NW,43.36633,-6.30197,43.29195,-6.39541,12.55,2
+way/189184557,way/43842955,SET Central Térmica de Narcea,Subestación Soto de Ribera,NW,NW,43.29195,-6.39541,43.31374,-5.88682,41.04,1
+way/1462950857,way/1497273186,Subestação de Ponte de Lima,Subestación de Fontefría,PT,NW,41.67816,-8.59387,42.25226,-8.31663,89.80,1
+way/1054310285,way/144599061,Subestação do Fundão,Subestação de Falagueira,PT,PT,40.17657,-7.45556,39.52813,-7.74094,99.18,1

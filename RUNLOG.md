@@ -133,6 +133,62 @@ One entry per session. Every number is measured or read back, never assumed.
   REI/Ward). That would also address the north/centre fault levels.
 - The flag stays in the code, off. `pp_v2_state_s29_F2.pkl` is kept for the record.
 
+### 8. Network-derived corridor reactances; a hidden 1.5 GW Madrid shift in the base (agent: claude-main)
+**Full network and reduction.**
+- `build_corridors_v2.py` now also writes **`lines_full_v2.csv`**: 428 substation-to-substation lines, 300 nodes,
+  main component 284. Its other outputs are unchanged.
+- **`reduce_fullnet.py`** (DC, series X only) fits one reactance per pp_v2 corridor so that the 15-zone reduced
+  network reproduces the full network's:
+  - zonal PTDF, with each zone's injection spread equally over its substations;
+  - zone-to-Madrid transfer reactance, which fixes the absolute scale (the PTDF alone is scale-free).
+- Result: **PTDF rms 0.025, transfer reactances within ≈ 10 %** (`corridor_x_fit[_open].csv`).
+- Physically the network is 2.4× stiffer against CAC–CYL and 1.8× against GRA–SE than the hub model.
+- The CAC ties to Portugal go to **PT-S** (Cedillo–Falagueira, [CA] p.33); the S27 PTMAP sent them to PT-N, so the
+  new `CAC-PT-S` corridor is added in fit mode.
+- pp_v2 flag **`CORR_X=fit`**: corridor lengths are set so that X equals the fit, there is no length continuation,
+  and France keeps its hub-to-hub ties (all French ends snap to one OSM node).
+- **Correction to §2:** only Pierola–Sentmenat is in the OSM line list. Cofrentes–La Muela, Fuendetodos–Mezquita and
+  Mezquita–Morella never were, so §2's −13 / −145 km and the ARA–VAL ×2→×1 removed lines the model did not have.
+  In fit mode only Pierola–Sentmenat is removed (82 circuit-km).
+
+**Finding: R2 (S28) and EU (§6) hold Madrid demand 1.5 GW low.**
+- The Madrid corridor knob sits at its −1.5 GW bound: MAD 2,780 → 1,280 MW, WAN 1,656 → 3,156 MW.
+  - s35b: −0.40; X6: −0.81; R2 / OLP / EU: −1.50 (bound).
+- **Cause:** the TRIPCAL trip target (4a+4b → +4.9 kV, weight 1/kV). Load moved next to Badajoz shrinks the
+  P-unloading part of the step.
+- With Madrid frozen (`MADFIX=1`), the fit used the next dispatch lever instead: Morocco export → 1,296 MW (target
+  750).
+- The trip target therefore corrupts the dispatch through any knob. S28 §10 already noted it is uncertain (tripped
+  plants' Q unknown; the P-only part matches the report).
+
+**Comparison, true Madrid demand, trip target as a check only** (`MADFIX=1 TRIPCAL=0`, vkg 5 %, logs
+`cal_s29/{HF,XF}.txt`):
+
+| | EU (base, Madrid −1.5 GW) | HF: hub X | XF: network-derived X |
+|---|---|---|---|
+| cost | 62.7 | 166.6 | 493.0 |
+| borders PT / FR / MA | 2,104 / 1,336 / 760 | 2,193 / 1,307 / 957 | 2,399 / 1,188 / 1,286 |
+| CAC→MAD (3,227) | 3,309 | 3,943 | 4,568 |
+| BAD→CAC (1,850) | 2,063 | 2,507 | **1,859** |
+| GRA→SE (900) | 1,368 | 1,657 | **1,293** |
+| CAC→CYL (1,200) | 1,942 | 2,106 | **1,364** |
+| trip 4a+4b / Granada | +7.0 / 17 | +8.8 kV / 36 | +12.5 kV / 43 kV/Gvar |
+| fault level N / CAT / NW | | +120 / +182 / +225 % | +81 / +142 / +189 % |
+
+- Both are genuine optima: `LSDBG` shows ftol/xtol termination, gradient ≈ 0, and the manual Jacobian has full rank.
+- **Conclusion:** the physical reactances fix the three secondary corridors and lower the fault levels. With true
+  Madrid demand, though, neither network reproduces Fig 2-4's CAC→MAD and the borders together. What is left is in
+  the **zonal dispatch**: where load and RES sit inside and between zones, inferred from April regional shares
+  (§6 of the V2 list). It is not in the impedances.
+- **Tool fixes this step:**
+  - frozen knobs are taken out of the optimisation (`MADFIX`);
+  - `LSDBG` / `LSPROBE` diagnostics; `LSMETHOD`, `LSXS`, `LSNFEV`, `LSTOL` options;
+  - the resid exception is printed under `LSDBG`;
+  - `MADW` / `MADREG` options;
+  - **`base_v2.py` bug:** overriding a base flag (e.g. `TRIPCAL=0`) crashed before writing the log, so a few
+    interim tables were stale. Fixed.
+- The base is **not changed** (still EU) pending the decision below.
+
 ## Session 28 — 2026-11-25 — agent: claude-mac (local macOS copy, **no PSCAD**): pandapower v2 load flow continued
 
 **Scope:** continue the pandapower v2 calibration from S27 §34 on a local copy (pandapower 3.5.6 in a venv, Python

@@ -10,7 +10,8 @@ Same inputs, substation snapping and zone rule as build_corridors.py. What chang
      (k - 1 lines; a T-junction becomes two lines).
   4. Circuits of a line = max-flow between its two terminals inside the cluster, capacity = circuits per way.
      v1 took the minimum along ONE path, so a double circuit mapped as two separate ways was counted once.
-Outputs: corridors_v2.csv, zone_km_v2.csv (same columns as v1), and a diff against corridors.csv on stdout.
+Outputs: corridors_v2.csv, zone_km_v2.csv (same columns as v1), lines_full_v2.csv (every substation-to-substation
+line, S29), and a diff against corridors.csv on stdout.
 """
 import argparse, collections, csv, json, math, os
 import networkx as nx
@@ -158,6 +159,14 @@ with open(os.path.join(HERE, "corridors_v2.csv"), "w", newline="", encoding="utf
         for l in sorted(cor[k], key=lambda l: -l["L"]):
             x, y = (l["a"], l["b"]) if zn(l["a"]) == k[0] else (l["b"], l["a"])
             w.writerow([k[0], k[1], nm(x), nm(y), f"{l['L']:.1f}", l["nc"], l["names"]])
+# full substation-to-substation network, for the zonal reduction (reduce_fullnet.py, RUNLOG S29 sec 8)
+pp_ = lambda n: (0.0, 0.0) if n == "FR" else subs[n]["p"]
+with open(os.path.join(HERE, "lines_full_v2.csv"), "w", newline="", encoding="utf-8") as f:
+    w = csv.writer(f); w.writerow(["a", "b", "name_a", "name_b", "zone_a", "zone_b", "lat_a", "lon_a", "lat_b", "lon_b", "km", "circuits"])
+    for l in lines:
+        (la, oa), (lb, ob) = pp_(l["a"]), pp_(l["b"])
+        w.writerow([l["a"], l["b"], nm(l["a"]), nm(l["b"]), zn(l["a"]), zn(l["b"]), f"{la:.5f}", f"{oa:.5f}", f"{lb:.5f}", f"{ob:.5f}",
+                    f"{l['L']:.2f}", min(l["nc"], 8)])
 with open(os.path.join(HERE, "zone_km_v2.csv"), "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f); w.writerow(["zone", "circuit_km_incl_half_ties", "route_km_internal"])
     for z in sorted(zkm): w.writerow([z, f"{zkm[z]:.0f}", f"{zroute[z]:.0f}"])
