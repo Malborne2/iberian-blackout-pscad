@@ -15,7 +15,7 @@ from scipy.optimize import linear_sum_assignment
 import pandapower as pp
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 
-ap = argparse.ArgumentParser(); ap.add_argument("tag"); ap.add_argument("--win", nargs=2, type=float)
+ap = argparse.ArgumentParser(); ap.add_argument("tag"); ap.add_argument("--win", nargs=2, type=float); ap.add_argument("--timeline", type=float)
 a = ap.parse_args()
 HERE = os.path.dirname(os.path.abspath(__file__))
 t, c = load(os.path.join(r"C:\PSCAD_work\v2_runs", a.tag), "v2")
@@ -55,6 +55,13 @@ if units and len(units) == len(inst):
 else:
     print(f"unit list ({len(units)}) and SyncUnit instances ({len(inst)}) differ: no matching")
 ws = np.array([c[f"{i}:Wspd"] for i in inst]) / (2 * np.pi)
+if a.timeline:                                   # S30 sec 9: where a collapse starts (0.25 s steps)
+    nm_of = {inst[ri]: units[ci]["name"] for ri, ci in zip(r_, c_)} if units and len(units) == len(inst) else {i: i for i in inst}
+    print("  t s   Vbus min/mean/max kV     f min..max Hz   fastest / slowest unit")
+    for t_ in np.arange(0.0, t[-1] + 1e-9, a.timeline):
+        j = min(len(t) - 1, np.searchsorted(t, t_)); vv = np.array([vb[b][j] for b in vb]); ff = ws[:, j]
+        print(f"  {t_:5.2f}  {vv.min():6.1f} {vv.mean():6.1f} {vv.max():6.1f}   {ff.min():7.3f}..{ff.max():7.3f}   "
+              f"{nm_of[inst[ff.argmax()]]} / {nm_of[inst[ff.argmin()]]}")
 print(f"machine frequency in window: {ws[:, m].mean():.4f} Hz, spread {(ws[:, m].max(axis=0) - ws[:, m].min(axis=0)).max() * 1000:.1f} mHz")
 fig, ax = plt.subplots(3, 1, figsize=(10, 9), sharex=True)
 k = max(1, len(t) // 5000)
