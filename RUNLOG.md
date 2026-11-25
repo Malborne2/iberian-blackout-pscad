@@ -170,6 +170,49 @@ event replay is ≈ 3 h, so runs must be few, short and parallel.
   Each read (0.5746)²·100 = 33 MW/Mvar on a source left at Es = 230 kV, which is the same trap.
 - Rerun health12 (12 s) with the fix.
 
+### 7. Exponential loads and per-bus meters in the generator
+- **Per-bus meter:** one `master:freq-meas` per zone, TS and PS bus (22). Its 3-phase N port sits on the bus; outputs
+  are F_<bus> (Hz), VPU_<bus> (pu of 400 kV) and PH_<bus>. Ports: N (−4, 0), FREQ (+4, −2), Volts (+4, 0),
+  PHASE (+4, +2).
+- **Zone loads follow the report's exponential law (α 0.8, β 4.1), as benched in lt4:**
+  - Vf = realpole(VPU, 20 ms), limited to 0.5–1.5;
+  - R = (400²/P0n)·Vf^(2−α) and L = (400²/(ω·Q0n))·Vf^(2−β), with P0n = P_lf/V_lf^α and Q0n = Q_lf/V_lf^β, so the
+    load-flow point is reproduced exactly;
+  - built from `x_power_y` → `gain` → `varrlc` (0 nodes).
+- **HVDC:** a constant 1,000 MW (exponent 2).
+- **Unchanged:** the net capacitive remainder of netted RES, the small pumps and the bus shunts stay constant
+  impedance.
+- `EXPLOAD=0` restores constant-impedance loads.
+
+### 8. Single-line diagram layout (owner request) — `build_v2.py` rewritten placement, case `C:\PSCAD_work2sld`
+- **Zone blocks at geographic positions**, rows north to south:
+  1. NW, N, FR;
+  2. PT-N, CYL, ARA, CAT;
+  3. CAC, MAD, VAL;
+  4. PT-S, BAD, SCE, SE;
+  5. WAN, GRA;
+  6. MA.
+- **Annotations:** a heading per row (areas of Fig 2-41) and a title per zone.
+- **Busbars:** each bus has a visible named busbar (`create_bus`, Name = B_<bus>). Every electrical element of the bus
+  hangs below it on a vertical wire: units, RES plants, loads, shunts, meter, transformers, France source.
+- **Sub-buses** get their own busbar lower in the zone block, each in its own x lane: pump stations, BAD-TS / WAN-TS,
+  the Morocco cable end MA-B, the Morocco terminal.
+- **Lines** hang under their sending bus; the far end is a node label with the receiving bus name.
+- **Named stub per busbar:** one stub that is also the voltage-measuring label and carries the V_<bus> pgb. The far
+  ends of lines connect through it. Wiring the 33-line mesh across the diagram is not used: in PSCAD a wire crossing a
+  bus connects to it.
+- **Control blocks** (ramps, load-law chains, constants) sit in a strip below each zone's elements. The shared DC rail
+  source, time signal and FRC sit next to the Morocco block.
+- **First build:** 159 nodes instead of 162. The Main map showed one 3-phase node fewer: MA-B and WAN-TS shared a row
+  and their busbars overlapped, which merged the cable end with the TS bus.
+- **Fixes:**
+  - each sub-bus gets its own x lane;
+  - wider blocks (12 grid units per element);
+  - a **built-in busbar clash check** that refuses to save if two busbars on a row overlap or come within reach.
+- **Rebuild: 162 nodes, 0 errors**, identical to the label version.
+- `build_v2.py` and `run_v2.py` now default to `C:\PSCAD_work2sld`. The previous generator is kept as
+  `build_v2_grid.py`.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)

@@ -61,44 +61,100 @@ try:
             L("   params", list(cmp_.parameters().keys()) if nm in ("SyncUnit", "RES_Plant", "PumpUnit") else "")
         raise SystemExit(0)
 
-    # ---------------- placement helpers: labels on read-back ports ----------------
-    POS = {"x": 6, "y": 6}
-    def cell(w=14, h=9):
-        x, y = POS["x"], POS["y"]; POS["x"] += w
-        if POS["x"] > 200: POS["x"] = 6; POS["y"] += h
-        return x, y
-    def nlab(x, y, n): c_ = cv.add_component("master", "nodelabel", x, y, 0); c_.parameters(Name=n)
+    # ---------------- single-line-diagram layout (owner request S30 sec 8) ----------------
+    # Zone blocks at geographic positions (rows north -> south). Each bus gets a visible busbar; every electrical element of
+    # that bus hangs below it on a vertical wire. Sub-buses (pump stations, TS buses, Morocco cable end/terminal) have their
+    # own busbar lower in the same block. Lines hang under their sending bus; their far end is a node label with the
+    # receiving bus name, connected to that busbar through its named stub (wiring a 33-line mesh across the diagram would
+    # cross busbars, and in PSCAD a wire crossing a bus connects to it). Control blocks sit in a strip below the elements.
+    TERM0 = {BN[tr.lv_bus]: BN[tr.hv_bus] for _, tr in net.trafo.iterrows() if tr["name"].startswith("T G")}
+    ROWS = [("NORTH / NORTH-WEST AREA  +  FRANCE", ["NW", "N", "FR"]),
+            ("PORTUGAL NORTH  /  NORTH AREA  /  EAST AREA", ["PT-N", "CYL", "ARA", "CAT"]),
+            ("CENTRE  (SOUTH-WEST AREA)  /  EAST AREA", ["CAC", "MAD", "VAL"]),
+            ("PORTUGAL SOUTH  /  SOUTH-WEST AREA  /  EAST AREA", ["PT-S", "BAD", "SCE", "SE"]),
+            ("SOUTH-WEST AREA  (ANDALUSIA)", ["WAN", "GRA"]),
+            ("MOROCCO", ["MA"])]
+    SUBS = {"PT-N": ["PS-PT"], "CYL": ["PS-CYL"], "ARA": ["PS-ARA"], "BAD": ["BAD-TS"], "WAN": ["WAN-TS", "MA-B"], "MA": ["Morocco term"]}
+    ZNAME = {"NW": "NW  Galicia / Asturias / Leon", "N": "N  Basque C. / Navarra / Cantabria", "FR": "FR  France (source behind 20 ohm)",
+             "PT-N": "PT-N  Portugal north", "CYL": "CYL  Castilla y Leon", "ARA": "ARA  Aragon", "CAT": "CAT  Catalonia",
+             "CAC": "CAC  Caceres (Almaraz)", "MAD": "MAD  Madrid", "VAL": "VAL  Valencia / Cuenca", "PT-S": "PT-S  Portugal south",
+             "BAD": "BAD  Badajoz", "SCE": "SCE  Cordoba / Ciudad Real", "SE": "SE  Murcia / Almeria", "WAN": "WAN  Sevilla / Huelva / Cadiz",
+             "GRA": "GRA  Granada / Malaga / Jaen", "MA": "MA  Morocco"}
+    ZOF = {b: z for z, ss in SUBS.items() for b in ss}; ZOF.update({z: z for _, zs in ROWS for z in zs})
+    # pre-count hanging electrical items per zone to size the blocks
+    NIT = {}
+    def nit(z, k=1): NIT[z] = NIT.get(z, 0) + k
+    for _, ln in net.line.iterrows(): nit(ZOF[BN[ln.from_bus]])
+    for _, g in net.gen.iterrows(): nit(ZOF.get(TERM0.get(BN[g.bus], BN[g.bus]), "MA"))
+    for _, s_ in net.sgen.iterrows(): nit(ZOF[BN[s_.bus]], 1 if s_["name"].startswith(("E", "RES")) else 0)
+    for _, l_ in net.load.iterrows(): nit(ZOF[BN[l_.bus]], 2)
+    for b in set(BN.values()):
+        if " term" not in b or "Morocco" in b: nit(ZOF[b], 2)
+    nit("PT-N", 6); nit("BAD", 3); nit("WAN", 1); nit("GRA", 2)
+    SLOT = 9
+    ZX, ZY = {}, {}
+    y = 12
+    for title, zs in ROWS:
+        x = 10
+        for z in zs:
+            ZX[z], ZY[z] = x, y; x += max(56, 12 * NIT.get(z, 3) + 20)
+        y += 66
+    CUR = {}                                   # bus -> next x for hanging items
+    CTL = {}                                   # zone -> next x in the control strip
+    PORTS = {}                                 # bus -> [(x, y)] electrical ports to wire to its busbar
+    def busy(b): return ZY[ZOF[b]] + (0 if ZOF[b] == b else 34)
+    def nlab(x, y, n, meas=False):
+        c_ = cv.add_component("master", "nodelabel", x, y, 0); c_.parameters(Name=n)
+        if meas: c_.parameters(MeasV="YES", VName="V_" + n[2:], PU="NO")
     def dlab(x, y, n): c_ = cv.add_component("master", "datalabel", x, y, 0); c_.parameters(Name=n)
     def gnd(x, y): cv.add_component("master", "ground", x, y, 0)
-    def put(lib, nm, params, node=None, data=None, ground=(), w=14, h=9):
-        x, y = cell(w, h); c_ = cv.add_component(lib, nm, x, y, 0)
+    def hang(bus, lib, nm, params, eport, node=None, data=None, ground=(), w=SLOT, dy=7):
+        """Place an electrical element under bus `bus`; its port `eport` is wired up to the busbar later."""
+        z = ZOF[bus]; lane = SUBS.get(z, []).index(bus) * 60 if bus in SUBS.get(z, []) else 0   # own x lane per sub-bus (S30 sec 8 fix)
+        x = CUR.get(bus, ZX[z] + 6 + lane); CUR[bus] = x + w
+        c_ = cv.add_component(lib, nm, x, busy(bus) + dy, 0)
         if params: c_.parameters(**params)
         P = c_.ports()
+        if eport: PORTS.setdefault(bus, []).append((P[eport].x, P[eport].y))
         for port, n in (node or {}).items(): nlab(P[port].x, P[port].y, n)
         for port, n in (data or {}).items(): dlab(P[port].x, P[port].y, n)
         for port in ground: gnd(P[port].x, P[port].y)
         return c_, P
-    def const(v, n):
-        c_, P = put("master", "const", dict(Value=str(v)), w=8); dlab(list(P.values())[0].x, list(P.values())[0].y, n)
+    ZW = {z: max(56, 12 * NIT.get(z, 3) + 20) for z in ZX}
+    def ctl(zone, lib, nm, params, data=None, w=8):
+        """Control (data-only) block in the zone's control strip, rows of blocks below the hanging elements."""
+        k = CTL.get(zone, 0); CTL[zone] = k + 1
+        per = max(1, (ZW[zone] - 12) // w); x = ZX[zone] + 6 + (k % per) * w; y_ = ZY[zone] + 17 + 4 * (k // per)
+        c_ = cv.add_component(lib, nm, x, y_, 0)
+        if params: c_.parameters(**params)
+        P = c_.ports()
+        for port, n in (data or {}).items(): dlab(P[port].x, P[port].y, n)
+        return c_, P
+    def const(v, n, zone="CAT"):
+        c_, P = ctl(zone, "master", "const", dict(Value=str(v))); dlab(list(P.values())[0].x, list(P.values())[0].y, n)
     CNT = {}
     def count(k): CNT[k] = CNT.get(k, 0) + 1
-
-    # ---------------- lines (pi sections, SI values) ----------------
+    # titles
+    for title, zs in ROWS:
+        a_ = cv.add_component("master", "annotation", ZX[zs[0]], ZY[zs[0]] - 9, 0); a_.parameters(AL1=title, AL2="")
+    for z in ZX:
+        a_ = cv.add_component("master", "annotation", ZX[z] + 2, ZY[z] - 4, 0); a_.parameters(AL1=ZNAME.get(z, z), AL2="")
+    # ---------------- lines (pi sections, SI values): hang under the sending bus, far end labelled ----------------
     for i_, ln in net.line.iterrows():
         fa, fb = BN[ln.from_bus], BN[ln.to_bus]; nc = ln.parallel; Lkm = ln.length_km
         R = ln.r_ohm_per_km * Lkm / nc; X = ln.x_ohm_per_km * Lkm / nc; C = ln.c_nf_per_km * Lkm * nc * 1e-3   # ohm, ohm, uF
-        put("master", "pi_section", dict(Name=f"L{i_}", PU="4", F="50.0", len="1.0", Rp1=f"{R:.6g}", Lp1=f"{X / W50:.6g}", Cp1=f"{max(C, 1e-6):.6g}",
-                                          Rz1=f"{3 * R:.6g}", Lz1=f"{3 * X / W50:.6g}", Cz1=f"{max(0.6 * C, 1e-6):.6g}"),
-            node={"N1": lab(fa), "N2": lab(fb)}); count("line")
+        hang(fa, "master", "pi_section", dict(Name=f"L{i_}", PU="4", F="50.0", len="1.0", Rp1=f"{R:.6g}", Lp1=f"{X / W50:.6g}", Cp1=f"{max(C, 1e-6):.6g}",
+                                               Rz1=f"{3 * R:.6g}", Lz1=f"{3 * X / W50:.6g}", Cz1=f"{max(0.6 * C, 1e-6):.6g}"),
+             "N1", node={"N2": lab(fb)}); count("line")
     # ---------------- transformers kept: pump stations, Morocco ----------------
     for i_, tr in net.trafo.iterrows():
         if not (tr["name"].startswith("T PS") or tr["name"] == "T Morocco"): continue
-        put("master", "xfmr-3p2w", dict(Tmva=f"{tr.sn_mva:.1f}", Xl=f"{tr.vk_percent / 100:.4f} [pu]", V1="400", V2="400", NLL="0.0016 [pu]",
-                                         Im1="2.0 [%]", Sat="0", YD1="0", YD2="0", f="50"),
-            node={"N1": lab(BN[tr.hv_bus]), "N2": lab(BN[tr.lv_bus])}, ground=("G1",)); count("xfmr")
+        hang(BN[tr.hv_bus], "master", "xfmr-3p2w", dict(Tmva=f"{tr.sn_mva:.1f}", Xl=f"{tr.vk_percent / 100:.4f} [pu]", V1="400", V2="400", NLL="0.0016 [pu]",
+                                                         Im1="2.0 [%]", Sat="0", YD1="0", YD2="0", f="50"),
+             "N1", node={"N2": lab(BN[tr.lv_bus])}, ground=("G1",)); count("xfmr")
     # ---------------- synchronous units ----------------
     H_ES, H_PT = 5.25, 5.3          # [inf] uniform H so that sum H*S meets Table 2-4 (Spain 97,590, Portugal 21,884 MW s)
-    TERM = {BN[tr.lv_bus]: BN[tr.hv_bus] for _, tr in net.trafo.iterrows() if tr["name"].startswith("T G")}   # unit term -> zone (direct)
+    TERM = TERM0
     QHV = {tr["name"][2:]: -net.res_trafo.at[i_, "q_hv_mvar"] for i_, tr in net.trafo.iterrows() if tr["name"].startswith("T G")}
     XT_UNIT = 0.15                  # step-up reactance lumped into the machine (S30 sec 5: bench xreal vs xlump, swing 1.695 Hz both)
     def unit(name, bus, Pmw, Qmvar, S, H, XCc, Kdrp, Kiq, Kgov, gov=True, xt=XT_UNIT):
@@ -107,7 +163,8 @@ try:
                    Kgov=f"{Kgov}", Tgov="2.0", GovLim="0.054" if gov else "0.0", KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0",
                    XCc=f"{XCc}", Kdrp=f"{Kdrp}", Kiq=f"{Kiq}",
                    XmD=f"{1.79 + xt}", XmD1=f"{0.169 + xt}", XmD2=f"{0.135 + xt}", XmQ=f"{1.71 + xt}", XmQ1=f"{0.228 + xt}", XmQ2=f"{0.2 + xt}", XmP=f"{0.130 + xt}")
-        put("v2", "SyncUnit", prm, node={"T": lab(bus)}); count("syncunit"); L(f"unit {name:22s} at {bus:12s} P {Pmw:7.1f} Q {Qmvar:+7.1f} S {S:6.0f} V {V[bus]:.4f} ang {A[bus]:+7.2f}")
+        hang(bus, "v2", "SyncUnit", prm, "T", w=SLOT + 1); count("syncunit")
+        L(f"unit {name:22s} at {bus:12s} P {Pmw:7.1f} Q {Qmvar:+7.1f} S {S:6.0f} V {V[bus]:.4f} ang {A[bus]:+7.2f}")
     for i_, g in net.gen.iterrows():
         nm = g["name"]; gb = BN[g.bus]
         if nm.startswith("G"):
@@ -115,23 +172,22 @@ try:
             unit(nm, zone, g.p_mw, QHV[nm], S, H_PT if "PT" in nm else H_ES, 0.05 if "PT" in nm else 0.03, 4.0, 0.005, 5.726)
         elif nm == "Morocco":
             unit(nm, gb, g.p_mw, net.res_gen.at[i_, "q_mvar"], 5556.0, 4.0, 0.0, 0.0, 0.0, 5.726, xt=0.0)   # real 15 % transformer kept
-    for i_, s in net.sgen.iterrows():                       # embedded synchronous generation: constant Q (outer loop, no droop)
-        if s["name"].startswith("E"):
-            bus = BN[s.bus]; unit(s["name"], bus, s.p_mw, s.q_mvar, s.p_mw / 0.9, H_ES, 0.0, 0.0, 0.05, 0.0, gov=False)
+    for i_, s_ in net.sgen.iterrows():                      # embedded synchronous generation: constant Q (outer loop, no droop)
+        if s_["name"].startswith("E"):
+            bus = BN[s_.bus]; unit(s_["name"], bus, s_.p_mw, s_.q_mvar, s_.p_mw / 0.9, H_ES, 0.0, 0.0, 0.05, 0.0, gov=False)
     # ---------------- pumps: one PumpUnit per stage behind breaker3 ----------------
     PUMPS = [("M1", "PS-CYL", 1049.0), ("M2", "PS-ARA", 1017.0), ("M3", "PS-PT", 381.0), ("M4", "PS-PT", 450.0), ("M5", "PS-PT", 438.0),
              ("M6", "PS-PT", 470.0), ("M7", "PS-PT", 359.0)]
     QP = {BN[g.bus]: (net.res_gen.at[i_, "q_mvar"], -g.p_mw) for i_, g in net.gen.iterrows() if g["name"].startswith("M")}
-    const(0.0, "BRKOFF"); const(0.0, "PLD0")
+    const(0.0, "PLD0", "PT-N")
     for k, (m_, bus, mw) in enumerate(PUMPS):
         S = mw / 0.863; q = QP[bus][0] * mw / QP[bus][1]
-        put("master", "breaker3", dict(NAME=f"BRK{m_}", BP=f"PB{m_}", OPCUR="1"), node={"N1": lab(bus), "N2": f"P_{m_}"}, w=8)
-        dlab(*cell(6), f"BRK{m_}") if False else None
-        put("v2", "PumpUnit", dict(Sbase=f"{S:.1f}", Vbase="400", VbaseLN="230.9401", Ibase=f"{S / (3 ** 0.5 * 400):.4f}", H=f"{H_PT if 'PT' in bus else H_ES}",
-                                    P0=f"{-mw:.1f}", Q0=f"{q:.1f}", V0=f"{V[bus]:.5f}", Ph0=f"{math.radians(A[bus]):.6f}", Vctl="0", Tstart="0.5",
-                                    Pmec=f"{-mw / S:.6f}", Kgov="0.0", Tgov="5.0", GovLim="0.0", KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0"),
-            node={"T": f"P_{m_}"}, data={"PLD": "PLD0"}); count("pump")
-        const(0.0, f"BRK{m_}")
+        hang(bus, "master", "breaker3", dict(NAME=f"BRK{m_}", BP=f"PB{m_}", OPCUR="1"), "N1", node={"N2": f"P_{m_}"}, w=6)
+        hang(bus, "v2", "PumpUnit", dict(Sbase=f"{S:.1f}", Vbase="400", VbaseLN="230.9401", Ibase=f"{S / (3 ** 0.5 * 400):.4f}", H=f"{H_PT if 'PT' in bus else H_ES}",
+                                          P0=f"{-mw:.1f}", Q0=f"{q:.1f}", V0=f"{V[bus]:.5f}", Ph0=f"{math.radians(A[bus]):.6f}", Vctl="0", Tstart="0.5",
+                                          Pmec=f"{-mw / S:.6f}", Kgov="0.0", Tgov="5.0", GovLim="0.0", KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0"),
+             None, node={"T": f"P_{m_}"}, data={"PLD": "PLD0"}, w=SLOT); count("pump")
+        const(0.0, f"BRK{m_}", ZOF[bus])
     # ---------------- RES plants (21) ----------------
     RESP = [("R1_Granada", "GRA", 355.0), ("R10_Malaga", "GRA", 154.0), ("A5_GRA", "GRA", 1706 + 82 - 509),
             ("R2_Badajoz4a", "BAD-TS", 582.0), ("R3_Badajoz4b", "BAD-TS", 145.0), ("R4_Badajoz5b1", "BAD-TS", 118.0), ("R7_BadajozTS3", "BAD-TS", 108.0),
@@ -139,68 +195,99 @@ try:
             ("R8_Caceres", "CAC", 78.5), ("A3_CAC", "CAC", 1692 - 226 - 78.5), ("A4_SCE", "SCE", 3687 - 97), ("R5_Segovia", "CYL", 117.0),
             ("A6_CYL", "CYL", 1010 + 6 - 117), ("R11_Cuenca", "VAL", 530.0), ("A7_VAL", "VAL", 2449 - 105 - 530), ("A7b_SE_R12", "SE", 1524 - 176),
             ("A8_PTS", "PT-S", 2681.0), ("A9_ARA", "ARA", 1370 + 236)]
-    c1, P1 = put("master", "source1", dict(ACDC="1", Esd="800 [kV]", Ia="IDC"), node=None, w=10)   # shared DC rail (v1 pattern)
-    pe = sorted([v for v in P1.values() if getattr(v, "dim", 1) != 0], key=lambda v: v.x) or sorted(P1.values(), key=lambda v: v.x)
-    L("source1 ports", {k: (v.x, v.y) for k, v in P1.items()})
-    nlab(pe[0].x, pe[0].y, "RAILP"); nlab(pe[-1].x, pe[-1].y, "RAILN")
-    const(0.0, "FRC")
-    ts_, tsp = put("master", "time-sig", None, w=8); dlab(list(tsp.values())[0].x, list(tsp.values())[0].y, "TT")   # shared time for the ramps
+    xs, ys = ZX["MA"] + 70, ZY["MA"]                         # shared DC rail source (v1 pattern) and shared time signal, next to Morocco
+    a_ = cv.add_component("master", "annotation", xs - 2, ys - 5, 0); a_.parameters(AL1="Shared DC rail of all RES plants (800 kV) and shared time signal", AL2="")
+    c1 = cv.add_component("master", "source1", xs, ys, 0); c1.parameters(ACDC="1", Esd="800 [kV]", Ia="IDC"); P1 = c1.ports()
+    pe = sorted(P1.values(), key=lambda v: v.x); nlab(pe[0].x, pe[0].y, "RAILP"); nlab(pe[-1].x, pe[-1].y, "RAILN")
+    ts_ = cv.add_component("master", "time-sig", xs + 12, ys, 0); tq = list(ts_.ports().values())[0]; dlab(tq.x, tq.y, "TT")
+    cf = cv.add_component("master", "const", xs + 20, ys, 0); cf.parameters(Value="0.0"); cq = list(cf.ports().values())[0]; dlab(cq.x, cq.y, "FRC")
     KPF = -0.135
     for k, (nm, bus, mw) in enumerate(RESP):
-        S = mw / 0.9; prm = dict(v1res); prm = {kk: vv for kk, vv in prm.items() if kk in ("Sbase", "Kv", "Ki", "Lf", "Cf", "Rf", "Kmod", "Kpf", "CarrPh", "Imax",
-                                    "RampLim", "Vt1", "Tt1", "Vt2", "Tt2", "Vt3", "Tt3", "Nsub", "Share1", "Share2", "Share3", "MeasSide", "Qmode", "Vset", "Tforce", "Trel")}
+        S = mw / 0.9; prm = {kk: vv for kk, vv in v1res.items() if kk in ("Sbase", "Kv", "Ki", "Lf", "Cf", "Rf", "Kmod", "Kpf", "CarrPh", "Imax",
+                             "RampLim", "Vt1", "Tt1", "Vt2", "Tt2", "Vt3", "Tt3", "Nsub", "Share1", "Share2", "Share3", "MeasSide", "Qmode", "Vset", "Tforce", "Trel")}
         prm.update(Sbase=f"{S:.2f}", Lf=f"{76.394 / S:.6g}", Cf=f"{0.001167 * S:.6g}", Ki=f"{489.9 / S:.6g}", Kpf=f"{KPF}",
                    Vt1="1.5", Vt2="1.5", Vt3="1.5", Nsub="1", Share1="1.0", Share2="0.0", Share3="0.0", CarrPh=f"{(k * 17.0) % 360:.1f}")
-        x, y = cell(16, 9)
-        up = cv.add_component("master", "upramp", x, y, 0); up.parameters(X1="0.3", X2="1.5", Y2="0.9"); upp = up.ports()
+        up, upp = ctl(ZOF[bus], "master", "upramp", dict(X1="0.3", X2="1.5", Y2="0.9"))
         po = max(upp.values(), key=lambda v: v.x); dlab(po.x, po.y, f"PR{k + 1}"); pi_ = min(upp.values(), key=lambda v: v.x); dlab(pi_.x, pi_.y, "TT")
-        if k == 0: L("upramp ports", {kk: (v.x, v.y) for kk, v in upp.items()})
-        put("v2", "RES_Plant", prm, node={"AC": lab(bus), "DCP": "RAILP", "DCN": "RAILN"}, data={"Pref": f"PR{k + 1}", "Force": "FRC"}); count("res")
+        hang(bus, "v2", "RES_Plant", prm, "AC", node={"DCP": "RAILP", "DCN": "RAILN"}, data={"Pref": f"PR{k + 1}", "Force": "FRC"}, w=SLOT + 3); count("res")
         L(f"RES {nm:16s} at {bus:7s} {mw:7.1f} MW  S {S:7.1f}")
     # ---------------- loads, shunts, HVDC (varrlc to ground) ----------------
     PLANT_ZONES = {b for _, b, _ in RESP} | {"BAD", "WAN"}
     NET = {}
-    for i_, s in net.sgen.iterrows():                       # RES (and dispatch shifts) of zones without a plant are netted into the load
-        nm = s["name"]
+    for i_, s_ in net.sgen.iterrows():                      # RES (and dispatch shifts) of zones without a plant are netted into the load
+        nm = s_["name"]
         if nm.startswith(("RES ", "DSP ")):
             z = nm.split()[-1]
-            if z not in PLANT_ZONES: NET[z] = NET.get(z, (0.0, 0.0)); NET[z] = (NET[z][0] + s.p_mw, NET[z][1] + s.q_mvar)
+            if z not in PLANT_ZONES: NET[z] = NET.get(z, (0.0, 0.0)); NET[z] = (NET[z][0] + s_.p_mw, NET[z][1] + s_.q_mvar)
     L("RES netted into loads:", {k: (round(v[0]), round(v[1])) for k, v in NET.items()})
-    def shunt_rl(bus, Pmw, Qmvar, tag):
-        VLL = 400.0 * V[bus]
-        if Pmw > 1.0: put("master", "varrlc", dict(Name=f"R{tag}", RLC="0", R=f"{VLL ** 2 / Pmw:.6g}"), node={"A": lab(bus)}, ground=("B",), w=8); count("varrlc")
-        if Qmvar > 1.0: put("master", "varrlc", dict(Name=f"L{tag}", RLC="1", L=f"{VLL ** 2 / (W50 * Qmvar):.6g}"), node={"A": lab(bus)}, ground=("B",), w=8); count("varrlc")
-        if Qmvar < -1.0: put("master", "varrlc", dict(Name=f"C{tag}", RLC="2", C=f"{-Qmvar / (W50 * VLL ** 2) * 1e6:.6g}"), node={"A": lab(bus)}, ground=("B",), w=8); count("varrlc")
+    EXPLOAD = os.environ.get("EXPLOAD", "1") == "1"         # exponential loads driven by the bus meter (S30 sec 7)
+    METB = sorted({b for b in BN.values() if " term" not in b and b not in ("FR",)})
+    for bus in METB:                                        # per-bus meter: freq-meas -> F_<b> (Hz), VPU_<b> (pu of 400 kV)
+        sb = lab(bus)[2:]
+        hang(bus, "master", "freq-meas", dict(Ts="0.02", Vbas="400", F="50"), "N", data={"FREQ": f"F_{sb}", "Volts": f"VPU_{sb}", "PHASE": f"PH_{sb}"}, w=SLOT + 1)
+        if EXPLOAD: ctl(ZOF[bus], "master", "realpole", dict(T="0.02", G="1.0", Limit="YES", Max="1.5", Min="0.5"), data={"I": f"VPU_{sb}", "O": f"VF_{sb}"})
+        count("meter")
+    def exp_branch(bus, kind, base, expo, tag):
+        sb = lab(bus)[2:]; sig = f"{kind}{tag}"[:30]
+        ctl(ZOF[bus], "master", "x_power_y", dict(y=f"{expo:.4f}"), data={"IN": f"VF_{sb}", "OUT": f"X{sig}"})
+        g_, gp = ctl(ZOF[bus], "master", "gain", dict(G=f"{base:.6g}"))
+        ki = [k for k in gp if k in ("I", "IN")][0]; ko = [k for k in gp if k in ("O", "OUT")][0]
+        dlab(gp[ki].x, gp[ki].y, f"X{sig}"); dlab(gp[ko].x, gp[ko].y, sig)
+        prm = dict(Name=f"V{tag}"[:30], RLC="0" if kind == "R" else "1"); prm["R" if kind == "R" else "L"] = sig
+        hang(bus, "master", "varrlc", prm, "A", ground=("B",), w=6); count("varrlc_exp")
+    ALPHA, BETA = 0.8, 4.1
+    def shunt_rl(bus, Pmw, Qmvar, tag, VLL=None):
+        VLL = VLL or 400.0 * V[bus]
+        if Pmw > 1.0: hang(bus, "master", "varrlc", dict(Name=f"R{tag}", RLC="0", R=f"{VLL ** 2 / Pmw:.6g}"), "A", ground=("B",), w=6); count("varrlc")
+        if Qmvar > 1.0: hang(bus, "master", "varrlc", dict(Name=f"L{tag}", RLC="1", L=f"{VLL ** 2 / (W50 * Qmvar):.6g}"), "A", ground=("B",), w=6); count("varrlc")
+        if Qmvar < -1.0: hang(bus, "master", "varrlc", dict(Name=f"C{tag}", RLC="2", C=f"{-Qmvar / (W50 * VLL ** 2) * 1e6:.6g}"), "A", ground=("B",), w=6); count("varrlc")
     for i_, ld in net.load.iterrows():
         bus = BN[ld.bus]; z = ld["name"].split()[-1]
         P_, Q_ = net.res_load.at[i_, "p_mw"], net.res_load.at[i_, "q_mvar"]
         if ld["name"].startswith("Load ") and z in NET: P_ -= NET[z][0]; Q_ -= NET[z][1]
-        shunt_rl(bus, P_, Q_, ld["name"].replace(" ", "_").replace("-", "_"))
+        tg = ld["name"].replace(" ", "_").replace("-", "_")
+        if EXPLOAD and bus in METB and (ld["name"].startswith("Load ") or ld["name"].startswith("HVDC")):
+            al, be = (0.0, 0.0) if ld["name"].startswith("HVDC") else (ALPHA, BETA)
+            vlf = V[bus]
+            if P_ > 1.0: exp_branch(bus, "R", 400.0 ** 2 / (P_ / vlf ** al), 2 - al, tg)
+            if Q_ > 1.0: exp_branch(bus, "L", 400.0 ** 2 / (W50 * Q_ / vlf ** be), 2 - be, tg)
+            if Q_ < -1.0: shunt_rl(bus, 0.0, Q_, tg + "c")      # net capacitive remainder (netted RES) stays constant Z
+        else:
+            shunt_rl(bus, P_, Q_, tg)
     SH = {}
-    for i_, sh in net.shunt.iterrows(): SH[BN[sh.bus]] = SH.get(BN[sh.bus], 0.0) + sh.q_mvar * sh.step * V[BN[sh.bus]] ** 0   # Mvar at 1 pu
+    for i_, sh in net.shunt.iterrows(): SH[BN[sh.bus]] = SH.get(BN[sh.bus], 0.0) + sh.q_mvar * sh.step   # Mvar at 1 pu
     for bus, q in SH.items():
-        if abs(q) > 1.0:
-            VLL = 400.0
-            if q > 0: put("master", "varrlc", dict(Name=f"SHL_{lab(bus)}", RLC="1", L=f"{VLL ** 2 / (W50 * q):.6g}"), node={"A": lab(bus)}, ground=("B",), w=8)
-            else: put("master", "varrlc", dict(Name=f"SHC_{lab(bus)}", RLC="2", C=f"{-q / (W50 * VLL ** 2) * 1e6:.6g}"), node={"A": lab(bus)}, ground=("B",), w=8)
-            count("varrlc")
+        if abs(q) > 1.0: shunt_rl(bus, 0.0, q, f"SH_{lab(bus)[2:]}", VLL=400.0)
     # ---------------- France source at the FR hub ----------------
-    # source3 voltage is Es (internal, LL rms kV, behind Z) -- Vm is ignored (S30 sec 6: a default Es 230 kV collapsed the
-    # first settle). Es/Ph from the load flow: the source supplies the ext_grid P,Q plus the 1,000 MW the HVDC delivered to
-    # France in pandapower (in PSCAD the HVDC is a 1,000 MW load at CAT). E = V + sqrt3 Z I, I = conj(S / (sqrt3 V)).
+    # source3 voltage is Es (internal, LL rms kV, behind Z) -- Vm is ignored (S30 sec 6). Es/Ph from the load flow: the source
+    # supplies the ext_grid P,Q plus the 1,000 MW the HVDC delivered to France in pandapower (in PSCAD the HVDC is a load at CAT).
     ZF = 20.0 * np.exp(1j * np.radians(85.0))
     Sx = (net.res_ext_grid.p_mw.iloc[0] + 1000.0) + 1j * net.res_ext_grid.q_mvar.iloc[0]
     Vf = 400.0 * V["FR"] * np.exp(1j * np.radians(A["FR"])); If = np.conj(Sx / (np.sqrt(3) * Vf)); Ef = Vf + np.sqrt(3) * ZF * If
     L(f"France source: S {Sx.real:.0f} MW {Sx.imag:+.0f} Mvar, terminal {abs(Vf):.1f} kV {A['FR']:+.2f} deg -> Es {abs(Ef):.2f} kV {np.degrees(np.angle(Ef)):+.3f} deg")
-    put("master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
-                                  Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), node={"N3": lab("FR")}, ground=("N",)); count("source3")
-    # ---------------- bus voltage channels: measuring node label (0 nodes) -> pgb ----------------
-    for bus in sorted(set(BN.values())):
-        if " term" in bus and "Morocco" not in bus: continue
-        vn = "V_" + lab(bus)[2:]
-        x, y = cell(10, 9); c_ = cv.add_component("master", "nodelabel", x, y, 0); c_.parameters(Name=lab(bus), MeasV="YES", VName=vn, PU="NO")
-        g_ = cv.add_component("master", "pgb", x + 4, y + 2, 0); g_.parameters(Name=vn); gp = list(g_.ports().values())[0]; dlab(gp.x, gp.y, vn)
-        count("vchan")
+    hang("FR", "master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
+                                         Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), "N3", ground=("N",), w=SLOT + 2); count("source3")
+    # ---------------- busbars, wires, named measuring stubs + voltage channels ----------------
+    BUSN = {}
+    for bus, pts in PORTS.items():
+        yb = busy(bus); xs_ = [p_[0] for p_ in pts]; x0, x1 = min(xs_) - 3, max(xs_) + 3
+        bb = cv.create_bus((x0, yb), (x1, yb))
+        try:
+            bp = bb.parameters(); key = "Name" if "Name" in bp else ("name" if "name" in bp else None)
+            if key: bb.parameters(**{key: lab(bus)})
+            if not BUSN: L("bus parameters:", bp)
+        except Exception as ex: L("bus naming failed:", ex)
+        BUSN[bus] = (x0, x1, yb)
+        for (px, py) in pts:
+            if py != yb: cv.create_wire((px, yb), (px, py))
+        cv.create_wire((x0, yb), (x0 - 3, yb)); nlab(x0 - 3, yb, lab(bus), meas=True)      # named stub: far ends of lines etc.
+        g_ = cv.add_component("master", "pgb", x0 - 3, yb - 3, 0); g_.parameters(Name="V_" + lab(bus)[2:])
+        gp = list(g_.ports().values())[0]; dlab(gp.x, gp.y, "V_" + lab(bus)[2:]); count("vchan")
+    bl = sorted(BUSN.items(), key=lambda kv: (kv[1][2], kv[1][0]))
+    clash = [(b1, b2) for (b1, (a0, a1, y1)), (b2, (c0, c1, y2)) in zip(bl, bl[1:]) if y1 == y2 and a1 + 2 >= c0 - 5]
+    if clash: L("BUSBAR CLASH (would merge nodes):", clash); raise SystemExit(3)
+    missing = sorted(set(BN.values()) - set(PORTS) - {b for b in BN.values() if " term" in b and "Morocco" not in b})
+    if missing: L("WARNING buses without hanging elements (no busbar):", missing)
     L("placed:", CNT)
     prj.parameters(time_duration="2.0", time_step="20", sample_step="1000", PlotType="1", StartType="0")
     prj.save()
