@@ -4,6 +4,21 @@
 |---|---|---|---|
 | claude-main | v2 pre-event calibration (pandapower) | `iberia_eq/pp_v2.py`, `iberia_eq/SOURCES.md`, `iberia_eq/V2_BUS_UNIT_LIST.md` | 2026-11-25 |
 
+# STATUS — Session 29 banner (25 Nov 2026; agent: claude-main)
+
+- **Base v2 load flow = R2 + `OPEN_LINES` + `PUMP_PT_V`.** Run it with `python iberia_eq/base_v2.py` (resume, < 1 s
+  plus start-up); the state is `iberia_eq/pp_v2_state_s29_OLP.pkl`. Fit cost 75.1, max V err 2.8 kV, all border and
+  unit-Q targets met. VAL→ARA 753 MW; Portuguese circulating Q removed.
+- **Open:**
+  - Spanish TSO–DSO Q +0.97 Gvar absorbing, but Fig 4-84 says the DSOs inject (−1.3 Gvar at 412 kV, 400 kV interface
+    only). Suspected cause: the 3.2 % unit connection X from TRIPCAL. Next: remote voltage control (AVR line-drop
+    compensation) in `fastpf`, then a PSCAD AVR bench.
+  - PT tie Q +256 vs +100.
+  - 4a+4b +7.0 vs +4.9 kV.
+  - Fig 2-4 corridor checks; north/centre fault levels.
+
+---
+
 # STATUS — Session 28 banner (25 Nov 2026; agent: claude-mac; pandapower only, no PSCAD; merged in PR #1)
 
 - **v2 load flow continued** (`RUNLOG.md` Session 28). The S27 state `iberia_eq/pp_v2_state.pkl` is unchanged.

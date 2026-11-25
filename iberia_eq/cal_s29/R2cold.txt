@@ -1,0 +1,129 @@
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   167
+    ARA-MAD   x3->3:    92 ->   282
+    ARA-N     x3->3:    59 ->   263
+    ARA-VAL   x1->2:    77 ->   230
+    BAD-CAC   x3->3:   155 ->   135
+    BAD-PT-S  x1->2:    81 ->   543
+    BAD-WAN   x3->3:   105 ->   208
+    CAC-CYL   x2->2:   171 ->   193
+    CAC-MAD   x6->6:   193 ->   257
+    CAC-PT-N  x1->2:    25 ->   598
+    CAC-SCE   x3->3:   150 ->   242
+    CAT-FR    x1->2:    92 ->   240
+    CAT-VAL   x1->2:   155 ->   321
+    CYL-MAD   x6->6:   127 ->   187
+    CYL-N     x3->3:   136 ->   226
+    CYL-NW    x7->7:   151 ->   193
+    CYL-PT-N  x1->2:     5 ->   254
+     FR-N     x3->3:    13 ->   394
+    GRA-SCE   x1->2:    67 ->   140
+    GRA-SE    x1->2:    59 ->   234
+    GRA-WAN   x2->2:    80 ->   156
+    MAD-VAL   x4->4:   104 ->   228
+      N-NW    x5->5:   125 ->   275
+     NW-PT-N  x3->3:    61 ->   236
+   PT-S-WAN   x1->2:    58 ->   880
+    SCE-WAN   x4->4:   175 ->   209
+     SE-VAL   x4->4:    63 ->   167
+  lengths 0.0 / unit-X 0.0 least_squares: nfev 12, max |V err| 6.28 kV, max other err 881 (MW/Mvar) | njev 8, resid calls 245, load flows 246 (0.2 s of 0.6 s wall), cost 318.03
+  lengths 0.1 / unit-X 0.0 least_squares: nfev 6, max |V err| 6.36 kV, max other err 177 (MW/Mvar) | njev 6, resid calls 181, load flows 182 (0.2 s of 0.4 s wall), cost 124.12
+  lengths 0.2 / unit-X 0.0 least_squares: nfev 8, max |V err| 5.63 kV, max other err 154 (MW/Mvar) | njev 8, resid calls 241, load flows 242 (0.2 s of 0.6 s wall), cost 116.65
+  lengths 0.3 / unit-X 0.0 least_squares: nfev 7, max |V err| 4.93 kV, max other err 167 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.2 s of 0.5 s wall), cost 108.53
+  lengths 0.4 / unit-X 0.0 least_squares: nfev 7, max |V err| 4.31 kV, max other err 172 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.2 s of 0.5 s wall), cost 101.19
+  lengths 0.5 / unit-X 0.0 least_squares: nfev 7, max |V err| 3.78 kV, max other err 173 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.2 s of 0.5 s wall), cost 94.73
+  lengths 0.6 / unit-X 0.0 least_squares: nfev 7, max |V err| 3.34 kV, max other err 171 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.2 s of 0.5 s wall), cost 89.08
+  lengths 0.7 / unit-X 0.0 least_squares: nfev 7, max |V err| 2.97 kV, max other err 167 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.2 s of 0.5 s wall), cost 84.09
+  lengths 0.8 / unit-X 0.0 least_squares: nfev 7, max |V err| 2.67 kV, max other err 163 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.2 s of 0.5 s wall), cost 79.68
+  lengths 0.9 / unit-X 0.0 least_squares: nfev 9, max |V err| 2.43 kV, max other err 159 (MW/Mvar) | njev 9, resid calls 271, load flows 272 (0.3 s of 0.6 s wall), cost 75.74
+  lengths 1.0 / unit-X 0.0 least_squares: nfev 5, max |V err| 2.26 kV, max other err 156 (MW/Mvar) | njev 5, resid calls 151, load flows 152 (0.1 s of 0.4 s wall), cost 72.53
+  lengths 1.0 / unit-X 0.1 least_squares: nfev 12, max |V err| 2.29 kV, max other err 155 (MW/Mvar) | njev 5, resid calls 158, load flows 159 (0.1 s of 0.4 s wall), cost 73.47
+  lengths 1.0 / unit-X 0.2 least_squares: nfev 11, max |V err| 2.34 kV, max other err 155 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.1 s of 0.3 s wall), cost 74.47
+  lengths 1.0 / unit-X 0.3 least_squares: nfev 11, max |V err| 2.39 kV, max other err 154 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.1 s of 0.3 s wall), cost 75.53
+  lengths 1.0 / unit-X 0.4 least_squares: nfev 11, max |V err| 2.45 kV, max other err 153 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.1 s of 0.3 s wall), cost 76.68
+  lengths 1.0 / unit-X 0.5 least_squares: nfev 11, max |V err| 2.52 kV, max other err 152 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.1 s of 0.3 s wall), cost 77.93
+  lengths 1.0 / unit-X 0.6 least_squares: nfev 11, max |V err| 2.61 kV, max other err 150 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.1 s of 0.3 s wall), cost 79.31
+  lengths 1.0 / unit-X 0.7 least_squares: nfev 11, max |V err| 2.72 kV, max other err 148 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.1 s of 0.3 s wall), cost 80.87
+  lengths 1.0 / unit-X 0.8 least_squares: nfev 10, max |V err| 2.87 kV, max other err 145 (MW/Mvar) | njev 4, resid calls 127, load flows 128 (0.1 s of 0.3 s wall), cost 82.70
+  lengths 1.0 / unit-X 0.9 least_squares: nfev 10, max |V err| 3.07 kV, max other err 140 (MW/Mvar) | njev 4, resid calls 127, load flows 128 (0.1 s of 0.3 s wall), cost 84.92
+  lengths 1.0 / unit-X 1.0 least_squares: nfev 10, max |V err| 3.35 kV, max other err 132 (MW/Mvar) | njev 4, resid calls 127, load flows 128 (0.1 s of 0.3 s wall), cost 87.78
+  final least_squares: nfev 17, max |V err| 3.35 kV, max other err 132 (MW/Mvar) | njev 8, resid calls 258, load flows 1033 (1.0 s of 1.5 s wall), cost 91.62
+  final calibration: total evaluations 807
+fastpf vs pandapower at the final state: max dV 3.3e-16 pu, max d gen Q 1.6e-07 Mvar; total load flows 5376 in 4.5 s, fallbacks 570
+trip gate: 4a+4b at BAD-TS +7.10 kV (target 4.9), Granada at GRA +0.92 kV = 19 kV/Gvar (report 18-42); unit connection X 3.37 %
+calibration pass 3: 807 rounds; Portuguese load x0.886, Spanish demand x0.956
+DSO shunts at 1 pu (Mvar, + absorbing): GRA -148  WAN -397  BAD -254  CAC +229  SCE -350  MAD +317  CYL +169  NW +644  N -828  ARA -670  CAT -1536  VAL -918  SE +91  PT-S -889  PT-N +460
+unit Q per area: N -435 (target -400)  SW -157 (target -150)  E -620 (target -600)
+Spanish distribution exchange: P 23633 MW, Q +1216 Mvar (load +5039, DSO shunts -3822); Fig 4-84 (400 kV interface only, ~8.7 GW): Q -1,000 ... -1,800 Mvar
+zone  V[kV] target  demand   RES
+GRA     411.9    412    1055   1706
+WAN     413.6    413    1582   2560
+BAD     412.7    412     263   2538
+CAC     405.6    406     175   1692
+SCE     416.6    417    1088   3687
+MAD     405.5    405    2657    650
+CYL     405.9    405    1110   1010
+NW      405.2    405    2991    496
+N       408.5    409    2995    255
+ARA     410.8    410    1231   1370
+CAT     400.1    400    4829    233
+VAL     412.3    413    2030   2449
+SE      408.3    408    1269   1524
+PS-CYL  405.0              0      0
+PS-ARA  410.0              0      0
+PS-PT   408.0              0      0
+PT-N    401.3    398       0      0
+PT-S    401.0    401       0      0
+FR      388.3              0      0
+MA-B    412.8              0      0
+MA      378.2              0      0
+BAD-TS  411.4              0      0
+WAN-TS  413.3              0      0
+
+borders ES->PT   2102 MW (target ~2,100) | ES->MA   749 (~750) | ES->FR AC   343 + HVDC 1000 =  1343 (target 1360)
+   tie CAT-FR     x2   240 km  P    -18 MW  Q   +132
+   tie FR-N       x3   394 km  P   -357 MW  Q   -192
+   Morocco unit P 4052 MW, Moroccan load 4781 MW
+   Portugal ties ES->PT: WAN +440  BAD +735  CAC +727  CYL +276  NW -76 | North area -> PT +200 (Fig 2-41: +200) | PT load north share 0.50
+corridor flows vs Fig 2-4: CAC->MAD +3302 (3227)  BAD->CAC +2049 (1850)  GRA->SE +1432 (900)  VAL->ARA +1216 (0)  CAC->CYL +1915 (1200)
+zone demand now: GRA 1055  WAN 3016  BAD 263  CAC 175  SCE 1088  MAD 1223  CYL 1110  NW 2991  N 2995  ARA 1231  CAT 4829  VAL 2030  SE 1269
+zone RES now:    GRA 1706  WAN 1857  BAD 1585  CAC 1692  SCE 3687  MAD 650  CYL 1010  NW 496  N 255  ARA 1370  CAT 233  VAL 2449  SE 1524
+Madrid net in-feed    586 MW; SW corridor CAC+SCE -> MAD   3302 MW (Fig 2-4: 3,227 on the six circuits)
+generator Q [Mvar]: G1 -110  G2 -270  G3 -396  G4 -269  G5 -108  G6 -47  G7 +46  G8 -1342  M1 -34  M2 -24  M3-7 +1028  Morocco +774
+France slack P -1338 MW, Q -369 Mvar
+tie Q ES->X: FR +339 (target +300)  PT +232 (target +100)  MA -307 (target -360) | set-points FR 388.3 kV, MA 385.1 kV, PT 385.0 kV
+
+reactive balance Spain (Mvar):
+   generated: 400 kV corridor charging   5274   zone-internal 400 kV charging   7492
+   absorbed : reactors   2404  loads   5039  RES   2723 (P 20170, Q/P 0.135)  units   1211  DSO shunts  -3822  (+ = absorbing)
+
+reactive balance South-West (Mvar):
+   generated: 400 kV corridor charging   2178   zone-internal 400 kV charging   1899
+   absorbed : reactors    699  loads   1283  RES   1645 (P 12184, Q/P 0.135)  units    157  DSO shunts   -996  (+ = absorbing)
+
+series reactive losses I2X, all lines: 5276 Mvar (charging 6409); largest:
+   CAC-MAD      x6  257 km  P  +3302 MW  I2X   719  charging  657 Mvar
+   CAC-CYL      x2  193 km  P  +1915 MW  I2X   545  charging  195 Mvar
+   CAT-VAL      x2  321 km  P  -1220 MW  I2X   389  charging   89 Mvar
+   CAC-SCE      x3  242 km  P  -1755 MW  I2X   386  charging  263 Mvar
+   GRA-SE       x2  234 km  P  +1432 MW  I2X   359  charging   34 Mvar
+   BAD-CAC      x3  135 km  P  +2049 MW  I2X   283  charging  270 Mvar
+   ARA-MAD      x3  282 km  P  -1345 MW  I2X   276  charging  158 Mvar
+   ARA-VAL      x2  230 km  P  -1186 MW  I2X   253  charging   45 Mvar
+   CAC-PT-N     x2  598 km  P   +727 MW  I2X   245  charging   14 Mvar
+   PT-N-PT-S    x3  250 km  P  -1312 MW  I2X   232  charging  417 Mvar
+   transformer reactive losses 862 Mvar
+Fig 4-2 South Spain 12:32:00: RES 2269 Mvar on 16807 MW (report 2,297 on 17,020) | reactors 1378 (1,300) | PO 7.4 units 111 (74)
+
+short-circuit (MVA, IEC 60909 max): zone  model  Table 4-26
+   MAD    30937    10555  (+193 %)
+   VAL    23599    11167  (+111 %)
+   N      22551    10158  (+122 %)
+   CAT    29199     9967  (+193 %)
+   NW     32080     9665  (+232 %)
+   WAN    11981    12271  (-2 %)
+   BAD     8000     8386  (-5 %)
+C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\build_branch.py:1591: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  power_station_unit = trafo_df.power_station_unit.fillna(False).values.astype(bool)
+C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\build_branch.py:1591: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  power_station_unit = trafo_df.power_station_unit.fillna(False).values.astype(bool)

@@ -161,6 +161,18 @@ for (za, zb), (nc, ckm) in pairs.items():
         zz = "PT" if z.startswith("PT") else z
         if zz in ties_ckm: ties_ckm[zz] += (PHYS_CKM[(za, zb)] if CHG_PHYS else ckm) / 2
 internal_ckm = {z: max(0.0, zkm[z] - ties_ckm.get(z, 0)) for z in zkm}
+# Table 2-12 ([FR] p.114-115): 400 kV lines still open at 12:32 (opened for voltage control, closed later on 28/04).
+# Lengths [inf] = straight substation distance x 1.15 (OSM coordinates): Pierola-Sentmenat 26 -> 30 km (CAT),
+# Cofrentes-La Muela 11 -> 13 km (VAL), Fuendetodos-Mezquita 69 -> 79 km and Mezquita-Morella 57 -> 66 km (both ARA; Morella
+# is ARA's end of the ARA-VAL corridor, so Mezquita-Morella open also removes one equivalent ARA-VAL circuit) (RUNLOG S29)
+# PUMP_PT_V=1: Portuguese pump motors hold the PT-N hub target (398 kV) instead of the 408 kV default, which made them
+# generate ~1 Gvar against the Portuguese unit (circulating Q, RUNLOG S29) [inf]
+OPEN_LINES = os.environ.get("OPEN_LINES", "0") == "1"
+if OPEN_LINES:
+    for z_, km_ in {"CAT": 30.0, "VAL": 13.0, "ARA": 145.0}.items():
+        internal_ckm[z_] = max(0.0, internal_ckm[z_] - km_)
+    k_ = ("ARA", "VAL"); nc_, ckm_ = pairs[k_]; n2_ = max(1, nc_ - 1); pairs[k_] = [n2_, ckm_ / nc_ * n2_]
+    print(f"OPEN_LINES: internal charging -30/-13/-145 km (CAT/VAL/ARA); ARA-VAL x{nc_} -> x{n2_}")
 
 net = pp.create_empty_network(f_hz=50, sn_mva=100)
 B = {b: pp.create_bus(net, vn_kv=400, name=b) for b in BUSES}
@@ -196,7 +208,7 @@ for n, z, p in GEN:                                       # units behind their s
     pp.create_gen(net, tb, p_mw=p, vm_pu=(VT[z] / 400 if z in VT else a.vset), name=n)
 for n, sp, p in EMB:
     for z, f in sp.items(): pp.create_sgen(net, B[z], p_mw=p * f, q_mvar=0, name=f"{n} {z}")
-for n, z, p in PUMPS: pp.create_gen(net, B[z], p_mw=-p, vm_pu=VT.get({"PS-CYL": "CYL", "PS-ARA": "ARA"}.get(z, ""), 408) / 400, name=n)
+for n, z, p in PUMPS: pp.create_gen(net, B[z], p_mw=-p, vm_pu=VT.get({"PS-CYL": "CYL", "PS-ARA": "ARA", **({"PS-PT": "PT-N"} if os.environ.get("PUMP_PT_V", "0") == "1" else {})}.get(z, ""), 408) / 400, name=n)
 mt = pp.create_bus(net, vn_kv=400, name="Morocco term")
 pp.create_transformer_from_parameters(net, B["MA"], mt, sn_mva=PMAX["Morocco"] / 0.9, vn_hv_kv=400, vn_lv_kv=400, vk_percent=15,
                                       vkr_percent=0.3, pfe_kw=0, i0_percent=0.0, name="T Morocco")

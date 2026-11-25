@@ -2,6 +2,73 @@
 
 One entry per session. Every number is measured or read back, never assumed.
 
+## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
+
+### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
+- Pulled PR #1 (claude-mac, S28). R2 reproduces on Windows (Python 3.13, pandapower 3.5.6) **to the printed digit**:
+  - resume: cost 91.62, max V err 3.35 kV, trip gate +7.10 kV / 19 kV/Gvar;
+  - a cold fit lands on the same state;
+  - `fastpf` matches pandapower to 3.3e-16 pu.
+- **New launcher `iberia_eq/base_v2.py`:**
+  - it holds the base configuration in one place, so `pp_v2.py`'s own defaults (S27) stay reproducible;
+  - `python iberia_eq/base_v2.py` resumes the base in seconds on a work copy (`pp_v2_state_base_work.pkl`,
+    git-ignored), so the committed state is never modified;
+  - `--cold --state X.pkl` does a full fit;
+  - `--env K=V ...` adds flags.
+
+### 2. Table 2-12 lines open at 12:32 (`OPEN_LINES=1`) — S28 §12 to-do
+- Removed from zone-internal charging, lengths = straight substation distance × 1.15 (OSM coordinates) [inf]:
+  - Pierola–Sentmenat 30 km (CAT);
+  - Cofrentes–La Muela 13 km (VAL);
+  - Fuendetodos–Mezquita 79 km (ARA);
+  - Mezquita–Morella 66 km (ARA).
+- Morella is ARA's end of the ARA–VAL corridor and stays fed from the north (OSM ways at Morella), so
+  Mezquita–Morella open is modelled as **ARA–VAL ×2 → ×1**.
+- Cold fit (`iberia_eq/cal_s29/OL.txt`):
+  - **VAL→ARA 1,216 → 753 MW** (Fig 2-4: a few hundred);
+  - TSO–DSO Q +1,216 → +985 Mvar;
+  - cost 91.6 → 88.6;
+  - the rest unchanged.
+
+### 3. Circulating Q in Portugal (`PUMP_PT_V=1`)
+- R2 had the Portuguese unit G8 absorbing **−1,332 Mvar** while the Portuguese pump motors M3–7 **generated
+  +1,017 Mvar**: about 1 Gvar circulating between two machines.
+- **Cause:** the PS-PT pump bus fell through to the 408 kV default set-point while PT-N sits at ≈ 398 kV.
+- **Fix:** pumps hold the PT-N target (398 kV) [inf].
+- Cold fit (`cal_s29/OLP.txt`):
+  - G8 **−743**, pumps **−173** Mvar;
+  - **cost 88.6 → 75.1**;
+  - max V err 3.43 → **2.80 kV**;
+  - PT tie Q +256 (target +100, still open).
+
+**New base = R2 + OPEN_LINES + PUMP_PT_V** → `iberia_eq/pp_v2_state_s29_OLP.pkl`.
+
+| check | base (S29) | R2 | target |
+|---|---|---|---|
+| max V err | 2.80 kV | 3.35 | Fig 2-4 |
+| borders PT / FR / MA | 2,103 / 1,338 / 755 | 2,102 / 1,343 / 749 | 2,100 / 1,360 / 750 |
+| unit Q N / SW / E | −431 / −155 / −617 | −435 / −157 / −620 | −400 / −150 / −600 |
+| VAL→ARA | 753 | 1,216 | a few hundred |
+| Spanish TSO–DSO Q | +966 | +1,216 | see §4 |
+| trip gate 4a+4b / Granada | +7.04 kV / 18 kV/Gvar | +7.10 / 19 | +4.9 / 18–42 |
+| Portuguese unit / pumps Q | −743 / −173 | −1,332 / +1,017 | ≈ 0 [inf] |
+
+### 4. Fig 4-84 re-read (S28 §13 open item 1) — `figs/report_p292_fig4-84_tso_dso.png`
+- **Sign:** "(−) sign → DSO injects into TSO grid". The Q panel runs **−1.8 Gvar at 395 kV → −1.0 Gvar at 418 kV**
+  (12:00–12:33). At the 12:32 voltage (≈ 410–413 kV) it is ≈ −1.3 Gvar. So the distribution grids were **net
+  capacitive**, and less so as voltage rose.
+- **Scope:** the panel covers only the 400 kV TSO–DSO interface, ≈ 7.8–9.0 GW (left panel). The model's "Spanish
+  distribution exchange" lumps all 23.6 GW, including what the 220 kV grid supplies, so the figure is a sign and slope
+  check, not a 1:1 target.
+- **Slope [read]:** ≈ +35 Mvar/kV and ≈ +45 MW/kV on ≈ 8.4 GW. It is a time correlation (demand and PV also moved),
+  so it is not a load law.
+- **The model is still +0.97 Gvar absorbing: the wrong sign.** Most likely cause: TRIPCAL drove the unit connection
+  X to 3.2 %. That removed ≈ 1.5 Gvar of step-up I²X absorption (s35b at 20 %: 1.9 Gvar of transformer losses), so
+  the fit takes it out of the DSO shunts instead. S28 §7's remedy (a realistic 12–15 % step-up plus AVR line-drop
+  compensation) should restore both the trip sensitivity and the absorption.
+  - **Next:** emulate this in `fastpf` as remote voltage control (unit terminal PQ, HV bus PV with the unit's Q)
+    before benching the AVR change in PSCAD.
+
 ## Session 28 — 2026-11-25 — agent: claude-mac (local macOS copy, **no PSCAD**): pandapower v2 load flow continued
 
 **Scope:** continue the pandapower v2 calibration from S27 §34 on a local copy (pandapower 3.5.6 in a venv, Python
