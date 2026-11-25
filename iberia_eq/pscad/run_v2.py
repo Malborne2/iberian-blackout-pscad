@@ -11,7 +11,7 @@ import mhi.pscad
 ap = argparse.ArgumentParser()
 ap.add_argument("tag"); ap.add_argument("--dur", type=float, default=10.0); ap.add_argument("--snap", type=float)
 ap.add_argument("--from", dest="frm"); ap.add_argument("--sample", default="200"); ap.add_argument("--step", default="20")
-ap.add_argument("--work", default=r"C:\PSCAD_work\v2")
+ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld")
 a = ap.parse_args()
 OUTD = os.path.join(r"C:\PSCAD_work\v2_runs", a.tag); os.makedirs(OUTD, exist_ok=True)
 BUILD = os.path.join(a.work, "v2.gf81_x86")

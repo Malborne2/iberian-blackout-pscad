@@ -20,7 +20,7 @@ import numpy as np, pandapower as pp
 
 HERE = os.path.dirname(os.path.abspath(__file__)); IEQ = os.path.dirname(HERE)
 ap = argparse.ArgumentParser(); ap.add_argument("--probe", action="store_true"); ap.add_argument("--nobuild", action="store_true")
-ap.add_argument("--work", default=r"C:\PSCAD_work\v2")
+ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld")
 a = ap.parse_args()
 WORK = a.work; os.makedirs(WORK, exist_ok=True); PSCX = os.path.join(WORK, "v2.pscx")
 log = open(os.path.join(WORK, "build_v2.log"), "w")
