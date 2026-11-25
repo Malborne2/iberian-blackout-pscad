@@ -362,6 +362,13 @@ paths. To be re-checked against Fig 2-55 (Spain–France exchange, p.~64) and Fi
 ## 11. Sources added 2026-11-24 (Draft 2 of the v2 list)
 
 **[FR] items newly used:**
+- **Fig 4-84 ([FR] p.292, `figs/report_p292_fig4-84_tso_dso.png`), read 2026-11-25 (RUNLOG S29 §4):**
+  - **Sign:** negative means the DSO injects into the TSO grid.
+  - **Scope:** the 400 kV TSO–DSO interface only, 12:00–12:33.
+  - P: 7.8–9.0 GW, rising with voltage.
+  - Q: −1.8 Gvar at 395 kV → −1.0 Gvar at 418 kV; ≈ −1.3 Gvar at 412 kV [read ±0.1 Gvar].
+- **Table 2-12 ([FR] p.114–115):** 400 kV lines still open at 12:32 are Pierola–Sentmenat 2, Cofrentes–La Muela 1,
+  Fuendetodos–Mezquita and Mezquita–Morella 1. Lengths in pp_v2 are [inf] (straight distance × 1.15).
 - **Table 3-1** (p.117–~120): full event sequence, parsed into **`table3-1_events.csv`** (173 rows: event, country,
   time, description, MW).
   - Checks: Spanish pump trips 13a + 13b + 14 + 10 + 15 + 17 + 23 = 2,756 MW = Table 3-9; Portuguese pump trips =
