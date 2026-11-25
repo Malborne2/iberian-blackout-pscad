@@ -1,0 +1,113 @@
+CORR_X=fit: 27 corridor reactances from corridor_x_fit_open.csv
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   324
+    ARA-MAD   x3->3:    92 ->   279
+    ARA-N     x3->3:    59 ->   519
+    ARA-VAL   x1->2:    77 ->   348
+    BAD-CAC   x3->3:   155 ->   192
+    BAD-PT-S  x1->2:    81 ->   414
+    BAD-WAN   x3->3:   105 ->   167
+    CAC-CYL   x2->2:   171 ->   463
+    CAC-MAD   x6->6:   193 ->   325
+    CAC-PT-N  x1->2:    25 ->  5647
+    CAC-SCE   x3->3:   150 ->   177
+    CAT-FR    x1->2:    92 ->   240
+    CAT-VAL   x1->2:   155 ->   708
+    CYL-MAD   x6->6:   127 ->   270
+    CYL-N     x3->3:   136 ->   229
+    CYL-NW    x7->7:   151 ->   262
+    CYL-PT-N  x1->2:     5 ->   318
+     FR-N     x3->3:    13 ->   394
+    GRA-SCE   x1->2:    67 ->   314
+    GRA-SE    x1->2:    59 ->   429
+    GRA-WAN   x2->2:    80 ->   325
+    MAD-VAL   x4->4:   104 ->   185
+      N-NW    x5->5:   125 ->   413
+     NW-PT-N  x3->3:    61 ->   228
+   PT-S-WAN   x1->2:    58 ->   497
+    SCE-WAN   x4->4:   175 ->   246
+     SE-VAL   x4->4:    63 ->   156
+    CAC-PT-S  x1->2:    80 ->   284
+OPEN_LINES (fit mode): CAT internal charging -82 circuit-km (Pierola-Sentmenat); reactances from the reduced network
+resumed from pp_v2_state.pkl
+  resume-final least_squares: nfev 2, max |V err| 2.82 kV, max other err 304 (MW/Mvar) | njev 2, resid calls 79, load flows 80 (0.1 s of 0.2 s wall), cost 74.24
+fastpf vs pandapower at the final state: max dV 3.3e-16 pu, max d gen Q 6.1e-08 Mvar; total load flows 81 in 0.1 s, fallbacks 0
+trip gate: 4a+4b at BAD-TS +7.70 kV (target 4.9), Granada at GRA +0.34 kV = 7 kV/Gvar (report 18-42); unit connection X 1.00 %
+calibration pass 3: 2 rounds; Portuguese load x0.883, Spanish demand x0.948
+DSO shunts at 1 pu (Mvar, + absorbing): GRA -300  WAN +22  BAD -313  CAC -299  SCE -571  MAD -644  CYL -65  NW +478  N -970  ARA -642  CAT -1759  VAL -962  SE +10  PT-S -1389  PT-N -135
+unit Q at 400 kV per area: N -409 (target -400)  SW -130 (target -150)  E -594 (target -600)
+Spanish distribution exchange: P 23409 MW, Q -1287 Mvar (load +4966, DSO shunts -6253); Fig 4-84 (400 kV interface only, ~8.7 GW): Q -1,000 ... -1,800 Mvar
+zone  V[kV] target  demand   RES
+GRA     412.0    412    1046   1706
+WAN     413.5    413    1569   2560
+BAD     412.6    412     261   2538
+CAC     405.1    406     174   1692
+SCE     416.7    417    1079   3687
+MAD     405.2    405    2635    650
+CYL     405.9    405    1101   1010
+NW      404.6    405    2966    496
+N       408.6    409    2970    255
+ARA     410.9    410    1221   1370
+CAT     399.9    400    4789    233
+VAL     412.5    413    2013   2449
+SE      408.4    408    1258   1524
+PS-CYL  405.0              0      0
+PS-ARA  410.0              0      0
+PS-PT   398.0              0      0
+PT-N    400.8    398       0      0
+PT-S    402.2    401       0      0
+FR      389.9              0      0
+MA-B    412.8              0      0
+MA      379.9              0      0
+BAD-TS  411.3              0      0
+WAN-TS  413.3              0      0
+
+borders ES->PT   2123 MW (target ~2,100) | ES->MA   786 (~750) | ES->FR AC   294 + HVDC 1000 =  1294 (target 1360)
+   tie CAT-FR     x2   240 km  P   -136 MW  Q   +124
+   tie FR-N       x3   394 km  P   -424 MW  Q   -162
+   Morocco unit P 4033 MW, Moroccan load 4798 MW
+   Portugal ties ES->PT: WAN +772  BAD +902  CAC +589  CYL +138  NW -278 | North area -> PT -140 (Fig 2-41: +200) | PT load north share 0.50
+corridor flows vs Fig 2-4: CAC->MAD +4443 (3227)  BAD->CAC +1865 (1850)  GRA->SE +1345 (900)  VAL->ARA +970 (0)  CAC->CYL +1362 (1200)
+zone demand now: GRA 1046  WAN 1569  BAD 261  CAC 174  SCE 1079  MAD 2635  CYL 1101  NW 2966  N 2970  ARA 1221  CAT 4789  VAL 2013  SE 1258
+dispatch shifts (MW, + = more net injection): WAN -145  GRA +82  SCE -97  BAD -202  CAC -226  MAD +587  VAL -105  SE -175  CAT +280  CYL +6  NW -35  N -206  ARA +236
+PT ties vs Fig 2-4 split: NW->PT-N -278 (77)  CYL->PT-N +138 (492)  CAC->PT-S +472 (849)  BAD->PT-S +902 (99)  WAN->PT-S +772 (583)
+zone RES now:    GRA 1706  WAN 1857  BAD 1585  CAC 1692  SCE 3687  MAD 650  CYL 1010  NW 496  N 255  ARA 1370  CAT 233  VAL 2449  SE 1524
+Madrid net in-feed   1425 MW; SW corridor CAC+SCE -> MAD   4443 MW (Fig 2-4: 3,227 on the six circuits)
+generator Q [Mvar]: G1 -72  G2 -237  G3 -359  G4 -247  G5 -84  G6 -54  G7 +26  G8 -605  M1 -32  M2 -42  M3-7 -176  Morocco +810
+France slack P -1288 MW, Q -328 Mvar
+tie Q ES->X: FR +309 (target +300)  PT +269 (target +100)  MA -332 (target -360) | set-points FR 389.9 kV, MA 387.2 kV, PT 393.8 kV
+
+reactive balance Spain (Mvar):
+   generated: 400 kV corridor charging   5270   zone-internal 400 kV charging   7442
+   absorbed : reactors   2404  loads   4966  RES   2723 (P 20170, Q/P 0.135)  units   1100  DSO shunts  -6253  (+ = absorbing)
+
+reactive balance South-West (Mvar):
+   generated: 400 kV corridor charging   2176   zone-internal 400 kV charging   1898
+   absorbed : reactors    699  loads    947  RES   1645 (P 12184, Q/P 0.135)  units    125  DSO shunts  -1555  (+ = absorbing)
+
+series reactive losses I2X, all lines: 7855 Mvar (charging 6407); largest:
+   CAC-MAD      x6  325 km  P  +4443 MW  I2X  1656  charging  655 Mvar
+   PT-N-PT-S    x3  250 km  P  -2226 MW  I2X   978  charging  418 Mvar
+   CAC-CYL      x2  463 km  P  +1362 MW  I2X   673  charging  195 Mvar
+   CAC-SCE      x3  177 km  P  -2619 MW  I2X   632  charging  263 Mvar
+   GRA-SE       x2  429 km  P  +1345 MW  I2X   587  charging   34 Mvar
+   CAT-VAL      x2  708 km  P   -783 MW  I2X   371  charging   89 Mvar
+   ARA-MAD      x3  279 km  P  -1508 MW  I2X   345  charging  158 Mvar
+   BAD-CAC      x3  192 km  P  +1865 MW  I2X   333  charging  269 Mvar
+   CYL-N        x3  229 km  P  +1590 MW  I2X   297  charging  233 Mvar
+   BAD-PT-S     x2  414 km  P   +902 MW  I2X   253  charging   46 Mvar
+   transformer reactive losses 710 Mvar
+Fig 4-2 South Spain 12:32:00: RES 2269 Mvar on 16807 MW (report 2,297 on 17,020) | reactors 1378 (1,300) | PO 7.4 units 105 (74)
+
+short-circuit (MVA, IEC 60909 max): zone  model  Table 4-26
+   MAD    28359    10555  (+169 %)
+   VAL    21314    11167  (+91 %)
+   N      18776    10158  (+85 %)
+   CAT    27029     9967  (+171 %)
+   NW     29700     9665  (+207 %)
+   WAN    11672    12271  (-5 %)
+   BAD     7744     8386  (-8 %)
+C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\build_branch.py:1591: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  power_station_unit = trafo_df.power_station_unit.fillna(False).values.astype(bool)
+C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\build_branch.py:1591: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  power_station_unit = trafo_df.power_station_unit.fillna(False).values.astype(bool)

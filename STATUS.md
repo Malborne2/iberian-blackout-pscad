@@ -6,12 +6,12 @@
 
 # STATUS — Session 29 banner (25 Nov 2026; agent: claude-main)
 
-- **Base v2 load flow = R2 + `OPEN_LINES` + `PUMP_PT_V` + `EMB_KPF=fig42` + `UNITQ_HV`** (S29 §2–6). Run it with
-  `python iberia_eq/base_v2.py`; the state is `iberia_eq/pp_v2_state_s29_EU.pkl`.
-  - Fit cost 62.7, max V err 2.9 kV, all border and unit-Q targets met.
-  - Spanish TSO–DSO Q +0.28 Gvar (was +1.2).
-  - VAL→ARA 753 MW; Portuguese circulating Q removed.
-  - GRA→SE and CAC→CYL are structural (S29 §7): they need corridor impedances from a full-network reduction.
+- **Base v2 load flow ACCEPTED (S29 §10):** `python iberia_eq/base_v2.py` → `iberia_eq/pp_v2_state_s29_vk3.pkl`.
+  - Network-derived corridor X (`reduce_fullnet.py`); Madrid at real demand; dispatch shifts ≤ 0.6 GW for the borders.
+  - Voltages within 2.8 kV; borders and unit Q met; Fig 4-2 met.
+  - TSO–DSO Q −1.29 Gvar (injecting, like Fig 4-84).
+  - Trip checks met: max-V rise +5.05 kV (+4.9); Granada 25 kV/Gvar.
+  - Fig 2-4 line flows are checks only (one bus per zone, S29 §9).
 - **Open:**
   - Spanish TSO–DSO Q +0.97 Gvar absorbing, but Fig 4-84 says the DSOs inject (−1.3 Gvar at 412 kV, 400 kV interface
     only). Suspected cause: the 3.2 % unit connection X from TRIPCAL. Next: remote voltage control (AVR line-drop

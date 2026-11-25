@@ -189,6 +189,68 @@ One entry per session. Every number is measured or read back, never assumed.
     interim tables were stale. Fixed.
 - The base is **not changed** (still EU) pending the decision below.
 
+### 9. Zonal dispatch fitted (`DISPATCH=1`), and what one bus per zone cannot do (agent: claude-main)
+**Knobs.**
+- Zero-sum net-injection shifts between zones of the same Fig 2-41 area (SW: WAN GRA SCE BAD CAC MAD; E: VAL SE CAT;
+  N: CYL NW N ARA), so area totals are unchanged.
+- Realised as RES moved (P plus fixed-PF Q). Penalty 1 per `DSP_W` GW.
+- Optional target: the Fig 2-4 split of the PT border between its ties, scaled to 2,100 MW (`DSP_PTSPLIT`).
+- Fig 2-4 is only partly re-read (tiles in `figs/fig2-4_tiles/`). Its PT ties sum to ≈ 2,780 MW against Fig 2-41's
+  2,050, so its line flows are used only where clearly read.
+
+**Results** (CORR_X=fit, Madrid real; `cal_s29/XD*.txt`):
+- With the Fig 2-4 Madrid corridor and the PT tie split as targets, the fit moves 1.0–2.3 GW between zones
+  (BAD −1.5 GW, MAD +2.3 GW).
+- Even then CAC→MAD is 3,278–4,491 (3,227), BAD→CAC 970–1,170 (1,850) and BAD→PT-S 690–765 (≈ 99).
+- **Conclusion:** the line-level Fig 2-4 pattern needs the plants' substation locations inside each zone. One bus per
+  zone cannot place them, and Fig 2-4 is itself inconsistent with Fig 2-41.
+- With a node budget of 190–195 of 200, at most 1–2 buses could be added. Not pursued (owner decision): the Fig 2-4
+  line flows become checks.
+
+### 10. Accepted pre-event state, and the trip gate made like-for-like (agent: claude-main)
+**Accepted** (owner decision): CORR_X=fit, MADFIX=1, DISPATCH=1 with the borders only (DSP_PTSPLIT=0, DSP_W=0.2 GW,
+MADW=200), TRIPCAL=0. Shifts are ≤ 0.6 GW: MAD +587, CAT +280, ARA +236, CAC −226, N −206, BAD −202 MW.
+
+**Trip gate.**
+- S28's target compared the *local* step at BAD-TS with +4.9 kV, which is the rise of the **system maximum** 400 kV
+  voltage in Fig 3-7a (427.8 → 432.7 kV).
+- Like-for-like check added: the maximum Spanish 400 kV voltage before E3, after E3, and after 4a+4b.
+- Scan of the Spanish unit connection X (`VKG`, resume override added):
+
+  | X | max-voltage rise 4a+4b (report +4.9) | Granada kV/Gvar (18–42) | local BAD-TS step |
+  |---|---|---|---|
+  | 2 % | +3.92 | 16 | +9.0 |
+  | **3 %** | **+5.05** | **25** | +10.1 |
+  | 5 % | +7.06 | 43 | +12.1 |
+  | 7.5 % | — | 67 | +14.2 |
+
+- **3 % meets both report checks.**
+- The local BAD-TS step (+10.1 kV) agrees with Table 3-3's local progression at Badajoz: 432.6–437.3 (4a) →
+  438.7 (4b) → 443 kV (5b1).
+- The old target was the wrong quantity. That mismatch drove the dispatch distortions of R2 (§8).
+
+**Base = `pp_v2_state_s29_vk3.pkl`** (`python iberia_eq/base_v2.py`; flags in `base_v2.py`; log `cal_s29/base_vk3.txt`):
+
+| check | value | target |
+|---|---|---|
+| voltages | max err 2.82 kV | Fig 2-4 |
+| borders PT / FR / MA | 2,123 / 1,294 / 786 | 2,100 / 1,360 / 750 |
+| unit Q at 400 kV N / SW / E | −409 / −130 / −594 | −400 / −150 / −600 |
+| Fig 4-2 South Spain | RES 2,269, reactors 1,378, PO 7.4 105 | 2,297 / 1,300 / 74 |
+| Spanish TSO–DSO Q | **−1,288 Mvar (injecting)** | Fig 4-84: −1.0…−1.8 Gvar (400 kV interface) |
+| trip: max-V rise / Granada | +5.05 kV / 25 kV/Gvar | +4.9 / 18–42 |
+| fault level BAD / WAN | −8 % / −5 % | Table 4-26 |
+| fault level N / NW / CAT / MAD / VAL | +83 / +198 / +156 / +164 / +86 % | zonal limit, accepted |
+| Fig 2-4 checks | CAC→MAD 4,443 (3,227), BAD→CAC 1,865 ✓, GRA→SE 1,345 (900), CAC→CYL 1,362 (1,200) | checks only |
+
+**Known limits:**
+- the cold fit with CORR_X=fit does not converge; the base is reached by resume from EU;
+- PT tie Q is +269 vs +100;
+- the north and centre hubs are too stiff.
+
+**For PSCAD:** the 3 % unit connection X is the network-side equivalent of a realistic 15 % step-up with ≈ 80 % AVR
+line-drop compensation (S29 §5). Build it that way (V2 list §2).
+
 ## Session 28 — 2026-11-25 — agent: claude-mac (local macOS copy, **no PSCAD**): pandapower v2 load flow continued
 
 **Scope:** continue the pandapower v2 calibration from S27 §34 on a local copy (pandapower 3.5.6 in a venv, Python

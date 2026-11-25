@@ -1,4 +1,5 @@
-"""Run pp_v2.py in the adopted base configuration: R2 (RUNLOG S28 sec 13) + OPEN_LINES + PUMP_PT_V + EMB_KPF + UNITQ_HV (S29 sec 2-6).
+"""Run pp_v2.py in the adopted base configuration: R2 (RUNLOG S28 sec 13) + S29 sec 2-10 (see BASE_ENV).
+Note: the base is reached by resume; a cold fit with CORR_X=fit does not converge yet (S29 sec 8).
 
 usage:
   python iberia_eq/base_v2.py                      # resume from the base state, ~10 s
@@ -11,9 +12,12 @@ pp_v2.py's own defaults (the S27 behaviour) stay reproducible. Any change to the
 import argparse, os, shutil, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-BASE_STATE = "pp_v2_state_s29_EU.pkl"      # R2 alone: pp_v2_state_s28_R2.pkl with the two S29 flags off
+BASE_STATE = "pp_v2_state_s29_vk3.pkl"      # R2 alone: pp_v2_state_s28_R2.pkl with the two S29 flags off
 BASE_ENV = {"FAST": "1", "OBJ": "2", "TRIPCAL": "1", "PT_TIE_SW": "2.6", "CORR": "v2", "CHG": "phys", "SH_ARA_NW": "0",
-            "OPEN_LINES": "1", "PUMP_PT_V": "1", "EMB_KPF": "fig42", "UNITQ_HV": "1"}
+            "OPEN_LINES": "1", "PUMP_PT_V": "1", "EMB_KPF": "fig42", "UNITQ_HV": "1",
+            # S29 sec 8-10: network-derived corridor X, Madrid at real demand, small area-preserving dispatch shifts for the
+            # borders, trip gate as a check (system maximum, like Fig 3-7a), Spanish unit connection X 3 %
+            "TRIPCAL": "0", "CORR_X": "fit", "MADFIX": "1", "DISPATCH": "1", "DSP_PTSPLIT": "0", "DSP_W": "0.2", "MADW": "200", "VKG": "3"}
 BASE_ARGS = ["--frsc", "1500", "--kres", "0.2", "--route", "1.0", "--flowcal", "--mincirc", "2", "--vkg", "5"]
 
 ap = argparse.ArgumentParser()

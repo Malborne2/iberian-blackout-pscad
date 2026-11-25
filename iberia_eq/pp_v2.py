@@ -436,7 +436,7 @@ TRIP_T = {"E4": float(os.environ.get("TRIP_E4", 4.9)), "E3": float(os.environ.ge
 
 
 def XNAMES():
-    return ["mor"] + (["pt"] if PTSPLIT else []) + (["fbad", "fse", "fcac"] if FLOW2 else []) + (["vkg"] if KNOB_VKG else [])
+    return ["mor"] + (["pt"] if PTSPLIT else []) + (["fbad", "fse", "fcac"] if FLOW2 else []) + ([f"d_{z}" for z in DKN] if DISPATCH else []) + (["vkg"] if KNOB_VKG else [])
 
 
 def set_vkg(v):
@@ -447,6 +447,9 @@ def set_vkg(v):
     if FP is not None: FP.set_trafo_vk(TVK, v)
     for i_ in TVK: net.trafo.at[i_, "vk_percent"] = v
     VKG[0] = v
+
+
+TRIPV = []
 
 
 def trip_dv():
@@ -460,6 +463,7 @@ def trip_dv():
         net.sgen.loc[[ig, ib], ["p_mw", "q_mvar"]] = keep
         if Vk is not None: FP.V = Vk
         solve(full=True)
+    TRIPV[:] = [v0, v3, v4]                                  # kept for the system-maximum check (S29 sec 10)
     return 400 * (v3[B["GRA"]] - v0[B["GRA"]]), 400 * (v4[B["BAD-TS"]] - v3[B["BAD-TS"]])
 
 
@@ -474,6 +478,27 @@ F2 = {"fbad": 0.0, "fse": 0.0, "fcac": 0.0}                 # GW
 F2T = {"fbad": (("BAD", "CAC"), 1850), "fse": (("GRA", "SE"), 900), "fcac": (("CAC", "CYL"), 1200)}
 RESP0 = {z: net.sgen.at[RESI[z], "p_mw"] for z in ("BAD", "WAN", "CAC", "SCE")}
 P0_SE0, P0_CAT0 = P0["SE"], P0["CAT"]
+# DISPATCH=1: zero-sum net-injection shifts between the zones of each Fig 2-41 area (area totals unchanged) [liberty, user OK
+# S27], realised as RES moved between zones (P + fixed-PF Q), weakly penalised (1 per 0.5 GW). Targets: the Fig 2-4 split of
+# the Portuguese border between its ties, scaled to the 2,100 MW total (RUNLOG S29 sec 9). The last zone of each group takes
+# minus the sum of the others.
+DISPATCH = os.environ.get("DISPATCH", "0") == "1"
+DSP_PTSPLIT = os.environ.get("DSP_PTSPLIT", "1") == "1"     # 0: the Fig 2-4 PT tie split is a check only (S29 sec 10)
+DSP_W = float(os.environ.get("DSP_W", 0.5))                  # GW per unit of shift penalty
+DGRP = [["WAN", "GRA", "SCE", "BAD", "CAC", "MAD"], ["VAL", "SE", "CAT"], ["CYL", "NW", "N", "ARA"]]
+DKN = [z for g in DGRP for z in g[:-1]]                     # 10 free knobs (GW)
+DSH = {z: 0.0 for g in DGRP for z in g}
+DSG = {z: pp.create_sgen(net, B[z], p_mw=0.0, q_mvar=0.0, name=f"DSP {z}") for g in DGRP for z in g} if DISPATCH else {}
+# Fig 2-4 ties to Portugal at 12:32 [read]: Cartelle-Lindoso 102, Aldeadavila-Lagoaca 652, Cedillo-Falagueira 1,124,
+# Brovales-Alqueva ~131 (label unclear), P.Guzman-Tavira 772 -> shares of 2,781, applied to the 2,100 MW target
+PTSH = {("NW", "PT-N"): 102, ("CYL", "PT-N"): 652, ("CAC", "PT-S"): 1124, ("BAD", "PT-S"): 131, ("WAN", "PT-S"): 772}
+PTSH = {k: 2100 * v / sum(PTSH.values()) for k, v in PTSH.items()}
+
+
+def set_dsp(vals):
+    for z, v in zip(DKN, vals): DSH[z] = float(v)
+    for g in DGRP: DSH[g[-1]] = -sum(DSH[z] for z in g[:-1])
+    for z, i_ in DSG.items(): net.sgen.at[i_, "p_mw"] = 1000 * DSH[z]; net.sgen.at[i_, "q_mvar"] = a.kpf * 1000 * DSH[z]
 
 
 def set_f2(fb, fs, fc):
@@ -489,7 +514,7 @@ def set_f2(fb, fs, fc):
 def getx():
     return np.concatenate([[net.shunt.at[CAL[z], "q_mvar"] / 1000 for z in KZ], [net.gen.at[GI[n], "vm_pu"] for n in KG],
                            [scale.get("GRA", 1), scale.get("PT-N", 1), net.ext_grid.at[0, "vm_pu"], net.gen.at[iMA, "vm_pu"],
-                            (P0["MAD"] - P0_MAD0) / 1000, net.gen.at[iMA, "p_mw"] / 1000]] + ([[P0["PT-N"] / PT_LOAD]] if PTSPLIT else []) + ([[F2["fbad"], F2["fse"], F2["fcac"]]] if FLOW2 else []) + ([[VKG[0] / 100]] if KNOB_VKG else []))
+                            (P0["MAD"] - P0_MAD0) / 1000, net.gen.at[iMA, "p_mw"] / 1000]] + ([[P0["PT-N"] / PT_LOAD]] if PTSPLIT else []) + ([[F2["fbad"], F2["fse"], F2["fcac"]]] if FLOW2 else []) + ([[DSH[z] for z in DKN]] if DISPATCH else []) + ([[VKG[0] / 100]] if KNOB_VKG else []))
 
 
 def setx(x):
@@ -508,6 +533,9 @@ def setx(x):
     if FLOW2:
         j_ = k + 6 + (1 if PTSPLIT else 0)
         if len(x) >= j_ + 3: set_f2(x[j_], x[j_ + 1], x[j_ + 2])
+    if DISPATCH:
+        j_ = k + 6 + (1 if PTSPLIT else 0) + (3 if FLOW2 else 0)
+        if len(x) >= j_ + len(DKN): set_dsp(x[j_:j_ + len(DKN)])
     if KNOB_VKG: set_vkg(100 * x[-1])
 
 
@@ -545,6 +573,10 @@ def resid(x):
     if a.flowcal: r += [(flow("CAC", {"MAD"}) - FLOWT[("CAC", "MAD")]) / float(os.environ.get("MADW", 50))]   # MADW: weight (MW per unit)
     if float(os.environ.get("MADREG", 0)) > 0: r += [float(os.environ["MADREG"]) * (P0["MAD"] - P0_MAD0) / 1000]   # penalty per GW of Madrid shift (S29 sec 8)
     if FLOW2: r += [(flow(k_[0], {k_[1]}) - t_) / 100 for k_, t_ in F2T.values()]
+    if DISPATCH:
+        if DSP_PTSPLIT: r += [(flow(za_, {zb_}) - t_) / (200 if za_ == "BAD" else 100) for (za_, zb_), t_ in PTSH.items()]   # Fig 2-4 PT tie split
+        else: r += [0.0] * len(PTSH)
+        r += [DSH[z] / DSP_W for z in DSH]                                                                # 1 per DSP_W GW moved
     if PTSPLIT: r += [(flow("NW", {"PT-N"}) + flow("CYL", {"PT-N"}) - 200) / 50]       # Fig 2-41 exact: North -> Portugal 200 MW
     if OBJ2:                                                 # identifiability terms (S28): pin the null directions found by SVD=1
         for A, t in QAREA.items():                           # each unit's share of its area's Q, by |P| (as the S27 one-knob loop)
@@ -564,13 +596,13 @@ def resid(x):
 
 
 P0_MAD0, P0_WAN0 = P0["MAD"], P0["WAN"]
-NRES = len(VT) + len(QAREA) + 8 + (1 if a.flowcal else 0) + (1 if float(os.environ.get('MADREG', 0)) > 0 else 0) + len(KZ) + (1 if PTSPLIT else 0) + (2 if TRIPCAL else 0) + (3 if FLOW2 else 0) + ((len(GEN_AREA) + 1 + len(CAL) + 1) if OBJ2 else 0)
+NRES = len(VT) + len(QAREA) + 8 + (1 if a.flowcal else 0) + (1 if float(os.environ.get('MADREG', 0)) > 0 else 0) + len(KZ) + (1 if PTSPLIT else 0) + (2 if TRIPCAL else 0) + (3 if FLOW2 else 0) + ((len(PTSH) + len(DSH)) if DISPATCH else 0) + ((len(GEN_AREA) + 1 + len(CAL) + 1) if OBJ2 else 0)
 
 
 def calib_ls(tag=""):
     x0 = getx()
-    lo = np.concatenate([np.full(len(KZ), -6.0), np.full(len(KG), 0.85), [0.7, 0.5, 0.9, 0.85, -1.5, 3.0]] + ([[0.45]] if PTSPLIT else []) + ([[-1.0, -1.5, -1.5]] if FLOW2 else []) + ([[0.03]] if KNOB_VKG else []))
-    hi = np.concatenate([np.full(len(KZ), 6.0), np.full(len(KG), 1.15), [1.3, 1.5, 1.1, 1.15, 1.5, 6.0]] + ([[0.70]] if PTSPLIT else []) + ([[1.0, 1.5, 1.5]] if FLOW2 else []) + ([[0.25]] if KNOB_VKG else []))
+    lo = np.concatenate([np.full(len(KZ), -6.0), np.full(len(KG), 0.85), [0.7, 0.5, 0.9, 0.85, -1.5, 3.0]] + ([[0.45]] if PTSPLIT else []) + ([[-1.0, -1.5, -1.5]] if FLOW2 else []) + ([[-1.5] * len(DKN)] if DISPATCH else []) + ([[0.03]] if KNOB_VKG else []))
+    hi = np.concatenate([np.full(len(KZ), 6.0), np.full(len(KG), 1.15), [1.3, 1.5, 1.1, 1.15, 1.5, 6.0]] + ([[0.70]] if PTSPLIT else []) + ([[1.0, 1.5, 1.5]] if FLOW2 else []) + ([[1.5] * len(DKN)] if DISPATCH else []) + ([[0.25]] if KNOB_VKG else []))
     x0 = np.clip(x0, lo + 1e-6, hi - 1e-6)
     if os.environ.get("RESDUMP"):                           # print the residual groups at the start and the end
         RD_ = lambda r_: f"V {np.sum(r_[:len(VT)]**2):.1f} | other {np.sum(r_[len(VT):]**2):.1f}"
@@ -620,11 +652,13 @@ if RESUME and not a.quick:                                # start from the saved
     NB_ = len(KZ) + len(KG) + 5                                                    # knobs up to the Madrid knob
     tail = dict(zip(st.get("xnames", ["mor", "pt"][:len(x_) - NB_]), x_[NB_:]))       # older states: Morocco P, then PT share
     if "vkg" in tail or st.get("vkg"): set_vkg(100 * tail.get("vkg", st.get("vkg", a.vkg) / 100))
+    if os.environ.get("VKG"): set_vkg(float(os.environ["VKG"]))   # force the Spanish unit connection X (%) on resume (S29 sec 10)
     if TRIPCAL: KNOB_VKG = True
     if FLOW2:
         P0_SE0, P0_CAT0 = P0["SE"] + 1000 * tail.get("fse", 0.0), P0["CAT"] - 1000 * tail.get("fse", 0.0)
     x_ = np.concatenate([x_[:NB_], [tail.get("mor", net.gen.at[iMA, "p_mw"] / 1000)]] + ([[tail.get("pt", 0.5)]] if PTSPLIT else [])
                         + ([[tail.get("fbad", 0.0), tail.get("fse", 0.0), tail.get("fcac", 0.0)]] if FLOW2 else [])
+                        + ([[tail.get(f"d_{z}", 0.0) for z in DKN]] if DISPATCH else [])
                         + ([[VKG[0] / 100]] if KNOB_VKG else []))
     setx(x_)
     import pandas as pd                                     # warm start from the saved solved voltages
@@ -689,6 +723,10 @@ if FAST and FP is not None:                                 # final state throug
 if TRIPCAL or os.environ.get("TRIPCHK", "1") == "1":
     d3, d4 = trip_dv(); print(f"trip gate: 4a+4b at BAD-TS {d4:+.2f} kV (target {TRIP_T['E4']}), Granada at GRA {d3:+.2f} kV "
                               f"= {d3 / (-a.kpf * 355) * 1000:.0f} kV/Gvar (report 18-42); unit connection X {VKG[0]:.2f} %")
+    SPB_ = [B[z] for z in ES] + [B[f"{z}-TS"] for z in TSX]; nm_ = {B[z]: z for z in ES}; nm_.update({B[f"{z}-TS"]: f"{z}-TS" for z in TSX})
+    mx_ = [max(SPB_, key=lambda b: v[b]) for v in TRIPV]
+    print("trip gate, like Fig 3-7a (maximum Spanish 400 kV voltage): " + " -> ".join(f"{400 * v[b]:.1f} kV at {nm_[b]}" for v, b in zip(TRIPV, mx_))
+          + f" | rise over 4a+4b {400 * (TRIPV[2][mx_[2]] - TRIPV[1][mx_[1]]):+.2f} kV (report +4.9: 427.8 -> 432.7)")
 it = solve(full=True)
 print(f"calibration pass 3: {outer} rounds; Portuguese load x{scale.get('PT-N', 1):.3f}, Spanish demand x{scale.get('GRA', 1):.3f}")
 print("DSO shunts at 1 pu (Mvar, + absorbing): " + "  ".join(f"{z} {net.shunt.at[CAL[z], 'q_mvar']:+.0f}" for z in CAL))
@@ -716,6 +754,9 @@ print("   Portugal ties ES->PT: " + "  ".join(f"{z} {flow(z, {'PT-N', 'PT-S'}):+
 sw_mad = flow("CAC", {"MAD"}) + flow("SCE", {"MAD"})
 print("corridor flows vs Fig 2-4: " + "  ".join(f"{k[0]}->{k[1]} {flow(k[0], {k[1]}):+.0f} ({t})" for k, t in {**FLOWT, **FCHK}.items()))
 print("zone demand now: " + "  ".join(f"{z} {P0[z] * scale.get(z, 1):.0f}" for z in ES))
+if DISPATCH:
+    print("dispatch shifts (MW, + = more net injection): " + "  ".join(f"{z} {1000 * DSH[z]:+.0f}" for z in DSH))
+    print("PT ties vs Fig 2-4 split: " + "  ".join(f"{a_}->{b_} {flow(a_, {b_}):+.0f} ({t_:.0f})" for (a_, b_), t_ in PTSH.items()))
 print("zone RES now:    " + "  ".join(f"{z} {net.sgen.at[RESI[z], 'p_mw']:.0f}" for z in ES if z in RESI))
 print(f"Madrid net in-feed {mad_in:6.0f} MW; SW corridor CAC+SCE -> MAD {sw_mad:6.0f} MW (Fig 2-4: 3,227 on the six circuits)")
 print("generator Q [Mvar]: " + "  ".join(f"{n.split()[0]} {q:+.0f}" for n, q in zip(net.gen.name, net.res_gen.q_mvar)))

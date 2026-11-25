@@ -66,6 +66,12 @@ whenever the report gives its trigger: a voltage, a frequency, or a correlation 
 | G9 | France | FR | as ib6 | — | Fig 4-91 tie calibration |
 | G10 | Morocco | MA | 570–750 export from Spain | ties trip at 16a/16b, 12:33:20.229 and 20.473 | Fig 2-41, Fig 2-22; size [EXT] (O4 below) |
 
+**Unit step-up and AVR (S29 §5, §10).**
+- The accepted pre-event state uses a 3 % connection reactance for Spanish units G1–G7.
+- Build each unit with a realistic step-up (≈ 15 % on rating) and an AVR with reactive line-drop compensation of
+  ≈ 80 % of X_T, so the regulated point sees (1 − 0.8) × 15 % = 3 %.
+- Bench it on the 2-bus case before the full build.
+
 ### Embedded synchronous generation (inertia-carrying, no voltage control: fixed power factor)
 
 | # | Unit | Bus | P [MW] | Basis |

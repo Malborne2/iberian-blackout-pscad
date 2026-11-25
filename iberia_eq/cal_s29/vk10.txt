@@ -1,0 +1,53 @@
+CORR_X=fit: 27 corridor reactances from corridor_x_fit_open.csv
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   324
+    ARA-MAD   x3->3:    92 ->   279
+    ARA-N     x3->3:    59 ->   519
+    ARA-VAL   x1->2:    77 ->   348
+    BAD-CAC   x3->3:   155 ->   192
+    BAD-PT-S  x1->2:    81 ->   414
+    BAD-WAN   x3->3:   105 ->   167
+    CAC-CYL   x2->2:   171 ->   463
+    CAC-MAD   x6->6:   193 ->   325
+    CAC-PT-N  x1->2:    25 ->  5647
+    CAC-SCE   x3->3:   150 ->   177
+    CAT-FR    x1->2:    92 ->   240
+    CAT-VAL   x1->2:   155 ->   708
+    CYL-MAD   x6->6:   127 ->   270
+    CYL-N     x3->3:   136 ->   229
+    CYL-NW    x7->7:   151 ->   262
+    CYL-PT-N  x1->2:     5 ->   318
+     FR-N     x3->3:    13 ->   394
+    GRA-SCE   x1->2:    67 ->   314
+    GRA-SE    x1->2:    59 ->   429
+    GRA-WAN   x2->2:    80 ->   325
+    MAD-VAL   x4->4:   104 ->   185
+      N-NW    x5->5:   125 ->   413
+     NW-PT-N  x3->3:    61 ->   228
+   PT-S-WAN   x1->2:    58 ->   497
+    SCE-WAN   x4->4:   175 ->   246
+     SE-VAL   x4->4:    63 ->   156
+    CAC-PT-S  x1->2:    80 ->   284
+OPEN_LINES (fit mode): CAT internal charging -82 circuit-km (Pierola-Sentmenat); reactances from the reduced network
+Traceback (most recent call last):
+  File "C:\Users\Ibrahim\OneDrive - �stfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\iberia_eq\pp_v2.py", line 663, in <module>
+    solve(full=True); print("resumed from pp_v2_state.pkl", flush=True)
+    ~~~~~^^^^^^^^^^^
+  File "C:\Users\Ibrahim\OneDrive - �stfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\iberia_eq\pp_v2.py", line 302, in solve
+    FP = FastPF(net, [CAL[z] for z in CAL], LIDX, a.alpha, a.beta)
+  File "C:\Users\Ibrahim\OneDrive - �stfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\iberia_eq\fastpf.py", line 20, in __init__
+    self.rebuild()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\Ibrahim\OneDrive - �stfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\iberia_eq\fastpf.py", line 27, in rebuild
+    pp.runpp(net, init="results" if net.converged else "auto", max_iteration=50)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\run.py", line 244, in runpp
+    _powerflow(net, **kwargs)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\powerflow.py", line 71, in _powerflow
+    _ppci_to_net(result, net)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\powerflow.py", line 177, in _ppci_to_net
+    raise LoadflowNotConverged("Power Flow {0} did not converge after "
+                               "{1} iterations!".format(algorithm, max_iteration))
+pandapower.auxiliary.LoadflowNotConverged: Power Flow nr did not converge after 50 iterations!
