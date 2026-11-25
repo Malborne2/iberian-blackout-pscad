@@ -3,9 +3,8 @@
 | Agent | Working on | Files | Since |
 |---|---|---|---|
 | claude-main | v2 pre-event calibration (pandapower) | `iberia_eq/pp_v2.py`, `iberia_eq/SOURCES.md`, `iberia_eq/V2_BUS_UNIT_LIST.md` | 2026-11-25 |
-| claude-mac | pp_v2 fast solver, OBJ=2, trip gate, corridors v2, Portugal ties: on branch `agent/claude-mac/pp-v2-fastpf`, awaiting review (touches `pp_v2.py`, so not merged) | `iberia_eq/fastpf.py`, `build_corridors_v2.py`, `pp_v2_trip*.py`, `pp_v2_areas.py`, `scan.sh` | 2026-11-25 |
 
-# STATUS — Session 28 banner (25 Nov 2026; agent: claude-mac; pandapower only, no PSCAD; branch `agent/claude-mac/pp-v2-fastpf`)
+# STATUS — Session 28 banner (25 Nov 2026; agent: claude-mac; pandapower only, no PSCAD; merged in PR #1)
 
 - **v2 load flow continued** (`RUNLOG.md` Session 28). The S27 state `iberia_eq/pp_v2_state.pkl` is unchanged.
   The new **candidate X6** is `iberia_eq/pp_v2_state_s28_X6.pkl`. It is not yet the default; that decision is open.
