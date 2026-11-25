@@ -1,0 +1,54 @@
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   167
+    ARA-MAD   x3->3:    92 ->   282
+    ARA-N     x3->3:    59 ->   263
+    ARA-VAL   x1->2:    77 ->   230
+    BAD-CAC   x3->3:   155 ->   135
+    BAD-PT-S  x1->2:    81 ->   417
+    BAD-WAN   x3->3:   105 ->   208
+    CAC-CYL   x2->2:   171 ->   193
+    CAC-MAD   x6->6:   193 ->   257
+    CAC-PT-N  x1->2:    25 ->   460
+    CAC-SCE   x3->3:   150 ->   242
+    CAT-FR    x1->2:    92 ->   240
+    CAT-VAL   x1->2:   155 ->   321
+    CYL-MAD   x6->6:   127 ->   187
+    CYL-N     x3->3:   136 ->   226
+    CYL-NW    x7->7:   151 ->   193
+    CYL-PT-N  x1->2:     5 ->   254
+     FR-N     x3->3:    13 ->   394
+    GRA-SCE   x1->2:    67 ->   140
+    GRA-SE    x1->2:    59 ->   234
+    GRA-WAN   x2->2:    80 ->   156
+    MAD-VAL   x4->4:   104 ->   228
+      N-NW    x5->5:   125 ->   275
+     NW-PT-N  x3->3:    61 ->   236
+   PT-S-WAN   x1->2:    58 ->   677
+    SCE-WAN   x4->4:   175 ->   209
+     SE-VAL   x4->4:    63 ->   167
+  lengths 0.0 / unit-X 0.0 least_squares: nfev 14, max |V err| 6.32 kV, max other err 812 (MW/Mvar) | njev 8, resid calls 247, load flows 248 (0.3 s of 0.9 s wall), cost 281.48
+  lengths 0.1 / unit-X 0.0 least_squares: nfev 6, max |V err| 6.42 kV, max other err 161 (MW/Mvar) | njev 6, resid calls 181, load flows 182 (0.3 s of 0.8 s wall), cost 116.55
+  lengths 0.2 / unit-X 0.0 least_squares: nfev 8, max |V err| 5.75 kV, max other err 149 (MW/Mvar) | njev 8, resid calls 241, load flows 242 (0.4 s of 0.9 s wall), cost 110.74
+  lengths 0.3 / unit-X 0.0 least_squares: nfev 7, max |V err| 5.04 kV, max other err 163 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.3 s of 0.9 s wall), cost 103.40
+  lengths 0.4 / unit-X 0.0 least_squares: nfev 7, max |V err| 4.39 kV, max other err 169 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.3 s of 0.8 s wall), cost 96.35
+  lengths 0.5 / unit-X 0.0 least_squares: nfev 7, max |V err| 3.83 kV, max other err 169 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.3 s of 0.9 s wall), cost 89.97
+  lengths 0.6 / unit-X 0.0 least_squares: nfev 7, max |V err| 3.33 kV, max other err 166 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.3 s of 0.9 s wall), cost 84.29
+  lengths 0.7 / unit-X 0.0 least_squares: nfev 8, max |V err| 2.91 kV, max other err 161 (MW/Mvar) | njev 8, resid calls 241, load flows 242 (0.4 s of 1.0 s wall), cost 79.25
+  lengths 0.8 / unit-X 0.0 least_squares: nfev 8, max |V err| 2.57 kV, max other err 155 (MW/Mvar) | njev 8, resid calls 241, load flows 242 (0.4 s of 1.0 s wall), cost 74.86
+  lengths 0.9 / unit-X 0.0 least_squares: nfev 5, max |V err| 2.30 kV, max other err 148 (MW/Mvar) | njev 5, resid calls 151, load flows 152 (0.2 s of 0.6 s wall), cost 71.53
+  lengths 1.0 / unit-X 0.0 least_squares: nfev 23, max |V err| 107.39 kV, max other err 2737 (MW/Mvar) | njev 14, resid calls 430, load flows 431 (0.7 s of 8.0 s wall), cost 27314.65
+Traceback (most recent call last):
+  File "/Users/rana/Desktop/PhD @ UVA/Spanish_netowrk_model/iberia_eq/pp_v2.py", line 554, in <module>
+    setstep(fl, fv)
+  File "/Users/rana/Desktop/PhD @ UVA/Spanish_netowrk_model/iberia_eq/pp_v2.py", line 550, in setstep
+    if FP is not None: FP.rebuild()
+                       ^^^^^^^^^^^^
+  File "/Users/rana/Desktop/PhD @ UVA/Spanish_netowrk_model/iberia_eq/fastpf.py", line 27, in rebuild
+    pp.runpp(net, init="results" if net.converged else "auto", max_iteration=50)
+  File "/Users/rana/.venvs/iberia/lib/python3.12/site-packages/pandapower/run.py", line 244, in runpp
+    _powerflow(net, **kwargs)
+  File "/Users/rana/.venvs/iberia/lib/python3.12/site-packages/pandapower/powerflow.py", line 71, in _powerflow
+    _ppci_to_net(result, net)
+  File "/Users/rana/.venvs/iberia/lib/python3.12/site-packages/pandapower/powerflow.py", line 177, in _ppci_to_net
+    raise LoadflowNotConverged("Power Flow {0} did not converge after "
+pandapower.auxiliary.LoadflowNotConverged: Power Flow nr did not converge after 50 iterations!

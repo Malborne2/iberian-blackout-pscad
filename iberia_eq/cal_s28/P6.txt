@@ -1,0 +1,125 @@
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   167
+    ARA-MAD   x3->3:    92 ->   282
+    ARA-N     x3->3:    59 ->   263
+    ARA-VAL   x1->2:    77 ->   230
+    BAD-CAC   x3->3:   155 ->   135
+    BAD-PT-S  x1->2:    81 ->   313
+    BAD-WAN   x3->3:   105 ->   208
+    CAC-CYL   x2->2:   171 ->   193
+    CAC-MAD   x6->6:   193 ->   257
+    CAC-PT-N  x1->2:    25 ->   345
+    CAC-SCE   x3->3:   150 ->   242
+    CAT-FR    x1->2:    92 ->   240
+    CAT-VAL   x1->2:   155 ->   321
+    CYL-MAD   x6->6:   127 ->   187
+    CYL-N     x3->3:   136 ->   226
+    CYL-NW    x7->7:   151 ->   193
+    CYL-PT-N  x1->2:     5 ->   381
+     FR-N     x3->3:    13 ->   394
+    GRA-SCE   x1->2:    67 ->   140
+    GRA-SE    x1->2:    59 ->   234
+    GRA-WAN   x2->2:    80 ->   156
+    MAD-VAL   x4->4:   104 ->   228
+      N-NW    x5->5:   125 ->   275
+     NW-PT-N  x3->3:    61 ->   354
+   PT-S-WAN   x1->2:    58 ->   508
+    SCE-WAN   x4->4:   175 ->   209
+     SE-VAL   x4->4:    63 ->   167
+  lengths 0.0 / unit-X 0.0 least_squares: nfev 12, max |V err| 6.31 kV, max other err 880 (MW/Mvar) | njev 8, resid calls 245, load flows 246 (0.3 s of 0.9 s wall), cost 318.44
+  lengths 0.1 / unit-X 0.0 least_squares: nfev 7, max |V err| 6.54 kV, max other err 195 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.3 s of 0.8 s wall), cost 131.54
+  lengths 0.2 / unit-X 0.0 least_squares: nfev 7, max |V err| 5.94 kV, max other err 171 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.3 s of 0.8 s wall), cost 119.46
+  lengths 0.3 / unit-X 0.0 least_squares: nfev 7, max |V err| 5.22 kV, max other err 190 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.3 s of 0.9 s wall), cost 112.11
+  lengths 0.4 / unit-X 0.0 least_squares: nfev 7, max |V err| 4.54 kV, max other err 199 (MW/Mvar) | njev 7, resid calls 211, load flows 212 (0.3 s of 0.8 s wall), cost 104.98
+  lengths 0.5 / unit-X 0.0 least_squares: nfev 6, max |V err| 3.96 kV, max other err 201 (MW/Mvar) | njev 6, resid calls 181, load flows 182 (0.3 s of 0.8 s wall), cost 98.48
+  lengths 0.6 / unit-X 0.0 least_squares: nfev 6, max |V err| 3.46 kV, max other err 200 (MW/Mvar) | njev 6, resid calls 181, load flows 182 (0.3 s of 0.7 s wall), cost 92.68
+  lengths 0.7 / unit-X 0.0 least_squares: nfev 6, max |V err| 3.04 kV, max other err 195 (MW/Mvar) | njev 6, resid calls 181, load flows 182 (0.3 s of 0.7 s wall), cost 87.53
+  lengths 0.8 / unit-X 0.0 least_squares: nfev 6, max |V err| 2.70 kV, max other err 190 (MW/Mvar) | njev 6, resid calls 181, load flows 182 (0.2 s of 0.6 s wall), cost 82.95
+  lengths 0.9 / unit-X 0.0 least_squares: nfev 6, max |V err| 2.42 kV, max other err 184 (MW/Mvar) | njev 6, resid calls 181, load flows 182 (0.3 s of 0.7 s wall), cost 78.86
+  lengths 1.0 / unit-X 0.0 least_squares: nfev 6, max |V err| 2.19 kV, max other err 178 (MW/Mvar) | njev 6, resid calls 181, load flows 182 (0.3 s of 0.7 s wall), cost 75.19
+  lengths 1.0 / unit-X 0.1 least_squares: nfev 12, max |V err| 2.23 kV, max other err 178 (MW/Mvar) | njev 5, resid calls 158, load flows 159 (0.2 s of 0.6 s wall), cost 76.12
+  lengths 1.0 / unit-X 0.2 least_squares: nfev 11, max |V err| 2.28 kV, max other err 177 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.2 s of 0.5 s wall), cost 77.10
+  lengths 1.0 / unit-X 0.3 least_squares: nfev 11, max |V err| 2.33 kV, max other err 177 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.2 s of 0.5 s wall), cost 78.15
+  lengths 1.0 / unit-X 0.4 least_squares: nfev 11, max |V err| 2.39 kV, max other err 176 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.2 s of 0.5 s wall), cost 79.28
+  lengths 1.0 / unit-X 0.5 least_squares: nfev 11, max |V err| 2.46 kV, max other err 175 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.2 s of 0.4 s wall), cost 80.50
+  lengths 1.0 / unit-X 0.6 least_squares: nfev 11, max |V err| 2.56 kV, max other err 173 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.1 s of 0.4 s wall), cost 81.85
+  lengths 1.0 / unit-X 0.7 least_squares: nfev 11, max |V err| 2.67 kV, max other err 171 (MW/Mvar) | njev 4, resid calls 128, load flows 129 (0.1 s of 0.3 s wall), cost 83.38
+  lengths 1.0 / unit-X 0.8 least_squares: nfev 10, max |V err| 2.83 kV, max other err 168 (MW/Mvar) | njev 4, resid calls 127, load flows 128 (0.1 s of 0.3 s wall), cost 85.17
+  lengths 1.0 / unit-X 0.9 least_squares: nfev 10, max |V err| 3.04 kV, max other err 164 (MW/Mvar) | njev 4, resid calls 127, load flows 128 (0.1 s of 0.3 s wall), cost 87.34
+  lengths 1.0 / unit-X 1.0 least_squares: nfev 10, max |V err| 3.34 kV, max other err 157 (MW/Mvar) | njev 4, resid calls 127, load flows 128 (0.1 s of 0.3 s wall), cost 90.14
+  final least_squares: nfev 7, max |V err| 3.34 kV, max other err 157 (MW/Mvar) | njev 1, resid calls 37, load flows 38 (0.0 s of 0.1 s wall), cost 90.14
+  final calibration: total evaluations 791
+fastpf vs pandapower at the final state: max dV 4.4e-16 pu, max d gen Q 1.1e-07 Mvar; total load flows 4201 in 5.0 s, fallbacks 570
+trip gate: 4a+4b at BAD-TS +7.39 kV (target 4.9), Granada at GRA +1.33 kV = 28 kV/Gvar (report 18-42); unit connection X 5.00 %
+calibration pass 3: 791 rounds; Portuguese load x0.884, Spanish demand x0.957
+DSO shunts at 1 pu (Mvar, + absorbing): GRA -158  WAN -280  BAD -273  CAC +229  SCE -373  MAD +212  CYL +233  NW +658  N -831  ARA -654  CAT -1572  VAL -918  SE +81  PT-S -849  PT-N +431
+unit Q per area: N -437 (target -400)  SW -156 (target -150)  E -619 (target -600)
+Spanish distribution exchange: P 23661 MW, Q +1223 Mvar (load +5038, DSO shunts -3815); Fig 4-84 (400 kV interface only, ~8.7 GW): Q -1,000 ... -1,800 Mvar
+zone  V[kV] target  demand   RES
+GRA     411.9    412    1057   1706
+WAN     413.4    413    1585   2560
+BAD     412.4    412     264   2538
+CAC     405.3    406     176   1692
+SCE     416.6    417    1089   3687
+MAD     405.5    405    2661    650
+CYL     406.0    405    1112   1010
+NW      405.3    405    2996    496
+N       408.5    409    2999    255
+ARA     410.8    410    1233   1370
+CAT     400.0    400    4836    233
+VAL     412.3    413    2033   2449
+SE      408.3    408    1271   1524
+PS-CYL  405.0              0      0
+PS-ARA  410.0              0      0
+PS-PT   408.0              0      0
+PT-N    401.3    398       0      0
+PT-S    401.4    401       0      0
+FR      388.3              0      0
+MA-B    412.6              0      0
+MA      378.0              0      0
+BAD-TS  411.1              0      0
+WAN-TS  413.2              0      0
+
+borders ES->PT   2099 MW (target ~2,100) | ES->MA   740 (~750) | ES->FR AC   338 + HVDC 1000 =  1338 (target 1360)
+   tie CAT-FR     x2   240 km  P    -40 MW  Q   +134
+   tie FR-N       x3   394 km  P   -373 MW  Q   -188
+   Morocco unit P 4059 MW, Moroccan load 4779 MW
+   Portugal ties ES->PT: WAN +548  BAD +860  CAC +998  CYL +1  NW -308 | North area -> PT -307 (Fig 2-41: +200) | PT load north share 0.50
+corridor flows vs Fig 2-4: CAC->MAD +3274 (3227)  BAD->CAC +2084 (1850)  GRA->SE +1464 (900)  VAL->ARA +1201 (0)  CAC->CYL +1801 (1200)
+zone demand now: GRA 1057  WAN 2634  BAD 264  CAC 176  SCE 1089  MAD 1612  CYL 1112  NW 2996  N 2999  ARA 1233  CAT 4836  VAL 2033  SE 1271
+zone RES now:    GRA 1706  WAN 1857  BAD 1585  CAC 1692  SCE 3687  MAD 650  CYL 1010  NW 496  N 255  ARA 1370  CAT 233  VAL 2449  SE 1524
+Madrid net in-feed    979 MW; SW corridor CAC+SCE -> MAD   3274 MW (Fig 2-4: 3,227 on the six circuits)
+generator Q [Mvar]: G1 -111  G2 -269  G3 -395  G4 -265  G5 -108  G6 -46  G7 +45  G8 -1306  M1 -42  M2 -22  M3-7 +1029  Morocco +773
+France slack P -1333 MW, Q -366 Mvar
+tie Q ES->X: FR +338 (target +300)  PT +257 (target +100)  MA -306 (target -360) | set-points FR 388.3 kV, MA 384.9 kV, PT 385.5 kV
+
+reactive balance Spain (Mvar):
+   generated: 400 kV corridor charging   5273   zone-internal 400 kV charging   7491
+   absorbed : reactors   2404  loads   5038  RES   2723 (P 20170, Q/P 0.135)  units   1213  DSO shunts  -3815  (+ = absorbing)
+
+reactive balance South-West (Mvar):
+   generated: 400 kV corridor charging   2176   zone-internal 400 kV charging   1897
+   absorbed : reactors    698  loads   1195  RES   1645 (P 12184, Q/P 0.135)  units    156  DSO shunts   -927  (+ = absorbing)
+
+series reactive losses I2X, all lines: 5241 Mvar (charging 6408); largest:
+   CAC-MAD      x6  257 km  P  +3274 MW  I2X   708  charging  656 Mvar
+   CAC-CYL      x2  193 km  P  +1801 MW  I2X   482  charging  195 Mvar
+   CAC-SCE      x3  242 km  P  -1850 MW  I2X   431  charging  263 Mvar
+   CAT-VAL      x2  321 km  P  -1209 MW  I2X   382  charging   89 Mvar
+   GRA-SE       x2  234 km  P  +1464 MW  I2X   376  charging   34 Mvar
+   PT-N-PT-S    x3  250 km  P  -1546 MW  I2X   324  charging  418 Mvar
+   BAD-CAC      x3  135 km  P  +2084 MW  I2X   293  charging  269 Mvar
+   CAC-PT-N     x2  345 km  P   +998 MW  I2X   265  charging   14 Mvar
+   ARA-MAD      x3  282 km  P  -1298 MW  I2X   257  charging  158 Mvar
+   ARA-VAL      x2  230 km  P  -1172 MW  I2X   247  charging   45 Mvar
+   transformer reactive losses 916 Mvar
+Fig 4-2 South Spain 12:32:00: RES 2269 Mvar on 16807 MW (report 2,297 on 17,020) | reactors 1377 (1,300) | PO 7.4 units 111 (74)
+
+short-circuit (MVA, IEC 60909 max): zone  model  Table 4-26
+   MAD    30568    10555  (+190 %)
+   VAL    23213    11167  (+108 %)
+   N      22066    10158  (+117 %)
+   CAT    28128     9967  (+182 %)
+   NW     29894     9665  (+209 %)
+   WAN    12171    12271  (-1 %)
+   BAD     8155     8386  (-3 %)
