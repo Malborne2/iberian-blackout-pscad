@@ -3,6 +3,35 @@
 | Agent | Working on | Files | Since |
 |---|---|---|---|
 | claude-main | v2 pre-event calibration (pandapower) | `iberia_eq/pp_v2.py`, `iberia_eq/SOURCES.md`, `iberia_eq/V2_BUS_UNIT_LIST.md` | 2026-11-25 |
+| claude-mac | pp_v2 fast solver, OBJ=2, trip gate, corridors v2, Portugal ties: on branch `agent/claude-mac/pp-v2-fastpf`, awaiting review (touches `pp_v2.py`, so not merged) | `iberia_eq/fastpf.py`, `build_corridors_v2.py`, `pp_v2_trip*.py`, `pp_v2_areas.py`, `scan.sh` | 2026-11-25 |
+
+# STATUS — Session 28 banner (25 Nov 2026; agent: claude-mac; pandapower only, no PSCAD; branch `agent/claude-mac/pp-v2-fastpf`)
+
+- **v2 load flow continued** (`RUNLOG.md` Session 28). The S27 state `iberia_eq/pp_v2_state.pkl` is unchanged.
+  The new **candidate X6** is `iberia_eq/pp_v2_state_s28_X6.pkl`. It is not yet the default; that decision is open.
+- **Fixed:** resume bug (Madrid knob read from the Morocco slot → 4 GW shift). `--route 1.0` is needed to reproduce
+  s35b.
+- **Corridor builder v2:** finds the missing **Vandellós–La Plana (CAT–VAL)** axis and extra circuits. Spanish
+  400 kV circuit-km 18.4 → 21.4 thousand (REE ≈ 21.7). This cuts the fitted DSO capacitive injection
+  −6.8 → −3.7 Gvar.
+- **New gate `pp_v2_trip.py`** (static ΔV per trip):
+  - s35b: 4a+4b **+12.8 kV** vs the report's 4.9, Granada 108 kV/Gvar vs 18–42;
+  - X6 (unit connection X 5 %): **+7.1 kV**, **28 kV/Gvar ✓**, all border / unit-Q / Madrid targets met.
+- **Later in S28:**
+  - `fastpf.py` (own Newton on pandapower's Ybus, exact to 2e-16 pu) cuts a cold fit from 4–9 min to **40–60 s**.
+  - The SVD showed the S27 objective was under-determined (2 null directions). `OBJ=2` fixes it (condition number 15).
+  - The trip gate is now inside the fit (`TRIPCAL=1`).
+  - **Portugal loop fixed** with `PT_TIE_SW=2.6`: North→PT **+200** (target +200).
+  - **New candidate R2:** `pp_v2_state_s28_R2.pkl`.
+- **Open:**
+  - Spanish TSO–DSO Q +1.2 Gvar vs Fig 4-84's −1.0…−1.8;
+  - Portuguese unit absorbs 1.3 Gvar;
+  - 4a+4b +7.1 vs 4.9 kV (the tripped plants' Q is unknown);
+  - Table 2-12 lines still open at 12:32 are not yet removed;
+  - north/centre fault levels;
+  - AVR line-drop compensation proposed instead of a few-% step-up.
+
+---
 
 # STATUS — Session 27 banner (23 Nov 2026, 14:05); the Session 26 status follows unchanged below
 

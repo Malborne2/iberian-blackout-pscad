@@ -2,6 +2,293 @@
 
 One entry per session. Every number is measured or read back, never assumed.
 
+## Session 28 — 2026-11-25 — agent: claude-mac (local macOS copy, **no PSCAD**): pandapower v2 load flow continued
+
+**Scope:** continue the pandapower v2 calibration from S27 §34 on a local copy (pandapower 3.5.6 in a venv, Python
+3.12; PSCAD not available). Nothing in PSCAD was touched. The S27 state `iberia_eq/pp_v2_state.pkl` is **unchanged**
+(byte-compared after the session); every new state has its own file. New code is opt-in through environment
+variables, so the S27 commands reproduce exactly.
+
+### 1. Reproduction of the S27 state, and one bug
+- The S27 "s35b" result (`iberia_eq/cal_ls_s35b.txt`) reproduces to the printed digit with
+  `RESUME=1 python pp_v2.py --frsc 1500 --kres 0.2 --vkg 20 --mincirc 2 --route 1.0 --flowcal`.
+  **`--route 1.0` is required** (the default is 1.2). With the default, the resume converges to a wrong state
+  (voltages off by up to 37 kV).
+- **Bug fixed (resume):** the resume took the Madrid knob from `x[-1]`, which has been the Morocco P knob since that
+  knob was added. The Madrid shift was then applied as ≈ 4 GW: MAD demand −2,044 MW, the CAC→MAD corridor 1,206 MW.
+  Now indexed as `x[len(KZ) + len(KG) + 4]`. S27's "resume in 8 s" note predates the Morocco knob.
+- The local copy this session started from predated S27 §35–36. §35 (claude-main) documents the code tagged
+  "RUNLOG S27 sec 35" (French hub, Morocco knob, Fig 4-2 reactors, `--kpf −0.135`, `QBAL`).
+
+### 2. Area-level check of the s35b state (`DUMP_NET` + `iberia_eq/pp_v2_areas.py <net.p>`)
+Fig 2-41 implies the internal transfers: SW exports ≈ 8.0 GW internally, N imports 3.37 GW, E imports 4.67 GW
+(SOURCES §1). Area totals in the model are close (SW +8.6, N −4.0 GW). The zone-to-area mapping is not exact: VAL holds
+40 % of Castilla-La Mancha and SE 10 % of Andalucía, so E is not comparable.
+
+Two **loop flows** are found, and neither is a target in S27:
+
+| | s35b | report |
+|---|---|---|
+| Spanish North area → Portugal | **−1,005 MW** (Portugal feeds the Spanish North) | +200 (Fig 2-41, exact); +855 (Fig 2-4, read) |
+| VAL → ARA ("Morella–La Plana") | 1,674 MW | a few hundred (Fig 2-4) |
+
+### 3. Corridor builder v2 — the Vandellós–La Plana axis was missing (`iberia_eq/build_corridors_v2.py`)
+- **Cause:** v1 walks line chains and drops any chain that ends at an unmapped junction, rounding junctions to 0.001°.
+  The OSM ways Vandellós → (41.02, 0.84) → La Plana (ids 126230839, 127605079) are present but were lost, so
+  **CAT–VAL had no corridor**. The south-east surplus then reached Catalonia over VAL→ARA→CAT.
+- **v2 method:**
+  - merge junctions within 0.3 km;
+  - bridge dead ends to the nearest node within 2 km (5 gaps bridged);
+  - each group of connected junctions is a cluster, and its terminals are joined by the minimum spanning tree of the
+    shortest paths;
+  - circuits = max-flow between the two terminals, which counts parallel ways mapped separately.
+- **Result:** CAT–VAL **new** (Vandellós–La Plana 155 km ×1). More circuits on CAC–CYL (1 → 2), CYL–MAD (4 → 6),
+  CYL–NW (5 → 7) and N–NW (4 → 5). Everything else is unchanged.
+- **Spanish 400 kV circuit-km 18,377 → 21,445.** REE publishes ≈ 21.7 thousand km [EXT, to cite in SOURCES before
+  use as a target]. v1 therefore **under-counted line charging by ≈ 1.7 Gvar**.
+- Output: `corridors_v2.csv` and `zone_km_v2.csv`. v1 files are untouched. Used with `CORR=v2`.
+
+### 4. Charging conservation (`CHG=phys`)
+- Hub-to-hub lengthening gave every corridor the charging of its hub-to-hub length. Zone-internal charging was then
+  clipped at zero, so total charging was not the physical circuit-km. Worst case: FR–N, 13 km physical, modelled as
+  394 km ×3 = 650 Mvar.
+- With `CHG=phys`, each corridor keeps its OSM circuit-km of charging through the whole continuation; only its series
+  impedance is hub-to-hub.
+- Effect: the France equivalent voltage moves 373.8 → 390 kV and the French slack Q −1,057 → −330 Mvar, which is more
+  physical.
+
+### 5. New gate — static trip sensitivity (`iberia_eq/pp_v2_trip.py`)
+- **Method:** remove a tripping plant's P and its fixed-PF absorption from a solved state. Re-solve with the
+  exponential loads iterated and the units holding their terminal set-points. Cases are cumulative: E3 = Granada
+  355 MW at GRA; E4 = + Badajoz 4a + 4b, 727 MW at BAD-TS.
+- **Report checks:**
+  - after 4a + 4b, the 400 kV maximum rises **+4.9 kV** (Fig 3-7a, S27 §21);
+  - ΔQ / S_sc at Bienvenida = 98 Mvar / 8,386 MVA = +4.7 kV;
+  - Granada: **18–42 kV/Gvar** (S27 §9 r3).
+- **s35b fails both: 4a + 4b = +12.8 kV at BAD-TS (2.6×), Granada 108 kV/Gvar**, and every Spanish hub rises
+  +3…+6 kV for Granada alone.
+- **Decomposition of the 4a + 4b step on s35b** (`iberia_eq/pp_v2_trip_decomp.py <net.p>`, each part alone):
+
+  | case | BAD-TS rise |
+  |---|---|
+  | P only (flow relief: less SW → N flow, less I²X) | +8.2 kV |
+  | Q only (98 Mvar) | +7.0 kV |
+  | units stiff (connection X 20 → 2 %) | **+7.0** (was +14.6) |
+  | DSO shunts held at constant Q | 14.6 → 12.4 |
+  | constant-power loads | 14.6 → **19.2** (β 4.1 is stabilising) |
+
+  The **unit connection reactance `--vkg`** is the main lever. It barely moves the BAD/WAN fault levels (they sit far
+  from the units), so it is nearly free for the cascade area.
+- This gate is cheap (≈ 1 s) and directly tests the PLAN's "biggest open risk" (reactive balance → voltage rise per
+  trip). **Proposed: run it on every candidate state before any PSCAD build.**
+
+### 6. Experiments (all full continuations from cold, 4–9 min each, ≤ 6 in parallel; logs `iberia_eq/cal_s28/<tag>.txt`)
+Common: `--frsc 1500 --kres 0.2 --route 1.0 --flowcal --mincirc 2` unless stated.
+
+| tag | change | max V err | borders PT/FR/MA | unit Q N/SW/E | DSO Q | 4a+4b ΔV | Granada kV/Gvar | N→PT |
+|---|---|---|---|---|---|---|---|---|
+| s35b (S27) | — vkg 20 | 0.8 kV | 2103 / 1287 / 753 | −390/−137/−581 | −6.8 Gvar | +12.8 | 108 | −1,005 |
+| v1phys | CHG=phys | 6.4 | 2134 / 1386 / 832 | −322/−116/−436 | −6.7 | +13.8 | 125 | — |
+| v2phys | CORR=v2 CHG=phys | 4.6 | 2154 / 1410 / 827 | −423/−132/−592 | −4.6 | +12.3 | 104 | −914 |
+| X1 | v2phys + PTSPLIT | 3.0 | 2349 / 1388 / 808 | −375/−121/−547 | −4.0 | +11.6 | 87 | −379 |
+| X2 | X1, vkg 10 | 3.2 | 2357 / 1358 / 802 | −417/−167/−614 | −3.7 | +8.9 | 48 | −374 |
+| X4 | X1, mincirc 3 | 4.5 | 2420 / 1475 / 843 | −369/−119/−452 | −4.0 | +10.9 | 85 | −621 |
+| X5 | v2phys, vkg 10, SH_ARA_NW 0 | 3.4 | 2118 / 1298 / 760 | −402/−149/−602 | −3.9 | +8.75 | 50 | −718 |
+| **X6** | **v2phys, vkg 5, SH_ARA_NW 0** | **3.5** | **2110 / 1320 / 756** | **−400/−150/−600** | **−3.7** | **+7.1** | **28 ✓** | −720 |
+| X7 | X5 with SH_ARA_NW 300 | 3.6 | 2115 / 1410 / 810 | −406/−183/−674 | −4.3 | +9.4 | 56 | −897 |
+
+(X3, q0 0.35, did not finish; v2hub was stopped. Both are not needed: v1phys vs v2phys isolates the corridor effect.)
+
+**Findings:**
+1. **The v2 corridors are what cut the DSO injection** (−6.8 → −3.7…−4.6 Gvar). Charging conservation alone does
+   not (v1phys −6.7). The "8 Gvar of distribution shunts" risk of the v2 plan was largely missing 400 kV line charging.
+2. **`vkg` sets the trip sensitivity:** 20 → 10 → 5 % gives 4a+4b +12.3 → +8.75 → +7.1 kV and Granada
+   104 → 50 → 28 kV/Gvar. BAD/WAN fault levels stay within 2 %. North/centre hub fault levels get worse
+   (MAD +193 %, NW +226 %, already an accepted zonal limitation, S27 §31).
+3. **The Portugal loop is not fixed by the knobs tried.**
+   - The PT north-load share knob (`PTSPLIT=1`, target N→PT +200) ran to its bound of 0.70.
+   - Removing the ARA→NW 600 MW shift made it worse.
+   - The LS also drives the Portuguese unit to 0.91–0.93 pu at its terminal to meet the PT tie Q (+100), so PT P and
+     Q are entangled. Open.
+4. **The ARA→NW 600 MW demand shift [liberty] is no longer needed:** with CAT–VAL present, VAL→ARA falls
+   1,674 → 1,183 MW with or without it. X5 and X6 drop it, which is one liberty fewer.
+5. **Fig 2-4 checks still high:** BAD→CAC 2,116 (1,850), GRA→SE 1,476 (900), CAC→CYL 1,687 (1,200).
+
+**Candidate state: X6** → `iberia_eq/pp_v2_state_s28_X6.pkl` (output `cal_ls_s28_X6.txt`, trip gate
+`trip_s28_X6.txt`; s35b's gate is in `trip_s35b.txt`). Resume (4 s):
+`CORR=v2 CHG=phys SH_ARA_NW=0 STATE=pp_v2_state_s28_X6.pkl RESUME=1 python iberia_eq/pp_v2.py --frsc 1500 --kres 0.2 --route 1.0 --flowcal --mincirc 2 --vkg 5`.
+It is **not** adopted as the default: that is a decision for the user and the S27 agent.
+
+### 7. What `vkg` 5 % means for the PSCAD build (design note)
+- A 5 % step-up is not physical. What the static fit needs is the stiffness of AVRs that regulate the **400 kV side**.
+- Spanish units under P.O. 7.4 follow voltage set-points at the transmission node, and line-drop compensation is
+  standard practice.
+- **Proposal for v2:** keep a realistic step-up (12–15 %) for the dynamics and the fault level, and give `SyncUnit`'s
+  AVR **reactive line-drop compensation** (Xc ≈ −(vk − 5 %)). Then the static ΔV per trip of X6 is reproduced
+  without a non-physical transformer.
+- This needs one AVR input change in `SyncUnit`, benched on the 2-bus case first.
+
+### 8. Next, in order
+1. Decide X6 vs s35b as the base (user + S27 agent).
+2. Add the trip gate as a soft residual in `least_squares` (target +4.9 kV for 4a + 4b; 2 extra solves per evaluation,
+   ≈ 20 ms), with `vkg` as a knob. That replaces the hand sweep.
+3. Portugal loop: try the PT RES north/south split (60/40 [inf]) and an explicit PT-N/PT-S hub position as knobs.
+   Then the target N→PT +200.
+4. Cite REE's 400 kV circuit-km in SOURCES §9 and add it as a check.
+5. Optional, larger: build the full OSM 400 kV network (≈ 430 lines) in pandapower and derive the 22-bus equivalent
+   with `pandapower.grid_equivalents` (REI / Ward). That gives corridor impedances from the meshed network instead of
+   centroid distance × route factor, and may ease the fault-level/transfer tension (S27 §32).
+
+### 9. The optimiser: what it is, what it cost, and what changed (user question)
+**What it is.**
+- `scipy.optimize.least_squares` (trust-region reflective, bounded) on a vector of weighted residuals.
+- Weights: 1 kV of voltage error ≈ 50 MW ≈ 50 Mvar.
+- Knobs: 15 DSO shunts, 8 unit set-points, Spanish and Portuguese demand scale, France / Morocco voltage, the Madrid
+  shift, Morocco P (29 in all).
+- The Jacobian is finite differences: one residual per knob.
+- It runs inside a 21-step continuation: OSM → hub lengths, then 15 % → `vkg`.
+
+**Measured cost (profile).**
+- One pandapower load flow = 5–15 ms on this 32-bus network, of which **> 90 % is DataFrame ↔ matrix glue**
+  (`_pd2ppc` + result extraction); the Newton itself is < 1 ms.
+- The exponential loads add an outer fixed-point loop: ≈ 2.8 load flows per residual.
+- scipy's `nfev` excludes the finite-difference calls, so real cost ≈ nfev + 29 × njev. The S27 "total evaluations
+  1000–3653" was under-reported about 30×.
+- A cold continuation took 4–9 min.
+
+**Change 1: own Newton–Raphson on pandapower's matrices (`iberia_eq/fastpf.py`, `FAST=1`).**
+- Uses pandapower's Ybus / Yf / Yt, rebuilt only when the topology changes.
+- DSO shunts and `vkg` are updated directly in the Ybus.
+- The exponential loads are inside the Newton mismatch and Jacobian, so there is no outer loop and no tolerance noise.
+- Damped steps, with a fallback to pandapower if Newton fails.
+- **Agreement with `pp.runpp`: 2e-16 pu in V, 2e-7 Mvar in unit Q** (checked automatically at the end of every run).
+- **0.5 ms per solve.** A cold continuation now takes **40–60 s**; a resume takes 4 s.
+
+**Change 2: the objective was under-determined (`SVD=1` prints the Jacobian SVD).**
+- At X6 there are 27 independent target rows for 29 knobs, condition number 1.7e4, and two exact null directions
+  (s ≈ 2e-4):
+  - DSO GRA / NW / CYL ↔ unit G6's set-point;
+  - DSO PT-N ↔ unit G8's set-point.
+- The S27 optimiser stopped early (noisy FD Jacobian plus `max_nfev`), so it looked stable.
+- The exact solver then walked along those directions: GRA −5.1 Gvar, CAC +4.0 Gvar, PT-N at the −6 Gvar bound.
+- **`OBJ=2` adds physics terms** [inf]:
+  - each unit's share of its area's Q, by |P|, as S27's one-knob loop did (/100 Mvar);
+  - the Spanish TSO–DSO net Q (`QEX`, default −2.5 Gvar ± 0.5, Fig 4-84 scaled);
+  - each zone's exchange ∝ its demand (/300 Mvar);
+  - Portuguese unit Q ≈ 0 (/300).
+- Result: 53 rows, **condition number 15**, and the shunts back to physical values.
+
+**Change 3: parallelism.**
+- At 0.5 ms per solve, a parallel Jacobian would lose to process start-up, so it is not used.
+- What does pay is **independent cold fits in parallel** for structural choices: `iberia_eq/scan.sh`, 8 at a time on 8 cores,
+  **8 fits in 70 s wall**.
+- Extra agents or sessions add nothing here: the work is CPU-bound runs plus reading tables.
+
+### 10. Trip gate inside the fit (`TRIPCAL=1`)
+- Two residuals:
+  - 4a + 4b at BAD-TS → 4.9 kV (/1 kV);
+  - Granada at GRA → 1.44 kV (= 30 kV/Gvar on 48 Mvar, /0.5 kV).
+- Knob: the Spanish units' connection X (G1–G7 only, bounds 3–25 %), active in the final fit and in resume.
+- **First version moved G8 and the pump trafos too.** It fought the Portuguese Q terms and the knob went to 7.7 %, so
+  it is now Spain only.
+- **Result:**
+  - vkg → **3.4 %**, Granada **19 kV/Gvar** (band 18–42, at its lower edge), 4a + 4b **+7.1 kV** (target 4.9).
+  - Lowering vkg further would put Granada below its band, so the remaining 4a + 4b excess is **local to BAD-TS**.
+- **Caveat:** the target assumes the tripped plants absorbed 0.135 × P (98 Mvar). With Q ≈ 0 at the trip, the model's
+  P-only part (≈ +3.5…5 kV, §5) already matches the report. The plants' Q at the trip is not given (C8).
+- Open: get the plants' Q from [FR] / [CA] before tightening this.
+
+### 11. The Portugal loop — found and fixed by scan
+- **Mechanism:** Spanish SW → Portugal → PT-N hub → Spanish North (CYL, NW). Portugal acts as a short-cut parallel to
+  Spain's internal SW → N corridors.
+- **Scan** (`OBJ=2`, vkg 5, cold, North → PT, Fig 2-41 target +200):
+
+  | change | North→PT | cost |
+  |---|---|---|
+  | baseline | −750 | 98.6 |
+  | PT RES south 0.4 / 0.8 | −972 / −524 | 105 / 93 |
+  | PT internal 150 / 400 km | −954 / −539 | 103 / 96 |
+  | all PT ties ×0.6 / ×1.5 / ×2.0 | −1,459 / −307 / −52 | 112 / 90 / 87 |
+  | PT load north share as knob | −317 (at its bound) | 165 |
+  | **SW ties only (`PT_TIE_SW`) ×2.0 / ×2.5 / ×2.6 / ×3.0** | −59 / +164 / **+200** / +505 | 90 / 88 / **87.8** / 87 |
+
+- **Adopted: `PT_TIE_SW=2.6`** [inf, liberty]. It is one knob, and the cost improves.
+- **Justification:** the CAC / BAD / WAN → PT-N / PT-S equivalents must include the Portuguese internal network
+  between the border and the Porto / Lisbon hubs. Their hub-to-hub length (230–339 km) treated that path as one
+  400 kV line.
+- The PT RES split stays at 0.6 south: SOURCES has no basis for another value.
+- **Ties after the fix:** WAN +440, BAD +735, CAC +727, CYL +276, NW −76.
+  - Fig 2-4: 772 / ≈ 131 / 1,124 / 652 / +203.
+  - Directions are now right except NW. BAD vs CAC is still off.
+
+### 12. Open-lines check (Table 2-12, [FR] p.114–115)
+- Still open at 12:32 (end time later on 28/04):
+  - Pierola–Sentmenat 2 (CAT);
+  - Cofrentes–La Muela 1 (VAL);
+  - Fuendetodos–Mezquita (ARA);
+  - Mezquita–Morella 1 (ARA–VAL).
+- Also, from [FR] p.~123, 4 + 6 lines were reconnected between 12:00 and 12:25.
+- These lie exactly where the fit injects most DSO Q (CAT −1.5, VAL −0.9, ARA −0.7 Gvar), and Mezquita–Morella weakens
+  the over-loaded ARA–VAL path (1,216 vs a few hundred MW).
+- Their charging (≈ 110 Mvar) is small. **To do:** remove them from `corridors_v2` / `zone_km_v2` and re-fit.
+
+### 13. Candidate state R2, and what is still open
+**R2** → `iberia_eq/pp_v2_state_s28_R2.pkl` (log `cal_ls_s28_R2.txt`, gate `trip_s28_R2.txt`). Resume in 4 s:
+`FAST=1 OBJ=2 TRIPCAL=1 PT_TIE_SW=2.6 CORR=v2 CHG=phys SH_ARA_NW=0 STATE=pp_v2_state_s28_R2.pkl RESUME=1 python iberia_eq/pp_v2.py --frsc 1500 --kres 0.2 --route 1.0 --flowcal --mincirc 2 --vkg 5`
+
+| check | R2 | target |
+|---|---|---|
+| voltages | max err 3.35 kV | Fig 2-4 |
+| borders PT / FR / MA | 2,102 / 1,343 / 749 | 2,100 / 1,360 / 750 |
+| unit Q N / SW / E | −435 / −157 / −620 | −400 / −150 / −600 |
+| North → PT | **+200** | +200 |
+| CAC → MAD | 3,302 | 3,227 |
+| Granada / 4a+4b | 19 kV/Gvar ✓ / +7.1 kV | 18–42 / +4.9 |
+| tie Q FR / MA / PT | +339 / −307 / +232 | +300 / −360 / +100 |
+
+**Still open:**
+1. **Spanish TSO–DSO net Q is +1.2 Gvar absorbing vs Fig 4-84's −1.0…−1.8 Gvar (injecting).** The target is in
+   `OBJ=2` but cannot be met together with the unit-Q and voltage targets. With the right 400 kV charging (§3), the
+   transmission side has ≈ 3–4 Gvar too little absorption. s35b met it only because v1 lacked 1.7 Gvar of charging.
+   Candidates: §12's open lines (small); wind Q/P 0.2 in the north instead of 0.135 ([NX]: PF 0.98 inductive);
+   Fig 4-84's sign convention (re-read).
+2. **The Portuguese unit absorbs 1.34 Gvar** (prior 0), and PT tie Q is +232 vs +100. Portugal lacks a reactive sink:
+   REN Table 2-3 / Table 2-8 status not extracted.
+3. **Fig 2-4 checks:** CAC→CYL 1,915 (1,200), GRA→SE 1,432 (900), BAD→CAC 2,049 (1,850).
+4. North / centre fault levels (zonal limit, unchanged).
+5. R2 vs s35b as the base: user + S27 agent.
+
+### 14. New flags in one place (all off by default; S27 commands unchanged)
+| flag | effect |
+|---|---|
+| `CORR=v2` | corridors_v2.csv / zone_km_v2.csv |
+| `CHG=phys` | each corridor keeps its OSM circuit-km of charging |
+| `FAST=1` | fastpf.py solver, cross-checked at the end |
+| `OBJ=2` | identifiability terms; `QEX` sets the TSO–DSO target |
+| `TRIPCAL=1` | trip residuals + Spanish vkg knob; `TRIP_E4` / `TRIP_E3` set the targets |
+| `SVD=1` | Jacobian SVD at the final state |
+| `PT_TIE_SW` | SW → PT tie scale |
+| `PT_TIE_K` | all PT ties |
+| `PT_INT_KM` / `PT_INT_NC` | the PT internal corridor |
+| `PT_RES_S` | PT RES south share |
+| `PTSPLIT=1` | PT load north share as a knob |
+| `STATE` | state file |
+| `DUMP_NET` | pickle the solved net |
+| `TRIPCHK=0` | skip the end-of-run trip print |
+
+### 15. Repository (2026-11-25, agent: claude-mac)
+- Everything above is on branch **`agent/claude-mac/pp-v2-fastpf`**, not on `main`. `iberia_eq/pp_v2.py` is claimed by
+  claude-main (STATUS claims table), so the merge is for claude-main / the owner to review.
+- **New files:**
+  - `fastpf.py`, `build_corridors_v2.py`, `corridors_v2.csv`, `zone_km_v2.csv`;
+  - `pp_v2_trip.py`, `pp_v2_trip_decomp.py`, `pp_v2_areas.py`, `scan.sh`;
+  - states `pp_v2_state_s28_{X5,X6,R2}.pkl`;
+  - logs `cal_ls_s28_{X6,R2}.txt`, `trip_*.txt`, `cal_s28/*.txt` (one per experiment tag of §6, §9–§11).
+- **`pp_v2.py` with no new flags is unchanged in behaviour**, except for the resume fix of §1. Checked on this branch:
+  S27's s35b resume reproduces (max V err 0.77 kV, borders 2,103 / 753 / 1,287).
+- **Python environment used:** pandapower 3.5.6, numba, scipy, Python 3.12 (macOS venv). `scan.sh` needs zsh; on
+  Windows, run the same commands from PowerShell.
+
 ## Session 27 — 2026-11-23 — Claude (with the user): review of executor Session 26, corrections, WP9-case settle
 
 **Scope:** the user asked for a check of the executor's Session 26 and to continue from there. Each correction
