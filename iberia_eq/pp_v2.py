@@ -98,7 +98,8 @@ SHIFT = [("SE", "CAT", float(os.environ.get("SH_SE_CAT", 800))), ("ARA", "NW", f
 for zf, zt, mw in SHIFT:
     mw = min(mw, DEM[zf] - 100); DEM[zf] -= mw; DEM[zt] += mw
 # ---- externals ----
-PT_LOAD, PT_RES = 5600, {"PT-S": 0.6 * (1604 + 2104 + 761), "PT-N": 0.4 * (1604 + 2104 + 761)}  # Fig 2-16 / 2-19 [read]; split [inf]
+PT_RES_S = float(os.environ.get("PT_RES_S", 0.6))           # S28 Portugal scan knobs (defaults = S27 values)
+PT_LOAD, PT_RES = 5600, {"PT-S": PT_RES_S * (1604 + 2104 + 761), "PT-N": (1 - PT_RES_S) * (1604 + 2104 + 761)}  # Fig 2-16 / 2-19 [read]; split [inf]
 MA_LOAD, MA_EXPORT_FROM_ES = 5000, 750       # [inf] / Fig 2-22
 FR_T = float(os.environ.get("FR_T", 1360))   # ES->FR incl. HVDC: Fig 2-41 exact 1,360 at 12:32; [CA] p.104 range 1,500 (12:32:00) -> 450 (12:32:57)
 HVDC_FR = 1000                                # [inf] schedule ES->FR on the HVDC; AC ties carry the rest
@@ -110,7 +111,11 @@ if os.environ.get("REAC_FIG42", "1") == "1": REACT["WAN"] = 400; REACT["SE"] = 1
 
 # ---- network ----
 R_KM, X_KM, C_NF_KM = 0.03, 0.253, 11.0      # [EXT-3]; r [inf]
-cor = list(csv.DictReader(open(os.path.join(HERE, "corridors.csv"), encoding="utf-8")))
+CORR = os.environ.get("CORR", "v1")                          # v2: corridors_v2.csv / zone_km_v2.csv (build_corridors_v2.py, RUNLOG S28)
+SFX = "_v2" if CORR == "v2" else ""
+CHG_PHYS = os.environ.get("CHG", "hub") == "phys"            # phys: each corridor's charging = its OSM circuit-km, not hub-to-hub length (S28)
+STATE = os.path.join(HERE, os.environ.get("STATE", "pp_v2_state.pkl"))
+cor = list(csv.DictReader(open(os.path.join(HERE, f"corridors{SFX}.csv"), encoding="utf-8")))
 PTMAP = {"NW": "PT-N", "CYL": "PT-N", "CAC": "PT-N", "BAD": "PT-S", "WAN": "PT-S"}
 pairs = {}
 for r in cor:
@@ -119,7 +124,10 @@ for r in cor:
         z = zb if za == "PT" else za; za, zb = z, PTMAP[z]
     k = tuple(sorted((za, zb))); km, nc = float(r["route_km"]), int(r["circuits"])
     p = pairs.setdefault(k, [0, 0.0]); p[0] += nc; p[1] += km * nc
-EXTRA = {("WAN", "MA-B"): (2, 30.0, "cable"), ("MA-B", "MA"): (2, 200.0, "ohl"), ("PT-N", "PT-S"): (3, 250.0, "ohl")}
+EXTRA = {("WAN", "MA-B"): (2, 30.0, "cable"), ("MA-B", "MA"): (2, 200.0, "ohl"),
+         ("PT-N", "PT-S"): (int(os.environ.get("PT_INT_NC", 3)), float(os.environ.get("PT_INT_KM", 250.0)), "ohl")}
+PT_TIE_K = float(os.environ.get("PT_TIE_K", 1.0))          # scale on the hub-to-hub length of the Spain-Portugal ties (S28 scan)
+PT_TIE_SW = float(os.environ.get("PT_TIE_SW", 1.0))        # extra scale on the ties from the Spanish SW area (CAC, BAD, WAN) [inf, S28]
 # [inf] Strait cables (2 x 30 km), then ~200 km of Moroccan 400 kV network to the Moroccan hub ("weak" link, [FR] p.~187);
 # Portuguese internal north-south corridor
 # Zonal equivalent: ties to Portugal need HUB-TO-HUB impedance, not the short border lines (5-47 km), otherwise the
@@ -137,27 +145,31 @@ def gc(p_, q_):
     return 2 * 6371 * math.asin(math.sqrt(math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2))
 HUB_ALL = os.environ.get("HUB_ALL", "1") == "1"            # pass 4: hub-to-hub for EVERY inter-zone corridor
 OSM_KM = {k: v[1] / v[0] for k, v in pairs.items()}
+PHYS_CKM = {k: v[1] for k, v in pairs.items()}             # physical circuit-km per corridor (OSM)
 print("corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):")
 for k in list(pairs):
     if any(z.startswith("PT") for z in k) or (HUB_ALL and all(z in CEN for z in k)):
         nc0 = pairs[k][0]; old_km = pairs[k][1] / nc0
         nc = max(nc0, a.mincirc)                            # [inf] equivalent circuits incl. parallel 220 kV paths / OSM gaps
-        pairs[k] = [nc, nc * a.route * gc(CEN[k[0]], CEN[k[1]])]
+        pairs[k] = [nc, nc * a.route * gc(CEN[k[0]], CEN[k[1]]) * (PT_TIE_K * (PT_TIE_SW if set(k) & {"CAC", "BAD", "WAN"} else 1.0) if any(z.startswith("PT") for z in k) else 1.0)]
         OSM_KM[k] = old_km
         print(f"   {k[0]:>4s}-{k[1]:<5s} x{nc0}->{nc}: {old_km:5.0f} -> {pairs[k][1] / nc:5.0f}")
-zkm = {r["zone"]: float(r["circuit_km_incl_half_ties"]) for r in csv.DictReader(open(os.path.join(HERE, "zone_km.csv"), encoding="utf-8"))}
+zkm = {r["zone"]: float(r["circuit_km_incl_half_ties"]) for r in csv.DictReader(open(os.path.join(HERE, f"zone_km{SFX}.csv"), encoding="utf-8"))}
 ties_ckm = {z: 0.0 for z in zkm}
 for (za, zb), (nc, ckm) in pairs.items():
     for z in (za, zb):
         zz = "PT" if z.startswith("PT") else z
-        if zz in ties_ckm: ties_ckm[zz] += ckm / 2
+        if zz in ties_ckm: ties_ckm[zz] += (PHYS_CKM[(za, zb)] if CHG_PHYS else ckm) / 2
 internal_ckm = {z: max(0.0, zkm[z] - ties_ckm.get(z, 0)) for z in zkm}
 
 net = pp.create_empty_network(f_hz=50, sn_mva=100)
 B = {b: pp.create_bus(net, vn_kv=400, name=b) for b in BUSES}
+CTOT = {}                                                    # line index -> total nF (CHG=phys keeps it through the continuation)
 for (za, zb), (nc, ckm) in pairs.items():
-    pp.create_line_from_parameters(net, B[za], B[zb], length_km=ckm / nc, r_ohm_per_km=R_KM, x_ohm_per_km=a.xk * X_KM,
-                                   c_nf_per_km=C_NF_KM, max_i_ka=2.0, parallel=nc, name=f"{za}-{zb}")
+    i_ = pp.create_line_from_parameters(net, B[za], B[zb], length_km=ckm / nc, r_ohm_per_km=R_KM, x_ohm_per_km=a.xk * X_KM,
+                                        c_nf_per_km=C_NF_KM * (PHYS_CKM[(za, zb)] / ckm if CHG_PHYS else 1.0), max_i_ka=2.0,
+                                        parallel=nc, name=f"{za}-{zb}")
+    if CHG_PHYS: CTOT[i_] = C_NF_KM * PHYS_CKM[(za, zb)]
 for (za, zb), (nc, km, kind) in EXTRA.items():
     c = 230.0 if kind == "cable" else C_NF_KM; x = 0.12 if kind == "cable" else a.xk * X_KM      # [inf] 400 kV cable
     pp.create_line_from_parameters(net, B[za], B[zb], length_km=km, r_ohm_per_km=0.02, x_ohm_per_km=x,
@@ -239,10 +251,43 @@ LIDX = np.array([L[z] for z in L]); LZB = np.array([B[z if z in B else "MA"] for
 LP0 = np.array([P0[z] for z in L]); LQ0 = np.array([Q0[z] for z in L]); LZ = list(L)
 
 
+CNT = {"runpp": 0, "resid": 0, "t_pf": 0.0}               # cost counters (S28 profiling)
+import time
+
+
+FAST = os.environ.get("FAST", "0") == "1"                 # fastpf.py: own Newton on pandapower's Ybus, exponential loads exact (S28)
+FP = None
+
+
 def solve(full=False):
     """One load flow + one exponential-load update (full=True: iterate the loads to convergence)."""
+    global FP
+    if FAST:
+        if FP is None:
+            from fastpf import FastPF
+            pp.runpp(net, init="results" if net.converged else "auto", max_iteration=50)
+            FP = FastPF(net, [CAL[z] for z in CAL], LIDX, a.alpha, a.beta)
+        sc_ = np.array([scale.get(z, 1) for z in LZ])
+        t_ = time.perf_counter(); CNT["runpp"] += 1
+        try:
+            it = FP.solve(sc_ * np.array([P0[z] for z in LZ]), sc_ * np.array([Q0[z] for z in LZ]))
+            CNT["t_pf"] += time.perf_counter() - t_
+            return it
+        except (RuntimeError, np.linalg.LinAlgError):              # fall back to pandapower + the fixed-point load loop
+            CNT["fallback"] = CNT.get("fallback", 0) + 1
+            for it in range(30):
+                pp.runpp(net, init="results" if net.converged else "auto", max_iteration=50)
+                v = net.res_bus.vm_pu.values[LZB]
+                np_, nq = sc_ * np.array([P0[z] for z in LZ]) * v ** a.alpha, sc_ * np.array([Q0[z] for z in LZ]) * v ** a.beta
+                dv = max(np.abs(np_ - net.load.loc[LIDX, "p_mw"].values).max(), np.abs(nq - net.load.loc[LIDX, "q_mvar"].values).max())
+                net.load.loc[LIDX, "p_mw"] = np_; net.load.loc[LIDX, "q_mvar"] = nq
+                if dv < 0.02: break
+            FP.V = net._ppc["internal"]["V"].copy()
+            return it + 1
     for it in range(30 if full else 1):
+        t_ = time.perf_counter(); CNT["runpp"] += 1
         pp.runpp(net, init="results" if net.converged else "auto", max_iteration=50)
+        CNT["t_pf"] += time.perf_counter() - t_
         v = net.res_bus.vm_pu.values[LZB]
         sc_ = np.array([scale.get(z, 1) for z in LZ]); p0 = np.array([P0[z] for z in LZ]); q0 = np.array([Q0[z] for z in LZ])
         np_, nq = sc_ * p0 * v ** a.alpha, sc_ * q0 * v ** a.beta
@@ -280,6 +325,7 @@ KNOB = {("CAC", "MAD"): ("dem", "WAN", "MAD"),      # more Madrid demand pulls t
         ("VAL", "ARA"): ("dem", "NW", "ARA"),       # flow too high -> Aragon demand moves to the NW (N area)
         ("CAC", "CYL"): ("res", "SCE", "CAC")}      # flow too high -> Caceres RES moves to SCE (SW area)
 RESI = {n.split()[-1]: i_ for i_, n in zip(net.sgen.index, net.sgen.name) if n.startswith("RES ")}
+RESTS_I = {n.split()[-1]: i_ for i_, n in zip(net.sgen.index, net.sgen.name) if n.startswith("RESTS ")}
 
 
 def calib(maxr):
@@ -347,10 +393,50 @@ KZ = list(CAL)                                              # DSO shunts (Mvar)
 KG = [n for n, _, _ in GEN]                                 # unit set-points (pu)
 
 
+OBJ2 = os.environ.get("OBJ", "1") == "2"                   # objective v2: identifiability terms (S28)
+QEX_T = float(os.environ.get("QEX", -2500))                 # Spanish TSO-DSO net Q, Mvar (+ absorbing): Fig 4-84 -1.0..-1.8 Gvar at the
+                                                            # 400 kV interface (8.7 of 24 GW), scaled -2.8..-5.0 [inf]; soft, +-500
+TRIPCAL = os.environ.get("TRIPCAL", "0") == "1"             # trip-sensitivity residuals + unit connection X as a knob (S28)
+KNOB_VKG = False                                            # switched on after the continuation (final fit and resume only)
+VKG = [a.vkg]
+TRIP_T = {"E4": float(os.environ.get("TRIP_E4", 4.9)), "E3": float(os.environ.get("TRIP_E3", 1.44))}   # kV: Fig 3-7a; 48 Mvar x 30 kV/Gvar
+
+
+def XNAMES():
+    return ["mor"] + (["pt"] if PTSPLIT else []) + (["vkg"] if KNOB_VKG else [])
+
+
+def set_vkg(v):
+    """Connection reactance of the SPANISH units G1-G7, %: pandapower table + fast-solver Ybus (no rebuild needed).
+    Portugal's unit and the pump stations keep the continuation value (S28: the knob on G8 fought the PT reactive terms)."""
+    if abs(v - VKG[0]) < 1e-12: return
+    TVK = [i_ for i_ in TV if net.trafo.at[i_, "name"].split()[1] in ("G1", "G2", "G3", "G4", "G5", "G6", "G7")]
+    if FP is not None: FP.set_trafo_vk(TVK, v)
+    for i_ in TVK: net.trafo.at[i_, "vk_percent"] = v
+    VKG[0] = v
+
+
+def trip_dv():
+    """Static dV (kV) at GRA for E3 (Granada 355 MW) and at BAD-TS for 4a+4b (727 MW) alone; state restored after."""
+    ig, ib = RESI["GRA"], RESTS_I["BAD"]; keep = net.sgen.loc[[ig, ib], ["p_mw", "q_mvar"]].values.copy()
+    Vk = FP.V.copy() if FP is not None else None; v0 = net.res_bus.vm_pu.values.copy()
+    try:
+        net.sgen.at[ig, "p_mw"] -= 355; net.sgen.at[ig, "q_mvar"] -= a.kpf * 355; solve(full=True); v3 = net.res_bus.vm_pu.values.copy()
+        net.sgen.at[ib, "p_mw"] -= 727; net.sgen.at[ib, "q_mvar"] -= a.kpf * 727; solve(full=True); v4 = net.res_bus.vm_pu.values.copy()
+    finally:
+        net.sgen.loc[[ig, ib], ["p_mw", "q_mvar"]] = keep
+        if Vk is not None: FP.V = Vk
+        solve(full=True)
+    return 400 * (v3[B["GRA"]] - v0[B["GRA"]]), 400 * (v4[B["BAD-TS"]] - v3[B["BAD-TS"]])
+
+
+PTSPLIT = os.environ.get("PTSPLIT", "0") == "1"             # knob: Portuguese load north share; target North -> PT 200 MW (S28)
+
+
 def getx():
     return np.concatenate([[net.shunt.at[CAL[z], "q_mvar"] / 1000 for z in KZ], [net.gen.at[GI[n], "vm_pu"] for n in KG],
                            [scale.get("GRA", 1), scale.get("PT-N", 1), net.ext_grid.at[0, "vm_pu"], net.gen.at[iMA, "vm_pu"],
-                            (P0["MAD"] - P0_MAD0) / 1000, net.gen.at[iMA, "p_mw"] / 1000]])
+                            (P0["MAD"] - P0_MAD0) / 1000, net.gen.at[iMA, "p_mw"] / 1000]] + ([[P0["PT-N"] / PT_LOAD]] if PTSPLIT else []) + ([[VKG[0] / 100]] if KNOB_VKG else []))
 
 
 def setx(x):
@@ -363,9 +449,14 @@ def setx(x):
     d = 1000 * x[k + 4]; P0["MAD"] = P0_MAD0 + d; P0["WAN"] = P0_WAN0 - d        # Madrid corridor knob (SW area)
     Q0["MAD"] = a.q0 * P0["MAD"]; Q0["WAN"] = a.q0 * P0["WAN"]
     if len(x) > k + 5: net.gen.at[iMA, "p_mw"] = 1000 * x[k + 5]                    # Morocco unit P -> ES->MA export
+    if PTSPLIT and len(x) > k + 6:                                                   # Portuguese load north share (S28)
+        P0["PT-N"] = PT_LOAD * x[k + 6]; P0["PT-S"] = PT_LOAD * (1 - x[k + 6])
+        Q0["PT-N"] = a.q0 * P0["PT-N"]; Q0["PT-S"] = a.q0 * P0["PT-S"]
+    if KNOB_VKG: set_vkg(100 * x[-1])
 
 
 def resid(x):
+    CNT["resid"] += 1
     setx(x)
     try:
         solve(full=True)
@@ -381,24 +472,41 @@ def resid(x):
     r += [(-(qg["G1 Almaraz II"] + qg["G6 SW CCGT"] + qg["G7 E CCGT"]) - 74) / 50]   # Fig 4-2: PO 7.4 units, South Spain, 74 Mvar absorbed
     r += [(qfr - QTIE["FR"]) / 50, (qma - QTIE["MA"]) / 50, (qpt - 100) / 50]          # ES->PT tie Q now a target (Fig 2-93)
     if a.flowcal: r += [(flow("CAC", {"MAD"}) - FLOWT[("CAC", "MAD")]) / 50]
+    if PTSPLIT: r += [(flow("NW", {"PT-N"}) + flow("CYL", {"PT-N"}) - 200) / 50]       # Fig 2-41 exact: North -> Portugal 200 MW
+    if OBJ2:                                                 # identifiability terms (S28): pin the null directions found by SVD=1
+        for A, t in QAREA.items():                           # each unit's share of its area's Q, by |P| (as the S27 one-knob loop)
+            nm_ = [n for n, ar in GEN_AREA.items() if ar == A]; tp = sum(abs(net.gen.at[GI[n], "p_mw"]) for n in nm_)
+            r += [(qg[n] - t * abs(net.gen.at[GI[n], "p_mw"]) / tp) / 100 for n in nm_]
+        vv = net.res_bus.vm_pu.values
+        qex = {z: net.load.at[L[z], "q_mvar"] + net.shunt.at[CAL[z], "q_mvar"] * vv[B[z]] ** 2 for z in CAL}   # load + DSO shunt, Mvar
+        pz = {z: net.load.at[L[z], "p_mw"] for z in CAL}; pes = sum(pz[z] for z in ES)
+        r += [(sum(qex[z] for z in ES) - QEX_T) / 500]                                          # Fig 4-84 scaled [inf]
+        r += [(qex[z] - pz[z] * QEX_T / pes) / 300 for z in CAL]                                 # exchange ~ demand, per zone [inf]
+        r += [qg["G8 PT conventional"] / 300]                                                    # Portuguese unit: no data -> near 0 [inf]
+    if TRIPCAL:
+        if KNOB_VKG: d3, d4 = trip_dv(); r += [(d4 - TRIP_T["E4"]) / 1.0, (d3 - TRIP_T["E3"]) / 0.5]   # kV; Granada band 0.86-2.0 kV
+        else: r += [0.0, 0.0]
     r += list(0.02 * (x[:len(KZ)]))                                                          # mild preference for small shunts
     return np.array(r)
 
 
 P0_MAD0, P0_WAN0 = P0["MAD"], P0["WAN"]
-NRES = len(VT) + len(QAREA) + 8 + (1 if a.flowcal else 0) + len(KZ)
+NRES = len(VT) + len(QAREA) + 8 + (1 if a.flowcal else 0) + len(KZ) + (1 if PTSPLIT else 0) + (2 if TRIPCAL else 0) + ((len(GEN_AREA) + 1 + len(CAL) + 1) if OBJ2 else 0)
 
 
 def calib_ls(tag=""):
     x0 = getx()
-    lo = np.concatenate([np.full(len(KZ), -6.0), np.full(len(KG), 0.85), [0.7, 0.5, 0.9, 0.85, -1.5, 3.0]])
-    hi = np.concatenate([np.full(len(KZ), 6.0), np.full(len(KG), 1.15), [1.3, 1.5, 1.1, 1.15, 1.5, 6.0]])
+    lo = np.concatenate([np.full(len(KZ), -6.0), np.full(len(KG), 0.85), [0.7, 0.5, 0.9, 0.85, -1.5, 3.0]] + ([[0.45]] if PTSPLIT else []) + ([[0.03]] if KNOB_VKG else []))
+    hi = np.concatenate([np.full(len(KZ), 6.0), np.full(len(KG), 1.15), [1.3, 1.5, 1.1, 1.15, 1.5, 6.0]] + ([[0.70]] if PTSPLIT else []) + ([[0.25]] if KNOB_VKG else []))
     x0 = np.clip(x0, lo + 1e-6, hi - 1e-6)
+    c0 = dict(CNT); t0 = time.perf_counter()
     sol = least_squares(resid, x0, bounds=(lo, hi), x_scale="jac", diff_step=float(os.environ.get("DSTEP", 1e-3)), max_nfev=400)
     setx(sol.x); solve(full=True)
     r = resid(sol.x)
     print(f"  {tag} least_squares: nfev {sol.nfev}, max |V err| {np.abs(r[:len(VT)]).max():.2f} kV, "
-          f"max other err {np.abs(r[len(VT):len(VT) + len(QAREA) + 9]).max() * 50:.0f} (MW/Mvar)", flush=True)
+          f"max other err {np.abs(r[len(VT):len(VT) + len(QAREA) + 9]).max() * 50:.0f} (MW/Mvar) | njev {sol.njev}, "
+          f"resid calls {CNT['resid'] - c0['resid']}, load flows {CNT['runpp'] - c0['runpp']} "
+          f"({CNT['t_pf'] - c0['t_pf']:.1f} s of {time.perf_counter() - t0:.1f} s wall), cost {sol.cost:.2f}", flush=True)
     return sol.nfev
 
 
@@ -406,19 +514,25 @@ def calib_ls(tag=""):
 # fault-level settings (--xk, --vkg), re-calibrating at each step from the previous solution (RUNLOG S27 sec 31)
 LX = net.line.x_ohm_per_km.copy(); XK1 = {i_: (1.0 if n == "WAN-MA-B" else a.xk) for i_, n in zip(net.line.index, net.line.name)}   # the cable is not scaled
 TV = {i_: net.trafo.at[i_, "vk_percent"] for i_ in net.trafo.index if net.trafo.at[i_, "name"].startswith("T ") and net.trafo.at[i_, "vk_percent"] == a.vkg}
-RESUME = os.environ.get("RESUME") and os.path.exists(os.path.join(HERE, "pp_v2_state.pkl"))
+RESUME = os.environ.get("RESUME") and os.path.exists(STATE)
 if RESUME and not a.quick:                                # start from the saved solved state (full lengths, full unit-X)
-    import pickle; st = pickle.load(open(os.path.join(HERE, "pp_v2_state.pkl"), "rb"))
+    import pickle; st = pickle.load(open(STATE, "rb"))
     P0.update(st["P0"]); Q0.update(st["Q0"]); x_ = st["x"]
-    d_ = 1000 * x_[-1]; P0_MAD0, P0_WAN0 = P0["MAD"] - d_, P0["WAN"] + d_      # saved P0 already holds the Madrid shift
-    if len(x_) == len(getx()) - 1: x_ = np.append(x_, net.gen.at[iMA, "p_mw"] / 1000)   # state saved before the Morocco knob
+    d_ = 1000 * x_[len(KZ) + len(KG) + 4]                                      # the Madrid knob (NOT x[-1]: that is the Morocco P knob)
+    P0_MAD0, P0_WAN0 = P0["MAD"] - d_, P0["WAN"] + d_                          # saved P0 already holds the Madrid shift
+    NB_ = len(KZ) + len(KG) + 5                                                    # knobs up to the Madrid knob
+    tail = dict(zip(st.get("xnames", ["mor", "pt"][:len(x_) - NB_]), x_[NB_:]))       # older states: Morocco P, then PT share
+    if "vkg" in tail or st.get("vkg"): set_vkg(100 * tail.get("vkg", st.get("vkg", a.vkg) / 100))
+    if TRIPCAL: KNOB_VKG = True
+    x_ = np.concatenate([x_[:NB_], [tail.get("mor", net.gen.at[iMA, "p_mw"] / 1000)]] + ([[tail.get("pt", 0.5)]] if PTSPLIT else [])
+                        + ([[VKG[0] / 100]] if KNOB_VKG else []))
     setx(x_)
     import pandas as pd                                     # warm start from the saved solved voltages
     net.res_bus = pd.DataFrame({"vm_pu": st["vm"], "va_degree": st["va"], "p_mw": 0.0, "q_mvar": 0.0}, index=net.bus.index)
     net.converged = True
     solve(full=True); print("resumed from pp_v2_state.pkl", flush=True)
     NR += calib_ls("resume-final")
-    import pickle; pickle.dump({"x": getx(), "P0": P0, "Q0": Q0, "vm": net.res_bus.vm_pu.values, "va": net.res_bus.va_degree.values}, open(os.path.join(HERE, "pp_v2_state.pkl"), "wb"))
+    import pickle; pickle.dump({"x": getx(), "xnames": XNAMES(), "vkg": VKG[0], "P0": P0, "Q0": Q0, "vm": net.res_bus.vm_pu.values, "va": net.res_bus.va_degree.values}, open(STATE, "wb"))
 elif not a.quick:
     HUB_KM = {i_: net.line.at[i_, "length_km"] for i_ in net.line.index}
     OSMI = {i_: OSM_KM.get(tuple(net.line.at[i_, "name"].split("-", 1)) if net.line.at[i_, "name"].count("-") == 1 else None, HUB_KM[i_])
@@ -430,7 +544,10 @@ elif not a.quick:
         for i_ in net.line.index:
             net.line.at[i_, "length_km"] = OSMI[i_] + (HUB_KM[i_] - OSMI[i_]) * fl
             k_ = XK1[i_]; net.line.at[i_, "x_ohm_per_km"] = LX[i_] / k_ * (1 + (k_ - 1) * fv)
+            if i_ in CTOT: net.line.at[i_, "c_nf_per_km"] = CTOT[i_] / (net.line.at[i_, "length_km"] * net.line.at[i_, "parallel"])
         for i_ in TV: net.trafo.at[i_, "vk_percent"] = 15 + (a.vkg - 15) * fv
+        VKG[0] = 15 + (a.vkg - 15) * fv
+        if FP is not None: FP.rebuild()
     steps = [(0.0, 0.0)] + [(round(f, 2), 0.0) for f in np.arange(0.1, 1.0001, 0.1)] + [(1.0, round(f, 2)) for f in np.arange(0.1, 1.0001, 0.1)]
     last = None
     for fl, fv in steps:
@@ -448,9 +565,29 @@ elif not a.quick:
             top = net.res_line.loading_percent.sort_values(ascending=False).head(6).index
             for i_ in top: print(f"     {net.line.at[i_, 'name']:12s} x{int(net.line.at[i_, 'parallel'])} {net.line.at[i_, 'length_km']:.0f} km  P {net.res_line.at[i_, 'p_from_mw']:+7.0f} MW  {net.res_line.at[i_, 'loading_percent']:.0f} %")
             raise SystemExit(1)
+    if TRIPCAL: KNOB_VKG = True                              # trip gate + vkg knob in the final fit only
     NR += calib_ls("final"); print(f"  final calibration: total evaluations {NR}", flush=True)
-    import pickle; pickle.dump({"x": getx(), "P0": P0, "Q0": Q0, "vm": net.res_bus.vm_pu.values, "va": net.res_bus.va_degree.values}, open(os.path.join(HERE, "pp_v2_state.pkl"), "wb"))
+    import pickle; pickle.dump({"x": getx(), "xnames": XNAMES(), "vkg": VKG[0], "P0": P0, "Q0": Q0, "vm": net.res_bus.vm_pu.values, "va": net.res_bus.va_degree.values}, open(STATE, "wb"))
 outer = NR
+if os.environ.get("SVD") == "1":                            # identifiability: SVD of the residual Jacobian at the final state (S28)
+    x_ = getx(); r_ = resid(x_); h_ = 1e-4; Jm = np.zeros((len(r_), len(x_)))
+    for j_ in range(len(x_)):
+        xp = x_.copy(); xp[j_] += h_; Jm[:, j_] = (resid(xp) - r_) / h_
+    resid(x_); Js = Jm[:-len(KZ)]   # without the shunt regulariser rows
+    KN = [f"dso {z}" for z in KZ] + [f"vm {n.split()[0]}" for n in KG] + ["dem ES", "dem PT", "V FR", "V MA", "MAD shift", "P MA"] + XNAMES()[1:]
+    cs = np.linalg.norm(Js, axis=0); U_, sv, Vt = np.linalg.svd(Js / np.where(cs > 0, cs, 1), full_matrices=False)
+    print(f"Jacobian (targets only, columns normalised): {Js.shape}, cond {sv[0] / sv[-1]:.1e}; smallest singular values:")
+    for k_ in range(1, 6):
+        v_ = Vt[-k_]; top = np.argsort(-np.abs(v_))[:4]
+        print(f"   s = {sv[-k_]:.2e}: " + "  ".join(f"{v_[t]:+.2f} {KN[t]}" for t in top))
+if FAST and FP is not None:                                 # final state through pandapower itself (all res_* tables), cross-checked
+    vf = net.res_bus.vm_pu.values.copy(); qf = net.res_gen.q_mvar.values.copy(); FAST = False
+    pp.runpp(net, init="results")
+    print(f"fastpf vs pandapower at the final state: max dV {np.abs(vf - net.res_bus.vm_pu.values).max():.1e} pu, "
+          f"max d gen Q {np.abs(qf - net.res_gen.q_mvar.values).max():.1e} Mvar; total load flows {CNT['runpp']} in {CNT['t_pf']:.1f} s, fallbacks {CNT.get('fallback', 0)}")
+if TRIPCAL or os.environ.get("TRIPCHK", "1") == "1":
+    d3, d4 = trip_dv(); print(f"trip gate: 4a+4b at BAD-TS {d4:+.2f} kV (target {TRIP_T['E4']}), Granada at GRA {d3:+.2f} kV "
+                              f"= {d3 / (-a.kpf * 355) * 1000:.0f} kV/Gvar (report 18-42); unit connection X {VKG[0]:.2f} %")
 it = solve(full=True)
 print(f"calibration pass 3: {outer} rounds; Portuguese load x{scale.get('PT-N', 1):.3f}, Spanish demand x{scale.get('GRA', 1):.3f}")
 print("DSO shunts at 1 pu (Mvar, + absorbing): " + "  ".join(f"{z} {net.shunt.at[CAL[z], 'q_mvar']:+.0f}" for z in CAL))
@@ -473,6 +610,8 @@ print(f"\nborders ES->PT {pt:6.0f} MW (target ~2,100) | ES->MA {ma:5.0f} (~750) 
 for i_, n in zip(net.line.index, net.line.name):
     if "FR" in n: print(f"   tie {n:10s} x{int(net.line.at[i_, 'parallel'])} {net.line.at[i_, 'length_km']:5.0f} km  P {net.res_line.at[i_, 'p_from_mw']:+6.0f} MW  Q {net.res_line.at[i_, 'q_from_mvar']:+6.0f}")
 print(f"   Morocco unit P {net.gen.at[iMA, 'p_mw']:.0f} MW, Moroccan load {net.res_load.at[L['MA'], 'p_mw']:.0f} MW")
+print("   Portugal ties ES->PT: " + "  ".join(f"{z} {flow(z, {'PT-N', 'PT-S'}):+.0f}" for z in ES if abs(flow(z, {'PT-N', 'PT-S'})) > 0.5) +
+      f" | North area -> PT {flow('NW', {'PT-N'}) + flow('CYL', {'PT-N'}):+.0f} (Fig 2-41: +200) | PT load north share {P0['PT-N'] / (P0['PT-N'] + P0['PT-S']):.2f}")
 sw_mad = flow("CAC", {"MAD"}) + flow("SCE", {"MAD"})
 print("corridor flows vs Fig 2-4: " + "  ".join(f"{k[0]}->{k[1]} {flow(k[0], {k[1]}):+.0f} ({t})" for k, t in {**FLOWT, **FCHK}.items()))
 print("zone demand now: " + "  ".join(f"{z} {P0[z] * scale.get(z, 1):.0f}" for z in ES))
@@ -522,3 +661,5 @@ if os.environ.get("QBAL", "1") == "1":                      # reactive-power bal
     po = -(qg_["G1 Almaraz II"] + qg_["G6 SW CCGT"] + qg_["G7 E CCGT"])
     print(f"Fig 4-2 South Spain 12:32:00: RES {rq:.0f} Mvar on {rp:.0f} MW (report 2,297 on 17,020) | reactors {rx:.0f} (1,300) | PO 7.4 units {po:.0f} (74)")
 sc_report()
+if os.environ.get("DUMP_NET"):                              # solved net for offline diagnostics (pp_v2_diag.py)
+    pp.to_pickle(net, os.environ["DUMP_NET"]); print("net saved to", os.environ["DUMP_NET"])
