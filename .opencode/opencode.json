@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "pscad": {
+        "type": "local",
+        "command": [
+          "C:\\Users\\Ibrahim\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+          "-m",
+          "pscad_mcp.server"
+        ],
+        "cwd": "C:\\GitHub\\PSCAD-MCP",
+        "environment": {
+          "PYTHONPATH": "C:\\GitHub\\PSCAD-MCP"
+        },
+        "timeout": {
+          "startup": 60000,
+          "catalog": 60000,
+          "execution": 3600000
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+14:36:30 import
+14:36:30 connect
+14:36:31 canvas
+14:36:31 components
+14:36:32 n = 279
+14:36:32 0 type Bus
+14:36:32 0 id ERR 'Bus' object has no attribute 'id'
+14:36:32 0 loc [25, 27]
+14:36:33 0 orient 0
+14:36:33 0 defn ERR 'Bus' object has no attribute 'definition'
+14:36:33 0 params n= 6
+14:36:33 1 type Bus
+14:36:33 1 id ERR 'Bus' object has no attribute 'id'
+14:36:34 1 loc [30, 20]
+14:36:34 1 orient 0
+14:36:34 1 defn ERR 'Bus' object has no attribute 'definition'
+14:36:34 1 params n= 6
+14:36:34 2 type Bus
+14:36:34 2 id ERR 'Bus' object has no attribute 'id'
+14:36:34 2 loc [44, 20]
+14:36:35 2 orient 0
+14:36:35 2 defn ERR 'Bus' object has no attribute 'definition'
+14:36:35 2 params n= 6
+14:36:35 3 type Bus
+14:36:35 3 id ERR 'Bus' object has no attribute 'id'
+14:36:35 3 loc [60, 20]
+14:36:36 3 orient 0
+14:36:36 3 defn ERR 'Bus' object has no attribute 'definition'
+14:36:36 3 params n= 6
+14:36:36 4 type Bus
+14:36:36 4 id ERR 'Bus' object has no attribute 'id'
+14:36:37 4 loc [70, 20]
+14:36:37 4 orient 0
+14:36:37 4 defn ERR 'Bus' object has no attribute 'definition'
+14:36:37 4 params n= 6
+14:36:37 5 type Bus
+14:36:37 5 id ERR 'Bus' object has no attribute 'id'
+14:36:38 5 loc [45, 26]
+14:36:38 5 orient 0
+14:36:38 5 defn ERR 'Bus' object has no attribute 'definition'
+14:36:38 5 params n= 6
+14:36:38 6 type Bus
+14:36:38 6 id ERR 'Bus' object has no attribute 'id'
+14:36:39 6 loc [32, 31]
+14:36:39 6 orient 0
+14:36:39 6 defn ERR 'Bus' object has no attribute 'definition'
+14:36:39 6 params n= 6
+14:36:39 7 type Bus
+14:36:39 7 id ERR 'Bus' object has no attribute 'id'
+14:36:39 7 loc [49, 31]
+14:36:39 7 orient 0
+14:36:39 7 defn ERR 'Bus' object has no attribute 'definition'
+14:36:40 7 params n= 6
+14:36:40 8 type Bus
+14:36:40 8 id ERR 'Bus' object has no attribute 'id'
+14:36:40 8 loc [52, 31]
+14:36:41 8 orient 0
+14:36:41 8 defn ERR 'Bus' object has no attribute 'definition'
+14:36:41 8 params n= 6
+14:36:41 9 type Bus
+14:36:41 9 id ERR 'Bus' object has no attribute 'id'
+14:36:41 9 loc [24, 35]
+14:36:41 9 orient 0
+14:36:41 9 defn ERR 'Bus' object has no attribute 'definition'
+14:36:42 9 params n= 6
+14:36:42 10 type Bus
+14:36:42 10 id ERR 'Bus' object has no attribute 'id'
+14:36:42 10 loc [28, 43]
+14:36:42 10 orient 0
+14:36:42 10 defn ERR 'Bus' object has no attribute 'definition'
+14:36:43 10 params n= 6
+14:36:43 11 type Bus
+14:36:43 11 id ERR 'Bus' object has no attribute 'id'
+14:36:43 11 loc [45, 44]
+14:36:44 11 orient 0
+14:36:44 11 defn ERR 'Bus' object has no attribute 'definition'
+14:36:44 11 params n= 6
+14:36:44 done

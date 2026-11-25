@@ -1,0 +1,17 @@
+# C:/PSCAD_work/s25/ib6_r5_strong_4s.psout
+# t 0..4.000 s, values = 20 ms means centred at t (p-p over the 0.2 s before t)
+
+units: [1]=32, [2]=37, [3]=30, [4]=31, [5]=39F
+
+--- t = 2.90 s
+  unit  32: f  50.0000 Hz (p-p    0.0 mHz)  P     3975 MW  Q   -2113 Mvar  V 1.0551 pu  Tm*S     4097
+  unit  37: f  50.0000 Hz (p-p    0.0 mHz)  P     3490 MW  Q   -2167 Mvar  V 1.0607 pu  Tm*S      861
+  unit  30: f  50.0000 Hz (p-p    0.0 mHz)  P     3223 MW  Q   -1963 Mvar  V 1.0805 pu  Tm*S      408
+  unit  31: f  50.0000 Hz (p-p    0.0 mHz)  P     3791 MW  Q   +2250 Mvar  V 1.0538 pu  Tm*S     3853
+  unit 39F: f  50.0000 Hz (p-p    0.0 mHz)  P     3276 MW  Q   -1827 Mvar  V 1.0217 pu  Tm*S     7032
+  bus 33: VDF 1.0978 (p-p 0.2459)  plant P    3032 MW
+  bus 34: VDF 1.1121 (p-p 0.2929)  plant P    2610 MW
+  bus 35: VDF 1.0962 (p-p 0.2369)  plant P    3390 MW
+  bus 36: VDF 1.0882 (p-p 0.2468)  plant P    2813 MW
+  bus 38: VDF 0.9689 (p-p 0.1954)  plant P    3988 MW
+  plants 15833 MW, Iberian units 14478 MW, PTIE +1350 MW (S->F), HVDC P -974 (neg=export), V9 0.003 pu, OOS1 0

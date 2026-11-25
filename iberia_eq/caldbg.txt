@@ -1,0 +1,128 @@
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   167
+    ARA-MAD   x3->3:   183 ->   282
+    ARA-N     x3->3:    59 ->   263
+    ARA-VAL   x1->2:    77 ->   230
+    BAD-CAC   x3->3:   155 ->   135
+    BAD-PT-S  x1->2:    81 ->   209
+    BAD-WAN   x3->3:   105 ->   208
+    CAC-CYL   x1->2:   178 ->   193
+    CAC-MAD   x6->6:   193 ->   257
+    CAC-PT-N  x1->2:    25 ->   230
+    CAC-SCE   x3->3:   150 ->   242
+    CYL-MAD   x4->4:   169 ->   187
+    CYL-N     x3->3:   136 ->   226
+    CYL-NW    x5->5:   143 ->   193
+    CYL-PT-N  x1->2:     5 ->   254
+    GRA-SCE   x1->2:    67 ->   140
+    GRA-SE    x1->2:    59 ->   234
+    GRA-WAN   x2->2:    80 ->   156
+    MAD-VAL   x4->4:   116 ->   228
+      N-NW    x4->4:   116 ->   275
+     NW-PT-N  x3->3:    61 ->   236
+   PT-S-WAN   x1->2:    58 ->   339
+    SCE-WAN   x4->4:   175 ->   209
+     SE-VAL   x4->4:    63 ->   167
+    round 0: V err 74.8 kV (worst BAD 337.2/412)  unitQ err 2780  tieQ err 2520  PT 2427 FR 1300  flow err 1582  gen vm 1.025 1.010 1.010 1.022 1.022 1.040 1.042 1.005 1.012 1.025 1.020 0.995
+    round 250: V err 2.1 kV (worst ARA 412.1/410)  unitQ err 107  tieQ err 0  PT 2100 FR 1175  flow err 927  gen vm 0.999 0.970 0.970 1.005 0.982 1.021 1.022 0.459 1.012 1.025 1.020 0.980
+    round 500: V err 2.1 kV (worst ARA 412.1/410)  unitQ err 105  tieQ err 0  PT 2100 FR 1175  flow err 927  gen vm 0.999 0.970 0.970 1.005 0.982 1.021 1.022 0.457 1.012 1.025 1.020 0.980
+  continuation lengths 0.0 / unit-X 0.0: rounds 600
+    round 0: V err 12.2 kV (worst PT-N 385.8/398)  unitQ err 377  tieQ err 190  PT 2035 FR 1183  flow err 326  gen vm 1.004 0.970 0.970 1.007 0.972 1.025 1.022 0.467 1.012 1.025 1.020 0.980
+  continuation lengths 0.1 / unit-X 0.0: rounds 750
+    round 0: V err 3.3 kV (worst PT-S 397.7/401)  unitQ err 49  tieQ err 52  PT 2082 FR 1150  flow err 7  gen vm 1.000 0.970 0.970 1.005 0.981 1.022 1.021 0.847 1.012 1.025 1.020 0.980
+  continuation lengths 0.2 / unit-X 0.0: rounds 900
+    round 0: V err 2.7 kV (worst ARA 412.7/410)  unitQ err 68  tieQ err 52  PT 2088 FR 1145  flow err 246  gen vm 1.000 0.970 0.970 1.005 0.982 1.021 1.021 0.897 1.012 1.025 1.020 0.980
+  continuation lengths 0.3 / unit-X 0.0: rounds 1050
+    round 0: V err 2.8 kV (worst ARA 412.8/410)  unitQ err 54  tieQ err 67  PT 2094 FR 1134  flow err 176  gen vm 0.999 0.970 0.970 1.004 0.982 1.020 1.020 0.916 1.012 1.025 1.020 0.980
+  continuation lengths 0.4 / unit-X 0.0: rounds 1200
+    round 0: V err 2.8 kV (worst ARA 412.8/410)  unitQ err 43  tieQ err 75  PT 2098 FR 1128  flow err 132  gen vm 0.998 0.970 0.970 1.004 0.982 1.020 1.020 0.925 1.012 1.025 1.020 0.981
+  continuation lengths 0.5 / unit-X 0.0: rounds 1350
+    round 0: V err 2.9 kV (worst ARA 412.9/410)  unitQ err 33  tieQ err 81  PT 2101 FR 1122  flow err 102  gen vm 0.998 0.970 0.970 1.004 0.982 1.019 1.019 0.931 1.012 1.025 1.020 0.981
+  continuation lengths 0.6 / unit-X 0.0: rounds 1500
+    round 0: V err 3.0 kV (worst ARA 413.0/410)  unitQ err 33  tieQ err 85  PT 2103 FR 1118  flow err 80  gen vm 0.998 0.970 0.970 1.004 0.981 1.019 1.019 0.934 1.012 1.025 1.020 0.981
+  continuation lengths 0.7 / unit-X 0.0: rounds 1650
+    round 0: V err 3.0 kV (worst ARA 413.0/410)  unitQ err 40  tieQ err 88  PT 2104 FR 1114  flow err 64  gen vm 0.997 0.970 0.970 1.004 0.981 1.019 1.019 0.935 1.012 1.025 1.020 0.981
+  continuation lengths 0.8 / unit-X 0.0: rounds 1800
+    round 0: V err 3.1 kV (worst ARA 413.1/410)  unitQ err 45  tieQ err 90  PT 2106 FR 1111  flow err 52  gen vm 0.997 0.970 0.970 1.004 0.981 1.018 1.019 0.935 1.012 1.025 1.020 0.981
+  continuation lengths 0.9 / unit-X 0.0: rounds 1950
+    round 0: V err 3.1 kV (worst ARA 413.1/410)  unitQ err 49  tieQ err 91  PT 2106 FR 1110  flow err 42  gen vm 0.997 0.970 0.970 1.004 0.981 1.018 1.018 0.935 1.012 1.025 1.020 0.981
+  continuation lengths 1.0 / unit-X 0.0: rounds 2100
+    round 0: V err 2.2 kV (worst ARA 412.2/410)  unitQ err 105  tieQ err 13  PT 2102 FR 1165  flow err 1  gen vm 0.999 0.970 0.970 1.005 0.982 1.021 1.021 0.934 1.012 1.025 1.020 0.980
+  continuation lengths 1.0 / unit-X 0.1: rounds 2250
+    round 0: V err 2.3 kV (worst ARA 412.3/410)  unitQ err 104  tieQ err 15  PT 2102 FR 1163  flow err 1  gen vm 0.998 0.968 0.968 1.004 0.981 1.020 1.021 0.934 1.012 1.025 1.020 0.980
+  continuation lengths 1.0 / unit-X 0.2: rounds 2400
+    round 0: V err 2.3 kV (worst ARA 412.3/410)  unitQ err 107  tieQ err 15  PT 2102 FR 1162  flow err 1  gen vm 0.997 0.967 0.967 1.004 0.980 1.020 1.021 0.934 1.012 1.025 1.020 0.980
+  continuation lengths 1.0 / unit-X 0.3: rounds 2550
+    round 0: V err 2.4 kV (worst ARA 412.4/410)  unitQ err 108  tieQ err 15  PT 2103 FR 1162  flow err 1  gen vm 0.997 0.965 0.965 1.004 0.979 1.020 1.020 0.934 1.012 1.025 1.020 0.980
+  continuation lengths 1.0 / unit-X 0.4: rounds 2700
+    round 0: V err 2.4 kV (worst ARA 412.4/410)  unitQ err 111  tieQ err 15  PT 2103 FR 1162  flow err 1  gen vm 0.996 0.964 0.964 1.003 0.977 1.019 1.020 0.934 1.012 1.025 1.020 0.980
+  continuation lengths 1.0 / unit-X 0.5: rounds 2850
+    round 0: V err 2.4 kV (worst ARA 412.4/410)  unitQ err 113  tieQ err 15  PT 2102 FR 1162  flow err 1  gen vm 0.995 0.962 0.962 1.003 0.976 1.019 1.019 0.934 1.012 1.025 1.020 0.980
+  continuation lengths 1.0 / unit-X 0.6: rounds 3000
+    round 0: V err 2.4 kV (worst ARA 412.4/410)  unitQ err 115  tieQ err 15  PT 2102 FR 1162  flow err 1  gen vm 0.994 0.961 0.961 1.003 0.975 1.018 1.019 0.934 1.012 1.025 1.020 0.980
+  continuation lengths 1.0 / unit-X 0.7: rounds 3150
+    round 0: V err 2.5 kV (worst ARA 412.5/410)  unitQ err 116  tieQ err 15  PT 2102 FR 1164  flow err 1  gen vm 0.993 0.959 0.959 1.002 0.974 1.018 1.018 0.934 1.012 1.025 1.020 0.980
+  continuation lengths 1.0 / unit-X 0.8: rounds 3300
+    round 0: V err 11.9 kV (worst BAD 423.9/412)  unitQ err 146  tieQ err 292  PT 2167 FR 875  flow err 32  gen vm 0.988 0.957 0.957 1.000 0.970 1.013 1.013 0.931 1.012 1.025 1.020 0.982
+  continuation lengths 1.0 / unit-X 0.9: rounds 3450
+    round 0: V err 14.4 kV (worst BAD 426.4/412)  unitQ err 182  tieQ err 344  PT 2180 FR 815  flow err 38  gen vm 0.988 0.955 0.955 0.999 0.968 1.013 1.013 0.929 1.012 1.025 1.020 0.982
+  continuation lengths 1.0 / unit-X 1.0: rounds 3600
+    round 0: V err 17.9 kV (worst BAD 429.9/412)  unitQ err 246  tieQ err 414  PT 2203 FR 716  flow err 48  gen vm 0.988 0.953 0.953 0.998 0.966 1.013 1.013 0.928 1.012 1.025 1.020 0.983
+    round 250: V err 17.9 kV (worst BAD 429.9/412)  unitQ err 245  tieQ err 414  PT 2203 FR 716  flow err 48  gen vm 0.988 0.953 0.953 0.998 0.966 1.013 1.013 0.928 1.012 1.025 1.020 0.983
+    round 500: V err 17.9 kV (worst BAD 429.9/412)  unitQ err 245  tieQ err 414  PT 2203 FR 716  flow err 48  gen vm 0.988 0.953 0.953 0.998 0.966 1.013 1.013 0.928 1.012 1.025 1.020 0.983
+    round 750: V err 17.9 kV (worst BAD 429.9/412)  unitQ err 245  tieQ err 414  PT 2203 FR 716  flow err 48  gen vm 0.988 0.953 0.953 0.998 0.966 1.013 1.013 0.928 1.012 1.025 1.020 0.983
+    round 1000: V err 17.9 kV (worst BAD 429.9/412)  unitQ err 245  tieQ err 414  PT 2203 FR 716  flow err 48  gen vm 0.988 0.953 0.953 0.998 0.966 1.013 1.013 0.928 1.012 1.025 1.020 0.983
+    round 1250: V err 17.9 kV (worst BAD 429.9/412)  unitQ err 245  tieQ err 414  PT 2203 FR 716  flow err 48  gen vm 0.988 0.953 0.953 0.998 0.966 1.013 1.013 0.928 1.012 1.025 1.020 0.983
+    round 1500: V err 17.9 kV (worst BAD 429.9/412)  unitQ err 245  tieQ err 414  PT 2203 FR 716  flow err 48  gen vm 0.988 0.953 0.953 0.998 0.966 1.013 1.013 0.928 1.012 1.025 1.020 0.983
+    round 1750: V err 17.9 kV (worst BAD 429.9/412)  unitQ err 245  tieQ err 414  PT 2203 FR 716  flow err 48  gen vm 0.988 0.953 0.953 0.998 0.966 1.013 1.013 0.928 1.012 1.025 1.020 0.983
+  final calibration: total rounds 5600
+calibration pass 3: 5600 rounds; Portuguese load x0.886, Spanish demand x0.968
+DSO shunts at 1 pu (Mvar, + absorbing): GRA -163  WAN -75  BAD -1669  CAC +146  SCE -500  MAD -98  CYL -256  NW +213  N -1272  ARA -1043  CAT -1716  VAL -1207  SE +29  PT-S -562
+unit Q per area: N -645 (target -400)  SW -394 (target -150)  E -714 (target -600)
+Spanish distribution exchange: P 24223 MW, Q -2943 Mvar (load +5438, DSO shunts -8381); Fig 4-84 (400 kV interface only, ~8.7 GW): Q -1,000 ... -1,800 Mvar
+zone  V[kV] target  demand   RES
+GRA     424.5    412    1069   1706
+WAN     431.2    413    1603   2560
+BAD     442.1    412     267   2538
+CAC     418.3    406     178   1692
+SCE     431.5    417    1102   3687
+MAD     413.8    405    2691    650
+CYL     409.8    405    1124   1010
+NW      408.4    405    3611    496
+N       408.8    409    3034    255
+ARA     416.2    410     666   1370
+CAT     401.2    400    4891    233
+VAL     422.4    413    2057   2449
+SE      419.5    408    1285   1524
+PS-CYL  405.0              0      0
+PS-ARA  410.0              0      0
+PS-PT   408.0              0      0
+PT-N    403.6    398       0      0
+PT-S    414.7    401       0      0
+FR      406.8              0      0
+MA-B    429.9              0      0
+MA      386.3              0      0
+BAD-TS  429.9              0      0
+WAN-TS  427.0              0      0
+
+borders ES->PT   2203 MW (target ~2,100) | ES->MA   633 (~750) | ES->FR AC  -284 + HVDC 1000 =   716 (~1,175)
+corridor flows vs Fig 2-4: CAC->MAD +3179 (3227)  BAD->CAC +2225 (1850)  GRA->SE +1337 (900)  VAL->ARA +1535 (0)  CAC->CYL +1846 (1200)
+zone demand now: GRA 1069  WAN 1945  BAD 267  CAC 178  SCE 1102  MAD 2349  CYL 1124  NW 3611  N 3034  ARA 666  CAT 4891  VAL 2057  SE 1285
+zone RES now:    GRA 1706  WAN 2560  BAD 2538  CAC 1692  SCE 3687  MAD 650  CYL 1010  NW 496  N 255  ARA 1370  CAT 233  VAL 2449  SE 1524
+Madrid net in-feed   1764 MW; SW corridor CAC+SCE -> MAD   3179 MW (Fig 2-4: 3,227 on the six circuits)
+generator Q [Mvar]: G1 -236  G2 -198  G3 -370  G4 -122  G5 -296  G6 -158  G7 -146  G8 -540  M1 -88  M2 -139  M3-7 +352  Morocco +692
+France slack P -707 MW, Q -722 Mvar
+tie Q ES->X: FR -108 (target +300)  PT +204 (target +100, check)  MA -510 (target -360) | set-points FR 406.8 kV, MA 392.0 kV, PT 375.2 kV
+C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\build_branch.py:1591: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  power_station_unit = trafo_df.power_station_unit.fillna(False).values.astype(bool)
+C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\build_branch.py:1591: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  power_station_unit = trafo_df.power_station_unit.fillna(False).values.astype(bool)
+
+short-circuit (MVA, IEC 60909 max): zone  model  Table 4-26
+   MAD    25283    10555  (+140 %)
+   VAL    18028    11167  (+61 %)
+   N      22483    10158  (+121 %)
+   CAT    21453     9967  (+115 %)
+   NW     25261     9665  (+161 %)
+   WAN    12212    12271  (-0 %)
+   BAD     8395     8386  (+0 %)

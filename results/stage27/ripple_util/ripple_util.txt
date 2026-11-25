@@ -1,0 +1,18 @@
+## x1.00: C:/PSCAD_work/s27/rip_pref100.psout  (t 0.00..5.00)
+  bus 33: 17 Hz amp 3-5 s 0.00215 pu @ 18.7 Hz | 4-5 s 0.00311 @ 18.4 | P   3638 MW | |i| max 0.911 pu (Imax 1.1) | VDF 1.0722
+  bus 34: 17 Hz amp 3-5 s 0.00250 pu @ 18.7 Hz | 4-5 s 0.00358 @ 18.4 | P   3217 MW | |i| max 0.670 pu (Imax 1.1) | VDF 1.0724
+  bus 35: 17 Hz amp 3-5 s 0.00203 pu @ 18.7 Hz | 4-5 s 0.00286 @ 18.4 | P   4009 MW | |i| max 0.905 pu (Imax 1.1) | VDF 1.0721
+  bus 36: 17 Hz amp 3-5 s 0.00213 pu @ 18.7 Hz | 4-5 s 0.00290 @ 18.4 | P   3398 MW | |i| max 0.918 pu (Imax 1.1) | VDF 1.0682
+  bus 38: 17 Hz amp 3-5 s 0.00205 pu @ 18.2 Hz | 4-5 s 0.00278 @ 18.4 | P   5069 MW | |i| max 0.918 pu (Imax 1.1) | VDF 1.0730
+## x0.95: C:/PSCAD_work/s27/rip_pref095.psout  (t 0.00..5.00)
+  bus 33: 17 Hz amp 3-5 s 0.00157 pu @ 19.7 Hz | 4-5 s 0.00122 @ 17.3 | P   3472 MW | |i| max 0.866 pu (Imax 1.1) | VDF 1.0772
+  bus 34: 17 Hz amp 3-5 s 0.00180 pu @ 19.7 Hz | 4-5 s 0.00137 @ 17.3 | P   3069 MW | |i| max 0.638 pu (Imax 1.1) | VDF 1.0780
+  bus 35: 17 Hz amp 3-5 s 0.00145 pu @ 17.7 Hz | 4-5 s 0.00121 @ 18.4 | P   3823 MW | |i| max 0.857 pu (Imax 1.1) | VDF 1.0774
+  bus 36: 17 Hz amp 3-5 s 0.00147 pu @ 17.7 Hz | 4-5 s 0.00129 @ 17.3 | P   3243 MW | |i| max 0.872 pu (Imax 1.1) | VDF 1.0738
+  bus 38: 17 Hz amp 3-5 s 0.00158 pu @ 19.7 Hz | 4-5 s 0.00129 @ 17.3 | P   4829 MW | |i| max 0.873 pu (Imax 1.1) | VDF 1.0780
+## x0.90: C:/PSCAD_work/s27/rip_pref090.psout  (t 0.00..5.00)
+  bus 33: 17 Hz amp 3-5 s 0.00214 pu @ 18.7 Hz | 4-5 s 0.00267 @ 18.4 | P   3300 MW | |i| max 0.821 pu (Imax 1.1) | VDF 1.0815
+  bus 34: 17 Hz amp 3-5 s 0.00237 pu @ 18.7 Hz | 4-5 s 0.00298 @ 18.4 | P   2918 MW | |i| max 0.606 pu (Imax 1.1) | VDF 1.0828
+  bus 35: 17 Hz amp 3-5 s 0.00209 pu @ 18.7 Hz | 4-5 s 0.00260 @ 18.4 | P   3634 MW | |i| max 0.811 pu (Imax 1.1) | VDF 1.0820
+  bus 36: 17 Hz amp 3-5 s 0.00216 pu @ 18.7 Hz | 4-5 s 0.00261 @ 18.4 | P   3083 MW | |i| max 0.826 pu (Imax 1.1) | VDF 1.0788
+  bus 38: 17 Hz amp 3-5 s 0.00196 pu @ 18.7 Hz | 4-5 s 0.00272 @ 18.4 | P   4594 MW | |i| max 0.829 pu (Imax 1.1) | VDF 1.0826

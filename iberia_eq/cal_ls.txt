@@ -1,0 +1,98 @@
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   167
+    ARA-MAD   x3->3:   183 ->   282
+    ARA-N     x3->3:    59 ->   263
+    ARA-VAL   x1->2:    77 ->   230
+    BAD-CAC   x3->3:   155 ->   135
+    BAD-PT-S  x1->2:    81 ->   209
+    BAD-WAN   x3->3:   105 ->   208
+    CAC-CYL   x1->2:   178 ->   193
+    CAC-MAD   x6->6:   193 ->   257
+    CAC-PT-N  x1->2:    25 ->   230
+    CAC-SCE   x3->3:   150 ->   242
+    CYL-MAD   x4->4:   169 ->   187
+    CYL-N     x3->3:   136 ->   226
+    CYL-NW    x5->5:   143 ->   193
+    CYL-PT-N  x1->2:     5 ->   254
+    GRA-SCE   x1->2:    67 ->   140
+    GRA-SE    x1->2:    59 ->   234
+    GRA-WAN   x2->2:    80 ->   156
+    MAD-VAL   x4->4:   116 ->   228
+      N-NW    x4->4:   116 ->   275
+     NW-PT-N  x3->3:    61 ->   236
+   PT-S-WAN   x1->2:    58 ->   339
+    SCE-WAN   x4->4:   175 ->   209
+     SE-VAL   x4->4:    63 ->   167
+  lengths 0.0 / unit-X 0.0 least_squares: nfev 13, max |V err| 26.78 kV, max other err 1861 (MW/Mvar)
+  lengths 0.1 / unit-X 0.0 least_squares: nfev 19, max |V err| 5.75 kV, max other err 650 (MW/Mvar)
+  lengths 0.2 / unit-X 0.0 least_squares: nfev 400, max |V err| 3.82 kV, max other err 523 (MW/Mvar)
+  lengths 0.3 / unit-X 0.0 least_squares: nfev 15, max |V err| 3.69 kV, max other err 501 (MW/Mvar)
+  lengths 0.4 / unit-X 0.0 least_squares: nfev 17, max |V err| 4.46 kV, max other err 545 (MW/Mvar)
+  lengths 0.5 / unit-X 0.0 least_squares: nfev 16, max |V err| 5.83 kV, max other err 548 (MW/Mvar)
+  lengths 0.6 / unit-X 0.0 least_squares: nfev 16, max |V err| 4.88 kV, max other err 593 (MW/Mvar)
+  lengths 0.7 / unit-X 0.0 least_squares: nfev 17, max |V err| 5.47 kV, max other err 610 (MW/Mvar)
+  lengths 0.8 / unit-X 0.0 least_squares: nfev 400, max |V err| 6.32 kV, max other err 642 (MW/Mvar)
+  lengths 0.9 / unit-X 0.0 least_squares: nfev 400, max |V err| 6.83 kV, max other err 689 (MW/Mvar)
+  lengths 1.0 / unit-X 0.0 least_squares: nfev 400, max |V err| 7.30 kV, max other err 733 (MW/Mvar)
+  lengths 1.0 / unit-X 0.1 least_squares: nfev 14, max |V err| 7.12 kV, max other err 729 (MW/Mvar)
+  lengths 1.0 / unit-X 0.2 least_squares: nfev 400, max |V err| 7.40 kV, max other err 703 (MW/Mvar)
+  lengths 1.0 / unit-X 0.3 least_squares: nfev 118, max |V err| 7.29 kV, max other err 696 (MW/Mvar)
+  lengths 1.0 / unit-X 0.4 least_squares: nfev 14, max |V err| 7.70 kV, max other err 671 (MW/Mvar)
+  lengths 1.0 / unit-X 0.5 least_squares: nfev 14, max |V err| 7.26 kV, max other err 672 (MW/Mvar)
+  lengths 1.0 / unit-X 0.6 least_squares: nfev 16, max |V err| 7.25 kV, max other err 663 (MW/Mvar)
+  lengths 1.0 / unit-X 0.7 least_squares: nfev 14, max |V err| 7.29 kV, max other err 653 (MW/Mvar)
+  lengths 1.0 / unit-X 0.8 least_squares: nfev 14, max |V err| 7.36 kV, max other err 659 (MW/Mvar)
+  lengths 1.0 / unit-X 0.9 least_squares: nfev 14, max |V err| 7.39 kV, max other err 682 (MW/Mvar)
+  lengths 1.0 / unit-X 1.0 least_squares: nfev 17, max |V err| 7.19 kV, max other err 700 (MW/Mvar)
+  final least_squares: nfev 14, max |V err| 5.48 kV, max other err 385 (MW/Mvar)
+  final calibration: total evaluations 2962
+calibration pass 3: 2962 rounds; Portuguese load x0.837, Spanish demand x0.967
+DSO shunts at 1 pu (Mvar, + absorbing): GRA -516  WAN +970  BAD -786  CAC -568  SCE -704  MAD -352  CYL -690  NW -289  N -1212  ARA -817  CAT -1765  VAL -1462  SE +173  PT-S -970
+unit Q per area: N -704 (target -400)  SW -461 (target -150)  E -666 (target -600)
+Spanish distribution exchange: P 23916 MW, Q -3311 Mvar (load +5107, DSO shunts -8418); Fig 4-84 (400 kV interface only, ~8.7 GW): Q -1,000 ... -1,800 Mvar
+zone  V[kV] target  demand   RES
+GRA     415.3    412    1067   1706
+WAN     411.4    413    1601   2560
+BAD     418.9    412     266   2538
+CAC     407.7    406     177   1692
+SCE     419.2    417    1100   3687
+MAD     406.2    405    2688    650
+CYL     407.1    405    1123   1010
+NW      407.4    405    3606    496
+N       408.0    409    3030    255
+ARA     410.8    410     666   1370
+CAT     400.8    400    4885    233
+VAL     414.3    413    2054   2449
+SE      406.7    408    1283   1524
+PS-CYL  405.0              0      0
+PS-ARA  410.0              0      0
+PS-PT   408.0              0      0
+PT-N    393.8    398       0      0
+PT-S    406.5    401       0      0
+FR      406.6              0      0
+MA-B    411.2              0      0
+MA      383.0              0      0
+BAD-TS  416.3              0      0
+WAN-TS  410.7              0      0
+
+borders ES->PT   1869 MW (target ~2,100) | ES->MA   597 (~750) | ES->FR AC   341 + HVDC 1000 =  1341 (~1,175)
+corridor flows vs Fig 2-4: CAC->MAD +3612 (3227)  BAD->CAC +2565 (1850)  GRA->SE +1538 (900)  VAL->ARA +1644 (0)  CAC->CYL +2025 (1200)
+zone demand now: GRA 1067  WAN 1362  BAD 266  CAC 177  SCE 1100  MAD 2926  CYL 1123  NW 3606  N 3030  ARA 666  CAT 4885  VAL 2054  SE 1283
+zone RES now:    GRA 1706  WAN 1857  BAD 1585  CAC 1692  SCE 3687  MAD 650  CYL 1010  NW 496  N 255  ARA 1370  CAT 233  VAL 2449  SE 1524
+Madrid net in-feed   2313 MW; SW corridor CAC+SCE -> MAD   3612 MW (Fig 2-4: 3,227 on the six circuits)
+generator Q [Mvar]: G1 -333  G2 -96  G3 -384  G4 -323  G5 -414  G6 -128  G7 -187  G8 -919  M1 -3  M2 +36  M3-7 +668  Morocco +915
+France slack P -1333 MW, Q -387 Mvar
+tie Q ES->X: FR -822 (target +300)  PT +6259 (target +100, check)  MA -526 (target -360) | set-points FR 406.6 kV, MA 391.2 kV, PT 341.1 kV
+C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\build_branch.py:1591: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  power_station_unit = trafo_df.power_station_unit.fillna(False).values.astype(bool)
+C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\build_branch.py:1591: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  power_station_unit = trafo_df.power_station_unit.fillna(False).values.astype(bool)
+
+short-circuit (MVA, IEC 60909 max): zone  model  Table 4-26
+   MAD    25283    10555  (+140 %)
+   VAL    18028    11167  (+61 %)
+   N      22483    10158  (+121 %)
+   CAT    21453     9967  (+115 %)
+   NW     25261     9665  (+161 %)
+   WAN    12060    12271  (-2 %)
+   BAD     8215     8386  (-2 %)

@@ -1,0 +1,104 @@
+# ib5 warm step f: units 20,670 MW, France 4,546 MW, Pref x0.70, from settle12c
+psout      C:\PSCAD_work\s24\ib5_s24_warm8f_sync20670_fr4546.psout
+t          0.0000 .. 8.0000 s   dt 200 us   window 6.0-8.0 s   KPLANT 1.3
+
+machines  (France = min |POUT|; others by POUT*Sbase = P0; sum |rel err| = 1.6673 -> FAIL)
+ ch  bus   Sbase     POUT       MW     QOUT     Mvar  VIT pu      kV     f Hz   f p-p   f p-p    f min    f max    THETA
+             MVA       pu                pu                              mean     mHz     run      run      run      deg
+  1   30    6113  +0.4006  +2449.1  +0.2306  +1409.4  0.9406   376.3  51.6541   825.8  2151.3  49.9014  52.0527    3.138
+  2   37   12838  +0.3429  +4402.2  +0.1236  +1587.3  1.0048   401.9  51.6170   928.4  2162.0  49.8048  51.9669    3.137
+  3   32   15292  +0.2740  +4189.6  +0.1693  +2589.5  0.9447   377.9  51.6241  1002.0  2374.3  49.6759  52.0502    3.136
+  4   31   13548  +0.3997  +5414.6  +0.3668  +4969.1  0.9081   363.2  51.6563   843.3  2072.0  49.9612  52.0331    3.137
+  5  39F  200000  +0.0252  +5047.3  +0.0062  +1234.5  1.0226   409.0  49.9784     9.3    25.6  49.9744  50.0000    3.141
+
+plants  (n=18 per-bus identification, rule L2)
+ ch  bus   Sbase  VDF pu  VDF p-p     slope      id       iq     P MW   Q Mvar  TRIP
+             MVA               pu      pu/s      pu       pu                        
+  1   33     520  0.7407   0.2469  +0.01448  0.4405  -0.0772    170.6    -29.3     0
+  2   36     224  0.7775   0.2643  +0.01461  0.4429  -0.0775     77.1    -13.3     0
+  3   36     217  0.7775   0.2643  +0.01461  0.4444  -0.0780     74.7    -12.9     0
+  4   36    3123  0.7775   0.2643  +0.01461  0.4453  -0.0782   1088.0   -186.9     0
+  5   34     841  0.7411   0.2579  +0.01433  0.3204  -0.0562    201.3    -34.7     0
+  6   34     211  0.7411   0.2579  +0.01433  0.3190  -0.0558     50.1     -8.6     0
+  7   34     736  0.7411   0.2579  +0.01433  0.3204  -0.0560    175.1    -30.2     0
+  8   34     526  0.7411   0.2579  +0.01433  0.3203  -0.0561    125.4    -21.4     0
+  9   34     441  0.7411   0.2579  +0.01433  0.3206  -0.0561    105.6    -18.1     0
+ 10   34     307  0.7411   0.2579  +0.01433  0.3205  -0.0561     73.3    -12.6     0
+ 11   34    1552  0.7411   0.2579  +0.01433  0.3207  -0.0562    370.6    -63.8     0
+ 12   35     796  0.7878   0.2599  +0.01484  0.4449  -0.0782    281.3    -48.0     0
+ 13   35     169  0.7878   0.2599  +0.01484  0.4451  -0.0783     59.0    -10.2     0
+ 14   35    3247  0.7878   0.2599  +0.01484  0.4454  -0.0782   1145.0   -197.0     0
+ 15   38     766  0.8522   0.2498  +0.02168  0.4466  -0.0783    290.1    -50.3     0
+ 16   38     452  0.8522   0.2498  +0.02168  0.4462  -0.0783    172.6    -29.4     0
+ 17   38    4072  0.8522   0.2498  +0.02168  0.4465  -0.0782   1560.3   -267.9     0
+ 18   33    3315  0.7407   0.2469  +0.01448  0.4392  -0.0768   1078.8   -184.3     0
+TOT        21514           0.2643  +0.02168                    7099.0  -1218.8
+  ok   bus 33: VDF spread 0.7407..0.7407
+  ok   bus 34: VDF spread 0.7411..0.7411
+  ok   bus 35: VDF spread 0.7878..0.7878
+  ok   bus 36: VDF spread 0.7775..0.7775
+  ok   bus 38: VDF spread 0.8522..0.8522
+  ok   plant id plausibility 0.319..0.447 (0.15..1.10)
+
+switches / relays (0 = closed / not tripped)
+  BRK30  max    0   first>0.5 at      nan s
+  BRK31  max    0   first>0.5 at      nan s
+  BRK32  max    0   first>0.5 at      nan s
+  BRK37  max    0   first>0.5 at      nan s
+  BRKFR  max    0   first>0.5 at      nan s
+  OOS1   max    1   first>0.5 at    3.402 s
+  S1     max   10   first>0.5 at    1.189 s
+  S2     max   10   first>0.5 at    1.424 s
+  S3     max   10   first>0.5 at    1.659 s
+  S4     max   10   first>0.5 at    1.895 s
+  S5     max   10   first>0.5 at    2.130 s
+  S6     max   10   first>0.5 at    2.365 s
+  PBK30  P  -1679.1 MW   (window)
+  PBK31  P  +5404.9 MW   (window)
+  PBK32  P  +6118.1 MW   (window)
+  PBK37  P  -4416.0 MW   (window)
+  PBK vs unit POUT cross-check (sign of the breaker meter; M3):
+    PBK30   -1679.1 MW   POUT   +2449.1 MW   OPPOSITE sign   ratio -0.686
+    PBK37   -4416.0 MW   POUT   +4402.2 MW   OPPOSITE sign   ratio -1.003
+    PBK32   +6118.1 MW   POUT   +4189.6 MW   same sign   ratio 1.460
+    PBK31   +5404.9 MW   POUT   +5414.6 MW   same sign   ratio 0.998
+
+AC tie (PTIE: Spain -> France; France meter, S = 1 MW, sign flipped from the raw channel per M3)
+  PTIE     -338.6 MW   (min   -2811.5, max   +2659.6, p-p   5471.2)   slope  +389.29 MW/s
+  QTIE    -1954.1 Mvar (min   -4576.4, max    +891.5)
+  VTIE     1.0226 pu =   409.0 kV
+  V9       0.6765 pu =   270.6 kV
+  Ph9   -17.89 deg   Ph39   -41.55 deg   single-valued: False
+  d(theta) =   -13.63 deg (wrapped)
+  sign check: France POUT - French load =    +516.5 MW vs PTIE    -338.6 MW  ->  consistent
+  tie angle from C2 formula: asin(P*X/V^2) with X = 45 ohm, V = 400 kV -> 5.46 deg for |P| = 339 MW
+
+HVDC (dq x Sbase 1000 MVA; negative = export to France)
+  P     -15.0 MW  (min     -37.3, max      -2.1)   Q   +31.3 Mvar  VDF 0.6775 pu  TRIP 1
+
+C3 balance (Iberia only: the France machine is excluded; it is on the far side of the tie)
+  Iberian units  +16455.4 MW (+10555.2 Mvar)   plants   +7099.0 MW ( -1218.8 Mvar)   generation  +23554.3 MW        [France machine +5047.3 MW, excluded]
+  PTIE    -338.6 MW (+ = export to France)   HVDC     -15.0 MW (negative = export)
+  generation - PTIE + HVDC =  +23877.9 MW = load + losses
+  scheduled load 28087.5 MW (19 Iberian loads at 1 pu, NP = 1) -> implied losses  -4209.6 MW = -17.87 % of generation  [0-3 % required; 0.01 pu of load voltage = 281 MW]
+
+G7a / S2 gate rows, window 6.0-8.0 s, and first time each holds continuously to 8.0 s
+row                                                      required               measured  verdict  settled at
+all 5 machine f = 50.00 +- 0.02 Hz                  |f-50| < 0.02             51.3060 Hz     FAIL       8.000
+speed spread between machines < 5 mHz              spread < 0.005            1677.95 mHz     FAIL       0.000
+speed p-p (each machine) < 10 mHz                     p-p < 0.010            1001.96 mHz     FAIL       0.000
+collector VDF p-p < 0.005 pu                          p-p < 0.005              0.2643 pu     FAIL       0.000
+collector VDF |drift| < 0.002 pu/s                |slope| < 0.002           0.02168 pu/s     FAIL       0.000
+plant TRIP all 0 (18 plants)                                    0                      0     PASS       0.000
+BRK30/31/32/37 all 0 (closed)                                   0                      0     PASS       0.000
+BRKFR 0 (AC tie closed)                                         0                      0     PASS       0.000
+OOS1 0 (relay not latched)                                      0                      1     FAIL       0.000
+PTIE = +335 +- 100 MW (Spain -> France)                  235..435              -338.6 MW     FAIL       8.000
+HVDC P = 1,000 +- 10 MW export                        -990..-1010               -15.0 MW     FAIL       8.000
+HVDC TRIP 0                                                     0                      1     FAIL       0.000
+
+WP7 step 5 (fixed PF, Qmode 0) pre-event targets
+  Granada collector (plant ch1, bus 33) VDF 0.7407 pu   target 1.061 pu +-0.01  -> OUT
+  unit terminal VIT: 363.2 .. 409.0 kV   (Iberian 400-420 kV required; France 39F excluded in the band row)
+  Iberian units QOUT: 30 +1409 Mvar, 37 +1587 Mvar, 32 +2589 Mvar, 31 +4969 Mvar
+

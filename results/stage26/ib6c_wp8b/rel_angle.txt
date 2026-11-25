@@ -1,0 +1,20 @@
+# C:\PSCAD_work\s26\ib6c_wp8b_shed_12_20.psout: relative rotor angles from the speeds (360 deg * integral(f_i - f_j) dt)
+t range 12.00-20.00 s
+
+t      th32-37 [deg]  th30-37 [deg]  th32-30 [deg]  th31-37 [deg]  th32-FR [deg]
+ 12.00            +0             +0             +0             +0             +0
+ 15.90            +0             +0             -0             +0             -1
+ 16.50            -4             +0             -4           +157            -36
+ 17.00          +160             +4           +156           +638            +26
+ 17.50          +724             -9           +733          +1543           +319
+ 18.00         +1832            -27          +1860          +3016           +841
+ 18.50         +3489             -8          +3497          +5061          +1591
+ 19.00         +5442            +12          +5430          +7427          +2571
+ 19.50         +7525             -6          +7531          +9948          +3780
+ 20.00         +9927            -10          +9937         +12811          +5218
+
+  theta 32-37: total excursion +9927 deg = 27.6 pole slips over 8.0 s
+  theta 30-37: total excursion -10 deg = 0.0 pole slips over 8.0 s
+  theta 32-30: total excursion +9937 deg = 27.6 pole slips over 8.0 s
+  theta 31-37: total excursion +12811 deg = 35.6 pole slips over 8.0 s
+  theta 32-FR: total excursion +5218 deg = 14.5 pole slips over 8.0 s

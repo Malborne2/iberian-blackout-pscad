@@ -1,0 +1,82 @@
+fig2_4_label,zone,lat,lon,source,note
+CAPARACENA,GRA,37.2680,-3.7261,OSM way/170946426 'Subestación de Caparacena' (Red Eléctrica de España; 400000;220000;132000),
+HUENEJA,GRA,37.2165,-2.9423,OSM way/97937366 'Subestación de Huéneja' (Red Eléctrica de España; 400000;220000),Hueneja
+TABERNAS,SE,37.0710,-2.3123,OSM way/327268322 'Subestación de Tabernas' (no operator; 400000;220000),
+ARCHIDONA,GRA,37.1202,-4.4151,OSM way/487381592 'Subestación de Archidona' (no operator; 400000),
+CARTAMA,GRA,36.7509,-4.6051,OSM way/170968145 'Subestación de Cártama' (Red Eléctrica de España; 400000;220000;66000),
+TAJO ENC.,GRA,36.8950,-4.7456,OSM way/75902880 'Subestación Tajo de la Encantada' (no operator; 400000;220000),
+JORDANA,WAN,36.4442,-5.2187,OSM way/97286424 'Subestación de Jordana' (Red Eléctrica de España; 400000;220000),
+PINAR REY,WAN,36.2485,-5.4116,OSM way/97199647 'Subestación de Pinar del Rey' (Red Eléctrica de España; 400000),
+ARCOS FRT.,WAN,36.6715,-5.8206,OSM way/144487932 'Subestación de Arcos de la Frontera' (Red Eléctrica de España; 400000;220000),
+TARIFA,WAN,36.0323,-5.6061,OSM way/98603324 'Subestación de Tarifa' (no operator; 400000),
+PTO. CRUZ,WAN,36.0722,-5.6151,OSM way/691036111 'Subestación Puerto de la Cruz' (Red Eléctrica de España; 400000;220000),Morocco cable landing
+GUILLENA,WAN,37.6364,-6.0974,OSM way/170424447 'Subestación de Guillena' (Red Eléctrica de España; 400000;220000),
+D.RODRIGO,WAN,37.2452,-5.8435,OSM way/144787749 'Subestación de Don Rodrigo' (Red Eléctrica de España; 400000;220000;66000),
+CARMONA,WAN,37.5572,-5.7591,OSM way/181664117 'Subestación Colectora Promotores Carmona' (Red Eléctrica de España; 400000;220000),"collector, near REE Carmona"
+PALOS,WAN,37.1847,-6.8829,OSM way/170424455 'Subestación de Palos de la Frontera' (no operator; 400000;220000),
+BIENVENIDA,BAD,38.3179,-6.1976,OSM relation/20290680 'Subestación de Bienvenida' (Red Eléctrica de España; 400000),
+BROVALES,BAD,38.3204,-6.7031,OSM way/144767090 'SE Brovales' (Red Eléctrica de España; 400000),
+BALBOA,BAD,38.3258,-6.7126,OSM way/144767084 'SET Balboa' (Red Eléctrica de España; 400000;220000),
+S.SERVAN,BAD,38.8065,-6.5153,OSM way/651711449 'SE Servan' (Red Eléctrica de España; 400000;220000),
+CARMONITA,BAD,39.0950,-6.3692,OSM way/1267694217 'SET CARMONITA' (Red Eléctrica de España; 400000;220000),
+ALMARAZ,CAC,39.8071,-5.6932,OSM relation/17148268 'Subestación Almaraz' (Red Eléctrica de España; 400000;220000),
+ARANUELO,CAC,39.9504,-5.5897,OSM way/168358225 'SET Arañuelo' (Red Eléctrica de España; 400000),
+J.M.ORIOL,CAC,39.7240,-6.8747,OSM way/1247212292 'Subestación José María Oriol Nuevo Parque' (Red Eléctrica de España; 220000),"220 kV OSM entry, same site"
+CEDILLO,CAC,39.6643,-7.5332,OSM way/84526032 'Subestación de Cedillo' (Red Eléctrica de España; 400000),Portugal tie
+CANAVERAL,CAC,39.7993,-6.3604,OSM way/989699715 'SE Cañaveral' (Red Eléctrica de España; 400000),Cañaveral
+VALDECAB.,SCE,39.2912,-5.1825,OSM way/168357739 'Subestación de Valdecaballeros' (Red Eléctrica de España; 400000),
+CABRA,SCE,37.4571,-4.4943,OSM way/170954487 'Subestación de Cabra' (Red Eléctrica de España; 400000),
+BRAZATORT,SCE,38.6524,-4.2538,OSM way/576439241 'Subestación de Brazatortas' (Red Eléctrica de España; 400000;220000),
+MANZANARES,SCE,39.0448,-3.3443,OSM way/222895334 'SE Manzanares' (Red Eléctrica de España; 400000;220000),
+RODAANDAL,SCE,37.2549,-4.7770,OSM way/170961288 'Subestación de La Roda de Andalucía' (Red Eléctrica de España; 400000),
+GUADAME,SCE,38.0487,-4.1930,OSM way/145461765 'Subestación de Guadalquivir Medio' (Red Eléctrica de España; 400000;220000),INFERRED: SCADA code GUADAME = GUADAlquivir MEdio (no OSM 'Guadame'); position fits Fig 2-4 links to Brazatortas/Cabra/Valdecaballeros
+MORATA,MAD,40.2560,-3.4430,OSM way/27936937 'Subestación de Morata' (Red Eléctrica de España; 400000;220000),
+SS. REYES,MAD,40.5474,-3.6261,"Nominatim 'San Sebastián de los Reyes' -> San Sebastián de los Reyes, Comunidad de Madrid, España",town centroid
+GALAPAGAR,MAD,40.5982,-4.0050,OSM way/27668869 'Subestación de Galapagar' (Red Eléctrica de España; 400000),
+LA CEREAL,MAD,40.6006,-3.7231,OSM way/101953901 'Subestación de La Cereal' (Red Eléctrica de España; 400000),
+MORALEJA,MAD,40.2600,-3.8751,OSM way/27949649 'Subestación de Moraleja' (Red Eléctrica de España; 400000;220000),
+VILLAVICIOSA,MAD,40.3470,-3.9054,OSM way/28683005 'Subestación de Villaviciosa' (Red Eléctrica de España;UFD; 400000),
+LOECHES,MAD,40.3878,-3.4226,OSM way/677413570 'Subestación Loeches 1' (Red Eléctrica de España; 400000;220000),
+ANCHUELO,MAD,40.4647,-3.2967,OSM way/170272148 'SE Anchuelo' (Red Eléctrica de España; 400000),
+BELINCHON,MAD,40.0342,-3.0798,OSM way/226886241 'Belinchon' (Red Eléctrica de España; 400000),
+SEGOVIA,CYL,40.9399,-4.1654,OSM way/170479580 'Subestación de Segovia' (Red Eléctrica de España; 400000),
+LASTRAS,CYL,40.8808,-4.3394,OSM way/283348372 'Subestación de Lastras del Pozo' (no operator; 400000;132000;45000;15000),
+MUDARRA,CYL,41.7896,-4.9366,OSM way/74384031 'Subestación de La Mudarra' (Red Eléctrica de España; 400000;220000),
+TORDESILLAS,CYL,41.5068,-5.0129,OSM way/170511092 'Subestación Tordesillas' (Red Eléctrica de España; 400000;220000),
+VILLARINO,CYL,41.2551,-6.4875,OSM way/144327157 'Subestación de Villarino' (Red Eléctrica de España; 400000;220000),Duero hydro
+ALDEADAVILA,CYL,41.2077,-6.6788,OSM way/47911346 'Subestación de Aldeadávila II' (Red Eléctrica de España; 400000),"Duero hydro, Portugal tie"
+HINOJOSA,CYL,41.0172,-6.7336,OSM way/134884956 'Subestación de Hinojosa' (Red Eléctrica de España; 400000),
+GRIJOTA,CYL,42.0717,-4.5557,OSM way/85817084 'Subestación eléctrica de Grijota 440 kV' (Red Eléctrica de España; 400000;220000),
+MESON,NW,43.1671,-8.3558,OSM way/104370242 'Subestación Eléctrica do Mesón do Vento' (Red Eléctrica de España; 400000;220000),
+CARTELLE,NW,42.2564,-8.0574,OSM way/143483666 'Subestación de Cartelle' (Red Eléctrica de España; 400000),Portugal tie
+SOTO,NW,43.3137,-5.8868,OSM way/43842955 'Subestación Soto de Ribera' (Red Eléctrica de España; 400000;220000;132000),
+ROBLA,NW,42.7959,-5.6374,OSM way/173535816 'SET La Robla' (Red Eléctrica de España; 400000),
+MONTEARENAS,NW,42.5729,-6.5502,OSM way/58928252 'Subestación de Montearenas' (Red Eléctrica de España; 400000;220000),
+VELILLA,NW,42.8220,-4.8583,OSM way/118057369 'Subestacion de Velilla del Río Carrión' (Red Eléctrica de España; 400000),
+AGUAYO,N,43.1195,-4.0199,OSM way/51822825 'Subestación de Aguayo' (Red Eléctrica de España; 400000;220000),pumped storage
+HERRERA,N,42.5945,-4.3429,OSM way/47842260 'Subestación Eléctrica de Herrera' (Red Eléctrica de España; 400000;220000),
+GUENES,N,40.5982,-4.0050,OSM way/27668869 'Subestación de Galapagar' (Red Eléctrica de España; 400000),Güeñes
+ICHASO,N,43.0615,-2.2740,OSM way/196202213 'Subestación de Itxaso' (Red Eléctrica de España; 400000;220000),
+HERNANI,N,43.2598,-1.9686,OSM way/196207063 'Subestación Eléctrica de Hernani' (no operator; 400000;220000;132000),France tie (Argia)
+VITORIA,N,42.8506,-2.6614,"Nominatim 'Vitoria-Gasteiz' -> Vitoria-Gasteiz, Gasteizko kuadrilla, Araba / Álava, Euskadi",town centroid
+ARAGON,ARA,41.2173,-0.2805,OSM way/127787669 'Subestación Eléctrica Aragón' (Red Eléctrica de España; 400000),
+MAGALLON,ARA,41.8467,-1.3811,OSM way/1266081844 'Subestación de Magallón' (Red Eléctrica de España; 400000),
+ESCATRON,ARA,41.2871,-0.3250,"Nominatim 'Escatrón' -> Escatrón, Ribera Baja del Ebro, Zaragoza, Aragón, 50790, Esp",town centroid
+MEQUINENZA,ARA,41.3682,0.2769,OSM way/129767234 'Subestación de Mequinenza' (Red Eléctrica de España; 400000;220000),
+VIC,CAT,41.9570,2.2822,"OSM way/178294745 'Subestació de Vic' (Red Eléctrica de España, S.A.; 400000;220000)",France tie (Baixas)
+RUBI,CAT,41.4733,2.0099,OSM way/124121964 'Subestació de Rubí' (Red Eléctrica de España; 400000;220000),
+SENTMENAT,CAT,41.6195,2.1118,OSM way/104020696 'Subestació de Sentmenat' (Red Eléctrica de España; 400000;220000),
+VANDELLOS,CAT,40.9763,0.8790,OSM way/140011919 'Subestació de Vandellòs' (Red Eléctrica de España; 400000),nuclear
+ASCO,CAT,41.1805,0.5680,"Nominatim 'Ascó, Tarragona' -> Ascó, Ribera d'Ebre, Tarragona, Catalunya, 43791, España","town centroid, nuclear"
+LA ELIANA,VAL,39.5546,-0.5106,OSM way/33771314 'Subestacion electrica La Eliana' (Red Eléctrica de España;Iberdrola; 400000;220000;132000;20000),
+CATADAU,VAL,39.2502,-0.5608,OSM way/126987023 'Subestación de Catadau' (Red Eléctrica de España; 400000;220000;132000),
+COFRENTES,VAL,39.2300,-1.0619,"Nominatim 'Cofrentes' -> Cofrentes, El Valle de Cofrentes-Ayora, València / Valencia,","town centroid, nuclear"
+MINGLANILLA,VAL,39.5248,-1.5652,OSM way/145171008 'Subestación de Minglanilla' (Red Eléctrica de España; 400000),
+OLMEDILLA,VAL,39.6383,-2.0848,OSM way/1277630152 'Subestación de Olmedilla' (Red Eléctrica de España; 400000),Cuenca (6b)
+TRILLO,MAD,40.7033,-2.6257,OSM way/226363063 'Subestación de Trillo' (Red Eléctrica de España; 400000),nuclear
+ROMICA,SE,39.0436,-1.7998,OSM way/144941889 'Subestación Eléctrica Romica' (Red Eléctrica de España; 400000),
+PINILLA,SE,38.7645,-1.6021,OSM way/144942113 'Subestación de Pinilla' (Red Eléctrica de España; 400000;132000;20000),
+ROCAMORA,SE,38.1478,-0.9462,OSM way/171251565 'Subestación de Rocamora' (Iberdrola Distribución Eléctrica; 400000;132000;66000),
+LITORAL,SE,36.9782,-1.9080,OSM way/144909722 'Subestación Litoral' (Red Eléctrica de España; 400000;132000),
+ALQUEVA,PT,38.1859,-7.4984,OSM way/144639174 'Subestação de Alqueva' (REN; 400000;60000),"Portugal, tie to Brovales"
+LINDOSO,PT,41.8682,-8.2081,OSM way/135457230 'Posto de Corte do Alto Lindoso' (REN; 400000),"Portugal, tie to Cartelle"

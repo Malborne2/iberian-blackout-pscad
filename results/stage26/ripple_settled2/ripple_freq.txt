@@ -1,0 +1,2 @@
+# ripple peak, window 30.0-32.0 s (2.00 s)
+s25state dt    200 us   V34:   17.06 Hz  amp 0.00239 pu   P34:   17.09 Hz  amp      30 MW   (samples 10001)

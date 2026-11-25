@@ -1,0 +1,19 @@
+=== settle gate, window 19.5-20.0 s ===
+FAIL  all 5 machines f = 50.00 +- 0.02 Hz      32:57.9635 37:44.6180 30:44.5968 31:60.5259 39F:49.9724
+FAIL  speed spread < 5 mHz                     15929.2 mHz
+FAIL  speed p-p each < 10 mHz                  32:1260.8 37:1769.7 30:1864.2 31:1393.4 39F:0.4
+FAIL  collector VDF p-p < 0.005 pu             33:0.2820 34:0.2975 35:0.2724 36:0.2652 38:0.3496
+FAIL  collector VDF |drift| < 0.002 pu/s       33:+0.5220 34:+0.5231 35:+0.5075 36:+0.4859 38:+0.5752
+FAIL  plant TRIP all 0                         1
+PASS  BRK30 = 0                                0
+FAIL  BRK31 = 0                                1
+FAIL  BRK32 = 0                                1
+PASS  BRK37 = 0                                0
+FAIL  BRKFR = 0                                1
+FAIL  OOS1 = 0                                 1
+FAIL  PTIE = +335 +- 100 MW (S->F)             -0 (p-p 1)
+FAIL  HVDC P = 1000 +- 10 MW export            1206
+RESULT 2/14
+collector VDF means: 33:1.3611 34:1.3624 35:1.3645 36:1.4125 38:1.3333
+unit P/Q/V means: 32 5 MW -63 Mvar 1.0436; 37 7446 MW -6177 Mvar 1.2505; 30 5012 MW -4629 Mvar 1.2984; 31 5 MW -60 Mvar 1.0577; 39F 4590 MW -682 Mvar 1.0214
+plants 21946 MW

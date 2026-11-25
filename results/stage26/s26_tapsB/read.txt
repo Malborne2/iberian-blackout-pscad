@@ -1,0 +1,17 @@
+# C:\PSCAD_work\s26\ib6_s26_tapsB_40_52.psout
+# t 0..52.000 s, values = 20 ms means centred at t (p-p over the 0.2 s before t)
+
+units: [1]=32, [2]=37, [3]=30, [4]=31, [5]=39F
+
+--- t = 52.00 s
+  unit  32: f  49.9785 Hz (p-p    2.0 mHz)  P     3747 MW  Q   -2421 Mvar  V 1.0304 pu  Tm*S     3760
+  unit  37: f  49.9786 Hz (p-p    1.9 mHz)  P     3328 MW  Q   -2358 Mvar  V 1.0331 pu  Tm*S     3365
+  unit  30: f  49.9787 Hz (p-p    2.2 mHz)  P     3121 MW  Q   -2112 Mvar  V 1.0478 pu  Tm*S     3135
+  unit  31: f  49.9785 Hz (p-p    1.9 mHz)  P     3541 MW  Q   +1861 Mvar  V 1.0306 pu  Tm*S     3552
+  unit 39F: f  49.9833 Hz (p-p    0.1 mHz)  P     3802 MW  Q   -1973 Mvar  V 1.0225 pu  Tm*S     4554
+  bus 33: VDF 1.0610 (p-p 0.0202)  plant P    3669 MW
+  bus 34: VDF 1.1033 (p-p 0.0257)  plant P    3484 MW
+  bus 35: VDF 1.0582 (p-p 0.0213)  plant P    3950 MW
+  bus 36: VDF 1.0818 (p-p 0.0238)  plant P    3286 MW
+  bus 38: VDF 1.0550 (p-p 0.0236)  plant P    4903 MW
+  plants 19291 MW, Iberian units 13736 MW, PTIE +790 MW (S->F), HVDC P -1011 (neg=export), V9 0.003 pu, OOS1 0

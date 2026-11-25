@@ -1,0 +1,808 @@
+===== PAGE 1 =====
+ 
+PUBLIC USE 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SUMMARY REPORT ON THE EVENTS AND ACTIONS OF THE NPPs AND THE CSN, 
+FROM THE PERSPECTIVE OF NUCLEAR SAFETY AND RADIATION PROTECTION, 
+DURING THE TOTAL LOSS OF ELECTRICAL POWER THAT OCCURRED ON 28 APRIL 2025 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+April 2026 
+ 
+ 
+
+===== PAGE 2 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+2 
+ 
+ 
+ 
+TABLE OF CONTENTS 
+ 
+ 
+ 
+1. PURPOSE ................................................................................................................................. 4 
+2. RESPONSE OF OPERATING NUCLEAR POWER PLANTS AND MAIN ACTIONS BY LICENSEES 
+in response to the loss of external power ............................................................................. 4 
+2.1 
+Electrical transient in the supply network .................................................................... 4 
+2.2 
+Response and actions of Spanish nuclear power plants to the total loss of external 
+power  ........................................................................................................................................ 6 
+3. ACTIONS BY SPANISH THE NUCLEAR SAFETY COUNCIL ...................................................... 8 
+3.1 
+Activation of the emergency response organisation ................................................... 8 
+3.2 
+Supervision by the CSN of the performance and operation of electrical systems at 
+nuclear power plants during the pre-alert .............................................................................. 9 
+3.3 
+Supervision of the licensees’ actions by the CSN resident inspectors ................... 10 
+4. CONCLUSIONS ...................................................................................................................... 12 
+ANNEX: Summary tables of the actions taken by the power plants ...................................... 14 
+ 
+ 
+ 
+ 
+This report does not assess or determine the causes of the total power loss incident that occurred 
+on 28 April 2025, as this does not fall within the remit of the Nuclear Safety Council, which is 
+limited to nuclear safety and radiation protection 
+ 
+ 
+ 
+ 
+
+===== PAGE 3 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+3 
+ACRONYMS 
+ 
+ 
+ 
+A&E:  Accident and Emergency 
+ARI: Assistant Resident Inspector 
+CAGE: Alternative Emergency Management Centre 
+CAT: Technical Support Centre 
+CECOP: Operational Coordination Centre 
+CSN: Spanish Nuclear Safety Council 
+DPR: CSN Technical Directorate for Radiation Protection 
+DSN: CSN Technical Directorate for Nuclear Safety 
+ETF: Technical Operating Specifications 
+GDE: Emergency diesel generator 
+GP: Main generator 
+HPP: Hydroelectric Power Plant 
+INES TEC: Institute for Systems and Computer Engineering, Technology and Science 
+INRE: CSN Resident Inspectorate 
+LPS: Total loss of external power supply 
+MWe: Megawatts of electricity 
+NPPs: Nuclear Power Plants 
+ORE: Emergency Response Organisation 
+PEI: On-site Emergency Plan 
+PRS: Procedures for restoring service 
+REE: Spanish Electricity Grid 
+RHR: residual heat removal system 
+RI: Resident Inspector 
+SALEM: CSN Emergency Room 
+SCN: CSN Nuclear Facilities Deputy-Directorate 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+===== PAGE 4 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+4 
+1. PURPOSE 
+The purpose of this report is to summarise the response of operating nuclear power plants (NPPs) 
+and the main actions taken by their licence holders following the total power loss incident that 
+occurred on 28 April 2025, which affected the entire Iberian Peninsula. It also summarises the 
+actions taken by the Spanish Nuclear Safety Council (CSN) during the incident, as well as the 
+subsequent supervisory actions carried out by this organisation. The actions of the licence holders of 
+other nuclear or radioactive facilities, nor those of the CSN associated with them, have not been 
+included here. 
+It is not within the competences of the CSN to assess or determine the causes of the incident in the 
+national electricity system; therefore, this report does not analyse those causes but only examines 
+the response to the incident from the perspective of its impact on nuclear safety and radiation 
+protection. 
+2. RESPONSE OF OPERATING NUCLEAR POWER PLANTS AND MAIN ACTIONS BY LICENSEES IN 
+RESPONSE TO THE LOSS OF EXTERNAL POWER 
+2.1 
+Electrical transient in the supply network  
+The information contained in this section is drawn from public sources (INESCTEC, REE, etc.). This 
+report does not evaluate this information; rather, it is used to provide a brief description of the 
+associated operational events. 
+The total loss of electricity supply was caused by several transients in the transmission grid, which 
+triggered trips in the generation chain, leading to a drop in grid frequency and a rise in voltage. This, 
+in turn, caused cascading failures that affected all distribution networks, ultimately resulting in the 
+collapse of the system at 12:33:24 on 28 April 2025.  
+ 
+ 
+Figure 1: Evolution of frequency and voltage in the grid prior to the blackout (Source: Compass 
+Lexecon-INESCTEC). 
+Electricity generation on 28 April, up to the moment the incident occurred, is shown in Figure 2, with 
+total nuclear power generation remaining stable at an average of 3,387 MWe. 
+
+===== PAGE 5 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+5 
+ 
+ 
+Figure 2: Electricity generation on 28 April 2025 (REE data) 
+ 
+On the morning of 28 April, visible voltage fluctuations were detected in the transmission grid, 
+prompting Red Eléctrica Española, REE (Spanish Electricity Grid) to take certain measures to address 
+these instabilities. 
+Subsequently, voltage began to rise linearly across the entire grid, coinciding with a sustained 
+reduction in exports via the interconnection with France, which eventually shifted to an import-based 
+mode. Due to the generalised increase in voltage, several transients occurred, characterised by trips 
+in the generation chain. These chain disconnections of generation units reduced reactive power 
+absorption, which contributed to overvoltage and a drop in frequency, which in turn caused, amongst 
+other things, the disconnection of the CCNNs due to underfrequency. 
+ 
+ 
+Figure 3: Dimensionless overvoltage contour map with reference voltage PU (a) 12:32:58, (b) 
+12:33:17, (c) 12:33:18 (Source: ENTSO-E) 
+
+===== PAGE 6 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+6 
+2.2 
+Response and actions of Spanish nuclear power plants to the total loss of external power 
+The following table summarises the operational status of Spanish nuclear power plants prior to the 
+incident: 
+Plant /Group 
+Operational 
+status 
+Electrical power 
+(MWe) 
+Almaraz I 
+Cold 
+h
+d
+- 
+Almaraz II 
+70% 
+680 
+Ascó I 
+70% 
+719 
+Ascó II 
+100% 
+1034 
+Cofrentes 
+Cold stop 
+- 
+Trillo 
+Refuelling 
+- 
+Vandellós II 
+100% 
+1089 
+ 
+Figure 4 shows a simplified diagram that conceptually illustrates the power supply to the loads in a 
+nuclear power plant from the external power grid (in this example, 400 kV and 200 kV substations) 
+or from the unit’s own main generator, should the plant be operating at full power and supplying 
+electricity to the grid. The power supply to the plant’s consumers is provided to the so-called normal 
+busbars and the safeguard (emergency) busbars. In the event of a failure in the external power 
+supply, the emergency busbars are equipped with diesel generators that start up in response to low 
+voltage or frequency signals at the busbars and connect to the relevant busbar to restore voltage 
+there, thereby supplying the power required to maintain the plant in a safe condition. 
+ 
+ 
+Figure 4: Block diagram of the external power supply in a nuclear power plant 
+ 
+As a result of the incident, the reactors that were operating at full power—Almaraz II, Ascó I and II, 
+and Vandellós II—underwent automatic shutdowns due to the drop in grid frequency. The main 
+actions taken at each of the NPPs units are summarised below: 
+
+===== PAGE 7 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+7 
+- Almaraz I NPP: the plant had been in cold shutdown with the reactor in a subcritical state since 
+16 April, with core cooling maintained by the residual heat removal system. The voltage loss 
+triggered the automatic start-up and engagement of the emergency diesel generators to restore 
+voltage to the safety busbars, with the reconnection of loads to the safety busbars taking place 
+without incident. 
+- Almaraz II NPP: In the seconds prior to the disconnection, several sudden drops in grid frequency 
+were detected (12:32:57, 12:33:16 and 12:33:18), each of increasing amplitude. Following this 
+last oscillation, 103.6% of the generator’s rated voltage and a reactive power of -500 MVAr were 
+reached, causing the voltage regulator’s minimum excitation limiter to trip. As the grid frequency 
+decreased, the generator terminal voltage continued to rise (to a value of 108.6%). Finally, 
+minimum frequency was reached at the normal busbars, causing the reactor cooling pumps to 
+shut down and the reactor to shut down automatically. 
+As in Unit I, the emergency diesel generators were started and connected to the safety busbars, 
+followed by the reconnection of the necessary loads. 
+- Ascó I and II NPPs: in both units, the reactor automatically shut down due to a minimum 
+frequency signal on the busbars supplying the reactor cooling pumps. The diesel generators 
+started up due to minimum voltage on the safety busbars, subsequently coupling correctly to 
+their busbars and correctly performing the load reconnection sequence. 
+- Cofrentes NPP: the plant was in a cold shutdown state, with the reactor in a subcritical condition. 
+The two recirculation pumps and the residual heat removal system pump (RHR-B), which was in 
+operation, tripped. Following a low-voltage signal on the emergency busbars of divisions I, II and 
+III, the respective emergency diesel generators started up and connected to their respective 
+busbars. The loads were connected sequentially as per design. 
+- Trillo NPP: the plant was shut down for refuelling. As a result of the loss of voltage in the external 
+busbars, the safety busbars lost voltage, triggering the start-up and connection signals for the 
+four safety diesel generators (GY10/20/30/40). The GY10/20/30 diesel generators started up 
+and connected to their busbars correctly. The GY40 did not start, resulting in a zero voltage on 
+its associated emergency busbar, which triggered the start-up of the GY80 emergency diesel 
+generator; this generator connected correctly, restoring voltage to the emergency busbar. 
+However, in the operating mode in which the plant was, the plant’s technical operating 
+specifications (ETF) only require two backup diesel generators to be operational; therefore, the 
+failure of the GY40 to start had no safety implications. 
+- Vandellós II NPP: the reactor was automatically shut down due to a minimum frequency signal 
+in the reactor cooling pumps. The emergency diesel generators and the essential diesel 
+generator started up, supplying power to the safety busbars and critical switchgear. 
+The complete loss of external power at Spanish NPPs triggers the declaration of a “pre-emergency 
+alert” in accordance with their on-site emergency plans (PEI). The plant operators carried out the 
+actions associated with the pre-emergency alert, notifying the CSN of this status in accordance with 
+their operating procedures. 
+Once the “power blackout” had been confirmed at all plants, REE proceeded gradually to restore the 
+system by starting up systems capable of operating autonomously without external power supply 
+(hydroelectric plants) to create energy islands. The process involves gradually adding generation 
+(combined cycle gas turbines) and demand to these islands, which, once stabilised, must be 
+interconnected until the system is fully restored. All these operations were coordinated by REE in 
+accordance with its Service Restoration Procedures (PRS). 
+
+===== PAGE 8 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+8 
+Spanish regional electricity distribution companies have internal procedures and coordination 
+arrangements with REE to restore power supply from the grid to the facility. Following instructions 
+from REE, service was gradually restored by creating isolated power islands from hydroelectric power 
+plants, all subject to the condition of the national grid. The restoration of external electricity supply 
+to the power plants took between 5 and 15 hours, depending on the characteristics and specific 
+circumstances of each site and the stability of the electricity grid. 
+3. ACTIONS BY SPANISH THE NUCLEAR SAFETY COUNCIL 
+3.1 
+Activation of the emergency response organisation 
+The CSN’s Emergency Response Organisation (ORE) can operate in four response modes (0 to 3) 
+depending on the severity, complexity or duration of the emergency. On 28 April, the emergency 
+control room (SALEM) was activated in Mode 1 at 12:35, after the extent of the incident became 
+known. The activation remained in place until 03:20 on 29 April, when it reverted to Level 0, or 
+permanent alert, once the pre-alert had been downgraded by the last facility, Cofrentes nuclear power 
+plant. 
+The main challenge facing the ORE was to maintain the operational continuity of communications, 
+given that: 
+- Communications with the nuclear power plants experienced some intermittent interruptions. 
+However, although continuous monitoring required operational adjustments at times, all facilities 
+complied with the communications requirements set out in their on-site emergency plans and 
+there was no need to activate alternative backup communication systems.  
+- At certain times, specific adjustments were made to communications with some operational 
+coordination centres (CECOPs), without this hindering the overall performance of the functions 
+associated with the management of off-site nuclear emergency plans. 
+In conclusion, the need to strengthen and diversify communication channels has been identified, as 
+the importance of having additional alternative and redundant systems to ensure operational 
+coordination, even in the most complex and adverse scenarios, has become apparent. Some of these 
+systems are currently available, whilst others are at various stages of development. 
+As regards the ORE’s operational response during the incident, the effectiveness and coordination of 
+its actions were highlighted, particularly in the following aspects:  
+- There was close collaboration and effective coordination between the ORE’s operational groups, 
+which enabled the smooth running of their activities. 
+- The operational groups had the necessary personnel to carry out their activities, both during 
+working hours when the activation began and outside of them. Coverage of work shifts was 
+guaranteed despite the occasional difficulties encountered with communications and travel.  
+- The CSN’s power generation system performed satisfactorily throughout the entire period it was 
+required.  
+- The CSN’s IT systems operated without any significant disruptions that would have prevented 
+tasks from being carried out.  
+- Logistical and security requirements were amply met by dedicated staff from the Logistics 
+Support Group.  
+
+===== PAGE 9 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+9 
+3.2 
+Supervision by the CSN of the performance and operation of electrical systems at nuclear 
+power plants during the pre-alert 
+Following the incident on 28 April 2025, the CSN requested the following information from the 
+operators of the nuclear power plants regarding the magnitude of the transient and the subsequent 
+actions taken as a result: 
+1. Evolution of electrical variables in the external busbars, as well as the impact on electrical 
+variables in the emergency busbars. 
+2. Sequence of activation and actions of electrical protection systems and margins recorded in 
+relation to the set points of the most representative parameters (minimum voltage and/or 
+overvoltage, minimum frequency, loss of synchronism, power oscillations, etc.). 
+3. Recent modifications (if any, subsequent to July 2021) to protection settings, indicating changes 
+to both settings and time delays. 
+4. Actions taken and procedures followed by control room staff to restore the external power supply. 
+5. Actions taken and procedures followed regarding the diesel generators during the loss of 
+external power supply and after service was restored. 
+6. Procedures carried out, in coordination with REE, to restore service. 
+7. Incidents that occurred during the restoration of service at power plants in the vicinity of the 
+plant. 
+To address the aforementioned issues, the licence holders requested additional information from 
+REE regarding the electrical variables of the substations (switch positions, active/reactive power, 
+voltage and frequency), service restoration procedures, values of the 400 kV network protection 
+systems that were triggered, as well as other notable events during the incident.  
+The CSN’s Technical Directorate for Nuclear Safety (DSN) analysed the reports submitted by the 
+power plants in response to the request for information, to assess whether the performance of the 
+equipment and the operation of the Spanish nuclear power plants occurred in accordance with the 
+design and applicable procedures from the perspective of the main electrical systems involved in the 
+event.  
+The conclusions drawn from this assessment were as follows: 
+1. The internal electrical systems of the Spanish nuclear power plants performed correctly and kept 
+the plants within their design parameters, so that nuclear safety was not compromised at any 
+time. The only exception was the failure to start a safeguards diesel generator at Trillo Nuclear 
+Power Plant, which posed no risk to emergency management as it was not required, given that 
+the plant was in shutdown mode for refuelling. The emergency diesel generator in that 
+redundancy system started correctly, supplying the associated emergency busbar. The power 
+supply to essential safety loads was guaranteed at all times. 
+2. The electrical protection systems operated correctly as designed, and the licence holders have 
+not reported any malfunctions in this regard. The modifications to the protection systems 
+implemented since 2021 had no impact on the sequence of disconnections or the subsequent 
+reconnection during restoration. Many of the alarms and protection systems did not activate as 
+the time delays were not met, due to the speed at which the grid voltage and frequency 
+degraded. 
+
+===== PAGE 10 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+10 
+3. The automatic response of the plants’ regulation and control systems was acceptable and in line 
+with design specifications. The alarms generated were as expected for this event. 
+4. The joint response from the various control rooms, in coordination with REE, was adequate. The 
+restoration of voltage from the hydroelectric power plants was rapid but not without difficulties, 
+and on numerous occasions the restoration manoeuvres had to be repeated. This was due to 
+the difference in the boundary conditions under which the current restoration procedures have 
+been defined, which envisage a localised recovery of the electricity supply in a scenario far 
+removed from the complete ‘power blackout’ that occurred during this event. External power 
+supply to the normal busbars was restored swiftly within a matter of a few hours. 
+3.3 
+Supervision of the licensees’ actions by the CSN resident inspectors 
+As previously noted, the nationwide blackout that occurred in the Spanish electricity grid on 28 April 
+2025 at 12:33:24 triggered a pre-emergency alert due to a complete loss of external power supply 
+(LPS) at the seven nuclear power plants in operation across Spain’s five sites. Between 28 and 29 
+April, the emergency status was deactivated at all plants, following the restoration of power supplies 
+from external lines and with no significant operational incidents recorded at any plant. 
+The CSN has a team of resident inspectors (RI) stationed at the nuclear power plants; the team at 
+each plant consists of one resident inspector and one assistant resident inspector (ARI) in the case 
+of a single unit, and one resident inspector and two assistant resident inspectors in the case of two 
+units. At the time of the incident, resident inspection staff were present at each of the power plants 
+and remained there until the pre-alert status was de-escalated. 
+In order to compile relevant information regarding the transient and the actions taken by the licence 
+holders whilst the emergency pre-alert was in place at all nuclear power plants, the DSN requested 
+the Deputy-Directorate for Nuclear Facilities to prepare a comprehensive report for all power plants, 
+including information on the following aspects: 
+- Operational status of the unit prior to the LPS 
+- Sequence of events during the emergency 
+o Automatic response actions 
+o Manual response actions 
+o Actions to restore and normalise power supplies 
+o Administrative communications issued by the operator (essentially, those covered by the 
+Emergency Plan) 
+- Incidents affecting communication systems 
+- Organisation of the operator during the emergency 
+- Significant failures in safety systems and operational incidents occurring during the emergency 
+- Actions taken by the CSN’s resident inspector. 
+This summary analysis took into account the information gathered directly by the inspectors during 
+the pre-alert, as well as other information and data provided by the licence holders or included in 
+the pre-alert report which, in compliance with the on-site emergency plan and CSN Instruction IS-
+44, the licence holders are required to submit to the CSN. 
+
+===== PAGE 11 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+11 
+The annex to this report includes, by way of summary, tables detailing the actions taken at each of 
+the plants: 
+From the individual analysis of each of the seven units, as well as the comparative analysis of the 
+information compiled by the plant’s RI, a number of general conclusions have been drawn, which are 
+set out below: 
+- At the moment the grid blackout occurred, the safety systems and equipment required to manage 
+the emergency were operational at all seven units, and at none of them were carrying out 
+significant activities that interfered with the management of the emergency. 
+- The automatic response actions of the safety systems following the occurrence of the LPS were 
+as intended in the design at all units, with the sole exception of the failure during start-up of the 
+GY40 backup diesel generator at Trillo NPP; in response to this failure, the emergency diesel 
+generator GY80 started up and synchronised automatically, in accordance with the design and, 
+therefore, with no impact on safety. 
+- The manual response actions carried out by the operating shifts in response to the LPS condition 
+were correct and in accordance with the provisions of the applicable procedures at the five plants. 
+- At all seven units, the procedures for restoring external power supply applicable in the event of a 
+power failure were successfully implemented, although recovery times varied depending on the 
+characteristics and specific features of each site and the stability of the electricity grid; this led 
+to the loss of some lines once power had been restored and, in other cases, to the extension of 
+the pre-emergency alert status.  
+- At the five nuclear power plants, isolated incidents were recorded in the communication systems 
+associated with the loss of power supply, which required the adoption of management measures, 
+both internally and in relations with the various external stakeholders. The scope and duration of 
+these incidents varied greatly depending on the site, although in all cases compliance with the 
+communication requirements established in the Emergency Response Plans (ERPs) was 
+maintained. 
+- During the pre-alert, there were some isolated failures in safety components (failure on start-up 
+of GY40 at Trillo NPP and on opening of the relief valve of steam generator A at Vandellós II NPP) 
+and some operational incidents. In no case did this cause problems for emergency management 
+or have an impact on safe operation. The causes of each failure or incident are known and, where 
+deemed applicable, the licence holders have taken the corresponding corrective measures. 
+- At all five plants, a pre-emergency alert was declared in accordance with trigger 1.2.1 of the 
+Emergency Plan (EP), and the emergency was deactivated after carrying out the checks set out 
+in the procedures, once the operating conditions of the units were deemed stable and safe, and 
+the external power supply was considered to have been restored and secured. The duration of 
+the emergency depended, in each case, on the time at which the external power supply was 
+restored and the time required to complete the recovery actions, ranging from 5 to 15 hours. 
+During the emergency, the licence holders issued the relevant communications, although some 
+incidents affecting the communication systems had a limited impact on the pace at which these 
+were sent. No deficiencies were detected regarding the communications required by the 
+Emergency Response Plans (ERPs). 
+- Throughout the emergency, the licence holders’ organisation responded appropriately, with no 
+instances of unfilled posts or organisational problems that impacted the emergency response or 
+the safety of the facilities. Incidents in the communication systems made it necessary, in some 
+
+===== PAGE 12 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+12 
+cases, to implement supplementary procedures regarding communications and staff 
+organisation; however, in all cases the situations were resolved satisfactorily. At all times, 
+operational shifts and on-call posts were covered. Technical Support Centres (CATs) were 
+established and maintained in operation without problems; at some plants, the CAT was located 
+at the Alternative Emergency Management Centre (CAGE). There were no problems with shift 
+changes. In some cases, it was necessary to use the CAGE for staff rest and refreshments. 
+- On 28 April 2025, the availability of CSN resident inspectors at each site varied from one facility 
+to another. At Cofrentes and Trillo, only the resident inspectors were available, as the assistant 
+resident inspectors were on leave. At Almaraz, the resident inspector and the assistant resident 
+inspector were available, as the other assistant resident inspector was on leave. At Ascó and 
+Vandellós-II, all inspectors were available (three at Ascó and two at Vandellós-II), and 
+arrangements were made for a resident inspector to travel to the Government Sub-delegation in 
+Tarragona and take up the post of head of the radiological group from the start of the emergency. 
+At the plants where more than one inspector was available, appropriate decisions were taken to 
+organise possible relief shifts. In the case of Cofrentes, given the protracted nature of the 
+emergency, the CSN sent a technical expert from Madrid to act as a substitute resident inspector 
+on 29 April 2025. 
+- Although the resident inspection team did not have access to the full sets of equipment in most 
+cases, and despite occasional communication issues (both internally, at the power plants, and 
+externally with the CSN and CECOP), it was able to monitor developments in the operational 
+situation at each unit and report to the CSN and CECOP in a timely manner. 
+4.  CONCLUSIONS  
+The main conclusions drawn from the assessment carried out are as follows: 
+- The electrical protection systems at the nuclear power plants functioned as designed. 
+- The automatic response actions of the power plants’ safety systems following the LPS (reactor 
+trip, diesel generator start-up, load transfer sequence) were in accordance with design. The only 
+exception (and bearing in mind that this was not required by the ETF) was the failure of the GY40 
+diesel generator at Trillo NPP to start; instead, the GY80 started and coupled to the emergency 
+busbar, as designed. 
+- The manual response actions taken by the operators in response to the LPS were correct, in 
+accordance with the applicable procedures. 
+- The licence holders, in communication with REE, successfully applied the procedures for restoring 
+power supply from the external grid, although recovery times varied depending on the 
+configuration at each site and the stability of the grid at each location. At three of the plants, 
+some previously restored lines were lost due to grid instability for several hours, until the external 
+power supply finally stabilised. 
+- At all five nuclear power plants, isolated incidents were recorded in the communication systems 
+associated with the loss of power supply, which required the adoption of management measures, 
+both internally and in relations with the various external stakeholders. The scope and duration of 
+these incidents varied greatly across the sites, although in all cases compliance with the 
+communication requirements established in the PEIs was maintained. 
+- All plants carried out the emergency actions set out in the PEIs, corresponding to the LPS situation 
+(initiating event 1.2.1), in an appropriate manner. The pre-alerts were deactivated after verifying 
+
+===== PAGE 13 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+13 
+that operating conditions were stable and safe, and that the external power supply had been 
+restored. 
+- The licence holders’ organisation responded appropriately during the emergency. All required 
+operational shifts and on-site teams were covered. The CATs remained operational and the 
+necessary relief shifts took place. However, at times it was necessary to adjust certain 
+communication and staff organisation procedures as a result of incidents affecting the available 
+systems. 
+- The availability of resident inspectors was ensured at all sites. Where possible, the necessary 
+relief shifts were organised.  
+- Despite the communication incidents, the RI was able to monitor the development of the 
+operational situation at each plant, reporting to the CSN headquarters and the CECOPs (or Civil 
+Protection, or Government Sub-delegation, depending on the situation in each province). 
+- The CSN’s ORE was activated immediately following the incident and remained operational until 
+the last facility lifted the pre-alert. 
+- The CSN’s SALEM support systems, including electrical, IT and logistical systems, operated stably 
+and reliably, enabling the operational teams to carry out their duties with continuity and 
+coordination. 
+ 
+ 
+
+===== PAGE 14 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+14 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ANNEX: Summary tables of the actions taken by the power plants 
+ 
+ 
+
+===== PAGE 15 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+15 
+Almaraz NPP: duration of the emergency pre-alert 11.7 hours 
+Unit I 
+Unit II 
+Operational status 
+MODE 5 (COLD SHUTDOWN) 
+MODE 1 (69% power) 
+Operational faults / 
+incidents 
+After establishing supply from Valdecañas HPP during the initial phase of the 
+emergency, it was lost at 13:55 (28/04/25). Supply was restored from Oriol HPP 
+between 14:35 and 17:20 (28/04/25) 
+Organisation of the licence 
+holder 
+Satisfactory, although there have been issues with locating staff at the 
+replacement checkpoints 
+Action taken by the RI 
+• 
+RIs available at the control centre: 2 out of 3 
+• 
+Monitoring of the emergency from the control centre from start to finish 
+• 
+Contact with Civil Protection was made at the start of the emergency, 
+coinciding with a situation of limited availability of the CECOP during the 
+pre-alert. 
+• 
+RIs were in contact with CSN (SCN/INRE)  
+• 
+Telephone contact with SALEM was not restored until 21:35 
+(28/04/25) 
+• 
+The RI organised itself for a possible relief shift (not required) 
+ 
+ 
+
+===== PAGE 16 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+16 
+Ascó NPP: duration of the emergency pre-alert 5.2 hours 
+Unit I 
+Unit II 
+Operational status 
+MODE 1 (71% power) 
+MODE 1 (100% power) 
+Operational faults / incidents 
+Nothing significant 
+Opening of the pressuriser relief valve 
+(however, it opened and closed as 
+designed) 
+Licensee’s organisation 
+Adequate, with no personnel management issues 
+The emergency was managed from the CAGE 
+The ORE remained activated until the morning of 29 April 2025 
+Action taken by the RI 
+• 
+RIs available at headquarters: 3 out of 3 
+• 
+Monitoring of the emergency by the 3 RIs from the control centre 
+from start to finish 
+• 
+Coordination with the RI of Vandellós-II NPP (RI of Vandellós-II NPP 
+at CECOP from the start of the pre-alert) 
+• 
+Communication with Civil Protection from the start of the emergency 
+• 
+RIs were in contact with the CSN (Salem and SCN/INRE)  
+• 
+In coordination with the Vandellós-II RI, arrangements were made to 
+carry out relief shifts 
+ 
+ 
+
+===== PAGE 17 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+17 
+Cofrentes NPP: duration of the emergency pre-alert 14.8 hours 
+Operational status 
+OPERATING CONDITION 4 (COLD SHUTDOWN) 
+Operational faults/incidents 
+• 
+Start-up of the RHR-B pump (residual heat removal system) with the 
+circuit depressurised due to the feed pump being out of service; no 
+consequences (under investigation) 
+• 
+After establishing supply from the Cortes-La Muela power plant and 
+the Cofrentes power plant in the initial phase of the emergency, the 
+former was lost at 15:28. At 15:56, supply was established from the 
+Collado substation. Supply from the Cortes-La Muela power plant 
+was restored at 18:05 (28/04/25) 
+Organisation of the operator 
+Adequate, although there were problems locating staff for the replacement 
+teams 
+Action by the RI 
+• 
+RIs available at the control centre: 1 out of 2 
+• 
+Monitoring of the emergency by the RI from the control centre from 
+start to finish 
+• 
+Communication with CECOP between 14:00 and 15:00 (28/04/25). 
+It was agreed as a precautionary measure that the RI would remain 
+at the plant, given the uncertainty regarding travel conditions to 
+Valencia. 
+• 
+The RI was in intermittent contact with the CSN (SALEM and 
+SCN/INRE) and with CECOP, depending on the availability of the 
+various communication systems. 
+• 
+The RI remained at the plant until 03:45 (29/04/25)  
+• 
+On 29 April 2025, the SCN technical adviser acted as a stand-in RI 
+at the plant 
+ 
+ 
+
+===== PAGE 18 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+18 
+Trillo NPP: duration of the emergency pre-alert 13.8 hours 
+Operational status 
+MODE 5 (REFUELLING) 
+Operational faults/incidents 
+• 
+Failure on start-up of the GY40 backup diesel generator (as per 
+design, the GY80 emergency diesel generator started up and 
+synchronised). The ETF in MODE 5 does not require this. 
+• 
+Losses of the 220 kV power supply restored from Bolarque 
+substation at 14:03 (on 4 occasions), until full restoration at 20:28 
+(28/04/25) 
+Organisation of the operator 
+Adequate, although there were issues with staffing the replacement 
+checkpoints 
+The CAGE was used for staff rest 
+Action taken by the RI 
+• 
+RIs available at the plant: 1 out of 2 
+• 
+Monitoring of the emergency by the RI from headquarters until 
+22:00 (28/04/25) 
+• 
+At 13:20 on 28 April 2025, communication was maintained with the 
+Government Sub-delegation as part of the monitoring of the situation.  
+• 
+The RI was in intermittent contact with the CSN (SALEM and 
+SCN/INRE) and the Government Sub-delegation, depending on the 
+availability of the various communication systems.  
+• 
+At around 22:00 (28/04/25), the RI travelled to Guadalajara to 
+contact the Government Sub-delegation  
+• 
+Consideration was given to sending a technical expert from 
+headquarters to the plant on 29 April 2025 to act as a stand-in RI 
+(not necessary) 
+ 
+ 
+
+===== PAGE 19 =====
+ 
+ 
+ 
+PUBLIC USE 
+ 
+19 
+Vandellós 2 NPP: duration of the emergency pre-alert 4.8 hours 
+Operational status 
+OPERATING CONDITION 1 (100% power) 
+Operational 
+faults/incidents 
+• 
+Failure on opening of the steam generator A relief valve (no 
+consequences, as the other valves opened correctly) 
+Licensee’s organisation 
+Adequate, with no personnel management issues 
+Action by the RI 
+• 
+RIs available at the plant: 2 out of 2 
+• 
+At the beginning of the emergency, in coordination with the Ascó 
+NPP RI, it was decided that the Vandellós-II NPP RI would travel to 
+the CECOP and act as head of the radiological group 
+• 
+Monitoring of the emergency from the plant by the ARI from start to 
+finish 
+• 
+The ARI remained in contact with the CSN (SALEM) and CECOP  
+• 
+The RI attended the plant following the deactivation of the CECOP 
+(18:30, 28/04/25) to monitor recovery operations, where he 
+remained until 21:30 (28/04/25), once mobile phone service had 
+been restored 
+ 

@@ -1,0 +1,42 @@
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   167
+    ARA-MAD   x3->3:   183 ->   282
+    ARA-N     x3->3:    59 ->   263
+    ARA-VAL   x1->2:    77 ->   230
+    BAD-CAC   x3->3:   155 ->   135
+    BAD-PT-S  x1->2:    81 ->   209
+    BAD-WAN   x3->3:   105 ->   208
+    CAC-CYL   x1->2:   178 ->   193
+    CAC-MAD   x6->6:   193 ->   257
+    CAC-PT-N  x1->2:    25 ->   230
+    CAC-SCE   x3->3:   150 ->   242
+    CYL-MAD   x4->4:   169 ->   187
+    CYL-N     x3->3:   136 ->   226
+    CYL-NW    x5->5:   143 ->   193
+    CYL-PT-N  x1->2:     5 ->   254
+    GRA-SCE   x1->2:    67 ->   140
+    GRA-SE    x1->2:    59 ->   234
+    GRA-WAN   x2->2:    80 ->   156
+    MAD-VAL   x4->4:   116 ->   228
+      N-NW    x4->4:   116 ->   275
+     NW-PT-N  x3->3:    61 ->   236
+   PT-S-WAN   x1->2:    58 ->   339
+    SCE-WAN   x4->4:   175 ->   209
+     SE-VAL   x4->4:    63 ->   167
+Traceback (most recent call last):
+  File "C:\Users\Ibrahim\OneDrive - Østfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\iberia_eq\pp_v2.py", line 407, in <module>
+    setx(x_); solve(full=True); print("resumed from pp_v2_state.pkl", flush=True)
+              ~~~~~^^^^^^^^^^^
+  File "C:\Users\Ibrahim\OneDrive - Østfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\iberia_eq\pp_v2.py", line 239, in solve
+    pp.runpp(net, init="results" if net.converged else "auto", max_iteration=50)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\run.py", line 244, in runpp
+    _powerflow(net, **kwargs)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\powerflow.py", line 71, in _powerflow
+    _ppci_to_net(result, net)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandapower\powerflow.py", line 177, in _ppci_to_net
+    raise LoadflowNotConverged("Power Flow {0} did not converge after "
+                               "{1} iterations!".format(algorithm, max_iteration))
+pandapower.auxiliary.LoadflowNotConverged: Power Flow nr did not converge after 50 iterations!

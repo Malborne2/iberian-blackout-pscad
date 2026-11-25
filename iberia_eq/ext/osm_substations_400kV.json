@@ -1,0 +1,6074 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-11-23T17:57:58Z",
+    "timestamp_areas_base": "2026-11-23T14:59:06Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 13137839467,
+  "lat": 41.6478896,
+  "lon": -1.2910280,
+  "tags": {
+    "name": "SET Pre Rueda",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "220000;400000"
+  }
+},
+{
+  "type": "node",
+  "id": 13137897860,
+  "lat": 41.3333819,
+  "lon": 0.2009823,
+  "tags": {
+    "name": "SET Almendrales 400 kV",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "node",
+  "id": 13137939428,
+  "lat": 41.3177017,
+  "lon": 0.2503080,
+  "tags": {
+    "name": "SET Las Mareas 30/400 kV",
+    "operator": "Green Capital Development 68, SLU",
+    "power": "substation",
+    "substation": "converter",
+    "voltage": "30000;400000"
+  }
+},
+{
+  "type": "node",
+  "id": 13137939439,
+  "lat": 41.3553206,
+  "lon": 0.2131331,
+  "tags": {
+    "name": "SET Almendra Promotores",
+    "operator": "Green Capital Development 68, SLU",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "node",
+  "id": 13137939440,
+  "lat": 41.3537737,
+  "lon": 0.2128662,
+  "tags": {
+    "name": "SET Almendra 400 kV",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 24636044,
+  "center": {
+    "lat": 38.8889562,
+    "lon": -9.1372700
+  },
+  "tags": {
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Fanhões",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SFN",
+    "ref_name": "Fanhões",
+    "start_date": "1986",
+    "substation": "transmission",
+    "voltage": "400000;220000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 24791388,
+  "center": {
+    "lat": 40.5195512,
+    "lon": -3.6719214
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación eléctrica de Fuencarral",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "power": "substation",
+    "substation": "transmission",
+    "surface": "paved",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 27668869,
+  "center": {
+    "lat": 40.5982214,
+    "lon": -4.0050232
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Galapagar",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 27936937,
+  "center": {
+    "lat": 40.2559764,
+    "lon": -3.4430064
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Morata",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 27949649,
+  "center": {
+    "lat": 40.2599560,
+    "lon": -3.8750829
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Moraleja",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Yahoo",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 28308003,
+  "center": {
+    "lat": 40.5659905,
+    "lon": -3.5960243
+  },
+  "tags": {
+    "area": "yes",
+    "barrier": "fence",
+    "fence_type": "metal",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de San Sebastián",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 28683005,
+  "center": {
+    "lat": 40.3470112,
+    "lon": -3.9054407
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Villaviciosa",
+    "operator": "Red Eléctrica de España;UFD",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 33771314,
+  "center": {
+    "lat": 39.5545838,
+    "lon": -0.5106262
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "name": "Subestacion electrica La Eliana",
+    "operator": "Red Eléctrica de España;Iberdrola",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000;20000"
+  }
+},
+{
+  "type": "way",
+  "id": 34585227,
+  "center": {
+    "lat": 39.9667916,
+    "lon": -0.0965304
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de la Plana",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 43842955,
+  "center": {
+    "lat": 43.3137437,
+    "lon": -5.8868212
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Soto de Ribera",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 47842260,
+  "center": {
+    "lat": 42.5944578,
+    "lon": -4.3429452
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica de Herrera",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 47911346,
+  "center": {
+    "lat": 41.2077303,
+    "lon": -6.6787589
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Aldeadávila II",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 51188420,
+  "center": {
+    "lat": 39.7243225,
+    "lon": -6.8772115
+  },
+  "tags": {
+    "area": "yes",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Central Eléctrica de Alcántara",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "operator:wikipedia": "es:Iberdrola",
+    "power": "substation",
+    "source": "GPS",
+    "substation": "transmission",
+    "voltage": "400000;220000;45000"
+  }
+},
+{
+  "type": "way",
+  "id": 51247251,
+  "center": {
+    "lat": 41.1060552,
+    "lon": -2.3744854
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Medinaceli",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 51822825,
+  "center": {
+    "lat": 43.1195469,
+    "lon": -4.0199396
+  },
+  "tags": {
+    "name": "Subestación de Aguayo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 52516392,
+  "center": {
+    "lat": 42.6317030,
+    "lon": -6.0409259
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "SE Villameca",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "ITACyL",
+    "source:date": "2008",
+    "substation": "transmission",
+    "voltage": "400000",
+    "voltage:secondary": "132000"
+  }
+},
+{
+  "type": "way",
+  "id": 58928252,
+  "center": {
+    "lat": 42.5729049,
+    "lon": -6.5502236
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Montearenas",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 60063660,
+  "center": {
+    "lat": 43.0023391,
+    "lon": -3.8452303
+  },
+  "tags": {
+    "name": "Subestación Eléctrica Virtus",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "ref_name": "VIRTUS",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 60351390,
+  "center": {
+    "lat": 39.4235462,
+    "lon": -0.4546680
+  },
+  "tags": {
+    "access": "no",
+    "barrier": "fence",
+    "description": "Estación eléctrica",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestació elèctrica de Torrent",
+    "operator": "Red Eléctrica de España;Iberdrola",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000;66000;20000"
+  }
+},
+{
+  "type": "way",
+  "id": 71531354,
+  "center": {
+    "lat": 41.5257178,
+    "lon": -0.1003253
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestacion de Peñalba",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 73511619,
+  "center": {
+    "lat": 42.0335627,
+    "lon": -6.8620500
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica La Aparecida",
+    "name:es": "Subestación Eléctrica La Aparecida",
+    "name:gl": "Subestación Eléctrica da Aparecida",
+    "operator": "Grupo Ibereólica Renovables",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;45000"
+  }
+},
+{
+  "type": "way",
+  "id": 74384031,
+  "center": {
+    "lat": 41.7896379,
+    "lon": -4.9366074
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de La Mudarra",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "ITACyL",
+    "substation": "transmission",
+    "voltage": "400000;220000",
+    "wikidata": "Q54866482"
+  }
+},
+{
+  "type": "way",
+  "id": 75606778,
+  "center": {
+    "lat": 41.5234718,
+    "lon": 1.8297281
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestació de Pierola",
+    "name:ca": "Subestació de Pierola",
+    "name:en": "Pierola Substation",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 75902880,
+  "center": {
+    "lat": 36.8950264,
+    "lon": -4.7456271
+  },
+  "tags": {
+    "barrier": "wall",
+    "location": "outdoor",
+    "name": "Subestación Tajo de la Encantada",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 77640470,
+  "center": {
+    "lat": 39.6598485,
+    "lon": -0.3169951
+  },
+  "tags": {
+    "name": "SET Gaussa",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 77654729,
+  "center": {
+    "lat": 39.6422445,
+    "lon": -0.2366467
+  },
+  "tags": {
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 81152317,
+  "center": {
+    "lat": 42.5526694,
+    "lon": -5.5756030
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestacion de Vilecha",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000;45000"
+  }
+},
+{
+  "type": "way",
+  "id": 84526032,
+  "center": {
+    "lat": 39.6643432,
+    "lon": -7.5332163
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Cedillo",
+    "name:es": "Subestación de Cedillo",
+    "name:pt": "Subestação de Cedillo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 85817084,
+  "center": {
+    "lat": 42.0716911,
+    "lon": -4.5557448
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestación eléctrica de Grijota 440 kV",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 86512030,
+  "center": {
+    "lat": 42.3476211,
+    "lon": -2.2636847
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Santa Engracia",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 90829734,
+  "center": {
+    "lat": 42.1706231,
+    "lon": -1.6758667
+  },
+  "tags": {
+    "location": "outdoor",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 97199647,
+  "center": {
+    "lat": 36.2484732,
+    "lon": -5.4115851
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Pinar del Rey",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 97286424,
+  "center": {
+    "lat": 36.4441562,
+    "lon": -5.2186850
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Jordana",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 97937366,
+  "center": {
+    "lat": 37.2165465,
+    "lon": -2.9423046
+  },
+  "tags": {
+    "name": "Subestación de Huéneja",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Agencia Andaluza de la Energía",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 98603324,
+  "center": {
+    "lat": 36.0323175,
+    "lon": -5.6060583
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestación de Tarifa",
+    "power": "substation",
+    "substation": "transition",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 101953901,
+  "center": {
+    "lat": 40.6005838,
+    "lon": -3.7230910
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestación de La Cereal",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 103158873,
+  "center": {
+    "lat": 42.3442991,
+    "lon": -7.2811237
+  },
+  "tags": {
+    "addr:postcode": "32787",
+    "frequency": "50",
+    "loc_name": "Subestación Eléctrica da Praia de San Mamede",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica da Pobra de Trives",
+    "name:es": "Subestación Eléctrica de A Pobra de Trives",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 103511952,
+  "center": {
+    "lat": 42.5857200,
+    "lon": -6.6241502
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "La Lomba",
+    "name:es": "La Lomba",
+    "name:gl": "A Lomba",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 104020696,
+  "center": {
+    "lat": 41.6194816,
+    "lon": 2.1117786
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestació de Sentmenat",
+    "name:ca": "Subestació de Sentmenat",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 104370242,
+  "center": {
+    "lat": 43.1670533,
+    "lon": -8.3557885
+  },
+  "tags": {
+    "alt_name": "Subestación das Travesas",
+    "designation": "Subestación Mesón do Vento",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica do Mesón do Vento",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 105259481,
+  "center": {
+    "lat": 43.3268125,
+    "lon": -3.0939593
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Abanto",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 115680075,
+  "center": {
+    "lat": 42.8837937,
+    "lon": -2.6034084
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Arrazua",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 118057369,
+  "center": {
+    "lat": 42.8219530,
+    "lon": -4.8582615
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestacion de Velilla del Río Carrión",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 118758874,
+  "center": {
+    "lat": 42.8185302,
+    "lon": -4.8523286
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Central Térmica de Velilla",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 124121959,
+  "center": {
+    "lat": 41.4748060,
+    "lon": 2.0238141
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestació elèctrica de Can Jardí",
+    "name:ca": "Subestació elèctrica de Can Jardí",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 124121964,
+  "center": {
+    "lat": 41.4732540,
+    "lon": 2.0098651
+  },
+  "tags": {
+    "name": "Subestació de Rubí",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 124722161,
+  "center": {
+    "lat": 41.1568938,
+    "lon": -8.4542081
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestação de Recarei",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SRR",
+    "ref_name": "Recarei",
+    "source": "bing",
+    "start_date": "1990",
+    "substation": "transmission",
+    "voltage": "400000;220000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 126881765,
+  "center": {
+    "lat": 40.6109786,
+    "lon": -0.1953969
+  },
+  "tags": {
+    "name": "Subestación de Morella",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "operator:wikipedia": "es:Iberdrola",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 126987023,
+  "center": {
+    "lat": 39.2502393,
+    "lon": -0.5608484
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Catadau",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 127787669,
+  "center": {
+    "lat": 41.2173025,
+    "lon": -0.2804743
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestación Eléctrica Aragón",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 127922062,
+  "center": {
+    "lat": 39.6491683,
+    "lon": -0.2474129
+  },
+  "tags": {
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "operator:wikipedia": "es:Iberdrola",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 129055610,
+  "center": {
+    "lat": 38.5729998,
+    "lon": -8.8583559
+  },
+  "tags": {
+    "access": "no",
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestação de Palmela",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SPM",
+    "ref_name": "Palmela",
+    "source": "Bing",
+    "start_date": "1979",
+    "substation": "transmission",
+    "voltage": "400000;150000"
+  }
+},
+{
+  "type": "way",
+  "id": 129441519,
+  "center": {
+    "lat": 37.9407454,
+    "lon": -1.1880082
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación El Palmar",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 129767234,
+  "center": {
+    "lat": 41.3682217,
+    "lon": 0.2769289
+  },
+  "tags": {
+    "barrier": "fence",
+    "fence_type": "chain_link",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Mequinenza",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 131715746,
+  "center": {
+    "lat": 39.3382555,
+    "lon": -9.0011880
+  },
+  "tags": {
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Rio Maior",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SRM",
+    "ref_name": "Rio Maior",
+    "start_date": "1979",
+    "substation": "transmission",
+    "voltage": "400000;220000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 132865612,
+  "center": {
+    "lat": 41.4028464,
+    "lon": -8.3899816
+  },
+  "tags": {
+    "alt_name": "Subestação de Riba de Ave",
+    "barrier": "fence",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Riba d'Ave",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "rating": "1476 MVA",
+    "ref": "SRA",
+    "ref_name": "Riba d'Ave",
+    "source": "http://www.centrodeinformacao.ren.pt/PT/InformacaoTecnica/Paginas/Subestacoes.aspx",
+    "start_date": "1984",
+    "substation": "transmission",
+    "voltage": "400000;150000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 134884956,
+  "center": {
+    "lat": 41.0172089,
+    "lon": -6.7335503
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Hinojosa",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 135457228,
+  "center": {
+    "lat": 41.8693673,
+    "lon": -8.2027379
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestação da Central Hidroelétrica do Alto Lindoso",
+    "operator": "Energias de Portugal",
+    "operator:short": "EDP",
+    "operator:wikidata": "Q1341222",
+    "power": "substation",
+    "ref_name": "Central do Alto Lindoso",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 135457230,
+  "center": {
+    "lat": 41.8681841,
+    "lon": -8.2080896
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Posto de Corte do Alto Lindoso",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "PCAL",
+    "ref_name": "Alto Lindoso",
+    "source": "PNOA",
+    "source:date": "2010",
+    "start_date": "1992",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 135806477,
+  "center": {
+    "lat": 41.6498434,
+    "lon": -1.2965838
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestación Rueda de Jalón",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 140011919,
+  "center": {
+    "lat": 40.9763069,
+    "lon": 0.8790132
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestació de Vandellòs",
+    "name:ca": "Subestació de Vandellòs",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 142182853,
+  "center": {
+    "lat": 41.2304464,
+    "lon": -8.6048056
+  },
+  "tags": {
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Vermoim",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SVM",
+    "ref_name": "Vermoim",
+    "start_date": "1959",
+    "substation": "transmission",
+    "voltage": "400000;220000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 143207685,
+  "center": {
+    "lat": 41.7217296,
+    "lon": -0.7418009
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestación de Peñaflor",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Bing",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 143483666,
+  "center": {
+    "lat": 42.2564207,
+    "lon": -8.0574144
+  },
+  "tags": {
+    "access": "private",
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Cartelle",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Bing",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144138420,
+  "center": {
+    "lat": 41.3202130,
+    "lon": -4.7269151
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Olmedo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144327157,
+  "center": {
+    "lat": 41.2550650,
+    "lon": -6.4874868
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Villarino",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "ref_name": "VILLARINO",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 144327917,
+  "center": {
+    "lat": 41.0347721,
+    "lon": -6.8033935
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Saucelle II",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144385734,
+  "center": {
+    "lat": 41.2199361,
+    "lon": -6.7374396
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestação de Lagoaça",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SLGC",
+    "ref_name": "Lagoaça",
+    "start_date": "2009",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 144396412,
+  "center": {
+    "lat": 41.1018018,
+    "lon": -7.6624001
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestação de Armamar",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SAMM",
+    "ref_name": "Armamar",
+    "start_date": "2010",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 144439469,
+  "center": {
+    "lat": 40.4685746,
+    "lon": -8.4796119
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Paraimo",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SPI",
+    "ref_name": "Paraimo",
+    "start_date": "2006",
+    "substation": "transmission",
+    "voltage": "400000;220000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144439472,
+  "center": {
+    "lat": 40.7018560,
+    "lon": -7.9927193
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Lobagueira",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SBA",
+    "ref_name": "Bodiosa",
+    "start_date": "2006",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144487932,
+  "center": {
+    "lat": 36.6715443,
+    "lon": -5.8205998
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Arcos de la Frontera",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 144554435,
+  "center": {
+    "lat": 40.0579094,
+    "lon": -8.8369723
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Lavos",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SLV",
+    "ref_name": "Lavos",
+    "start_date": "2002",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144564903,
+  "center": {
+    "lat": 39.6506019,
+    "lon": -8.7897253
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação da Batalha",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SBL",
+    "ref_name": "Batalha",
+    "start_date": "1973",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144573746,
+  "center": {
+    "lat": 39.4665753,
+    "lon": -8.1143324
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Posto de Corte do Pego",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "PCPG",
+    "ref_name": "Pego",
+    "start_date": "1992",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144599061,
+  "center": {
+    "lat": 39.5281321,
+    "lon": -7.7409440
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Falagueira",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SFR",
+    "ref_name": "Falagueira",
+    "start_date": "1992",
+    "substation": "transmission",
+    "voltage": "400000;150000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144601080,
+  "center": {
+    "lat": 38.8896094,
+    "lon": -7.5289116
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Estremoz",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SETM",
+    "ref_name": "Estremoz",
+    "start_date": "2009",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144608818,
+  "center": {
+    "lat": 39.0140669,
+    "lon": -8.9508731
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Posto de Corte do Ribatejo",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "PCRJ",
+    "ref_name": "Ribatejo",
+    "start_date": "2004",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144622215,
+  "center": {
+    "lat": 37.9975157,
+    "lon": -8.7637966
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Sines",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SSN",
+    "ref_name": "Sines",
+    "source": "Bing",
+    "start_date": "1978",
+    "substation": "transmission",
+    "voltage": "400000;150000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144635505,
+  "center": {
+    "lat": 38.0551072,
+    "lon": -8.1277832
+  },
+  "tags": {
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Ferreira do Alentejo",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "rating": "413 MVA",
+    "ref": "SFA",
+    "ref_name": "Ferreira do Alentejo",
+    "source": "http://www.centrodeinformacao.ren.pt/PT/InformacaoTecnica/Paginas/Subestacoes.aspx",
+    "start_date": "1963",
+    "substation": "transmission",
+    "voltage": "400000;150000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144639174,
+  "center": {
+    "lat": 38.1859452,
+    "lon": -7.4983569
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Alqueva",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SAV",
+    "ref:PT:apa:aia": "1477",
+    "ref_name": "Alqueva",
+    "start_date": "2007",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 144767084,
+  "center": {
+    "lat": 38.3258377,
+    "lon": -6.7126075
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "SET Balboa",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 144767090,
+  "center": {
+    "lat": 38.3203860,
+    "lon": -6.7031332
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "SE Brovales",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144787749,
+  "center": {
+    "lat": 37.2451888,
+    "lon": -5.8434599
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestación de Don Rodrigo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;66000"
+  }
+},
+{
+  "type": "way",
+  "id": 144909709,
+  "center": {
+    "lat": 37.7656418,
+    "lon": -1.4457307
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "ST Totana",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 144909722,
+  "center": {
+    "lat": 36.9782483,
+    "lon": -1.9080030
+  },
+  "tags": {
+    "name": "Subestación Litoral",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 144909723,
+  "center": {
+    "lat": 37.6334064,
+    "lon": -0.9610805
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestación La Asomada",
+    "operator": "Iberdrola Distribución Eléctrica",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000;66000;36000;33000;20000"
+  }
+},
+{
+  "type": "way",
+  "id": 144915428,
+  "center": {
+    "lat": 37.5642633,
+    "lon": -0.9550273
+  },
+  "tags": {
+    "name": "Subestación Escombreras",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000;220000;132000;66000;20000;11000"
+  }
+},
+{
+  "type": "way",
+  "id": 144915438,
+  "center": {
+    "lat": 37.5728040,
+    "lon": -0.9416132
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Nueva Escombreras",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144931782,
+  "center": {
+    "lat": 39.0413662,
+    "lon": -1.0074237
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Ayora",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000",
+    "voltage:secondary": "132000"
+  }
+},
+{
+  "type": "way",
+  "id": 144933376,
+  "center": {
+    "lat": 39.4592224,
+    "lon": -0.9882242
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Requena",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144940509,
+  "center": {
+    "lat": 39.4659580,
+    "lon": -0.9705731
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Requena",
+    "operator": "Adif",
+    "power": "substation",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 144941889,
+  "center": {
+    "lat": 39.0435830,
+    "lon": -1.7997946
+  },
+  "tags": {
+    "designation": "ST ROMICA",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica Romica",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 144942113,
+  "center": {
+    "lat": 38.7645387,
+    "lon": -1.6021105
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Pinilla",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000;20000"
+  }
+},
+{
+  "type": "way",
+  "id": 145171008,
+  "center": {
+    "lat": 39.5247962,
+    "lon": -1.5651725
+  },
+  "tags": {
+    "barrier": "gate",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Minglanilla",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission;traction",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 145302700,
+  "center": {
+    "lat": 41.2044712,
+    "lon": 0.5711201
+  },
+  "tags": {
+    "location": "outdoor",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 145312949,
+  "center": {
+    "lat": 41.3884015,
+    "lon": 0.5051885
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestació elèctrica de Maials",
+    "name:ca": "Subestació elèctrica de Maials",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 145461765,
+  "center": {
+    "lat": 38.0487148,
+    "lon": -4.1930097
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Guadalquivir Medio",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 145823172,
+  "center": {
+    "lat": 40.7241653,
+    "lon": -0.8493918
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Mezquita",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 146826566,
+  "center": {
+    "lat": 43.2562473,
+    "lon": -1.9753742
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 148488880,
+  "center": {
+    "lat": 39.1053648,
+    "lon": -1.9577019
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Galera",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;55000"
+  }
+},
+{
+  "type": "way",
+  "id": 151061884,
+  "center": {
+    "lat": 41.5772565,
+    "lon": -8.3226311
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Pedralva",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "rating": "900 MVA",
+    "ref": "SPDV",
+    "ref_name": "Pedralva",
+    "start_date": "2007",
+    "substation": "transmission",
+    "voltage": "400000;150000;130000"
+  }
+},
+{
+  "type": "way",
+  "id": 151168335,
+  "center": {
+    "lat": 38.7780269,
+    "lon": -9.2388655
+  },
+  "tags": {
+    "alt_name": "Subestação Alto da Mira",
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestação Alto de Mira",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SAM",
+    "ref_name": "Alto de Mira",
+    "start_date": "1963",
+    "substation": "transmission",
+    "voltage": "400000;220000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 153232112,
+  "center": {
+    "lat": 39.7159846,
+    "lon": -1.9312949
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "ST Moncada",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 156435509,
+  "center": {
+    "lat": 39.6410992,
+    "lon": -0.2354165
+  },
+  "tags": {
+    "frequency": "50;0",
+    "name": "Converter HVDC de Morvedre",
+    "power": "substation",
+    "substation": "converter",
+    "voltage": "400000;250000"
+  }
+},
+{
+  "type": "way",
+  "id": 159930931,
+  "center": {
+    "lat": 42.7770879,
+    "lon": -3.2154659
+  },
+  "tags": {
+    "barrier": "wall",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Barcina",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 163194137,
+  "center": {
+    "lat": 37.1986952,
+    "lon": -8.5159230
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Portimão",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SPO",
+    "ref_name": "Portimão",
+    "start_date": "2006",
+    "substation": "transmission",
+    "voltage": "400000;150000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 165580300,
+  "center": {
+    "lat": 41.3255368,
+    "lon": 2.0279806
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestació de Viladecans",
+    "name:ca": "Subestació de Viladecans",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 168357739,
+  "center": {
+    "lat": 39.2911936,
+    "lon": -5.1824950
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Valdecaballeros",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 168358225,
+  "center": {
+    "lat": 39.9504157,
+    "lon": -5.5897058
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "SET Arañuelo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 169523042,
+  "center": {
+    "lat": 41.4041336,
+    "lon": 1.1266451
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "Subestació elèctrica de Les Comes",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 169523046,
+  "center": {
+    "lat": 41.4050555,
+    "lon": 1.1251721
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "Subestació elèctrica de l'Espluga de Francolí",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 169729505,
+  "center": {
+    "lat": 41.9724795,
+    "lon": 2.6958288
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestació de Bescanó (MAT)",
+    "name:ca": "Subestació de Bescanó",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 169867109,
+  "center": {
+    "lat": 41.2952389,
+    "lon": -0.3413478
+  },
+  "tags": {
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 169867119,
+  "center": {
+    "lat": 41.2800238,
+    "lon": -0.2183628
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "SET Peaker",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 169883205,
+  "center": {
+    "lat": 43.5890938,
+    "lon": -7.5529387
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Boimente",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "ref_name": "BOIMENTE",
+    "source": "PNOA",
+    "source:name": "Instituto geografico Nacional",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 169999915,
+  "center": {
+    "lat": 41.3367873,
+    "lon": -0.9766594
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestación de Fuendetodos",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 170014037,
+  "center": {
+    "lat": 41.3209495,
+    "lon": -1.7057102
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Terrer Vega",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 170272140,
+  "center": {
+    "lat": 40.7481325,
+    "lon": -2.9835427
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Fuentes de la Alcarría",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 170272148,
+  "center": {
+    "lat": 40.4646770,
+    "lon": -3.2966687
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "SE Anchuelo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 170424446,
+  "center": {
+    "lat": 37.5486051,
+    "lon": -7.2413509
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Puebla de Guzmán",
+    "operator": "Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;66000"
+  }
+},
+{
+  "type": "way",
+  "id": 170424447,
+  "center": {
+    "lat": 37.6363509,
+    "lon": -6.0974341
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "name": "Subestación de Guillena",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Bing",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 170424455,
+  "center": {
+    "lat": 37.1847288,
+    "lon": -6.8829386
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Palos de la Frontera",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 170479580,
+  "center": {
+    "lat": 40.9399194,
+    "lon": -4.1654019
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "Subestación de Segovia",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 170485453,
+  "center": {
+    "lat": 40.5499183,
+    "lon": -3.5667000
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "power": "substation",
+    "substation": "transition",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 170511092,
+  "center": {
+    "lat": 41.5068005,
+    "lon": -5.0128876
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Tordesillas",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 170946426,
+  "center": {
+    "lat": 37.2679806,
+    "lon": -3.7260875
+  },
+  "tags": {
+    "barrier": "fence",
+    "fence_type": "wire",
+    "location": "outdoor",
+    "name": "Subestación de Caparacena",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Agencia Andaluza de la Energía",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 170954487,
+  "center": {
+    "lat": 37.4570691,
+    "lon": -4.4942949
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Cabra",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 170961288,
+  "center": {
+    "lat": 37.2548587,
+    "lon": -4.7770117
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de La Roda de Andalucía",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 170968145,
+  "center": {
+    "lat": 36.7509163,
+    "lon": -4.6050953
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestación de Cártama",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;66000"
+  }
+},
+{
+  "type": "way",
+  "id": 171251565,
+  "center": {
+    "lat": 38.1477983,
+    "lon": -0.9462063
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Rocamora",
+    "operator": "Iberdrola Distribución Eléctrica",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000;66000"
+  }
+},
+{
+  "type": "way",
+  "id": 171253574,
+  "center": {
+    "lat": 38.5820446,
+    "lon": -9.1205944
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "indoor",
+    "name": "Subestação de Fernão Ferro",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SFF",
+    "ref_name": "Fernão Ferro",
+    "source": "Bing",
+    "start_date": "1980",
+    "substation": "transmission",
+    "voltage": "400000;150000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 171256169,
+  "center": {
+    "lat": 38.7190069,
+    "lon": -0.7225554
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "ST Beneixama",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 173535816,
+  "center": {
+    "lat": 42.7958568,
+    "lon": -5.6374307
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "SET La Robla",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 178294745,
+  "center": {
+    "lat": 41.9570351,
+    "lon": 2.2821754
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestació de Vic",
+    "operator": "Red Eléctrica de España, S.A.",
+    "power": "substation",
+    "ref": "Vic",
+    "ref:FR:RTE": ".VICH",
+    "ref_name": "VIC",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 181652541,
+  "center": {
+    "lat": 40.0341325,
+    "lon": -2.3240622
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Villanueva de los Escuderos I",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000",
+    "voltage:secondary": "50000"
+  }
+},
+{
+  "type": "way",
+  "id": 181652542,
+  "center": {
+    "lat": 40.0303101,
+    "lon": -2.3228658
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Villanueva de los Escuderos II",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 181664117,
+  "center": {
+    "lat": 37.5571661,
+    "lon": -5.7590592
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Colectora Promotores Carmona",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 181906370,
+  "center": {
+    "lat": 42.0974546,
+    "lon": -1.6674608
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "La Serna",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 181912569,
+  "center": {
+    "lat": 42.6694587,
+    "lon": -1.6545445
+  },
+  "tags": {
+    "converter": "yes",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Muruarte",
+    "operator": "Red Eléctrica de España;Iberdrola",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;66000"
+  }
+},
+{
+  "type": "way",
+  "id": 187645709,
+  "center": {
+    "lat": 43.4394236,
+    "lon": -7.8605531
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica da Central Térmica das Pontes de García Rodríguez",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 188618317,
+  "center": {
+    "lat": 42.6081917,
+    "lon": -6.5683509
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Compostilla II",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 188737728,
+  "center": {
+    "lat": 43.7019114,
+    "lon": -7.4788849
+  },
+  "tags": {
+    "name": "Subestación Aluminio",
+    "power": "substation",
+    "substation": "industrial",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 189184531,
+  "center": {
+    "lat": 43.3663294,
+    "lon": -6.3019661
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Estacion de Salas",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 189184555,
+  "center": {
+    "lat": 43.2430246,
+    "lon": -6.8658440
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica de Pesoz",
+    "name:es": "Subestación Eléctrica de Pesoz",
+    "name:gl": "Subestación Eléctrica de Pezós",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "ref_name": "PESOZ",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 189184557,
+  "center": {
+    "lat": 43.2919496,
+    "lon": -6.3954119
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "SET Central Térmica de Narcea",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 189577215,
+  "center": {
+    "lat": 42.7942403,
+    "lon": -5.6339328
+  },
+  "tags": {
+    "abandoned": "yes",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Central Térmica de La Robla",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 190058570,
+  "center": {
+    "lat": 43.3052347,
+    "lon": -5.6980804
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestacion de Lada",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 190110739,
+  "center": {
+    "lat": 43.5748200,
+    "lon": -5.8983053
+  },
+  "tags": {
+    "name": "Estacion de Tabiella",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000;66000"
+  }
+},
+{
+  "type": "way",
+  "id": 190236352,
+  "center": {
+    "lat": 41.4377219,
+    "lon": -2.5026066
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Almazán",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 191458480,
+  "center": {
+    "lat": 43.2426579,
+    "lon": -6.8546881
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica de Sanzo",
+    "name:gl": "Subestación Eléctrica de Sanzo",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 191480803,
+  "center": {
+    "lat": 42.8372454,
+    "lon": -6.5329935
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Anallares",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 196202213,
+  "center": {
+    "lat": 43.0614576,
+    "lon": -2.2739824
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Itxaso",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 196207063,
+  "center": {
+    "lat": 43.2598222,
+    "lon": -1.9685854
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica de Hernani",
+    "name:en": "Hernani Substation",
+    "name:es": "Subestación Eléctrica de Hernani",
+    "note": "Does a Basque name exist?",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 196207064,
+  "center": {
+    "lat": 43.2126461,
+    "lon": -2.2524020
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica de Azpeitia",
+    "name:en": "Azpeitia Substation",
+    "name:es": "Subestación Eléctrica de Azpeitia",
+    "note": "Does a Basque name exist?",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 196215046,
+  "center": {
+    "lat": 43.3496088,
+    "lon": -2.8806010
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Gatika",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000;132000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 200253359,
+  "center": {
+    "lat": 41.2550521,
+    "lon": 1.7192646
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestació Garraf",
+    "name:ca": "Subestació Garraf",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Bing",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 201459319,
+  "center": {
+    "lat": 37.3447158,
+    "lon": -7.7661025
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestação de Tavira",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "STVR",
+    "ref_name": "Tavira",
+    "start_date": "2011",
+    "substation": "transmission",
+    "voltage": "400000;150000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 202891403,
+  "center": {
+    "lat": 43.2188619,
+    "lon": -3.0303303
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Güeñes",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 216251164,
+  "center": {
+    "lat": 36.6697014,
+    "lon": -5.8279473
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Vallesol",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 217745445,
+  "center": {
+    "lat": 43.3886258,
+    "lon": -5.9948025
+  },
+  "tags": {
+    "name": "Subestación de Santa María de Grado",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 219501437,
+  "center": {
+    "lat": 43.2702127,
+    "lon": -6.6767025
+  },
+  "tags": {
+    "alt_name": "Subestación de Alto de El Palo",
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de El Palo",
+    "name:gl": "Subestación del Palo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "power": "substation",
+    "ref_name": "EL PALO",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 222895334,
+  "center": {
+    "lat": 39.0448499,
+    "lon": -3.3443078
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "SE Manzanares",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 223207745,
+  "center": {
+    "lat": 43.3587392,
+    "lon": -3.0910275
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Zierbena",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 223307054,
+  "center": {
+    "lat": 42.2297049,
+    "lon": 2.9483392
+  },
+  "tags": {
+    "barrier": "fence",
+    "fence_type": "metal",
+    "height": "3",
+    "location": "outdoor",
+    "name": "Subestació de Santa Llogaia d'Àlguema",
+    "name:ca": "Subestació de Santa Llogaia d'Àlguema",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 226363063,
+  "center": {
+    "lat": 40.7032821,
+    "lon": -2.6257427
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Trillo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 226886241,
+  "center": {
+    "lat": 40.0341771,
+    "lon": -3.0798156
+  },
+  "tags": {
+    "barrier": "fence",
+    "fixme": "name,operator",
+    "name": "Belinchon",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 229184275,
+  "center": {
+    "lat": 38.5232003,
+    "lon": -1.3328118
+  },
+  "tags": {
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 256334221,
+  "center": {
+    "lat": 42.2303855,
+    "lon": 2.9442521
+  },
+  "tags": {
+    "barrier": "fence",
+    "fence_type": "metal",
+    "frequency": "0",
+    "height": "3",
+    "location": "outdoor",
+    "name": "Estació transformadora de Santa Llogaia d'Àlguema",
+    "name:ca": "Estació transformadora de Santa Llogaia d'Àlguema",
+    "name:en": "Santa Llogaia Static Inverter Station",
+    "name:fr": "Station de conversion de Santa Llogaia d'Àlguema",
+    "operator": "INELFE",
+    "power": "substation",
+    "substation": "converter",
+    "voltage": "400000;320000"
+  }
+},
+{
+  "type": "way",
+  "id": 260018670,
+  "center": {
+    "lat": 39.9817779,
+    "lon": -3.1139561
+  },
+  "tags": {
+    "name": "Subestación de Santa Cruz de la Zarza",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000",
+    "voltage:secondary": "25000"
+  }
+},
+{
+  "type": "way",
+  "id": 265408693,
+  "center": {
+    "lat": 39.2627061,
+    "lon": -0.9190459
+  },
+  "tags": {
+    "name": "Cortes II",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "operator:wikipedia": "es:Iberdrola",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 283348372,
+  "center": {
+    "lat": 40.8808263,
+    "lon": -4.3393932
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Lastras del Pozo",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000;45000;15000"
+  }
+},
+{
+  "type": "way",
+  "id": 327268322,
+  "center": {
+    "lat": 37.0709698,
+    "lon": -2.3123167
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Tabernas",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 340399370,
+  "center": {
+    "lat": 42.2299387,
+    "lon": 2.9465155
+  },
+  "tags": {
+    "barrier": "fence",
+    "fence_type": "metal",
+    "height": "3",
+    "location": "outdoor",
+    "name": "Estació transmissora de Santa Llogaia d'Àlguema",
+    "name:ca": "Estació transmissora de Santa Llogaia d'Àlguema",
+    "name:en": "Santa Llogaia Transmission Station",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 401804126,
+  "center": {
+    "lat": 43.3236417,
+    "lon": -3.4622227
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Udalla",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 430071597,
+  "center": {
+    "lat": 43.2569711,
+    "lon": -1.9749556
+  },
+  "tags": {
+    "addr:city": "Hernani",
+    "addr:housenumber": "52B",
+    "addr:postcode": "20120",
+    "addr:street": "Osinaga auzoa",
+    "building": "yes",
+    "name": "Iberduero S.a.",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 434238959,
+  "center": {
+    "lat": 41.8887244,
+    "lon": -4.3817307
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "SET Cerrato",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 487381592,
+  "center": {
+    "lat": 37.1202033,
+    "lon": -4.4151044
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestación de Archidona",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 489953309,
+  "center": {
+    "lat": 43.6932840,
+    "lon": -7.5039041
+  },
+  "tags": {
+    "name": "Subestación Eléctrica de Xove",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "power": "substation",
+    "ref_name": "XOVE",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 504178826,
+  "center": {
+    "lat": 38.8829719,
+    "lon": -1.2782327
+  },
+  "tags": {
+    "name": "Campanario",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 542145772,
+  "center": {
+    "lat": 40.9739168,
+    "lon": -7.6887131
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestação do Sub-parque Eólico de Moimenta",
+    "operator": "Finerge",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 576439241,
+  "center": {
+    "lat": 38.6524257,
+    "lon": -4.2537636
+  },
+  "tags": {
+    "name": "Subestación de Brazatortas",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000",
+    "voltage:secondary": "220000"
+  }
+},
+{
+  "type": "way",
+  "id": 591669458,
+  "center": {
+    "lat": 41.8688877,
+    "lon": -4.5134738
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestacion de Tracción Dueñas",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;250000"
+  }
+},
+{
+  "type": "way",
+  "id": 591673330,
+  "center": {
+    "lat": 42.4503157,
+    "lon": -5.3712054
+  },
+  "tags": {
+    "name": "Subestación rectificadora",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "operator:wikipedia": "es:Administrador de Infraestructuras Ferroviarias",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 593535391,
+  "center": {
+    "lat": 39.2199353,
+    "lon": -5.3765697
+  },
+  "tags": {
+    "name": "SET Mesa de Copa",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000",
+    "voltage:secondary": "220000"
+  }
+},
+{
+  "type": "way",
+  "id": 626886449,
+  "center": {
+    "lat": 43.1280676,
+    "lon": -7.4164610
+  },
+  "tags": {
+    "name": "Subestación Eléctrica de Ludrio",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 627293640,
+  "center": {
+    "lat": 41.0329960,
+    "lon": -0.8397199
+  },
+  "tags": {
+    "name": "SET Muniesa",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 648169311,
+  "center": {
+    "lat": 38.1938315,
+    "lon": -7.4970603
+  },
+  "tags": {
+    "location": "overground",
+    "name": "Subestação da Central Hidroelétrica de Alqueva 2",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;15000"
+  }
+},
+{
+  "type": "way",
+  "id": 651711449,
+  "center": {
+    "lat": 38.8064523,
+    "lon": -6.5152594
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "SE Servan",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 675714143,
+  "center": {
+    "lat": 38.5217948,
+    "lon": -1.3333403
+  },
+  "tags": {
+    "name": "Subestación Peñarrubia",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 677413570,
+  "center": {
+    "lat": 40.3877745,
+    "lon": -3.4225698
+  },
+  "tags": {
+    "frequency": "50",
+    "name": "Subestación Loeches 1",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 683693772,
+  "center": {
+    "lat": 41.0229116,
+    "lon": -0.3821572
+  },
+  "tags": {
+    "name": "Subestacion De Mudéjar",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 683892938,
+  "center": {
+    "lat": 42.0624639,
+    "lon": 2.8831055
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "La Farga",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "PNOA:2020",
+    "start_date": "2019",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 691036111,
+  "center": {
+    "lat": 36.0722471,
+    "lon": -5.6151210
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Subestación Puerto de la Cruz",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 694016335,
+  "center": {
+    "lat": 41.3586274,
+    "lon": -8.6128826
+  },
+  "tags": {
+    "landuse": "industrial",
+    "name": "Subestação de Vila Nova de Famalicão",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SVNF",
+    "ref_name": "Vila Nova de Famalicão",
+    "start_date": "2015",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 701397734,
+  "center": {
+    "lat": 42.0477092,
+    "lon": -6.5436056
+  },
+  "tags": {
+    "name": "Subestación Eléctrica de Arbillera",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 729485840,
+  "center": {
+    "lat": 37.9634464,
+    "lon": -0.8968645
+  },
+  "tags": {
+    "name": "Subestación Torremendo",
+    "operator": "Iberdrola Distribución Eléctrica",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 742612300,
+  "center": {
+    "lat": 38.7388624,
+    "lon": -7.2765858
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "Subestação de Tração do Alandroal",
+    "operator": "Infraestruturas de Portugal",
+    "operator:short": "IP",
+    "operator:wikidata": "Q20730106",
+    "operator:wikipedia": "pt:Infraestruturas de Portugal",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 751560789,
+  "center": {
+    "lat": 40.9599581,
+    "lon": -8.4603738
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Subestação da Feira",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SFRA",
+    "ref_name": "Feira",
+    "start_date": "2013",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 753364578,
+  "center": {
+    "lat": 41.6706510,
+    "lon": -8.0304050
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "Posto de Corte de Vieira do Minho",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "PCVRM",
+    "ref_name": "Vieira do Minho",
+    "start_date": "2014",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 767739005,
+  "center": {
+    "lat": 41.5376280,
+    "lon": -7.7658818
+  },
+  "tags": {
+    "alt_name": "Posto de Corte de Gouvães",
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "Subestação de Gouvães",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "power": "substation",
+    "ref:PT:apa:aia": "2148",
+    "ref_name": "Gouvães",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 768087809,
+  "center": {
+    "lat": 41.5712129,
+    "lon": -7.7291068
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Posto de Corte do Alto Tâmega",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "power": "substation",
+    "ref_name": "Alto Tâmega",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 772002801,
+  "center": {
+    "lat": 37.9611088,
+    "lon": -1.3786635
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 772400244,
+  "center": {
+    "lat": 37.4370235,
+    "lon": -1.7189645
+  },
+  "tags": {
+    "name": "Subestación Carril",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 777446899,
+  "center": {
+    "lat": 37.5643331,
+    "lon": -0.9494255
+  },
+  "tags": {
+    "name": "Subestación Fausita",
+    "operator": "Iberdrola Distribución Eléctrica",
+    "power": "substation",
+    "voltage": "400000;220000;132000;66000;20000;11000"
+  }
+},
+{
+  "type": "way",
+  "id": 788716327,
+  "center": {
+    "lat": 38.4222154,
+    "lon": -6.2235071
+  },
+  "tags": {
+    "barrier": "fence",
+    "fence_type": "wire",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 791358190,
+  "center": {
+    "lat": 37.3823950,
+    "lon": -7.6994546
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestação da Central Solar de Alcoutim",
+    "operator": "WElink Energy/Solara4",
+    "power": "substation",
+    "ref_name": "Alcoutim",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 813954335,
+  "center": {
+    "lat": 38.7021634,
+    "lon": -8.8994353
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestação de Alcochete",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SACT",
+    "ref_name": "Alcochete",
+    "start_date": "2017",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 829082641,
+  "center": {
+    "lat": 38.3270590,
+    "lon": -6.7140969
+  },
+  "tags": {
+    "location": "outdoor",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 829082643,
+  "center": {
+    "lat": 38.3203255,
+    "lon": -6.7135919
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Siderúrgica Balboa",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 831327268,
+  "center": {
+    "lat": 42.4184542,
+    "lon": -2.2497375
+  },
+  "tags": {
+    "gas_insulated": "yes",
+    "location": "indoor",
+    "name": "Arubal",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 845179231,
+  "center": {
+    "lat": 38.5618800,
+    "lon": -0.8619021
+  },
+  "tags": {
+    "building": "industrial",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "operator:wikipedia": "es:Iberdrola",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 921541546,
+  "center": {
+    "lat": 39.2438023,
+    "lon": -0.9316952
+  },
+  "tags": {
+    "name": "La Muela II",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 931032666,
+  "center": {
+    "lat": 41.4042605,
+    "lon": 1.1240433
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestació elèctrica de l'Espluga de Francolí",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 931181199,
+  "center": {
+    "lat": 41.5264886,
+    "lon": -0.1003628
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Peñalba",
+    "operator": "Adif",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 931574994,
+  "center": {
+    "lat": 41.6503220,
+    "lon": -1.2975107
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Rueda de Jalón",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;50000"
+  }
+},
+{
+  "type": "way",
+  "id": 931602168,
+  "center": {
+    "lat": 41.3216426,
+    "lon": -1.7059368
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Terrer Vega (Adif)",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 931733590,
+  "center": {
+    "lat": 41.1055167,
+    "lon": -2.3737472
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "Medinaceli (Adif)",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;50000"
+  }
+},
+{
+  "type": "way",
+  "id": 931743752,
+  "center": {
+    "lat": 40.4638349,
+    "lon": -3.2961405
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "SET Anchuelo",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;50000"
+  }
+},
+{
+  "type": "way",
+  "id": 941947459,
+  "center": {
+    "lat": 42.3222435,
+    "lon": -3.8196830
+  },
+  "tags": {
+    "barrier": "fence",
+    "location": "outdoor",
+    "name": "SET Adif Buniel",
+    "operator": "Adif",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 964625644,
+  "center": {
+    "lat": 41.5509040,
+    "lon": -7.8121424
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Ribeira de Pena",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SRBP",
+    "ref_name": "Ribeira de Pena",
+    "start_date": "2021",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 981933507,
+  "center": {
+    "lat": 37.7186227,
+    "lon": -1.5445313
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación Totana Adif",
+    "operator": "Administrador de Infraestructuras Ferroviarias (Adif)",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 986410926,
+  "center": {
+    "lat": 40.6422760,
+    "lon": -6.5511472
+  },
+  "tags": {
+    "name": "SE Ciudad Rodrigo",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 986410945,
+  "center": {
+    "lat": 40.6125524,
+    "lon": -6.5601603
+  },
+  "tags": {
+    "name": "SET Cuidad Rodrigo",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000",
+    "voltage:primary": "400000",
+    "voltage:secondary": "27500"
+  }
+},
+{
+  "type": "way",
+  "id": 987944916,
+  "center": {
+    "lat": 38.6333392,
+    "lon": -7.9206390
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "Subestação do Divor",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SDVR",
+    "ref_name": "Divor",
+    "start_date": "2021",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 988035260,
+  "center": {
+    "lat": 38.6485297,
+    "lon": -8.6060085
+  },
+  "tags": {
+    "alt_name": "Posto de Corte de Pegões",
+    "barrier": "fence",
+    "name": "Subestação de Pegões",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SPGO",
+    "ref_name": "Pegões",
+    "start_date": "2021",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 989699715,
+  "center": {
+    "lat": 39.7992593,
+    "lon": -6.3603923
+  },
+  "tags": {
+    "name": "SE Cañaveral",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "https://www.ree.es/sites/default/files/04_SOSTENIBILIDAD/Documentos/tramitacion_ambiental/RA/Documento%20Ambiental%20Subestaci%C3%B3n%20Ca%C3%B1averal%20400%20kV.pdf",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1028926498,
+  "center": {
+    "lat": 41.0327997,
+    "lon": -0.8409176
+  },
+  "tags": {
+    "name": "SET Promotores Muniesa",
+    "power": "substation",
+    "voltage": "220000;400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1032009205,
+  "center": {
+    "lat": 39.5643437,
+    "lon": -5.6669133
+  },
+  "tags": {
+    "name": "SET Planta Fotovoltaica Francisco Pizarro",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1042227719,
+  "center": {
+    "lat": 37.5592402,
+    "lon": -2.7473368
+  },
+  "tags": {
+    "name": "Subestación de Baza",
+    "power": "substation",
+    "source": "https://ayuntamientodebaza.es/tag/subestacion-electrica",
+    "start_date": "2022-11-09",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1054310285,
+  "center": {
+    "lat": 40.1765712,
+    "lon": -7.4555555
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação do Fundão",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SFDA",
+    "ref_name": "Fundão",
+    "start_date": "2021",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1054312727,
+  "center": {
+    "lat": 39.6285343,
+    "lon": -7.4642692
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "SET FV SAN ANTONIO",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1100866837,
+  "center": {
+    "lat": 41.2304776,
+    "lon": -0.2621453
+  },
+  "tags": {
+    "name": "SET Sur",
+    "power": "substation",
+    "voltage": "400000;132000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1117748463,
+  "center": {
+    "lat": 43.3663060,
+    "lon": -6.3007021
+  },
+  "tags": {
+    "building": "yes",
+    "name": "Subestación de Salas 132/400 kV",
+    "operator": "Hidrocantábrico Distribución Eléctrica, S.A.U.",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "132000;400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1120397197,
+  "center": {
+    "lat": 39.4831141,
+    "lon": -2.1014930
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Subestación SSP",
+    "power": "substation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1123377073,
+  "center": {
+    "lat": 41.5234188,
+    "lon": -7.8615138
+  },
+  "tags": {
+    "barrier": "fence",
+    "landuse": "industrial",
+    "name": "Posto de Corte de Daivões",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "power": "substation",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1141933143,
+  "center": {
+    "lat": 43.3404732,
+    "lon": -3.5859100
+  },
+  "tags": {
+    "name": "Solórzano",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "start_date": "2013",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1153834517,
+  "center": {
+    "lat": 40.8026689,
+    "lon": -4.2087856
+  },
+  "tags": {
+    "landuse": "industrial",
+    "name": "Subestación Eléctrica Otero de Herreros",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;20000",
+    "voltage:primary": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1164100988,
+  "center": {
+    "lat": 38.8049309,
+    "lon": -6.5217776
+  },
+  "tags": {
+    "name": "Sub-1 Colectora San Serván",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1168861008,
+  "center": {
+    "lat": 39.9136536,
+    "lon": -5.4067468
+  },
+  "tags": {
+    "name": "Talayuela Solar",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000",
+    "voltage:secondary": "30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1172185252,
+  "center": {
+    "lat": 38.2379335,
+    "lon": -6.5891535
+  },
+  "tags": {
+    "name": "SET Apicio",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1175744923,
+  "center": {
+    "lat": 39.0474410,
+    "lon": -3.3417398
+  },
+  "tags": {
+    "name": "Subestación Manzanares colectora",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;132000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1218840771,
+  "center": {
+    "lat": 42.7467469,
+    "lon": -8.2510407
+  },
+  "tags": {
+    "name": "SET Sileda REE",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1218840772,
+  "center": {
+    "lat": 42.7479235,
+    "lon": -8.2523548
+  },
+  "tags": {
+    "name": "SET Sileda ADIF",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 1227066186,
+  "center": {
+    "lat": 41.7935523,
+    "lon": -4.9375245
+  },
+  "tags": {
+    "name": "SET Las Mazuelas",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1232962946,
+  "center": {
+    "lat": 41.4500020,
+    "lon": -5.3658729
+  },
+  "tags": {
+    "name": "Subestación Valdecarretas",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1236450374,
+  "center": {
+    "lat": 38.8838938,
+    "lon": -1.2779269
+  },
+  "tags": {
+    "name": "Campanario Adif",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1236451628,
+  "center": {
+    "lat": 38.8810662,
+    "lon": -1.2808947
+  },
+  "tags": {
+    "fixme": "yes",
+    "name": "SET Campanario Renovables",
+    "operator": "Elawan",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1237239896,
+  "center": {
+    "lat": 40.0297640,
+    "lon": -2.3206021
+  },
+  "tags": {
+    "name": "Villanueva de los Escuderos II",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1240967180,
+  "center": {
+    "lat": 43.2359583,
+    "lon": -2.7492924
+  },
+  "tags": {
+    "name": "Amorebieta",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1241153459,
+  "center": {
+    "lat": 43.0033672,
+    "lon": -3.8446345
+  },
+  "tags": {
+    "name": "SET Promotores Virtus",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "132000;400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1244663999,
+  "center": {
+    "lat": 42.6321136,
+    "lon": -6.0388870
+  },
+  "tags": {
+    "name": "Subestación Villameca Eolica",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "132000;400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1245866984,
+  "center": {
+    "lat": 39.6411969,
+    "lon": -2.0818543
+  },
+  "tags": {
+    "name": "Subestación Sabinar Generación",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1246115410,
+  "center": {
+    "lat": 39.6054142,
+    "lon": -6.3394713
+  },
+  "tags": {
+    "power": "substation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1246916016,
+  "center": {
+    "lat": 38.2865487,
+    "lon": -6.1603532
+  },
+  "tags": {
+    "power": "substation",
+    "substation": "yes",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1252105002,
+  "center": {
+    "lat": 40.4439614,
+    "lon": -3.5082671
+  },
+  "tags": {
+    "name": "SET San Fernando",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1256744849,
+  "center": {
+    "lat": 38.1970639,
+    "lon": -7.4964142
+  },
+  "tags": {
+    "name": "Subestação da Central Hidroelétrica de Alqueva 1",
+    "operator": "Energias de Portugal",
+    "operator:short": "EDP",
+    "operator:wikidata": "Q1341222",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1258290323,
+  "center": {
+    "lat": 41.2157593,
+    "lon": -7.4267979
+  },
+  "tags": {
+    "name": "Subestação da Central Hidroelétrica de Foz Tua",
+    "operator": "Movhera",
+    "power": "substation",
+    "ref:PT:apa:aia": "1916",
+    "ref_name": "Foz Tua",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1258384938,
+  "center": {
+    "lat": 41.5519452,
+    "lon": 2.0569653
+  },
+  "tags": {
+    "name": "Subestació elèctrica de Can Barba",
+    "name:ca": "Subestació elèctrica de Can Barba",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1259166797,
+  "center": {
+    "lat": 41.5238051,
+    "lon": -7.8655965
+  },
+  "tags": {
+    "name": "Subestação da Central Hidroelétrica de Daivões",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "operator:wikipedia": "en:Iberdrola",
+    "power": "substation",
+    "ref:PT:apa:aia": "2148",
+    "ref_name": "CH Daivões",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1259434653,
+  "center": {
+    "lat": 39.4213635,
+    "lon": -0.4511595
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Torrente-ADIF",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 1262722031,
+  "center": {
+    "lat": 36.1846421,
+    "lon": -5.4204172
+  },
+  "tags": {
+    "frequency": "50",
+    "name": "Subestación de Los Barrios",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1263279632,
+  "center": {
+    "lat": 41.0245848,
+    "lon": -0.3843311
+  },
+  "tags": {
+    "name": "SET Mudéjar Promotores",
+    "power": "substation",
+    "voltage": "400000;220000;33000"
+  }
+},
+{
+  "type": "way",
+  "id": 1263430948,
+  "center": {
+    "lat": 40.4433217,
+    "lon": -1.1158611
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Subestación Platea",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1266081844,
+  "center": {
+    "lat": 41.8466510,
+    "lon": -1.3810908
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Magallón",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1266109989,
+  "center": {
+    "lat": 41.3877849,
+    "lon": 0.5054906
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestació elèctrica de Maials",
+    "name:ca": "Subestació elèctrica de Maials",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1267694217,
+  "center": {
+    "lat": 39.0950218,
+    "lon": -6.3692079
+  },
+  "tags": {
+    "name": "SET CARMONITA",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "http://extremambiente.juntaex.es/files/Calidad%20y%20Evaluacion/2020/12/3/Proyecto_CR_Carmonita_sg.pdf;https://www.boe.es/diario_boe/txt.php?id=BOE-B-2019-12270",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1270848181,
+  "center": {
+    "lat": 42.5905510,
+    "lon": -3.8584455
+  },
+  "tags": {
+    "name": "SET Coculina",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "132000;400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1272514928,
+  "center": {
+    "lat": 38.9262358,
+    "lon": -6.7211855
+  },
+  "tags": {
+    "name": "Subestación Sagrajas",
+    "operator": "Adif",
+    "operator:wikidata": "Q358752",
+    "power": "substation",
+    "source:url": "https://www.ree.es/sites/default/files/04_SOSTENIBILIDAD/Documentos/tramitacion_ambiental/DIA/Documento%20Sintesis%20Subestaci%C3%B3n%20Sagrajas%20400%20kV%20%28ADIF%29.pdf",
+    "substation": "traction",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1272548315,
+  "center": {
+    "lat": 42.3227021,
+    "lon": -3.8205975
+  },
+  "tags": {
+    "name": "Subestación Buniel",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "https://izharia.com/referencias/subestacion-la-torca-400-132-kv/",
+    "substation": "transmission",
+    "voltage": "400000;25000"
+  }
+},
+{
+  "type": "way",
+  "id": 1277630100,
+  "center": {
+    "lat": 39.6393587,
+    "lon": -2.0835416
+  },
+  "tags": {
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1277630103,
+  "center": {
+    "lat": 39.6386711,
+    "lon": -2.0862718
+  },
+  "tags": {
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1277630152,
+  "center": {
+    "lat": 39.6383128,
+    "lon": -2.0847536
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestación de Olmedilla",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1277780445,
+  "center": {
+    "lat": 39.5240477,
+    "lon": -1.5647253
+  },
+  "tags": {
+    "operator": "Adif",
+    "power": "substation",
+    "substation": "traction",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1277780459,
+  "center": {
+    "lat": 39.5269725,
+    "lon": -1.5673019
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Minglanilla-Generación",
+    "power": "substation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1277780472,
+  "center": {
+    "lat": 39.5249554,
+    "lon": -1.5671296
+  },
+  "tags": {
+    "barrier": "fence",
+    "power": "substation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1278864373,
+  "center": {
+    "lat": 39.4601901,
+    "lon": -0.9875924
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "location": "outdoor",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1298167959,
+  "center": {
+    "lat": 39.0454672,
+    "lon": -8.9279481
+  },
+  "tags": {
+    "barrier": "fence",
+    "name": "Subestação de Vila Nova da Rainha",
+    "operator": "EDP Renováveis",
+    "operator:en": "EDP Renewables",
+    "operator:pt": "EDP Renováveis",
+    "operator:short": "EDPR",
+    "operator:wikidata": "Q1274362",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;60000"
+  }
+},
+{
+  "type": "way",
+  "id": 1316892946,
+  "center": {
+    "lat": 36.1841729,
+    "lon": -5.3907584
+  },
+  "tags": {
+    "name": "Subestación de Central de Ciclo Combinado Campo de Gibraltar",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1322975653,
+  "center": {
+    "lat": 37.7598428,
+    "lon": -8.3472926
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestação de Panóias",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref": "SPNA",
+    "ref_name": "Panóias",
+    "start_date": "2024-12",
+    "substation": "switching",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1331154119,
+  "center": {
+    "lat": 39.1831007,
+    "lon": -8.9379781
+  },
+  "tags": {
+    "alt_name": "Subestação da Central Fotovoltaica de Torre Bela",
+    "barrier": "fence",
+    "name": "Subestação da Central Fotovoltaica de Rio Maior",
+    "operator": "Neoen",
+    "power": "substation",
+    "ref_name": "Torre Bela",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1332493810,
+  "center": {
+    "lat": 36.3063408,
+    "lon": -5.3975316
+  },
+  "tags": {
+    "fixme": "Corregir cuando haya nuevas imágenes por satélite disponibles",
+    "name": "Subestación de Castellar de la Frontera",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1358349622,
+  "center": {
+    "lat": 40.0343003,
+    "lon": -3.0754770
+  },
+  "tags": {
+    "name": "Subestación Colectora Belinchón",
+    "power": "substation",
+    "voltage": "400000;132000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1359377028,
+  "center": {
+    "lat": 42.3246197,
+    "lon": -3.8180977
+  },
+  "tags": {
+    "barrier": "fence",
+    "fence_type": "split_rail",
+    "name": "Subestación La Torca",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "https://izharia.com/referencias/subestacion-la-torca-400-132-kv/",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1421833203,
+  "center": {
+    "lat": 41.5738354,
+    "lon": -7.7312607
+  },
+  "tags": {
+    "name": "Subestação da Central Hidroelétrica do Alto Tâmega",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1431026204,
+  "center": {
+    "lat": 40.7091770,
+    "lon": -2.6413684
+  },
+  "tags": {
+    "name": "Subestación Uma",
+    "power": "substation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1432060227,
+  "center": {
+    "lat": 39.7234170,
+    "lon": -6.8789293
+  },
+  "tags": {
+    "name": "Subestación Edificio ICE",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1432060229,
+  "center": {
+    "lat": 39.6497090,
+    "lon": -6.9740431
+  },
+  "tags": {
+    "name": "Subestación FV Tagus IV",
+    "power": "substation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1447258194,
+  "center": {
+    "lat": 42.7392303,
+    "lon": -4.8667090
+  },
+  "tags": {
+    "name": "Subestación Velilla Solar",
+    "power": "substation",
+    "substation": "yes",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1447258198,
+  "center": {
+    "lat": 42.6296287,
+    "lon": -4.8529716
+  },
+  "tags": {
+    "name": "Subestación Virgen de Areños III",
+    "power": "substation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1447258202,
+  "center": {
+    "lat": 42.8223983,
+    "lon": -4.8628156
+  },
+  "tags": {
+    "power": "substation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1447429837,
+  "center": {
+    "lat": 39.0980404,
+    "lon": -6.3688136
+  },
+  "tags": {
+    "name": "CARMONITA 400/220",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1448240979,
+  "center": {
+    "lat": 38.1989947,
+    "lon": -6.3972510
+  },
+  "tags": {
+    "name": "SE Segura de Leon",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1448240984,
+  "center": {
+    "lat": 38.1856848,
+    "lon": -6.3351970
+  },
+  "tags": {
+    "name": "SE PFS Emin",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1448249985,
+  "center": {
+    "lat": 39.7976793,
+    "lon": -6.3583695
+  },
+  "tags": {
+    "name": "Subestación Pizarroso I",
+    "power": "substation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1449716061,
+  "center": {
+    "lat": 41.4486171,
+    "lon": -5.3676412
+  },
+  "tags": {
+    "name": "Subestación Toro Renovables",
+    "power": "substation",
+    "source": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2021-21371",
+    "substation": "generation",
+    "voltage": "400000;132000;66000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1462950857,
+  "center": {
+    "lat": 41.6781569,
+    "lon": -8.5938737
+  },
+  "tags": {
+    "fixme": "Adicionar linhas elétricas novas com recurso a imagens aéreas mais recentes.",
+    "landuse": "industrial",
+    "name": "Subestação de Ponte de Lima",
+    "operator": "REN",
+    "operator:wikidata": "Q1862842",
+    "power": "substation",
+    "ref_name": "Ponte de Lima",
+    "start_date": "2025-11",
+    "substation": "transmission",
+    "voltage": "400000;150000"
+  }
+},
+{
+  "type": "way",
+  "id": 1480647902,
+  "center": {
+    "lat": 41.7900456,
+    "lon": -4.9294059
+  },
+  "tags": {
+    "name": "Subestación Colectora Oliva",
+    "power": "substation",
+    "source:url": "https://www.boe.es/diario_boe/txt.php?id=BOE-B-2020-40948",
+    "substation": "transmission",
+    "voltage": "400000;66000"
+  }
+},
+{
+  "type": "way",
+  "id": 1482328176,
+  "center": {
+    "lat": 42.0701608,
+    "lon": -4.5558818
+  },
+  "tags": {
+    "name": "SET HUSILLOS 400/132 kV.",
+    "power": "substation",
+    "source:url": "https://www.diputaciondepalencia.es/system/files/2024-10/20241021-bop-127-Ordinario.pdf",
+    "substation": "generation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1484018453,
+  "center": {
+    "lat": 39.5449238,
+    "lon": -5.6964650
+  },
+  "tags": {
+    "name": "subestación elevadora PSFV Campo de Arañuelo 30/400 kV",
+    "operator": "Naturgy",
+    "operator:wikidata": "Q474690",
+    "power": "substation",
+    "source:url": "https://bop.dip-caceres.es/bop/anuncio.html?csv=BOP-2024-1329",
+    "substation": "generation",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1484773439,
+  "center": {
+    "lat": 37.5493085,
+    "lon": -6.0871114
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestación La Reunión",
+    "power": "substation",
+    "substation": "distribution",
+    "voltage": "400000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1485775385,
+  "center": {
+    "lat": 38.3244100,
+    "lon": -6.7123467
+  },
+  "tags": {
+    "name": "SET Balboa",
+    "operator": "Endesa",
+    "operator:wikidata": "Q1275336",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;66000"
+  }
+},
+{
+  "type": "way",
+  "id": 1487830852,
+  "center": {
+    "lat": 37.6320089,
+    "lon": -6.0905785
+  },
+  "tags": {
+    "name": "Subestación Promotores Guillena",
+    "power": "substation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1488478024,
+  "center": {
+    "lat": 38.5208792,
+    "lon": -1.3303934
+  },
+  "tags": {
+    "name": "SET colectora La Alquería",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1489081301,
+  "center": {
+    "lat": 39.0419142,
+    "lon": -1.0088430
+  },
+  "tags": {
+    "name": "SE7 Preconcentradora 400/132 kV",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1493646686,
+  "center": {
+    "lat": 41.0347777,
+    "lon": -6.8033935
+  },
+  "tags": {
+    "name": "SE Saucelle II",
+    "operator": "Iberdrola",
+    "operator:wikidata": "Q1437502",
+    "power": "substation",
+    "substation": "transmission",
+    "voltage": "400000;45000"
+  }
+},
+{
+  "type": "way",
+  "id": 1493949519,
+  "center": {
+    "lat": 37.2848890,
+    "lon": -5.7822325
+  },
+  "tags": {
+    "name": "Subestación Matallana",
+    "power": "substation",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1497273183,
+  "center": {
+    "lat": 42.4892182,
+    "lon": -8.2495110
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "location": "outdoor",
+    "name": "Subestación Eléctrica de Beariz",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Esri",
+    "start_date": "2024-05-09",
+    "substation": "transmission",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1497273186,
+  "center": {
+    "lat": 42.2522639,
+    "lon": -8.3166306
+  },
+  "tags": {
+    "barrier": "fence",
+    "frequency": "50",
+    "landuse": "industrial",
+    "name": "Subestación de Fontefría",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Esri",
+    "start_date": "2025-01-08",
+    "substation": "transmission",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "way",
+  "id": 1499389789,
+  "center": {
+    "lat": 39.6638684,
+    "lon": -7.5398917
+  },
+  "tags": {
+    "name": "Subestación de la Central Hidroeléctrica de Cedillo",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;15000"
+  }
+},
+{
+  "type": "way",
+  "id": 1517819534,
+  "center": {
+    "lat": 37.1203700,
+    "lon": -4.4446086
+  },
+  "tags": {
+    "name": "S6",
+    "power": "substation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1518525084,
+  "center": {
+    "lat": 37.2689343,
+    "lon": -3.7298129
+  },
+  "tags": {
+    "name": "Subestación Promotores Caparacena",
+    "power": "substation",
+    "voltage": "400000;220000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1518713742,
+  "center": {
+    "lat": 37.0701001,
+    "lon": -2.3159563
+  },
+  "tags": {
+    "name": "Subestación Tabernas Renovables",
+    "power": "substation",
+    "voltage": "400000;132000"
+  }
+},
+{
+  "type": "way",
+  "id": 1564675622,
+  "center": {
+    "lat": 40.9343649,
+    "lon": -4.1931456
+  },
+  "tags": {
+    "name": "Subestación Majano",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;132000;30000"
+  }
+},
+{
+  "type": "way",
+  "id": 1564675626,
+  "center": {
+    "lat": 40.9381817,
+    "lon": -4.1635804
+  },
+  "tags": {
+    "power": "substation",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "way",
+  "id": 1580299363,
+  "center": {
+    "lat": 42.5919462,
+    "lon": -4.3410168
+  },
+  "tags": {
+    "name": "SET Herrera Promotores",
+    "power": "substation",
+    "substation": "generation",
+    "voltage": "400000;132000;30000"
+  }
+},
+{
+  "type": "relation",
+  "id": 10295969,
+  "center": {
+    "lat": 41.7669279,
+    "lon": 1.9350574
+  },
+  "tags": {
+    "name": "Estació receptora de Calders",
+    "name:ca": "Estació receptora de Calders",
+    "power": "substation",
+    "ref": "Calders",
+    "type": "multipolygon",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "relation",
+  "id": 16809528,
+  "center": {
+    "lat": 41.3554434,
+    "lon": 1.9023853
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestació de Begues",
+    "name:ca": "Subestació de Begues",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "substation": "transmission",
+    "type": "multipolygon",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "relation",
+  "id": 17148268,
+  "center": {
+    "lat": 39.8071126,
+    "lon": -5.6932304
+  },
+  "tags": {
+    "frequency": "50",
+    "layer": "1",
+    "location": "outdoor",
+    "name": "Subestación Almaraz",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "Bing",
+    "substation": "transmission",
+    "type": "multipolygon",
+    "voltage": "400000;220000"
+  }
+},
+{
+  "type": "relation",
+  "id": 17290041,
+  "center": {
+    "lat": 39.0120442,
+    "lon": -8.9513112
+  },
+  "tags": {
+    "landuse": "industrial",
+    "name": "Subestação da Central Termoeléctrica do Ribatejo",
+    "operator": "Energias de Portugal",
+    "operator:short": "EDP",
+    "operator:wikidata": "Q1341222",
+    "power": "substation",
+    "substation": "generation",
+    "type": "multipolygon",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "relation",
+  "id": 17294947,
+  "center": {
+    "lat": 39.4677092,
+    "lon": -8.1118344
+  },
+  "tags": {
+    "landuse": "industrial",
+    "name": "Subestação da Central Termoelétrica do Pego",
+    "operator": "Engie",
+    "power": "substation",
+    "substation": "generation",
+    "type": "multipolygon",
+    "voltage": "400000;20000;18000"
+  }
+},
+{
+  "type": "relation",
+  "id": 17294973,
+  "center": {
+    "lat": 37.9304380,
+    "lon": -8.8032779
+  },
+  "tags": {
+    "landuse": "industrial",
+    "name": "Subestação da Central Termoeléctrica de Sines",
+    "operator": "Energias de Portugal",
+    "operator:short": "EDP",
+    "operator:wikidata": "Q1341222",
+    "power": "substation",
+    "substation": "generation",
+    "type": "multipolygon",
+    "voltage": "400000;150000;60000"
+  }
+},
+{
+  "type": "relation",
+  "id": 17444204,
+  "center": {
+    "lat": 42.5907719,
+    "lon": -3.8597575
+  },
+  "tags": {
+    "name": "Subestación La Lora",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "operator:wikipedia": "es:Red Eléctrica de España",
+    "power": "substation",
+    "source": "ITACyL",
+    "source:date": "2009",
+    "substation": "generation",
+    "type": "multipolygon",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "relation",
+  "id": 19040600,
+  "center": {
+    "lat": 41.6934456,
+    "lon": -8.0275743
+  },
+  "tags": {
+    "alt_name": "Subestação de Frades II",
+    "location": "outdoor",
+    "name": "Subestação da Central Hidroelétrica de Frades",
+    "operator": "Energias de Portugal",
+    "operator:short": "EDP",
+    "operator:wikidata": "Q1341222",
+    "power": "substation",
+    "ref_name": "Central de Frades",
+    "substation": "generation",
+    "type": "multipolygon",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "relation",
+  "id": 19645437,
+  "center": {
+    "lat": 40.1237204,
+    "lon": -8.7753518
+  },
+  "tags": {
+    "frequency": "50",
+    "location": "outdoor",
+    "name": "Subestação da Central de Ciclo Combinado de Lares",
+    "operator": "Energias de Portugal",
+    "operator:short": "EDP",
+    "operator:wikidata": "Q1341222",
+    "power": "substation",
+    "substation": "generation",
+    "type": "multipolygon",
+    "voltage": "400000"
+  }
+},
+{
+  "type": "relation",
+  "id": 20290680,
+  "center": {
+    "lat": 38.3179107,
+    "lon": -6.1975539
+  },
+  "tags": {
+    "location": "outdoor",
+    "name": "Subestación de Bienvenida",
+    "operator": "Red Eléctrica de España",
+    "operator:short": "REE",
+    "operator:wikidata": "Q1551220",
+    "power": "substation",
+    "substation": "transmission",
+    "type": "multipolygon",
+    "voltage": "400000"
+  }
+}
+
+  ]
+}

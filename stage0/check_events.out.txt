@@ -1,0 +1,37 @@
+events.csv rows: 173   clusters: 95
+
+== A2 anchor sums ==
+PASS  event 3 (Granada transformer)            csv=    355.00  report=    355.00  d=   +0.00  tol=0.5
+PASS  event 4a+4b (Badajoz)                    csv=    727.00  report=    727.00  d=   +0.00  tol=0.5
+PASS  event 5 (seven trips)                    csv=    928.00  report=    928.00  d=   +0.00  tol=0.5
+PASS  event 5 row count = 7 (report: seven trips)
+PASS  event 5a2 (largest of the seven)         csv=    550.00  report=    550.00  d=   +0.00  tol=0.05
+
+== Table 3-2, window 12:33:20.000-12:33:25.000, Spain rows only ==
+PASS  Combined Cycle                           csv=    719.00  report=    719.00  d=   +0.00  tol=0.05
+PASS  Nuclear Power Plant                      csv=   3390.00  report=   3390.00  d=   +0.00  tol=0.05
+PASS  PV                                       csv=   3198.07  report=   3198.10  d=   -0.03  tol=0.05
+PASS  PV and Thermo-Solar                      csv=     85.30  report=     85.30  d=   +0.00  tol=0.05
+PASS  Wind                                     csv=     48.90  report=     48.90  d=   +0.00  tol=0.05
+PASS  Wind and PV                              csv=    168.00  report=    168.00  d=   +0.00  tol=0.05
+PASS  Total generation                         csv=   7609.27  report=   7609.30  d=   -0.03  tol=0.05
+INFO  Pumped Hydro, all ES pump rows: csv=-2912.00  report=-2756.00
+NOTE  ES pump rows = 2912.00 MW; rows of cluster 50 = 156.00 MW are UV / loss-of-synchronism trips (footnotes 23-24), not frequency shedding.
+PASS  Pumped Hydro (cluster 50 excluded)       csv=  -2756.00  report=  -2756.00  d=   +0.00  tol=0.05
+
+  Spanish demand rows in window      :   1473.53 MW
+  Rows with country 'IP' in window   :   8635.58 MW  (6 rows, one per LFDD step)
+  Report Load (Table 3-2 / p.200)    :  -8504.30 MW
+  Report LFDD steps ES (p.200) total :   8505.00 MW
+  Report LFDD steps PT (p.202) total :   1955.00 MW
+  ES + IP rows                       :  10109.11 MW
+  => the Load row of Table 3-2 is NOT reproducible from events.csv as written.
+
+== internal consistency ==
+PASS  cluster 2a/b: detail rows 208.46 vs summary 208.00 (report prints 'Total 208' over 208.46 of detail rows)
+PASS  all generation-loss rows positive (0 violations)
+PASS  every non-line-event row has an MW value (0 exceptions)
+INFO  1 row(s) with page-header text inside the description field: [('7b', 'Pump −124 21 118  //  Grid Incident in S')]
+
+RESULT: numeric checks pass; 1 item(s) UNRESOLVED:
+        - Table 3-2 Load row (-8,504.3 MW) vs events.csv demand rows (see above)

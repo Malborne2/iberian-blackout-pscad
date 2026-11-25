@@ -1,0 +1,17 @@
+# C:/PSCAD_work/s27/trim3/trim3_24_36.psout
+# t 0..36.000 s, values = 20 ms means centred at t (p-p over the 0.2 s before t)
+
+units: [1]=32, [2]=37, [3]=30, [4]=31, [5]=39F
+
+--- t = 36.00 s
+  unit  32: f  49.9933 Hz (p-p    1.1 mHz)  P     4170 MW  Q   -2413 Mvar  V 1.0313 pu  Tm*S     4231
+  unit  37: f  49.9933 Hz (p-p    1.4 mHz)  P     3614 MW  Q   -2474 Mvar  V 1.0338 pu  Tm*S     3637
+  unit  30: f  49.9933 Hz (p-p    2.7 mHz)  P     3353 MW  Q   -2174 Mvar  V 1.0496 pu  Tm*S     3369
+  unit  31: f  49.9933 Hz (p-p    1.1 mHz)  P     4138 MW  Q   +1916 Mvar  V 1.0313 pu  Tm*S     4189
+  unit 39F: f  49.9927 Hz (p-p    0.0 mHz)  P     4240 MW  Q   -2097 Mvar  V 1.0220 pu  Tm*S     4904
+  bus 33: VDF 1.0631 (p-p 0.0313)  plant P    3860 MW
+  bus 34: VDF 1.0635 (p-p 0.0359)  plant P    3330 MW
+  bus 35: VDF 1.0604 (p-p 0.0316)  plant P    3876 MW
+  bus 36: VDF 1.0574 (p-p 0.0367)  plant P    3282 MW
+  bus 38: VDF 1.0554 (p-p 0.0364)  plant P    4860 MW
+  plants 19209 MW, Iberian units 15274 MW, PTIE +350 MW (S->F), HVDC P -1020 (neg=export), V9 0.003 pu, OOS1 0

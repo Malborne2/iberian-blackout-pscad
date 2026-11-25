@@ -1,0 +1,158 @@
+<Meta name="Spanish_grid_model">
+  <messagelist>
+    <message id="113032920" status="normal" label="build" groupid="400002" scope="Spanish_grid_model" classid="MessageObj"><![CDATA[Begin compiling with PSCAD Version 5.1.0]]></message>
+    <message id="1892293138" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="738391881" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="281069681" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="1983002843" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="923027312" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="2128553409" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="1936373209" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="277429793" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="1993260818" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="1381610038" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="1162217676" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="1455545206" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="358799184" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="1496377694" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="1862680154" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="1801583804" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="1479383628" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="464636186" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="302615309" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="1138985305" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="643391270" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="969267479" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="2085007737" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="1068278489" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="222119655" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="490870867" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="2100269143" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="1005370064" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="1038380016" status="error" label="build" groupid="307502" classid="CmpNavigator">
+      <User name="master:pgb" scope="Spanish_grid_model" status="error" link="787896773" /><![CDATA[Input port 'Signl' is floating. A signal source must be provided.]]></message>
+    <message id="1955031466" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="psse" scope="Spanish_grid_model" status="normal" link="782780565" /><![CDATA[Compiling 'psse'. Generating network and data files.]]></message>
+    <message id="1819913917" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T26_29" scope="Spanish_grid_model" status="normal" link="159241307" /><![CDATA[Compiling 'T26_29'. Generating network and data files.]]></message>
+    <message id="152114870" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T26_28" scope="Spanish_grid_model" status="normal" link="1993719147" /><![CDATA[Compiling 'T26_28'. Generating network and data files.]]></message>
+    <message id="1693966507" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T25_26" scope="Spanish_grid_model" status="normal" link="696025885" /><![CDATA[Compiling 'T25_26'. Generating network and data files.]]></message>
+    <message id="279715181" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T28_29" scope="Spanish_grid_model" status="normal" link="1922756813" /><![CDATA[Compiling 'T28_29'. Generating network and data files.]]></message>
+    <message id="649915006" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T2_25" scope="Spanish_grid_model" status="normal" link="898097024" /><![CDATA[Compiling 'T2_25'. Generating network and data files.]]></message>
+    <message id="557305594" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T26_27" scope="Spanish_grid_model" status="normal" link="1548502742" /><![CDATA[Compiling 'T26_27'. Generating network and data files.]]></message>
+    <message id="1651245988" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T17_27" scope="Spanish_grid_model" status="normal" link="610896872" /><![CDATA[Compiling 'T17_27'. Generating network and data files.]]></message>
+    <message id="10974234" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T1_2" scope="Spanish_grid_model" status="normal" link="132099961" /><![CDATA[Compiling 'T1_2'. Generating network and data files.]]></message>
+    <message id="117584266" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T17_18" scope="Spanish_grid_model" status="normal" link="27881116" /><![CDATA[Compiling 'T17_18'. Generating network and data files.]]></message>
+    <message id="1892091052" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T2_3" scope="Spanish_grid_model" status="normal" link="270883288" /><![CDATA[Compiling 'T2_3'. Generating network and data files.]]></message>
+    <message id="843542577" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T3_18" scope="Spanish_grid_model" status="normal" link="1563545167" /><![CDATA[Compiling 'T3_18'. Generating network and data files.]]></message>
+    <message id="922450979" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T16_17" scope="Spanish_grid_model" status="normal" link="880611736" /><![CDATA[Compiling 'T16_17'. Generating network and data files.]]></message>
+    <message id="673520758" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T16_24" scope="Spanish_grid_model" status="normal" link="1607065382" /><![CDATA[Compiling 'T16_24'. Generating network and data files.]]></message>
+    <message id="1896673943" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T1_39" scope="Spanish_grid_model" status="normal" link="1710875964" /><![CDATA[Compiling 'T1_39'. Generating network and data files.]]></message>
+    <message id="1876374657" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T15_16" scope="Spanish_grid_model" status="normal" link="728010479" /><![CDATA[Compiling 'T15_16'. Generating network and data files.]]></message>
+    <message id="829336962" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T3_4" scope="Spanish_grid_model" status="normal" link="695244786" /><![CDATA[Compiling 'T3_4'. Generating network and data files.]]></message>
+    <message id="589399963" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T16_21" scope="Spanish_grid_model" status="normal" link="985011150" /><![CDATA[Compiling 'T16_21'. Generating network and data files.]]></message>
+    <message id="432565872" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T23_24" scope="Spanish_grid_model" status="normal" link="427332237" /><![CDATA[Compiling 'T23_24'. Generating network and data files.]]></message>
+    <message id="90661565" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T21_22" scope="Spanish_grid_model" status="normal" link="621977469" /><![CDATA[Compiling 'T21_22'. Generating network and data files.]]></message>
+    <message id="291947277" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T14_15" scope="Spanish_grid_model" status="normal" link="1092669953" /><![CDATA[Compiling 'T14_15'. Generating network and data files.]]></message>
+    <message id="858961945" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T4_14" scope="Spanish_grid_model" status="normal" link="930192587" /><![CDATA[Compiling 'T4_14'. Generating network and data files.]]></message>
+    <message id="433963484" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T4_5" scope="Spanish_grid_model" status="normal" link="519398027" /><![CDATA[Compiling 'T4_5'. Generating network and data files.]]></message>
+    <message id="509606982" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T16_19" scope="Spanish_grid_model" status="normal" link="1557250133" /><![CDATA[Compiling 'T16_19'. Generating network and data files.]]></message>
+    <message id="807717960" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T22_23" scope="Spanish_grid_model" status="normal" link="1396656488" /><![CDATA[Compiling 'T22_23'. Generating network and data files.]]></message>
+    <message id="961312111" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T5_6" scope="Spanish_grid_model" status="normal" link="466768812" /><![CDATA[Compiling 'T5_6'. Generating network and data files.]]></message>
+    <message id="194657174" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T13_14" scope="Spanish_grid_model" status="normal" link="165517550" /><![CDATA[Compiling 'T13_14'. Generating network and data files.]]></message>
+    <message id="717765405" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T5_8" scope="Spanish_grid_model" status="normal" link="539174694" /><![CDATA[Compiling 'T5_8'. Generating network and data files.]]></message>
+    <message id="1520376715" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T9_39" scope="Spanish_grid_model" status="normal" link="2118373786" /><![CDATA[Compiling 'T9_39'. Generating network and data files.]]></message>
+    <message id="1622117590" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T6_7" scope="Spanish_grid_model" status="normal" link="1610043783" /><![CDATA[Compiling 'T6_7'. Generating network and data files.]]></message>
+    <message id="364370838" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T6_11" scope="Spanish_grid_model" status="normal" link="658003597" /><![CDATA[Compiling 'T6_11'. Generating network and data files.]]></message>
+    <message id="1278756218" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T7_8" scope="Spanish_grid_model" status="normal" link="1580598589" /><![CDATA[Compiling 'T7_8'. Generating network and data files.]]></message>
+    <message id="595260115" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T10_11" scope="Spanish_grid_model" status="normal" link="80171600" /><![CDATA[Compiling 'T10_11'. Generating network and data files.]]></message>
+    <message id="773804636" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T10_13" scope="Spanish_grid_model" status="normal" link="1190111546" /><![CDATA[Compiling 'T10_13'. Generating network and data files.]]></message>
+    <message id="1095778021" status="normal" label="build" groupid="100006" classid="CmpNavigator">
+      <User name="T8_9" scope="Spanish_grid_model" status="normal" link="858753404" /><![CDATA[Compiling 'T8_9'. Generating network and data files.]]></message>
+    <message id="1631541692" status="normal" label="build" groupid="400000" scope="Spanish_grid_model" classid="MessageObj"><![CDATA[Time for Compile: 18731ms  Make: 0ms]]></message>
+    <message id="49318400" status="normal" label="build" groupid="400003" scope="Spanish_grid_model" classid="MessageObj"><![CDATA[Finished compiling with PSCAD Version 5.1.0]]></message>
+    <message id="615107189" status="normal" label="build" groupid="400001" scope="Spanish_grid_model" classid="MessageObj"><![CDATA[======== Build: 15 errors, 0 warnings ========]]></message>
+  </messagelist>
+  <ViewContext>
+    <Window defn="Spanish_grid_model:Main" call="0" />
+  </ViewContext>
+  <List classid="View">
+    <View name="Main" zoomscale="0.96" scrollx="0" scrolly="0" />
+    <View name="psse" zoomscale="1.5" scrollx="0" scrolly="2847" />
+  </List>
+  <Output device="EMTDC" version="2010" date="2026/11/10" time="20:03:22.000000">
+    <Domain name="Time" unit="s" mult="0.0" skew="0.0">
+      <Sample rate="2000.0" end="6000" />
+    </Domain>
+    <List classid="Analog">
+      <Analog name="Main(0):P_G37" index="1" gindex="100663297" id="895707119:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G38" index="2" gindex="100663298" id="1122143562:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G39" index="3" gindex="100663299" id="1913538314:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G36" index="4" gindex="100663300" id="1796961075:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G37" index="5" gindex="100663301" id="1986393690:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G38" index="6" gindex="100663302" id="662209017:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G39" index="7" gindex="100663303" id="761216858:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_C1" index="8" gindex="100663304" id="1947117126:0" label="" dim="3" unit="kV" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_G31" index="11" gindex="100663307" id="2128553409:0" label="" dim="1" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_C2" index="12" gindex="100663308" id="95438737:0" label="" dim="3" unit="kV" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_C3" index="15" gindex="100663311" id="126726661:0" label="" dim="3" unit="kV" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_G36" index="18" gindex="100663314" id="992299529:0" label="" dim="1" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_C4" index="19" gindex="100663315" id="1508169242:0" label="" dim="3" unit="kV" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_C5" index="22" gindex="100663318" id="531282996:0" label="" dim="3" unit="kV" min="-2.0" max="2.0" />
+      <Analog name="Main(0):V_G37" index="25" gindex="100663321" id="1159302583:0" label="" dim="1" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_G38" index="26" gindex="100663322" id="1904624503:0" label="" dim="1" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_G39" index="27" gindex="100663323" id="427650727:0" label="" dim="1" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_G35" index="28" gindex="100663324" id="787896773:0" label="" dim="3" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_G34" index="31" gindex="100663327" id="1068278489:0" label="" dim="3" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_G33" index="34" gindex="100663330" id="464636186:0" label="" dim="3" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_G32" index="37" gindex="100663333" id="1455545206:0" label="" dim="3" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):V_G30" index="40" gindex="100663336" id="133144760:0" label="" dim="3" unit="kV" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G35" index="43" gindex="100663339" id="1005370064:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G34" index="44" gindex="100663340" id="969267479:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G33" index="45" gindex="100663341" id="1801583804:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G32" index="46" gindex="100663342" id="1381610038:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G31" index="47" gindex="100663343" id="1983002843:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):Q_G30" index="48" gindex="100663344" id="1621164825:0" label="" dim="1" unit="Mvar" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G36" index="49" gindex="100663345" id="260478351:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G35" index="50" gindex="100663346" id="490870867:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G34" index="51" gindex="100663347" id="1138985305:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G33" index="52" gindex="100663348" id="1496377694:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G32" index="53" gindex="100663349" id="277429793:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G31" index="54" gindex="100663350" id="738391881:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+      <Analog name="Main(0):P_G30" index="55" gindex="100663351" id="27520036:0" label="" dim="1" unit="MW" min="-3.0" max="3.0" />
+    </List>
+    <List classid="Digital" />
+  </Output>
+</Meta>

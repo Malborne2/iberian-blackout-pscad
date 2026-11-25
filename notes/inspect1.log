@@ -1,0 +1,280 @@
+﻿total components: 279
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+BUS None
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0435 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0016 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | const | {'Name': '', 'Value': 1.006, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0435 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0016 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | const | {'Name': '', 'Value': 1.006, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0250 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+UserCmp None | const | {'Name': '', 'Value': 0.8571, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.02 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+UserCmp None | const | {'Name': '', 'Value': 1.07, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0142 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0007 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | const | {'Name': '', 'Value': 1.07, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0180 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0009 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+UserCmp None | const | {'Name': '', 'Value': 1.009, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0143 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+UserCmp None | const | {'Name': '', 'Value': 1.025, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0272 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0005 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | const | {'Name': '', 'Value': 1.0, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0232 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0006 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+UserCmp None | const | {'Name': '', 'Value': 1.025, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0181 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+UserCmp None | const | {'Name': '', 'Value': 1.025, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0156 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0008 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+UserCmp None | const | {'Name': '', 'Value': 1.025, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | xfmr-3p2w | {'Name': '', 'Tmva': Value('100.0 [MVA]'), 'f': Value('60.0 [Hz]'), 'YD1': 'Y', 'YD2': 'Y', 'Lead': 'LAGS', 'Xl': Value('0.0138 [pu]'), 'Ideal': 'NO', 'NLL': Value('0.0007 [pu]'), 'CuL': Value('0.0 [pu]'), 'Tap': '_1', 'View': 'CIRCLES', 'Dtls': 'NO', 'V1': Value('230.0 [kV]'), 'V2': Value('230.0 [kV]'), 'Enab': 'NO', 'Sat': '_1', 'Xair': Value('0.2 [pu]'), 'Tdc': Value('0.0 [s]'), 'Xknee': Value('1.17 [pu]'), 'Txk': Value('0.0 [s]'), 'Im1': Value('2.0 [%]'), 'ILA1': '', 'ILB1': '', 'ILC1': '', 'IAB1': '', 'IBC1': '', 'ICA1': '', 'ILA2': '', 'ILB2': '', 'ILC2': '', 'IAB2': '', 'IBC2': '', 'ICA2': '', 'IMA': '', 'IMB': '', 'IMC': '', 'FLXA': '', 'FLXB': '', 'FLXC': '', 'IMAB': '', 'IMBC': '', 'IMCA': '', 'FLXAB': '', 'FLXBC': '', 'FLXCA': '', 'Hys': 'NONE', 'Fremn1': Value('0.0'), 'Fremn2': Value('0.0'), 'Fremn3': Value('0.0'), 'LW2': Value('10'), 'Bnom': Value('1.7'), 'material': 'DEFAULT', 'C': 0.1, 'K': Value('5.0e-5'), 'BETA': 0.96, 'alpha': 1.325e-05, 'Msat': Value('1.72e6'), 'F1': 2730.0, 'F2': 3209.0, 'F3': 20294.0, 'Fb': 2.0, 'HA1': '', 'HB1': '', 'HC1': '', 'BA1': '', 'BB1': '', 'BC1': '', 'HAB1': '', 'HBC1': '', 'HCA1': '', 'BAB1': '', 'BBC1': '', 'BCA1': ''}
+UserCmp None | const | {'Name': '', 'Value': 1.06, 'Dim': 1}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | fixed_load | {'PO': Value('107.3333 [MW]'), 'QO': Value('0.8 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('77.93333 [MW]'), 'QO': Value('28.0 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('174.0 [MW]'), 'QO': Value('58.6667 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('2.5 [MW]'), 'QO': Value('29.3333 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('106.6667 [MW]'), 'QO': Value('51.0 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('109.8 [MW]'), 'QO': Value('10.7667 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('52.6667 [MW]'), 'QO': Value('10.0 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('226.6667 [MW]'), 'QO': Value('34.3333 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('91.3333 [MW]'), 'QO': Value('38.3333 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('82.5 [MW]'), 'QO': Value('28.2 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('102.8667 [MW]'), 'QO': Value('-30.73333 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('74.6667 [MW]'), 'QO': Value('15.7333 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('46.3333 [MW]'), 'QO': Value('5.6667 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('93.6667 [MW]'), 'QO': Value('25.1667 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('68.6667 [MW]'), 'QO': Value('9.2 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('94.5 [MW]'), 'QO': Value('8.9667 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('240.925 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('-3.73 [deg]'), 'Pinit': Value('2.50 [pu]'), 'Qinit': Value('0.832 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('225.86 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('-1.59 [deg]'), 'Pinit': Value('5.713 [pu]'), 'Qinit': Value('3.639 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+UserCmp None | annotation | {'AL1': 'slack bus', 'AL2': ''}
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('226.113 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('1.79 [deg]'), 'Pinit': Value('6.5 [pu]'), 'Qinit': Value('0.015 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('229.356 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('2.87 [deg]'), 'Pinit': Value('6.32 [pu]'), 'Qinit': Value('0.697 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('232.829 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('1.46 [deg]'), 'Pinit': Value('5.08 [pu]'), 'Qinit': Value('1.488 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('241.339 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('4.78 [deg]'), 'Pinit': Value('6.5 [pu]'), 'Qinit': Value('1.67 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('244.605 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('7.46 [deg]'), 'Pinit': Value('5.6 [pu]'), 'Qinit': Value('0.754 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('236.394 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('2.05 [deg]'), 'Pinit': Value('5.40 [pu]'), 'Qinit': Value('-0.353 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('236.095 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('7.30 [deg]'), 'Pinit': Value('8.3 [pu]'), 'Qinit': Value('-0.005 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | source3 | {'Name': 'Source1', 'Type': 'RR_L', 'Ctrl': 'FIXED', 'MVA': Value('100.0 [MVA]'), 'Vm': Value('230.0 [kV]'), 'F': Value('60.0 [Hz]'), 'Tc': Value('0.05 [s]'), 'ZSeq': 'NO', 'Imp': 'IMPEDANCE', 'Exph': 'RADIANS', 'View': 'SINGLE_LINE', 'Term': 'AT_TERMINAL', 'R1s': Value('1.0 [ohm]'), 'R1p': Value('1.0 [ohm]'), 'L1p': Value('0.1 [H]'), 'Z1': Value('10.0 [ohm]'), 'Phi1': Value('80.0 [deg]'), 'RN': 2.0, 'R0p': Value('1.0 [ohm]'), 'L0p': Value('0.1 [H]'), 'Z0': Value('1.0 [ohm]'), 'Phi0': Value('80.0 [deg]'), 'Es': Value('236.9 [kV]'), 'F0': Value('60.0 [Hz]'), 'Ph': Value('-10.06 [deg]'), 'Pinit': Value('10.0 [pu]'), 'Qinit': Value('-0.365 [pu]'), 'VCtrl': 'NO', 'Vdes': Value('1.0 [pu]'), 'Vbase': Value('230.0 [kV]'), 'Tvm': Value('0.02 [s]'), 'Tvc': Value('0.05 [s]'), 'PCtrl': 'NO', 'Pdes': Value('1.0 [pu]'), 'Tpm': Value('0.02 [s]'), 'Tpc': Value('0.05 [s]'), 'P': '', 'Q': '', 'V': '', 'Theta': '', 'Ia': '', 'Ib': '', 'Ic': '', 'PS': 'PARALLEL', 'R0s': Value('1.0 [ohm]'), 'L0s': Value('0.0001 [H]'), 'TcTyp': 'FIRST_ORDER_LAG', 'Iabc': '', 'qset': 'AUTO', 'PF_QMIN': Value('-1.0'), 'PF_QMAX': Value('1.0')}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | fixed_load | {'PO': Value('368.0 [MW]'), 'QO': Value('83.3333 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | fixed_load | {'PO': Value('3.0667 [MW]'), 'QO': Value('1.5333 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 5.403, 'Qd': -0.3004, 'Vd': 1.027, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+Wire None | ? | ERR Component has no parameters
+Sticky None | ? | {'align': 'LEFT', 'arrows': 0, 'fg_color_adv': 'black', 'bg_color_adv': '#fffafaf0', 'bdr_color_adv': '#ff95918c', 'full_font': 'Tahoma, 11world'}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 2.496, 'Qd': 0.8208, 'Vd': 1.047, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 10.01, 'Qd': -0.3627, 'Vd': 1.029, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 5.713, 'Qd': 3.658, 'Vd': 0.9812, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 6.495, 'Qd': 0.03835, 'Vd': 0.9827, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 5.055, 'Qd': 1.531, 'Vd': 1.012, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 6.309, 'Qd': 0.7779, 'Vd': 0.9958, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 5.593, 'Qd': 0.8051, 'Vd': 1.063, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 6.504, 'Qd': 1.655, 'Vd': 1.05, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | multimeter | {'MeasI': 'NO', 'MeasV': 'NO', 'MeasP': 'YES', 'MeasQ': 'YES', 'RMS': 'YES_ANALOG', 'MeasPh': 'NO', 'S': Value('100.0 [MVA]'), 'BaseV': Value('230.0 [kV]'), 'TS': Value('0.02 [s]'), 'Freq': Value('60.0 [Hz]'), 'Dis': 'YES', 'CurI': '', 'VolI': '', 'P': '', 'Q': '', 'Vrms': '', 'Ph': '', 'hide1': 'SHOW', 'hide2': 'SHOW', 'Pd': 8.297, 'Qd': 0.07221, 'Vd': 1.026, 'IRMS': 'NO', 'BaseA': Value('1.0'), 'Crms': '', 'Name': '', 'VolILL': ''}
+UserCmp None | T6_11 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T10_11 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T10_13 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T6_7 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T7_8 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T5_8 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T8_9 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T9_39 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T5_6 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T4_5 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T3_4 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T1_39 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T1_2 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T2_3 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T3_18 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T2_25 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T25_26 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T26_29 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T26_28 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T28_29 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T26_27 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T17_27 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T17_18 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T16_17 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T16_24 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T15_16 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T16_19 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T16_21 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T23_24 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T21_22 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T22_23 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T14_15 | {'Name': ''}
+UserCmp None | T4_14 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | T13_14 | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | capacitor | {'C': Value('5.014 [uF]'), 'Name': ''}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | ground | {}
+UserCmp None | capacitor | {'C': Value('10.029 [uF]'), 'Name': ''}
+UserCmp None | ground | {}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | psse | {'Name': ''}
+Wire None | ? | ERR Component has no parameters
+UserCmp None | annotation | {'AL1': '100 [MVar]', 'AL2': '@ 230 [kV]'}
+UserCmp None | annotation | {'AL1': '200 [MVar]', 'AL2': '@ 230 [kV]'}
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+Wire None | ? | ERR Component has no parameters
+UserCmp None | fixed_load | {'PO': Value('166.6667 [MW]'), 'QO': Value('61.3333 [MVAR]'), 'VBO': Value('132.790562 [kV]'), 'NP': 0.0, 'NQ': 0.0, 'KPF': 0.0, 'KQF': 0.0, 'FR': Value('60 [Hz]'), 'Dtls': 'NO', 'R1': '', 'L1': '', 'C1': '', 'Name': '', 'VPU': Value('1.0'), 'PQdef': 'RATED', 'Parts': 1, 'NPB': 2.0, 'NPC': 2.0, 'NQB': 2.0, 'NQC': 2.0, 'KPA': 1.0, 'KPB': 0.0, 'KQA': 1.0, 'KQB': 0.0, 'Scale': 1.0, 'NCYC': 10.0}

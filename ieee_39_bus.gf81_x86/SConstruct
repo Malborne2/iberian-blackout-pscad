@@ -1,0 +1,97 @@
+import os
+
+PSCAD_C_INCLUDES=[r'$EMTDCDIR\\inc', '$EMTDCBIN']
+PSCAD_F_INCLUDES=['.', r'$EMTDCDIR\\inc', '$EMTDCDIR', '$EMTDCBIN']
+
+env=DefaultEnvironment(
+    ENV=os.environ,
+    PRINT_CMD_LINE_FUNC=lambda cmd, tgt, src, env: print(f'>>> {cmd}'),
+    tools=['gfortran', 'gcc', 'g++', 'link', 'ar'],
+    CC=r'"C:\Program Files\GFortran\8.1\x86\bin\gcc.exe"',
+    FORTRAN=r'"C:\Program Files\GFortran\8.1\x86\bin\gfortran.exe"',
+    LINK=r'"C:\Program Files\GFortran\8.1\x86\bin\gcc.exe"',
+    CCFLAGS=['$PSCAD_C_DEFAULTS', '$PSCAD_C_PREPROC', '$PSCAD_C_WARNINGS', '$PSCAD_C_OPT', '$PSCAD_C_ADD'],
+    CPPPATH=PSCAD_C_INCLUDES,
+    FORTRANFLAGS=['$PSCAD_F_DEFAULTS', '$PSCAD_F_CHECKS', '$PSCAD_F_WARNINGS', '$PSCAD_F_PREPROC', '$PSCAD_F_OPT', '$PSCAD_F_ADD'],
+    FORTRANPATH=PSCAD_F_INCLUDES,
+    LINKFLAGS='$PSCAD_LINK_DEFAULTS $PSCAD_LINK_OPT',
+    LIBS=['gfortran', 'stdc++', 'quadmath', 'wsock32'],
+    PLATFORM='x86',
+    LIBPREFIX='',
+    LIBSUFFIX='.lib',
+    TARGET_ARCH='x86',
+    MSVC_VERSION='',
+    FORTRANFILESUFFIXES=['.f', '.for', '.ftn', '.f90'],
+    PSCAD_C_DEFAULTS='-Wall',
+    PSCAD_C_PREPROC=' $PSCAD_C_EXTRA_PREPROC',
+    PSCAD_C_ADD=r' $PSCAD_C_EXTRA_ADD',
+    PSCAD_C_WARNINGS=' ',
+    PSCAD_C_OPT='-O2',
+    PSCAD_C_DEBUG='-g',
+    PSCAD_C_EXTRA_PREPROC='',
+    PSCAD_C_EXTRA_ADD='',
+    PSCAD_F_DEFAULTS='-ffree-form -fdefault-real-8 -fdefault-double-8 -xf95-cpp-input',
+    PSCAD_F_WARNINGS='-Wconversion ',
+    PSCAD_F_CHECKS=' ',
+    PSCAD_F_DEBUG='-g',
+    PSCAD_F_OPT='-O2',
+    PSCAD_F_PREPROC=r' $PSCAD_F_EXTRA_PREPROC',
+    PSCAD_F_ADD=r' $PSCAD_F_EXTRA_ADD',
+    PSCAD_F_EXTRA_PREPROC='',
+    PSCAD_F_EXTRA_ADD='',
+    PSCAD_LINK_DEFAULTS='-fopenmp',
+    PSCAD_LINK_DEBUG='-g',
+    PSCAD_LINK_OPT='-O2',
+    EMTDCDIR=r'C:\Program Files (x86)\PSCAD\5.1.0\emtdc\gf81_x86',
+    EMTDCBIN=r'$EMTDCDIR\windows',
+    MATLAB_LIBPATH=''
+    )
+
+env.SetOption('num_jobs', os.cpu_count())
+
+objects = [env.File(r'$EMTDCBIN\main.obj')]
+objects += env.Object(target=r'Station_0.o', source=r'Station.f')
+objects += env.Object(target=r'Main_1.o', source=r'Main.f')
+objects += env.Object(target=r'psse_2.o', source=r'psse.f')
+objects += env.Object(target=r'T26_29_3.o', source=r'T26_29.f')
+objects += env.Object(target=r'T26_28_4.o', source=r'T26_28.f')
+objects += env.Object(target=r'T25_26_5.o', source=r'T25_26.f')
+objects += env.Object(target=r'T28_29_6.o', source=r'T28_29.f')
+objects += env.Object(target=r'T2_25_7.o', source=r'T2_25.f')
+objects += env.Object(target=r'T26_27_8.o', source=r'T26_27.f')
+objects += env.Object(target=r'T17_27_9.o', source=r'T17_27.f')
+objects += env.Object(target=r'T1_2_10.o', source=r'T1_2.f')
+objects += env.Object(target=r'T17_18_11.o', source=r'T17_18.f')
+objects += env.Object(target=r'T2_3_12.o', source=r'T2_3.f')
+objects += env.Object(target=r'T3_18_13.o', source=r'T3_18.f')
+objects += env.Object(target=r'T16_17_14.o', source=r'T16_17.f')
+objects += env.Object(target=r'T16_24_15.o', source=r'T16_24.f')
+objects += env.Object(target=r'T1_39_16.o', source=r'T1_39.f')
+objects += env.Object(target=r'T15_16_17.o', source=r'T15_16.f')
+objects += env.Object(target=r'T3_4_18.o', source=r'T3_4.f')
+objects += env.Object(target=r'T16_21_19.o', source=r'T16_21.f')
+objects += env.Object(target=r'T23_24_20.o', source=r'T23_24.f')
+objects += env.Object(target=r'T21_22_21.o', source=r'T21_22.f')
+objects += env.Object(target=r'T14_15_22.o', source=r'T14_15.f')
+objects += env.Object(target=r'T4_14_23.o', source=r'T4_14.f')
+objects += env.Object(target=r'T4_5_24.o', source=r'T4_5.f')
+objects += env.Object(target=r'T16_19_25.o', source=r'T16_19.f')
+objects += env.Object(target=r'T22_23_26.o', source=r'T22_23.f')
+objects += env.Object(target=r'T5_6_27.o', source=r'T5_6.f')
+objects += env.Object(target=r'T13_14_28.o', source=r'T13_14.f')
+objects += env.Object(target=r'T5_8_29.o', source=r'T5_8.f')
+objects += env.Object(target=r'T9_39_30.o', source=r'T9_39.f')
+objects += env.Object(target=r'T6_7_31.o', source=r'T6_7.f')
+objects += env.Object(target=r'T6_11_32.o', source=r'T6_11.f')
+objects += env.Object(target=r'T7_8_33.o', source=r'T7_8.f')
+objects += env.Object(target=r'T10_11_34.o', source=r'T10_11.f')
+objects += env.Object(target=r'T10_13_35.o', source=r'T10_13.f')
+objects += env.Object(target=r'T8_9_36.o', source=r'T8_9.f')
+objects += [env.File(r'$EMTDCBIN\emtdc.lib')]
+
+objects = [o for o in objects if o.suffix != '.mod']
+
+
+env.Program('ieee_39_bus', objects)
+env.Install(target='.', source=r'$EMTDCBIN\_Solver.dll')
+

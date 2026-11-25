@@ -1,0 +1,2603 @@
+[
+ {
+  "iid": 2112143874,
+  "defn": "master:annotation",
+  "bounds": [
+   23,
+   36,
+   27,
+   38
+  ],
+  "ports": [],
+  "params": {
+   "AL1": "2 PU",
+   "AL2": "RESISTANCE"
+  }
+ },
+ {
+  "iid": 1791774270,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   23,
+   26,
+   30,
+   28
+  ]
+ },
+ {
+  "iid": 1579833046,
+  "defn": "master:breaker3",
+  "bounds": [
+   29,
+   28,
+   31,
+   32
+  ],
+  "ports": [
+   {
+    "name": "N1",
+    "x": 30,
+    "y": 28,
+    "dim": 3,
+    "type": "3",
+    "electrical": "0",
+    "signal": "15"
+   },
+   {
+    "name": "N2",
+    "x": 30,
+    "y": 32,
+    "dim": 3,
+    "type": "3",
+    "electrical": "0",
+    "signal": "15"
+   }
+  ],
+  "params": {
+   "Ctrl": "NO",
+   "OPCUR": "NO",
+   "ENAB": "NO",
+   "CLVL": 0.0,
+   "View": "SINGLE_LINE",
+   "ViewB": "LOW_DISPLAY",
+   "DisPQ": "NO",
+   "NAME": "BRK",
+   "NAMEA": "BRKA",
+   "NAMEB": "BRKB",
+   "NAMEC": "BRKC",
+   "ROFF": 1000000.0,
+   "RON": 0.01,
+   "PRER": 0.5,
+   "TDA": 0.0,
+   "TDB": 0.0,
+   "TDC": 0.0,
+   "TDRA": 0.05,
+   "TDRB": 0.05,
+   "TDRC": 0.05,
+   "PostIns": "AT_NEXT_CURRENT_ZERO",
+   "TDBOA": 0.005,
+   "IBRA": "",
+   "IBRB": "",
+   "IBRC": "",
+   "IBR0": "",
+   "SBRA": "",
+   "SBRB": "",
+   "SBRC": "",
+   "BP": "",
+   "BQ": "",
+   "BOpen1": "CLOSE",
+   "BOpen2": "CLOSE",
+   "BOpen3": "CLOSE",
+   "P": "0 [MW]",
+   "Q": "0 [MVAR]",
+   "Vbr": ""
+  }
+ },
+ {
+  "iid": 909751583,
+  "defn": "master:ground",
+  "bounds": [
+   29,
+   34,
+   31,
+   36
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 30,
+    "y": 34,
+    "dim": 1,
+    "type": "3",
+    "electrical": "3",
+    "signal": "15"
+   }
+  ],
+  "params": {}
+ },
+ {
+  "iid": 248541915,
+  "defn": "master:inductor",
+  "bounds": [
+   30,
+   31,
+   31,
+   35
+  ],
+  "ports": [
+   {
+    "name": "B",
+    "x": 30,
+    "y": 32,
+    "dim": 0,
+    "type": "3",
+    "electrical": "1",
+    "signal": "15"
+   },
+   {
+    "name": "A",
+    "x": 30,
+    "y": 34,
+    "dim": 0,
+    "type": "3",
+    "electrical": "1",
+    "signal": "15"
+   }
+  ],
+  "params": {
+   "L": 0.00842,
+   "Name": ""
+  }
+ },
+ {
+  "iid": 1997227306,
+  "defn": "master:annotation",
+  "bounds": [
+   28,
+   36,
+   32,
+   38
+  ],
+  "ports": [],
+  "params": {
+   "AL1": "2 PU",
+   "AL2": "INDUCTANCE"
+  }
+ },
+ {
+  "iid": 1948972693,
+  "defn": "master:ground",
+  "bounds": [
+   24,
+   34,
+   26,
+   36
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 25,
+    "y": 34,
+    "dim": 1,
+    "type": "3",
+    "electrical": "3",
+    "signal": "15"
+   }
+  ],
+  "params": {}
+ },
+ {
+  "iid": 1730641735,
+  "defn": "master:resistor",
+  "bounds": [
+   25,
+   31,
+   26,
+   35
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 25,
+    "y": 34,
+    "dim": 0,
+    "type": "3",
+    "electrical": "1",
+    "signal": "15"
+   },
+   {
+    "name": "B",
+    "x": 25,
+    "y": 32,
+    "dim": 0,
+    "type": "3",
+    "electrical": "1",
+    "signal": "15"
+   }
+  ],
+  "params": {
+   "R": 3.174,
+   "Name": ""
+  }
+ },
+ {
+  "iid": 641688473,
+  "defn": "master:sync_machine",
+  "bounds": [
+   11,
+   21,
+   19,
+   30
+  ],
+  "ports": [
+   {
+    "name": "telect",
+    "x": 12,
+    "y": 26,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "speed",
+    "x": 14,
+    "y": 30,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "tmeco",
+    "x": 12,
+    "y": 28,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "efo",
+    "x": 12,
+    "y": 22,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "mvit",
+    "x": 18,
+    "y": 22,
+    "dim": 3,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "cfldn",
+    "x": 16,
+    "y": 22,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "efldn",
+    "x": 14,
+    "y": 22,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "tmech",
+    "x": 16,
+    "y": 30,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "Tmstd",
+    "x": 18,
+    "y": 30,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "NS",
+    "x": 18,
+    "y": 26,
+    "dim": 3,
+    "type": "3",
+    "electrical": "0",
+    "signal": "15"
+   },
+   {
+    "name": "N",
+    "x": 15,
+    "y": 26,
+    "dim": 1,
+    "type": "3",
+    "electrical": "3",
+    "signal": "15"
+   }
+  ],
+  "params": {
+   "Name": "HydroGener",
+   "Nqaxw": "ONE",
+   "Cnfg": "GENERATOR",
+   "MM": "DISABLE",
+   "CfRa": "RESISTANCE",
+   "MSat": "DISABLED",
+   "icTyp": "POWERS",
+   "Iscl": "NO",
+   "View": "SINGLE_LINE",
+   "itrfa": "NO",
+   "izro": "NO",
+   "Icsp": "NO",
+   "Icmp": "NO",
+   "Immd": "NO",
+   "Ifmlt": "NO",
+   "Term": "VT_IT",
+   "Ts": 0.02,
+   "Iexc": "YES",
+   "Igov": "YES",
+   "Ospd": "PU",
+   "machsw": "S2M",
+   "Enab": "LRR",
+   "npadjs": 0,
+   "pset": 0.0,
+   "nftrsw": 0,
+   "hmult": 1.0,
+   "sdmftr": 1.0,
+   "sdmspd": 1.0,
+   "npadjm": 0,
+   "fldmlt": 1.0,
+   "nfldsw": 0,
+   "Vbase": 7.967,
+   "Ibase": 5.02,
+   "OMO": 376.992,
+   "H": 3.117,
+   "D": 0.0,
+   "RNeut": 10000.0,
+   "XNeut": 0.0,
+   "Ri": 300.0,
+   "NOM": 1.0,
+   "Rs1": 0.002,
+   "XS1": 0.14,
+   "XMD0": 1.66,
+   "R2D": 0.0014068,
+   "X2D": 0.061789,
+   "R3D": 0.0040699,
+   "X3D": 0.0054581,
+   "X230": 0.0,
+   "XMQ": 1.58,
+   "R2Q": 0.014145,
+   "X2Q": 0.32928,
+   "R3Q": 0.0081942,
+   "X3Q": 0.094199,
+   "X231": 0.0,
+   "Ra": 0.0051716,
+   "Ta": 0.332,
+   "Xp": 0.163,
+   "Xd": 1.014,
+   "Xd_": 0.314,
+   "Tdo_": 6.55,
+   "Xd__": 0.28,
+   "Tdo__": 0.039,
+   "Gfld": 100.0,
+   "Xkf": 100.0,
+   "Xq": 0.77,
+   "Xq_": 0.228,
+   "Tqo_": 0.85,
+   "Xq__": 0.375,
+   "Tqo__": 0.071,
+   "AGFC": 1.0,
+   "X1": 0.0,
+   "Y1": 0.0,
+   "X2": 0.5,
+   "Y2": 0.5,
+   "X3": 0.8,
+   "Y3": 0.8,
+   "X4": 1.0,
+   "Y4": 1.0,
+   "X5": 1.2,
+   "Y5": 1.2,
+   "X6": 1.5,
+   "Y6": 1.5,
+   "X7": 1.8,
+   "Y7": 1.8,
+   "X8": 2.2,
+   "Y8": 2.2,
+   "X9": 3.2,
+   "Y9": 3.2,
+   "X10": 4.2,
+   "Y10": 4.2,
+   "VT": 1.0,
+   "Pheta": 0.0,
+   "Trmpv": 0.1,
+   "Sysfl": 100.0,
+   "Ptcon": 0.2,
+   "P0": 60.0,
+   "Q0": 0.0,
+   "Theti": 3.141592,
+   "Idi": 0.0,
+   "Iqi": 0.0,
+   "Ifi": 0.0,
+   "Spdi": 1.0,
+   "POut": "POUT",
+   "QOut": "QOUT",
+   "Vneut": "",
+   "Cneut": "",
+   "Lang": "",
+   "Theta": "Rang",
+   "Wang": "",
+   "Tesmt": "",
+   "PQscl": "SINGLE_MACHINE",
+   "InExc": "InitEx",
+   "InGov": "InitGv",
+   "Mon1": 1,
+   "Chn1": "",
+   "Mon2": 1,
+   "Chn2": "",
+   "Mon3": 1,
+   "Chn3": "",
+   "Mon4": 1,
+   "Chn4": "",
+   "Mon5": 1,
+   "Chn5": "",
+   "Mon6": 1,
+   "Chn6": "",
+   "Neut": "DISABLE",
+   "IorMVA": "CURRENT",
+   "MVA": 300.0,
+   "Npnts": 10,
+   "VolTyp": "LINE_NEUTRAL",
+   "VbaseLL": 18.0
+  }
+ },
+ {
+  "iid": 1410151125,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   18,
+   26,
+   21,
+   26
+  ]
+ },
+ {
+  "iid": 364070765,
+  "defn": "master:datalabel",
+  "bounds": [
+   12,
+   33,
+   13,
+   34
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 12,
+    "y": 33,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "W",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 1633793838,
+  "defn": "master:timerdefn",
+  "bounds": [
+   14,
+   57,
+   17,
+   59
+  ],
+  "ports": [
+   {
+    "name": "iout",
+    "x": 14,
+    "y": 58,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "2"
+   }
+  ],
+  "params": {
+   "Timsw": 0.3
+  }
+ },
+ {
+  "iid": 1046769196,
+  "defn": "master:timerdefn",
+  "bounds": [
+   5,
+   57,
+   8,
+   59
+  ],
+  "ports": [
+   {
+    "name": "iout",
+    "x": 8,
+    "y": 58,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "2"
+   }
+  ],
+  "params": {
+   "Timsw": 0.4
+  }
+ },
+ {
+  "iid": 103398872,
+  "defn": "master:pgb",
+  "bounds": [
+   17,
+   50,
+   19,
+   52
+  ],
+  "ports": [
+   {
+    "name": "Signl",
+    "x": 17,
+    "y": 51,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "TERMINAL VOLTAGE",
+   "Group": "Terminal Voltage",
+   "Display": "NO",
+   "Scale": 1.0,
+   "Units": "kV",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 20.0,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 822050213,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   14,
+   19,
+   14,
+   22
+  ]
+ },
+ {
+  "iid": 1339774933,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   16,
+   19,
+   16,
+   22
+  ]
+ },
+ {
+  "iid": 1160664459,
+  "defn": "master:annotation",
+  "bounds": [
+   5,
+   60,
+   11,
+   62
+  ],
+  "ports": [],
+  "params": {
+   "AL1": "Enab Mech Dynamics",
+   "AL2": "0->1 @ 0.4 Sec"
+  }
+ },
+ {
+  "iid": 1361587365,
+  "defn": "master:annotation",
+  "bounds": [
+   12,
+   60,
+   18,
+   62
+  ],
+  "ports": [],
+  "params": {
+   "AL1": "Change to Machine",
+   "AL2": "0->1 @ 0.3 Sec"
+  }
+ },
+ {
+  "iid": 1493915974,
+  "defn": "master:datalabel",
+  "bounds": [
+   13,
+   21,
+   14,
+   22
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 14,
+    "y": 21,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "EF",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 886516216,
+  "defn": "master:datalabel",
+  "bounds": [
+   16,
+   21,
+   17,
+   21
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 16,
+    "y": 21,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "IF",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 2036628830,
+  "defn": "master:datalabel",
+  "bounds": [
+   15,
+   30,
+   17,
+   31
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 16,
+    "y": 31,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "TM",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 103401320,
+  "defn": "master:pgb",
+  "bounds": [
+   17,
+   52,
+   19,
+   54
+  ],
+  "ports": [
+   {
+    "name": "Signl",
+    "x": 17,
+    "y": 53,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "FIELD VOLTAGE",
+   "Group": "Field Voltage",
+   "Display": "NO",
+   "Scale": 1.0,
+   "Units": "pu",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 3.5,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 103401728,
+  "defn": "master:pgb",
+  "bounds": [
+   7,
+   52,
+   9,
+   54
+  ],
+  "ports": [
+   {
+    "name": "Signl",
+    "x": 7,
+    "y": 53,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "REAL POWER",
+   "Group": "Synchronous Machine",
+   "Display": "NO",
+   "Scale": 120.0,
+   "Units": "MW",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 120.0,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 103402136,
+  "defn": "master:pgb",
+  "bounds": [
+   7,
+   54,
+   9,
+   56
+  ],
+  "ports": [
+   {
+    "name": "Signl",
+    "x": 7,
+    "y": 55,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "REACTIVE POWER",
+   "Group": "Synchronous Machine",
+   "Display": "NO",
+   "Scale": 120.0,
+   "Units": "MVAR",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 120.0,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 556087625,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   5,
+   53,
+   7,
+   53
+  ]
+ },
+ {
+  "iid": 1872413732,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   5,
+   55,
+   7,
+   55
+  ]
+ },
+ {
+  "iid": 110226572,
+  "defn": "master:datalabel",
+  "bounds": [
+   4,
+   53,
+   6,
+   54
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 5,
+    "y": 53,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "POUT",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 817806850,
+  "defn": "master:datalabel",
+  "bounds": [
+   4,
+   55,
+   6,
+   56
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 5,
+    "y": 55,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "QOUT",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 103403360,
+  "defn": "master:pgb",
+  "bounds": [
+   12,
+   52,
+   14,
+   54
+  ],
+  "ports": [
+   {
+    "name": "Signl",
+    "x": 12,
+    "y": 53,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "MECHANICAL TORQUE",
+   "Group": "Synchronous Machine",
+   "Display": "NO",
+   "Scale": 1.0,
+   "Units": "pu",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 0.6,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 565368274,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   10,
+   53,
+   12,
+   53
+  ]
+ },
+ {
+  "iid": 155736293,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   15,
+   53,
+   17,
+   53
+  ]
+ },
+ {
+  "iid": 2093941785,
+  "defn": "master:datalabel",
+  "bounds": [
+   15,
+   53,
+   16,
+   54
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 15,
+    "y": 53,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "EF",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 2008248877,
+  "defn": "master:datalabel",
+  "bounds": [
+   9,
+   53,
+   11,
+   54
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 10,
+    "y": 53,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "TM",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 269840223,
+  "defn": "master:datalabel",
+  "bounds": [
+   29,
+   57,
+   30,
+   59
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 29,
+    "y": 58,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "BRK",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 1853184847,
+  "defn": "master:annotation",
+  "bounds": [
+   26,
+   60,
+   30,
+   62
+  ],
+  "ports": [],
+  "params": {
+   "AL1": "Close Breaker",
+   "AL2": "@ 1.0 Sec."
+  }
+ },
+ {
+  "iid": 1770145537,
+  "defn": "master:datalabel",
+  "bounds": [
+   15,
+   55,
+   15,
+   56
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 15,
+    "y": 55,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "IF",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 1241831778,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   15,
+   55,
+   17,
+   55
+  ]
+ },
+ {
+  "iid": 103405808,
+  "defn": "master:pgb",
+  "bounds": [
+   17,
+   54,
+   19,
+   56
+  ],
+  "ports": [
+   {
+    "name": "Signl",
+    "x": 17,
+    "y": 55,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "FIELD CURRENT",
+   "Group": "Field Current",
+   "Display": "NO",
+   "Scale": 1.0,
+   "Units": "pu",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 1.8,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 620414369,
+  "defn": "master:datalabel",
+  "bounds": [
+   10,
+   55,
+   11,
+   56
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 10,
+    "y": 55,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "W",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 1336170453,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   10,
+   55,
+   12,
+   55
+  ]
+ },
+ {
+  "iid": 103406624,
+  "defn": "master:pgb",
+  "bounds": [
+   12,
+   54,
+   14,
+   56
+  ],
+  "ports": [
+   {
+    "name": "Signl",
+    "x": 12,
+    "y": 55,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "OMEGA",
+   "Group": "Synchronous Machine",
+   "Display": "NO",
+   "Scale": 376.99118,
+   "Units": "rad/s",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 376.0,
+   "Max": 382.0,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 1570105259,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   8,
+   39,
+   14,
+   39
+  ]
+ },
+ {
+  "iid": 79373493,
+  "defn": "master:datalabel",
+  "bounds": [
+   17,
+   33,
+   19,
+   34
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 18,
+    "y": 33,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "Tmstdy",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 124655962,
+  "defn": "master:const",
+  "bounds": [
+   4,
+   38,
+   8,
+   40
+  ],
+  "ports": [
+   {
+    "name": "OUT",
+    "x": 8,
+    "y": 39,
+    "dim": 0,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "",
+   "Value": 1.0,
+   "Dim": 1
+  }
+ },
+ {
+  "iid": 2079110012,
+  "defn": "master:datalabel",
+  "bounds": [
+   7,
+   58,
+   9,
+   59
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 8,
+    "y": 58,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "LRR",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 518812021,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   8,
+   33,
+   14,
+   33
+  ]
+ },
+ {
+  "iid": 739389436,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   14,
+   30,
+   14,
+   33
+  ]
+ },
+ {
+  "iid": 225445983,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   16,
+   30,
+   16,
+   33
+  ]
+ },
+ {
+  "iid": 753559873,
+  "defn": "master:datalabel",
+  "bounds": [
+   13,
+   58,
+   15,
+   59
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 14,
+    "y": 58,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "S2M",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 1025938106,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   18,
+   30,
+   18,
+   33
+  ]
+ },
+ {
+  "iid": 1927020415,
+  "defn": "master:sandhdefn",
+  "bounds": [
+   13,
+   8,
+   17,
+   11
+  ],
+  "ports": [
+   {
+    "name": "xsampl",
+    "x": 13,
+    "y": 9,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "nhold1",
+    "x": 15,
+    "y": 11,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "2"
+   },
+   {
+    "name": "yhold",
+    "x": 17,
+    "y": 9,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Iand": 1,
+   "Name": ""
+  }
+ },
+ {
+  "iid": 1553905305,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   13,
+   9,
+   14,
+   13
+  ]
+ },
+ {
+  "iid": 1703563289,
+  "defn": "master:datalabel",
+  "bounds": [
+   14,
+   11,
+   16,
+   12
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 15,
+    "y": 11,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "S2M",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 729513724,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   12,
+   17,
+   12,
+   22
+  ]
+ },
+ {
+  "iid": 1863341320,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   18,
+   17,
+   18,
+   22
+  ]
+ },
+ {
+  "iid": 221788769,
+  "defn": "master:hy_tur",
+  "bounds": [
+   12,
+   33,
+   17,
+   39
+  ],
+  "ports": [
+   {
+    "name": "Win",
+    "x": 14,
+    "y": 33,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "Tm",
+    "x": 16,
+    "y": 33,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "Wref",
+    "x": 14,
+    "y": 39,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "Z",
+    "x": 12,
+    "y": 35,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "ZI",
+    "x": 12,
+    "y": 37,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "WC": "NO",
+   "ST": "NO",
+   "JD": "NO",
+   "RV": "NO",
+   "INIT": "InitGv",
+   "HR": 1.0,
+   "PR": 1.0,
+   "ZR": 1.0,
+   "QG": "FLOW",
+   "QNL": 0.05,
+   "ZNL": 0.05,
+   "PM0": "Tmstdy",
+   "HI": 1.0,
+   "TW_1": 2.0,
+   "FP_1": 0.02,
+   "D_1": 0.5,
+   "TW_2": 2.0,
+   "TE_2": 2.0,
+   "FP_2": 0.02,
+   "D_2": 0.5,
+   "TW1_3": 2.0,
+   "FP1_3": 0.02,
+   "TW2_3": 2.0,
+   "FP2_3": 0.02,
+   "TS_3": 100.0,
+   "FO_3": 0.02,
+   "D_3": 0.5,
+   "TW1_4": 2.0,
+   "TE_4": 2.0,
+   "FP1_4": 0.02,
+   "TW2_4": 2.0,
+   "FP2_4": 0.02,
+   "TS_4": 100.0,
+   "FO_4": 0.02,
+   "D_4": 0.5,
+   "P_IN": "",
+   "P_OUT": "",
+   "HEAD": "",
+   "FLOW": "",
+   "Q_NT": "",
+   "Q_RLF": "RelVlv",
+   "Q_DEF": "JetDef",
+   "P_FLOW": "",
+   "P_HEAD": "",
+   "S_FLOW": "",
+   "S_HEAD": "",
+   "Name": ""
+  }
+ },
+ {
+  "iid": 513315416,
+  "defn": "master:hy_gov",
+  "bounds": [
+   6,
+   33,
+   12,
+   39
+  ],
+  "ports": [
+   {
+    "name": "W",
+    "x": 8,
+    "y": 33,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "WREF",
+    "x": 8,
+    "y": 39,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "ZG",
+    "x": 12,
+    "y": 35,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "Z0",
+    "x": 12,
+    "y": 37,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "H_GOV": "GOV_1",
+   "INIT": "InitGv",
+   "DB": 0.0,
+   "RP": 0.04,
+   "GMAX": 1.0,
+   "GMIN": 0.0,
+   "MGOR": 0.16,
+   "MGCR": 0.16,
+   "TP_1": 0.05,
+   "Q_1": 5.0,
+   "TG_1": 0.2,
+   "RT_1": 0.4,
+   "TR_1": 5.0,
+   "KP_2": 3.0,
+   "KI_2": 0.7,
+   "KD_2": 0.5,
+   "TA_2": 0.05,
+   "TC_2": 0.2,
+   "TD_2": 0.2,
+   "JET_D": "NO",
+   "RELF": "NO",
+   "TP_3": 0.02,
+   "TR_3": 8.0,
+   "RT_3": 0.45,
+   "TG_3": 0.5,
+   "MJOR_3": 0.1,
+   "MJCR_3": 0.1,
+   "Z_CUT": 0.0,
+   "MBOR_3": 0.1,
+   "MBCR_3": 0.1,
+   "RVCR_3": 0.1,
+   "RVMX_3": 1.0,
+   "Name": ""
+  }
+ },
+ {
+  "iid": 1678613739,
+  "defn": "Sticky",
+  "bounds": [
+   2,
+   1,
+   65,
+   3
+  ],
+  "ports_error": "'Sticky' object has no attribute 'ports'",
+  "params": {
+   "align": "CENTRE",
+   "arrows": 0,
+   "fg_color_adv": "black",
+   "bg_color_adv": "#fffafaf0",
+   "bdr_color_adv": "#ff95918c",
+   "full_font": "Tahoma, 15world"
+  }
+ },
+ {
+  "iid": 733887994,
+  "defn": "master:tbreakn",
+  "bounds": [
+   25,
+   56,
+   29,
+   60
+  ],
+  "ports": [
+   {
+    "name": "Sig",
+    "x": 29,
+    "y": 58,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "2"
+   }
+  ],
+  "params": {
+   "NUMS": 1,
+   "INIT": "OPEN",
+   "TO1": 1.0,
+   "TO2": 1.05,
+   "Name": ""
+  }
+ },
+ {
+  "iid": 1850221327,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   16,
+   9,
+   17,
+   13
+  ]
+ },
+ {
+  "iid": 377373287,
+  "defn": "master:multimeter",
+  "bounds": [
+   21,
+   25,
+   23,
+   28
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 23,
+    "y": 26,
+    "dim": 0,
+    "type": "3",
+    "electrical": "0",
+    "signal": "15"
+   },
+   {
+    "name": "B",
+    "x": 21,
+    "y": 26,
+    "dim": 0,
+    "type": "4",
+    "electrical": "0",
+    "signal": "15"
+   }
+  ],
+  "params": {
+   "MeasI": "NO",
+   "MeasV": "NO",
+   "MeasP": "NO",
+   "MeasQ": "NO",
+   "RMS": "YES_ANALOG",
+   "MeasPh": "NO",
+   "S": 1.0,
+   "BaseV": 1.0,
+   "TS": 0.02,
+   "Freq": 60.0,
+   "Dis": "NO",
+   "CurI": "",
+   "VolI": "",
+   "P": "",
+   "Q": "",
+   "Vrms": "Vrms",
+   "Ph": "",
+   "hide1": "HIDE",
+   "hide2": "HIDE",
+   "Pd": "",
+   "Qd": "",
+   "Vd": "",
+   "IRMS": "NO",
+   "BaseA": 1.0,
+   "Name": "",
+   "VolILL": "",
+   "Crms": ""
+  }
+ },
+ {
+  "iid": 1348960334,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   25,
+   26,
+   25,
+   32
+  ]
+ },
+ {
+  "iid": 1940544476,
+  "defn": "WireOrthogonal",
+  "bounds": [
+   15,
+   51,
+   17,
+   51
+  ]
+ },
+ {
+  "iid": 1263558867,
+  "defn": "master:datalabel",
+  "bounds": [
+   14,
+   51,
+   16,
+   52
+  ],
+  "ports": [
+   {
+    "name": "A",
+    "x": 15,
+    "y": 51,
+    "dim": 0,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "Vrms",
+   "animate": "NONE",
+   "display": "CURRENT",
+   "datatype": "REAL",
+   "index": 1,
+   "Unit": "",
+   "ivalue1": 0,
+   "rvalue1": 0.0,
+   "rvalue2": 0.0,
+   "showani": 0
+  }
+ },
+ {
+  "iid": 1663074140,
+  "defn": "master:excac_2016_2",
+  "bounds": [
+   12,
+   13,
+   18,
+   19
+  ],
+  "ports": [
+   {
+    "name": "IFD",
+    "x": 16,
+    "y": 19,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "EFD0",
+    "x": 12,
+    "y": 17,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "EFD",
+    "x": 14,
+    "y": 19,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "VREF",
+    "x": 16,
+    "y": 13,
+    "dim": 1,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "VREFO",
+    "x": 14,
+    "y": 13,
+    "dim": 1,
+    "type": "2",
+    "electrical": "0",
+    "signal": "3"
+   },
+   {
+    "name": "VIT",
+    "x": 18,
+    "y": 17,
+    "dim": 3,
+    "type": "1",
+    "electrical": "0",
+    "signal": "3"
+   }
+  ],
+  "params": {
+   "Name": "",
+   "TYPE": "AC1C",
+   "INIT": "InitEx",
+   "OVR": "YES",
+   "RC": 0.0,
+   "XC": 0.0,
+   "TR": 0.0,
+   "STAB": "NO",
+   "VFMX": 99.0,
+   "VEMN": 0.0,
+   "TE": 0.8,
+   "KE": 1.0,
+   "KC": 0.2,
+   "KD": 0.38,
+   "SE1": 0.1,
+   "VE1": 4.18,
+   "SE2": 0.03,
+   "VE2": 3.14,
+   "UEL": "NONE",
+   "OEL": "NONE",
+   "SCL": "NONE",
+   "UELTo": "ERROR",
+   "OELTo1": "VOLTAGE_ERROR",
+   "OELTo2": "ERROR",
+   "SCLuTo": "REGULATOR_OUTPUT",
+   "SCLoTo": "ERROR",
+   "VUEL": -10000000000.0,
+   "VOEL": 10000000000.0,
+   "VSCLsum": 0.0,
+   "VSCLu": -10000000000.0,
+   "VSCLo": 10000000000.0,
+   "TC_1": 0.0,
+   "TB_1": 0.0,
+   "KA_1": 400.0,
+   "TA_1": 0.02,
+   "VAMX_1": 14.5,
+   "VAMN_1": -14.5,
+   "EFMX_1": 6.03,
+   "EFMN_1": -5.43,
+   "KF_1": 0.03,
+   "TF_1": 1.0,
+   "TC_2": 0.0,
+   "TB_2": 0.0,
+   "KA_2": 400.0,
+   "TA_2": 0.01,
+   "VAMX_2": 8.0,
+   "VAMN_2": -8.0,
+   "KB_2": 25.0,
+   "EFMX_2": 105.0,
+   "EFMN_2": -95.0,
+   "FFL_2": "NO",
+   "KF_2": 0.03,
+   "TF_2": 1.0,
+   "KH_2": 1.0,
+   "KL_2": 1.0,
+   "VLR_2": 10000000000.0,
+   "KPR_3": 1.0,
+   "KIR_3": 0.0,
+   "KDR_3": 0.0,
+   "TDR_3": 1.0,
+   "VPIDMX_3": 3.2,
+   "VPIDMN_3": -3.2,
+   "TC_3": 0.0,
+   "TB_3": 0.0,
+   "KA_3": 45.62,
+   "TA_3": 0.013,
+   "VAMX_3": 1.0,
+   "VAMN_3": -0.95,
+   "KR_3": 3.77,
+   "FFL_3": "NO",
+   "KF_3": 0.143,
+   "KN_3": 0.05,
+   "EFDN_3": 2.36,
+   "TF_3": 1.0,
+   "KFA_3": 0.0,
+   "TFA_3": 0.0,
+   "ETX_3": 0.0,
+   "KL1_3": 0.0,
+   "VLV_3": 0.79,
+   "KLV_3": 0.194,
+   "VIMX_4": 10.0,
+   "VIMN_4": -10.0,
+   "TC_4": 1.0,
+   "TB_4": 10.0,
+   "KA_4": 200.0,
+   "TA_4": 0.015,
+   "VRMX_4": 5.64,
+   "VRMN_4": -4.53,
+   "KC_4": 0.0,
+   "KA_5": 400.0,
+   "TA_5": 0.02,
+   "VAMX_5": 7.3,
+   "VAMN_5": -7.3,
+   "KF_5": 0.03,
+   "TF1_5": 1.0,
+   "TF2_5": 0.0,
+   "TF3_5": 0.0,
+   "KA_6": 53.6,
+   "TK_6": 0.18,
+   "TA_6": 0.086,
+   "TC_6": 3.0,
+   "TB_6": 9.0,
+   "VAMX_6": 75.0,
+   "VAMN_6": -75.0,
+   "EFEMX_6": 44.0,
+   "EFEMN_6": -36.0,
+   "VFLM_6": 19.0,
+   "KH_6": 92.0,
+   "VHMX_6": 75.0,
+   "TH_6": 0.08,
+   "TJ_6": 0.02,
+   "S_7": "SUMMATION_I",
+   "KPR_7": 40.0,
+   "KIR_7": 5.6,
+   "KDR_7": 0.0,
+   "TDR_7": 1.0,
+   "VRMX_7": 5.0,
+   "VRMN_7": -5.0,
+   "KPA_7": 112.0,
+   "KIA_7": 0.0,
+   "VAMX_7": 1.0,
+   "VAMN_7": -1.0,
+   "KP_7": 6.41,
+   "TP_7": 0.0,
+   "KI_7": 0.0,
+   "XL_7": 0.0,
+   "KC1_7": 0.0,
+   "VBMX_7": 999.0,
+   "SW1_7": "B",
+   "SW2_7": "",
+   "KR_7": 0.0,
+   "KL_7": 26.2,
+   "KF1_7": 0.0,
+   "KF2_7": 0.0,
+   "KF3_7": 0.0,
+   "TF_7": 1.0,
+   "S_8": "SUMMATION_I",
+   "KPR_8": 80.0,
+   "KIR_8": 5.0,
+   "KDR_8": 10.0,
+   "TDR_8": 0.02,
+   "VPIDMX_8": 999.0,
+   "VPIDMN_8": -999.0,
+   "KA_8": 1.0,
+   "TA_8": 0.0,
+   "VRMX_8": 10.0,
+   "VRMN_8": 0.0,
+   "KP_8": 17.0,
+   "TP_8": 0.0,
+   "KI_8": 13.0,
+   "XL_8": 0.0,
+   "KC1_8": 0.0,
+   "VBMX_8": 1.25,
+   "SW1_8": "",
+   "VLV_8": 0.79,
+   "KPR_9": 10.0,
+   "KIR_9": 10.0,
+   "KDR_9": 0.0,
+   "TDR_9": 0.01,
+   "VPIDMX_9": 1.6,
+   "VPIDMN_9": 0.0,
+   "KPA_9": 4.0,
+   "KIA_9": 0.0,
+   "VAMX_9": 0.996,
+   "VAMN_9": -0.866,
+   "KA_9": 20.0,
+   "TA_9": 0.0018,
+   "VRMX_9": 19.92,
+   "VRMN_9": -17.32,
+   "KFW_9": 0.0,
+   "VFWMX_9": 10.0,
+   "VFWMN_9": 0.0,
+   "SCT_9": "THYRISTOR",
+   "KC1_9": 0.0,
+   "KP_9": 1.0,
+   "KI1_9": 0.0,
+   "XL_9": 0.0,
+   "TP_9": 0.0,
+   "VBMX1_9": 100.0,
+   "KC2_9": 0.0,
+   "KI2_9": 0.0,
+   "VBMX2_9": 0.0,
+   "SW1_9": "",
+   "VLV_9": 0.0,
+   "KF_9": 0.2,
+   "TF_9": 0.01,
+   "S_10": "NONE",
+   "KR_10": 600.0,
+   "TB1_10": 22.5,
+   "TC1_10": 3.0,
+   "TB2_10": 0.13,
+   "TC2_10": 0.9,
+   "TUB1_10": 22.5,
+   "TUC1_10": 3.0,
+   "TUB2_10": 0.13,
+   "TUC2_10": 0.9,
+   "TOB1_10": 18.0,
+   "TOC1_10": 0.9,
+   "TOB2_10": 0.1,
+   "TOC2_10": 0.1,
+   "VRSMX_10": 20.0,
+   "VRSMN_10": -20.0,
+   "VRMX_10": 40.0,
+   "VRMN_10": -35.0,
+   "SWEXC_10": "B",
+   "TEXC_10": 0.0,
+   "KEXC_10": 1.0,
+   "KCR_10": 0.0,
+   "TF1_10": 0.1,
+   "TF2_10": 0.1,
+   "KVFE_10": 1.0,
+   "KLIM_10": 0.0,
+   "SW1_10": "B",
+   "KP_10": 1.0,
+   "KI1_10": 0.0,
+   "XL_10": 0.0,
+   "TP_10": 0.0,
+   "KC1_10": 0.0,
+   "VBMX1_10": 1.5,
+   "KI2_10": 0.0,
+   "KC2_10": 0.0,
+   "VBMX2_10": 0.0,
+   "VLV_10": 0.0,
+   "VFLM_10": 20.0,
+   "KE_10": 1.0,
+   "S_11": "NONE",
+   "KPA_11": 30.0,
+   "TIA_11": 2.0,
+   "KPU_11": 30.0,
+   "TIU_11": 2.0,
+   "KB_11": 3.0,
+   "TB_11": 0.4,
+   "KPO_11": 30.0,
+   "TIO_11": 2.0,
+   "VRSMX_11": 3.0,
+   "VRSMN_11": -3.0,
+   "VRMX_11": 20.0,
+   "VRMN_11": -20.0,
+   "VAMX_11": 20.0,
+   "VAMN_11": 0.0,
+   "SW1_11": "B",
+   "KP_11": 1.0,
+   "KI1_11": 0.0,
+   "XL_11": 0.0,
+   "TP_11": 0.0,
+   "KC1_11": 0.0,
+   "VBMX1_11": 1.5,
+   "KI2_11": 0.0,
+   "KC2_11": 0.0,
+   "VBMX2_11": 0.0,
+   "KBT_11": 0.0,
+   "VBT_11": 0.0,
+   "VLV_11": 0.0,
+   "VF": "",
+   "VFE": ""
+  }
+ },
+ {
+  "iid": 1426404473,
+  "defn": "GraphFrame",
+  "bounds": [
+   35,
+   4,
+   64,
+   65
+  ],
+  "ports_error": "'GraphFrame' object has no attribute 'ports'",
+  "params": {
+   "title": "$(Group)",
+   "markers": false,
+   "lockmarkers": false,
+   "deltareadout": false,
+   "xmarker": 0.0,
+   "omarker": 0.0,
+   "pan_enable": true,
+   "pan_amount": 75,
+   "xtitle": "sec",
+   "xgridauto": true,
+   "xgrid": 0.1,
+   "xfont": "Tahoma, 12world",
+   "xangle": 0
+  }
+ },
+ {
+  "iid": 1290434674,
+  "defn": "OverlayGraph",
+  "bounds": [
+   0,
+   0,
+   29,
+   8
+  ],
+  "ports_error": "'OverlayGraph' object has no attribute 'location'",
+  "params": {
+   "title": "Power",
+   "gridvalue": 20.0,
+   "yintervalue": 0.0,
+   "grid": true,
+   "ticks": false,
+   "glyphs": false,
+   "yinter": true,
+   "xinter": true,
+   "invertcolor": false,
+   "crosshair": false,
+   "manualscale": false,
+   "autoframe": 0.25,
+   "grid_color": "#ff95908c",
+   "curve_colours": "Navy;Green;Maroon;Teal;Purple;Brown",
+   "curve_colours2": "Blue;Lime;Red;Aqua;Fuchsia;Yellow"
+  }
+ },
+ {
+  "iid": 1363292408,
+  "defn": "Curve",
+  "bounds": [
+   4,
+   0,
+   27,
+   1
+  ],
+  "ports_error": "'Curve' object has no attribute 'location'",
+  "params": {
+   "Name": "REAL POWER",
+   "Group": "Synchronous Machine",
+   "Display": "NO",
+   "Scale": 120.0,
+   "Units": "MW",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 120.0,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 185669378,
+  "defn": "OverlayGraph",
+  "bounds": [
+   0,
+   8,
+   29,
+   16
+  ],
+  "ports_error": "'OverlayGraph' object has no attribute 'location'",
+  "params": {
+   "title": "Reactive Power",
+   "gridvalue": 20.0,
+   "yintervalue": 0.0,
+   "grid": true,
+   "ticks": false,
+   "glyphs": false,
+   "yinter": true,
+   "xinter": true,
+   "invertcolor": false,
+   "crosshair": false,
+   "manualscale": false,
+   "autoframe": 0.25,
+   "grid_color": "#ff95908c",
+   "curve_colours": "Navy;Green;Maroon;Teal;Purple;Brown",
+   "curve_colours2": "Blue;Lime;Red;Aqua;Fuchsia;Yellow"
+  }
+ },
+ {
+  "iid": 424478676,
+  "defn": "Curve",
+  "bounds": [
+   4,
+   0,
+   27,
+   1
+  ],
+  "ports_error": "'Curve' object has no attribute 'location'",
+  "params": {
+   "Name": "REACTIVE POWER",
+   "Group": "Synchronous Machine",
+   "Display": "NO",
+   "Scale": 120.0,
+   "Units": "MVAR",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 120.0,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 1697086834,
+  "defn": "OverlayGraph",
+  "bounds": [
+   0,
+   16,
+   29,
+   25
+  ],
+  "ports_error": "'OverlayGraph' object has no attribute 'location'",
+  "params": {
+   "title": "speed",
+   "gridvalue": 1.0,
+   "yintervalue": 0.0,
+   "grid": true,
+   "ticks": false,
+   "glyphs": false,
+   "yinter": true,
+   "xinter": true,
+   "invertcolor": false,
+   "crosshair": false,
+   "manualscale": false,
+   "autoframe": 0.25,
+   "grid_color": "#ff95908c",
+   "curve_colours": "Navy;Green;Maroon;Teal;Purple;Brown",
+   "curve_colours2": "Blue;Lime;Red;Aqua;Fuchsia;Yellow"
+  }
+ },
+ {
+  "iid": 858832016,
+  "defn": "Curve",
+  "bounds": [
+   4,
+   0,
+   27,
+   1
+  ],
+  "ports_error": "'Curve' object has no attribute 'location'",
+  "params": {
+   "Name": "OMEGA",
+   "Group": "Synchronous Machine",
+   "Display": "NO",
+   "Scale": 376.99118,
+   "Units": "rad/s",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 376.0,
+   "Max": 382.0,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 760053067,
+  "defn": "OverlayGraph",
+  "bounds": [
+   0,
+   25,
+   29,
+   33
+  ],
+  "ports_error": "'OverlayGraph' object has no attribute 'location'",
+  "params": {
+   "title": "Torque",
+   "gridvalue": 0.1,
+   "yintervalue": 0.0,
+   "grid": true,
+   "ticks": false,
+   "glyphs": false,
+   "yinter": true,
+   "xinter": true,
+   "invertcolor": false,
+   "crosshair": false,
+   "manualscale": false,
+   "autoframe": 0.25,
+   "grid_color": "#ff95908c",
+   "curve_colours": "Navy;Green;Maroon;Teal;Purple;Brown",
+   "curve_colours2": "Blue;Lime;Red;Aqua;Fuchsia;Yellow"
+  }
+ },
+ {
+  "iid": 133284605,
+  "defn": "Curve",
+  "bounds": [
+   4,
+   0,
+   27,
+   1
+  ],
+  "ports_error": "'Curve' object has no attribute 'location'",
+  "params": {
+   "Name": "MECHANICAL TORQUE",
+   "Group": "Synchronous Machine",
+   "Display": "NO",
+   "Scale": 1.0,
+   "Units": "pu",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 0.6,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 1512859905,
+  "defn": "OverlayGraph",
+  "bounds": [
+   0,
+   33,
+   29,
+   41
+  ],
+  "ports_error": "'OverlayGraph' object has no attribute 'location'",
+  "params": {
+   "title": "Field Current",
+   "gridvalue": 0.2,
+   "yintervalue": 0.0,
+   "grid": true,
+   "ticks": false,
+   "glyphs": false,
+   "yinter": true,
+   "xinter": true,
+   "invertcolor": false,
+   "crosshair": false,
+   "manualscale": false,
+   "autoframe": 0.25,
+   "grid_color": "#ff95908c",
+   "curve_colours": "Navy;Green;Maroon;Teal;Purple;Brown",
+   "curve_colours2": "Blue;Lime;Red;Aqua;Fuchsia;Yellow"
+  }
+ },
+ {
+  "iid": 558069082,
+  "defn": "Curve",
+  "bounds": [
+   4,
+   0,
+   27,
+   1
+  ],
+  "ports_error": "'Curve' object has no attribute 'location'",
+  "params": {
+   "Name": "FIELD CURRENT",
+   "Group": "Field Current",
+   "Display": "NO",
+   "Scale": 1.0,
+   "Units": "pu",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 1.8,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 301330871,
+  "defn": "OverlayGraph",
+  "bounds": [
+   0,
+   41,
+   29,
+   49
+  ],
+  "ports_error": "'OverlayGraph' object has no attribute 'location'",
+  "params": {
+   "title": "Field Voltage",
+   "gridvalue": 0.5,
+   "yintervalue": 0.0,
+   "grid": true,
+   "ticks": false,
+   "glyphs": false,
+   "yinter": true,
+   "xinter": true,
+   "invertcolor": false,
+   "crosshair": false,
+   "manualscale": false,
+   "autoframe": 0.25,
+   "grid_color": "#ff95908c",
+   "curve_colours": "Navy;Green;Maroon;Teal;Purple;Brown",
+   "curve_colours2": "Blue;Lime;Red;Aqua;Fuchsia;Yellow"
+  }
+ },
+ {
+  "iid": 1279176352,
+  "defn": "Curve",
+  "bounds": [
+   4,
+   0,
+   27,
+   1
+  ],
+  "ports_error": "'Curve' object has no attribute 'location'",
+  "params": {
+   "Name": "FIELD VOLTAGE",
+   "Group": "Field Voltage",
+   "Display": "NO",
+   "Scale": 1.0,
+   "Units": "pu",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 3.5,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ },
+ {
+  "iid": 1076455978,
+  "defn": "OverlayGraph",
+  "bounds": [
+   0,
+   49,
+   29,
+   58
+  ],
+  "ports_error": "'OverlayGraph' object has no attribute 'location'",
+  "params": {
+   "title": "Voltage",
+   "gridvalue": 2.5,
+   "yintervalue": 0.0,
+   "grid": true,
+   "ticks": false,
+   "glyphs": false,
+   "yinter": true,
+   "xinter": true,
+   "invertcolor": false,
+   "crosshair": false,
+   "manualscale": false,
+   "autoframe": 0.25,
+   "grid_color": "#ff95908c",
+   "curve_colours": "Navy;Green;Maroon;Teal;Purple;Brown",
+   "curve_colours2": "Blue;Lime;Red;Aqua;Fuchsia;Yellow"
+  }
+ },
+ {
+  "iid": 1068704130,
+  "defn": "Curve",
+  "bounds": [
+   4,
+   0,
+   27,
+   1
+  ],
+  "ports_error": "'Curve' object has no attribute 'location'",
+  "params": {
+   "Name": "TERMINAL VOLTAGE",
+   "Group": "Terminal Voltage",
+   "Display": "NO",
+   "Scale": 1.0,
+   "Units": "kV",
+   "mrun": "LAST_RUN_ONLY",
+   "Pol": "NO",
+   "Min": 0.0,
+   "Max": 20.0,
+   "UseSignalName": "NO",
+   "enab": "YES"
+  }
+ }
+]

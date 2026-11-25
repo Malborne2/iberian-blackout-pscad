@@ -1,0 +1,5 @@
+# ripple peak, window 2.0-4.98 s (2.98 s)
+ref20   dt    200 us   V34:   18.21 Hz  amp 0.02480 pu   P34:   18.24 Hz  amp     314 MW   (samples 14901)
+dt10    dt    100 us   V34:   17.84 Hz  amp 0.02247 pu   P34:   18.07 Hz  amp     277 MW   (samples 29801)
+dt50    dt    200 us   V34:   18.02 Hz  amp 0.02379 pu   P34:   18.06 Hz  amp     309 MW   (samples 14901)
+dt100   dt    200 us   V34:   16.91 Hz  amp 0.03460 pu   P34:   16.91 Hz  amp     395 MW   (samples 14901)

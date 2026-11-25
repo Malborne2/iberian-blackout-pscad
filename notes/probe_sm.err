@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\Ibrahim\OneDrive - Østfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\notes\probe_sm.py", line 21, in <module>
+    log("const ports", list(c.ports()), {k: list(c.port(k)) for k in c.ports()})
+                                            ~~~~^^^^^^^^^^^
+TypeError: 'NoneType' object is not iterable

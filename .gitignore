@@ -1,0 +1,12 @@
+# OS / editor junk
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+
+# PSCAD transient logs
+@AutomationLog.txt
+
+# Python / tooling caches
+__pycache__/
+*.pyc

@@ -1,0 +1,20 @@
+# C:\PSCAD_work\s26\ib6c_trim_12_24.psout: relative rotor angles from the speeds (360 deg * integral(f_i - f_j) dt)
+t range 12.00-24.00 s
+
+t      th32-37 [deg]  th30-37 [deg]  th32-30 [deg]  th31-37 [deg]  th32-FR [deg]
+ 12.00            +0             +0             +0             +0             +0
+ 15.90            +0             +0             -0             +0             +4
+ 16.50            +0             +0             -0             -0             +5
+ 17.00            +0             +0             -0             -0             +4
+ 17.50            +0             +0             -0             +0             +2
+ 18.00            +0             +1             -0             +0             +1
+ 18.50            +0             +0             -0             +0             +2
+ 19.00            +0             +0             -0             +0             +3
+ 19.50            +0             +0             -0             +0             +4
+ 24.00            +0             +1             -0             +0             +3
+
+  theta 32-37: total excursion +0 deg = 0.0 pole slips over 12.0 s
+  theta 30-37: total excursion +1 deg = 0.0 pole slips over 12.0 s
+  theta 32-30: total excursion -0 deg = 0.0 pole slips over 12.0 s
+  theta 31-37: total excursion +0 deg = 0.0 pole slips over 12.0 s
+  theta 32-FR: total excursion +3 deg = 0.0 pole slips over 12.0 s

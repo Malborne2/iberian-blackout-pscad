@@ -1,0 +1,35 @@
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   167
+    ARA-MAD   x3->3:   183 ->   282
+    ARA-N     x3->3:    59 ->   263
+    ARA-VAL   x1->2:    77 ->   230
+    BAD-CAC   x3->3:   155 ->   135
+    BAD-PT-S  x1->2:    81 ->   209
+    BAD-WAN   x3->3:   105 ->   208
+    CAC-CYL   x1->2:   178 ->   193
+    CAC-MAD   x6->6:   193 ->   257
+    CAC-PT-N  x1->2:    25 ->   230
+    CAC-SCE   x3->3:   150 ->   242
+    CAT-FR    x1->2:    92 ->   240
+    CYL-MAD   x4->4:   169 ->   187
+    CYL-N     x3->3:   136 ->   226
+    CYL-NW    x5->5:   143 ->   193
+    CYL-PT-N  x1->2:     5 ->   254
+     FR-N     x3->3:    13 ->   394
+    GRA-SCE   x1->2:    67 ->   140
+    GRA-SE    x1->2:    59 ->   234
+    GRA-WAN   x2->2:    80 ->   156
+    MAD-VAL   x4->4:   116 ->   228
+      N-NW    x4->4:   116 ->   275
+     NW-PT-N  x3->3:    61 ->   236
+   PT-S-WAN   x1->2:    58 ->   339
+    SCE-WAN   x4->4:   175 ->   209
+     SE-VAL   x4->4:    63 ->   167
+  lengths 0.0 / unit-X 0.0 least_squares: nfev 26, max |V err| 4.85 kV, max other err 936 (MW/Mvar)
+  lengths 0.1 / unit-X 0.0 least_squares: nfev 19, max |V err| 5.47 kV, max other err 420 (MW/Mvar)
+  lengths 0.2 / unit-X 0.0 least_squares: nfev 103, max |V err| 5.24 kV, max other err 364 (MW/Mvar)
+  lengths 0.3 / unit-X 0.0 least_squares: nfev 71, max |V err| 4.60 kV, max other err 322 (MW/Mvar)
+  lengths 0.4 / unit-X 0.0 least_squares: nfev 71, max |V err| 3.81 kV, max other err 290 (MW/Mvar)
+  lengths 0.5 / unit-X 0.0 least_squares: nfev 274, max |V err| 2.97 kV, max other err 265 (MW/Mvar)
+  lengths 0.6 / unit-X 0.0 least_squares: nfev 252, max |V err| 2.15 kV, max other err 246 (MW/Mvar)
+  lengths 0.7 / unit-X 0.0 least_squares: nfev 31, max |V err| 1.37 kV, max other err 229 (MW/Mvar)

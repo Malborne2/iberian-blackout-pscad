@@ -1,0 +1,19 @@
+14:44:27 connect
+14:44:29 reload to discard any in-memory edits
+14:45:57 set project params
+14:45:58 params now: PSOUT 0.5
+14:45:58 mm params set
+14:45:58 datalabel P_G30 iid 671455901
+14:45:59 pgb P_G30 iid 2045328601
+14:45:59 wire ok
+14:46:00 datalabel Q_G30 iid 350421214
+14:46:00 pgb Q_G30 iid 347188497
+14:46:00 wire ok
+14:46:01 datalabel V_G30 iid 2136278856
+14:46:01 pgb V_G30 iid 147343351
+14:46:02 wire ok
+14:46:02 build
+14:46:46 run
+14:47:32 run finished
+14:47:33 status (None, None)
+14:47:33 out exists: False

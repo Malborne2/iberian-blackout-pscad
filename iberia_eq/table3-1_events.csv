@@ -1,0 +1,174 @@
+event,country,time,rest,mw
+1,ES,12:32:00 –,12:32:57 ; Net load increase ; Disconnection of small embedded generators and/or ; actual increase of load at the distribution level ; 317.30,317.3
+2a/b,ES,12:32:00 –,12:32:57 ; Fast downwards change21 of operating point ; of generation unit without ramping limitation ; OR disconnection of generation unit due to ; unknown rea,
+2a,ES,12:32:05,– ; Wind ; 2.57,2.57
+2a,ES,12:32:09,– ; Wind ; 21.62,21.62
+2a,ES,12:32:09,– ; Wind ; 5.89,5.89
+2a,ES,12:32:25,– ; Wind ; 19.21,19.21
+2a,ES,12:32:29,– ; Wind ; 22.42,22.42
+2a,ES,12:32:29,– ; Wind ; 55.63,55.63
+2a,ES,12:32:45,– ; PV ; 0.59,0.59
+2a,ES,12:32:49,– ; Wind ; 13.35,13.35
+2a,ES,12:32:49,– ; PV ; 1.14,1.14
+2a,ES,12:32:53,– ; PV ; 11.94,11.94
+2a,ES,12:32:53,– ; Wind ; 19.98,19.98
+2b,ES,12:32:09,– ; Wind ; 4.79,4.79
+2b,ES,12:32:09,– ; Wind ; 2.86,2.86
+2b,ES,12:32:25,– ; Wind ; 3.43,3.43
+2b,ES,12:32:29,– ; Wind ; 2.26,2.26
+2b,ES,12:32:53,– ; Wind ; 4.78,4.78
+2b,ES,12:32:53,– ; Wind ; 10.01,10.01
+2b,ES,12:32:53,– ; Wind ; 5.99,5.99
+3,ES,12:32:57.220,"Generation loss due to power transformer trip ; PV, wind, and thermo-solar ; 355.00",355.0
+4a,ES,12:33:16.443,Generation loss ; PV and thermo-solar ; 582.00,582.0
+4b,ES,12:33:16.820,Generation loss ; PV ; 145.00,145.0
+5a1,ES,12:33:17.368,Generation loss ; Wind ; 22.87,22.87
+5a2,ES,12:33:17.780,Generation loss ; PV ; 550.00,550.0
+5a3,ES,12:33:17.940,Generation loss ; Wind ; 94.00,94.0
+5b1,ES,12:33:17.520,Generation loss ; PV ; 118.00,118.0
+5b2,ES,12:33:17.547,Generation loss ; Wind and PV ; 33.73,33.73
+5b3,ES,12:33:17.975,Generation loss ; PV ; 37.50,37.5
+5b4,ES,12:33:18.020,Generation loss ; PV ; 71.90,71.9
+6a1,ES,12:33:18.102,Generation loss ; PV ; 3.00,3.0
+6a2,ES,12:33:18.220,Generation loss ; PV ; 20.00,20.0
+6a3,ES,12:33:18.360,Generation loss ; PV ; 16.00,16.0
+6a4,ES,12:33:18.410,Generation loss ; PV ; 41.00,41.0
+6a5,ES,12:33:18.540,Generation loss ; PV ; 63.00,63.0
+6a6,ES,12:33:18.630,Generation loss ; PV ; 25.70,25.7
+6a7,ES,12:33:18.680,Generation loss ; PV ; 127.50,127.5
+6a8,ES,12:33:18.846,Generation loss ; PV ; 154.00,154.0
+6a9,ES,12:33:19.000,Generation loss ; PV ; 16.00,16.0
+6b,ES,12:33:18.951,Generation loss ; PV ; 530.00,530.0
+7a,PT,12:33:19.000,Load shedding ; Pump ; −221.00,-221.0
+7b,PT,12:33:19.090,Load shedding ; Pump ; −124 ; 21 ; Most of downwards change in production was not reflected in the communicated program.,21.0
+7c,PT,12:33:19.332,Load shedding ; Pump ; −113.00,-113.0
+8a,ES,12:33:19.095,Generation loss ; PV ; 150.00,150.0
+8a,ES,12:33:19.320,Generation loss ; PV ; 0.71,0.71
+8a,ES,12:33:19.339,Generation loss ; Wind ; 11.17,11.17
+8a,ES,12:33:19.380,Generation loss ; Wind ; 6.21,6.21
+8b,ES,12:33:19.252,Generation loss ; Wind ; 364.00,364.0
+8b,ES,12:33:19.260,Generation loss ; PV ; 70.00,70.0
+8b,ES,12:33:19.396,Generation loss ; PV ; 509.00,509.0
+8b,ES,12:33:19.407,Generation loss ; PV ; 63.30,63.3
+8b,ES,12:33:19.920,Generation loss ; PV ; 72.00,72.0
+8b,ES,12:33:19.951,Generation loss ; PV ; 12.00,12.0
+8b,ES,12:33:19.960,Generation loss ; PV ; 22.30,22.3
+8b,ES,12:33:19.973,Generation loss ; PV ; 24.60,24.6
+9,ES,12:33:19.971,Line trip ; Loeches (RE) — Arganda (RE) 220 kV ; –,9.0
+10,ES,12:33:20.000,Pump disconnection ; Pump ; −102.00,-102.0
+11,PT,12:33:20.000,Load shedding ; Pump ; −219.00,-219.0
+11,PT,12:33:20.000,Load shedding ; Pump ; −219.00,-219.0
+11,PT,12:33:20.102,Load shedding ; Pump ; −207.00,-207.0
+11,PT,12:33:19.520,Load shedding ; Pump ; −18,-18.0
+11,PT,13:33:19.780,Load shedding ; Pump ; −18,-18.0
+11,PT,12:33:20.540,Load shedding ; Pump ; −74,-74.0
+11,PT,12:33:20.660,Load shedding ; Pump ; −75,-75.0
+12a,ES,12:33:20.020,Generation loss ; PV ; 313.00,313.0
+12a,ES,12:33:20.040,Generation loss ; PV and thermo-solar ; 50.30,50.3
+12a,ES,12:33:20.100,Generation loss ; Wind ; 48.90,48.9
+12a,ES,12:33:20.100,Generation loss ; Combined cycle ; 165.00,165.0
+12b,ES,12:33:20.175,Generation loss ; PV ; 75.80,75.8
+12b,ES,12:33:20.200,Generation loss ; PV ; 305.00,305.0
+12b,ES,12:33:20.235,Generation loss ; PV ; 139.50,139.5
+12b,ES,12:33:20.300,Generation loss ; PV and thermo-solar ; 35.00,35.0
+12b,ES,12:33:20.420,Generation loss ; PV ; 131.00,131.0
+12b,ES,12:33:20.476,Generation loss ; PV ; 212.40,212.4
+13a,ES,12:33:20.133,Load shedding ; Pump ; −69.00,-69.0
+13a,ES,12:33:20.180,Load shedding ; Pump ; −129.00,-129.0
+13a,ES,12:33:20.193,Load shedding ; Pump ; −139.00,-139.0
+13a,ES,12:33:20.320,Load shedding ; Pump ; −26.00,-26.0
+13a,ES,12:33:20.367,Load shedding ; Pump ; −25.00,-25.0
+13a,ES,12:33:20.405,Load shedding ; Pump ; −201.00,-201.0
+13a,ES,12:33:20.416,Load shedding ; Pump ; −131.00,-131.0
+13a,ES,12:33:20.418,Load shedding ; Pump ; −130.00,-130.0
+13a,ES,12:33:20.423,Load shedding ; Pump ; −130.00,-130.0
+13a,ES,12:33:20.506,Load shedding ; Pump ; −69.00,-69.0
+13b,ES,12:33:20.224,Load shedding ; Pump ; −89.00,-89.0
+13b,ES,12:33:20.243,Load shedding ; Pump ; −414.00,-414.0
+13b,ES,12:33:20.254,Load shedding ; Pump ; −79.00,-79.0
+13b,ES,12:33:20.259,Load shedding ; Pump ; −192.00,-192.0
+13b,ES,12:33:20.285,Load shedding ; Pump ; −51.00,-51.0
+13b,ES,12:33:20.306,Load shedding ; Pump ; −192.00,-192.0
+13b,ES,12:33:20.480,Load shedding ; Pump ; −78.00,-78.0
+14,ES,12:33:20.353,Load shedding ; Pump ; −103.00,-103.0
+14,ES,12:33:20.476,Load shedding ; Pump ; −53.00,-53.0
+15,ES,12:33:20.370,Load shedding ; Pump ; −75.00,-75.0
+16a,ES,12:33:20.229,Tie-line trip ; Puerto de la Cruz (RE) — Beni Harchane (ONEE) 400 kV ; −,
+16b,ES,12:33:20.473,Tie-line trip ; Puerto de la Cruz (RE) — Mellousa (ONEE) 400 kV ; −,
+17,ES,12:33:20.561,Load shedding ; Pump ; −181.00,-181.0
+17,ES,12:33:20.605,Pump disconnection ; Pump ; −30.00,-30.0
+18,IP,12:33:20.574,Load shedding 49.0 Hz ; Distribution ; −448.8,-448.8
+19,ES,12:33:20.650,Generation loss ; PV ; 167.70,167.7
+20,ES,12:33:20.650,Load shedding ; Demand ; −970.10,-970.1
+20,ES,12:33:20.810,Load shedding ; Demand ; −181.70,-181.7
+21,ES,12:33:20.740,Generation loss ; PV ; 89.00,89.0
+21,ES,12:33:21.080,Generation loss ; PV ; 170.67,170.67
+21,ES,12:33:21.254,Generation loss ; PV ; 129.00,129.0
+22,IP,12:33:20.788,"Load shedding 48.8 Hz ; Distribution ; −1,733.39",-1733.39
+23,ES,12:33:20.800,Load shedding ; Pump ; −68.00,-68.0
+24,PT,12:33:21.000,"Generation loss ; Distributed generation on DSO side (estimate) ; 1,073.00",1073.0
+25,PT,12:33:21.048,Net load disconnection ; Unexpected trip due to improper activation of load ; shedding function ; 110.00,110.0
+26,ES,12:33:21.060,Load shedding 48.7 Hz ; Distribution ; −71.03,-71.03
+27,PT,12:33:21.155,Load shedding ; Pump ; −337.00,-337.0
+28,ES,12:33:21.168,Load shedding ; Demand ; −250.70,-250.7
+29,IP,12:33:21.300,"Load shedding 48.6 Hz ; Distribution ; −1,495.9",-1495.9
+30,PT,12:33:21.390,Net load disconnection ; Unexpected trip due to improper activation of load ; ­shedding function ; 17.00,17.0
+31a,ES,12:33:21.407,Tie-line trip ; Baixas (RTE) — Vic (RE) 400 kV ; −,
+31b,ES,12:33:21.437,Tie-line trip ; Arkale (RE) — Argia (RTE) 220 kV ; −,
+31b,ES,12:33:21.535,Tie-line trip ; Argia (RTE) — Hernani (RE) 400 kV ; −,
+32,ES,12:33:21.440,Generation loss ; PV ; 26.00,26.0
+32,ES,12:33:21.503,Generation loss ; PV ; 140.00,140.0
+33,IP,12:33:21.537,"Load shedding 48.4 Hz ; Distribution ; −1,809.09",-1809.09
+34,PT,12:33:21.562,Load shedding ; Pump ; −30.00,-30.0
+34,PT,12:33:21.782,Load shedding ; Pump ; −329.00,-329.0
+35,IP,12:33:21.838,"Load shedding 48.2 Hz ; Distribution ; −1,582.3",-1582.3
+36a,ES,12:33:21.872,Generation evacuation ; line trip ; Pinar del Rey (RE) — San Roque 1 220 kV ; −,
+36b,ES,12:33:21.980,Generation evacuation line trip ; Olmedilla (RE) — Sabinar 400 kV 22 ; −,
+37,IP,12:33:22.080,"Load shedding 48.0 Hz ; Distribution ; −1,566.1",-1566.1
+38a,ES,12:33:22.160,Generation loss ; PV ; 55.00,55.0
+38a,ES,12:33:22.460,Generation loss ; PV ; 52.00,52.0
+38a,ES,12:33:22.470,Generation loss ; Wind and PV ; 114.00,114.0
+38a,ES,12:33:22.860,Generation loss ; PV ; 57.00,57.0
+38b,ES,12:33:22.600,"Generation loss ; PV ; 117.50 ; 22 ; At the time of the trip, the line’s active power flow was null.",22.0
+39,PT,12:33:22.213,Load shedding ; Pump ; −114.00,-114.0
+40,ES,12:33:22.330,Generation loss ; Wind and PV ; 54.00,54.0
+40,ES,12:33:22.900,Generation loss ; PV ; 170.50,170.5
+41a,ES,12:33:22.702,"Generation loss ; Nuclear ; 1,045.00",1045.0
+41b,ES,12:33:23.460,Generation loss ; Combined cycle ; 166.00,166.0
+41c,ES,12:33:23.515,Generation loss ; Nuclear ; 653.00,653.0
+42,ES,12:33:23.076,Line trip ; Maguilla (RE) — Valdecaballeros (RE) 400 kV ; −,42.0
+43a,ES,12:33:23.140,Generation loss ; PV ; 125.00,125.0
+43a,ES,12:33:23.360,Generation loss ; PV ; 117.50,117.5
+43a,ES,12:33:23.360,Generation loss ; PV ; 167.50,167.5
+43b,ES,12:33:23.400,Generation loss ; PV ; 380.00,380.0
+43a,ES,12:33:23.260,Generation loss ; PV ; 57.00,57.0
+44,PT,12:33:24.519,Generation loss ; Hydro ; 86.19,86.19
+45,ES,12:33:23.520,HVDC block ; HVDC Iberian Peninsula (RE) — Majorca (RE) ; —,45.0
+46,ES,12:33:23.590,"Generation loss ; Nuclear ; 1,692.00",1692.0
+47,ES,12:33:23.648,Generation loss ; Combined cycle ; 87.00,87.0
+48,PT,12:33:23.644,Generation loss ; Combined cycle ; 330.69,330.69
+48,PT,12:33:23.790,Generation loss ; Hydro ; 64.76,64.76
+49,PT,12:33:23.837,Generation loss ; Hydro ; 40.12,40.12
+49,PT,12:33:23.845,Generation loss ; Hydro ; 39.62,39.62
+50,ES,12:33:23.883,Pump disconnection23 ; Pump ; −78.00,-78.0
+50,ES,12:33:23.888,Pump disconnection24 ; Pump ; −78.00,-78.0
+51,ES,12:33:23.960,HVDC block ; HVDC Iberian Peninsula (RE) — France (RTE) ; —,51.0
+52,PT,12:33:23.954,Line trip ; Mogadouro (REN) — Central da Valeira (REN) 220 kV,52.0
+53,PT,12:33:24.195,Generation loss ; Hydro ; 65.34,65.34
+54,ES,12:33:24.230,Generation loss ; Combined cycle ; 78.00,78.0
+54,ES,12:33:24.725,Generation loss ; Combined cycle ; 83.00,83.0
+54,ES,12:33:24.800,Generation loss ; Combined cycle ; 140.00,140.0
+55a,ES,12:33:25.060,Tie-line trip ; Aldeadávila (RE) — Lagoaça (REN) 400 kV,
+55b,ES,12:33:25.144,Tie-line trip ; Cartelle (RE) — Lindoso (REN) (ckt 2) 400 kV,
+55c,ES,12:33:25.183,Tie-line trip ; Cartelle (RE) — Lindoso (REN) (ckt 1) 400 kV,
+55d,ES,12:33:25.325,Tie-line trip ; Cedillo (RE) — Falagueira (REN) 400 kV,
+55e,ES,12:33:25.410,Tie-line trip ; Saucelle (RE) — Pocinho (REN) 220 kV,
+55f,ES,12:33:26.165,Tie-line trip ; Aldeadávila (RE) — Pocinho (REN) (ckt 1) 220 kV,
+56,PT,12:33:24.434,Line trip ; Lagoaça (REN) — Armamar (REN),56.0
+57,PT,12:33:26.078,Generation loss ; Hydro ; 45.81,45.81
+57,PT,12:33:26.080,Generation loss ; Hydro ; 45.82,45.82
+57,PT,12:33:26.081,Generation loss ; Hydro ; 45.96,45.96
+58,PT,12:33:27.154,Generation loss ; Hydro ; 24.10,24.1
+59,PT,12:33:29.225,Generation loss ; Hydro ; 39.36,39.36
+59,PT,12:33:29.317,Generation loss ; Hydro ; 61.40,61.4
+60,PT,12:33:37.800,"Generation loss ; Hydro ; 49.04 ; Table 3-1: Sequence of events (imbalances shown in red for > 500 MW, in orange for > 50 MW, and in yellow for the remainder)",49.04

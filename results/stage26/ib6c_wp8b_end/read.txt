@@ -1,0 +1,30 @@
+# C:\PSCAD_work\s26\ib6c_wp8b_shed_12_20.psout
+# t 0..20.000 s, values = 20 ms means centred at t (p-p over the 0.2 s before t)
+
+units: [1]=32, [2]=37, [3]=30, [4]=31, [5]=39F
+
+--- t = 19.50 s
+  unit  32: f  57.3265 Hz (p-p  509.3 mHz)  P        4 MW  Q     -63 Mvar  V 1.0452 pu  Tm*S     3947
+  unit  37: f  45.1649 Hz (p-p   53.6 mHz)  P     3750 MW  Q   -4485 Mvar  V 1.0698 pu  Tm*S     3924
+  unit  30: f  45.2610 Hz (p-p  364.7 mHz)  P     1886 MW  Q   -4038 Mvar  V 1.0919 pu  Tm*S     3470
+  unit  31: f  59.8220 Hz (p-p  562.9 mHz)  P        5 MW  Q     -59 Mvar  V 1.0582 pu  Tm*S     3859
+  unit 39F: f  49.9726 Hz (p-p    0.2 mHz)  P     4590 MW  Q    -682 Mvar  V 1.0213 pu  Tm*S     5109
+  bus 33: VDF 1.1725 (p-p 0.2714)  plant P    4721 MW
+  bus 34: VDF 1.1737 (p-p 0.2753)  plant P    4283 MW
+  bus 35: VDF 1.1798 (p-p 0.2605)  plant P    5383 MW
+  bus 36: VDF 1.2309 (p-p 0.2713)  plant P    -372 MW
+  bus 38: VDF 1.1363 (p-p 0.2849)  plant P    6467 MW
+  plants 20482 MW, Iberian units 5645 MW, PTIE -0 MW (S->F), HVDC P -999 (neg=export), V9 0.003 pu, OOS1 1
+
+--- t = 20.00 s
+  unit  32: f  58.5938 Hz (p-p  509.5 mHz)  P        5 MW  Q     -63 Mvar  V 1.0404 pu  Tm*S     3947
+  unit  37: f  43.3944 Hz (p-p 1247.8 mHz)  P     7012 MW  Q   -6885 Mvar  V 1.3240 pu  Tm*S     3924
+  unit  30: f  43.4563 Hz (p-p  943.9 mHz)  P     5970 MW  Q   -4638 Mvar  V 1.3785 pu  Tm*S     3470
+  unit  31: f  61.2225 Hz (p-p  563.0 mHz)  P        5 MW  Q     -61 Mvar  V 1.0572 pu  Tm*S     3859
+  unit 39F: f  49.9722 Hz (p-p    0.2 mHz)  P     4589 MW  Q    -683 Mvar  V 1.0221 pu  Tm*S     5135
+  bus 33: VDF 1.4167 (p-p 0.0741)  plant P    4564 MW
+  bus 34: VDF 1.4188 (p-p 0.1107)  plant P    2450 MW
+  bus 35: VDF 1.4248 (p-p 0.0487)  plant P    6086 MW
+  bus 36: VDF 1.4727 (p-p 0.0480)  plant P   -1420 MW
+  bus 38: VDF 1.4676 (p-p 0.2204)  plant P   13214 MW
+  plants 24894 MW, Iberian units 12991 MW, PTIE +0 MW (S->F), HVDC P -1997 (neg=export), V9 0.004 pu, OOS1 0

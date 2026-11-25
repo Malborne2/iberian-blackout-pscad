@@ -1,0 +1,56 @@
+# C:\PSCAD_work\s26\ib6c_trim_12_24.psout
+# t 0..24.000 s, values = 20 ms means centred at t (p-p over the 0.2 s before t)
+
+units: [1]=32, [2]=37, [3]=30, [4]=31, [5]=39F
+
+--- t = 20.00 s
+  unit  32: f  49.9728 Hz (p-p    2.8 mHz)  P     4010 MW  Q   -2387 Mvar  V 1.0311 pu  Tm*S     4035
+  unit  37: f  49.9730 Hz (p-p    2.8 mHz)  P     3440 MW  Q   -2425 Mvar  V 1.0337 pu  Tm*S     3472
+  unit  30: f  49.9729 Hz (p-p    3.4 mHz)  P     3208 MW  Q   -2147 Mvar  V 1.0492 pu  Tm*S     3223
+  unit  31: f  49.9728 Hz (p-p    2.7 mHz)  P     3922 MW  Q   +1917 Mvar  V 1.0312 pu  Tm*S     3945
+  unit 39F: f  49.9773 Hz (p-p    0.4 mHz)  P     4396 MW  Q   -2075 Mvar  V 1.0218 pu  Tm*S     4723
+  bus 33: VDF 1.0570 (p-p 0.0229)  plant P    3575 MW
+  bus 34: VDF 1.0572 (p-p 0.0255)  plant P    3170 MW
+  bus 35: VDF 1.0567 (p-p 0.0211)  plant P    3926 MW
+  bus 36: VDF 1.0802 (p-p 0.0253)  plant P    3399 MW
+  bus 38: VDF 1.0584 (p-p 0.0248)  plant P    5075 MW
+  plants 19147 MW, Iberian units 14580 MW, PTIE +200 MW (S->F), HVDC P -1005 (neg=export), V9 0.003 pu, OOS1 0
+
+--- t = 22.00 s
+  unit  32: f  49.9777 Hz (p-p    0.8 mHz)  P     3996 MW  Q   -2354 Mvar  V 1.0327 pu  Tm*S     4035
+  unit  37: f  49.9774 Hz (p-p    1.1 mHz)  P     3453 MW  Q   -2399 Mvar  V 1.0354 pu  Tm*S     3474
+  unit  30: f  49.9775 Hz (p-p    1.9 mHz)  P     3225 MW  Q   -2117 Mvar  V 1.0515 pu  Tm*S     3227
+  unit  31: f  49.9776 Hz (p-p    0.8 mHz)  P     3912 MW  Q   +1941 Mvar  V 1.0326 pu  Tm*S     3945
+  unit 39F: f  49.9733 Hz (p-p    0.3 mHz)  P     4451 MW  Q   -2081 Mvar  V 1.0217 pu  Tm*S     4811
+  bus 33: VDF 1.0591 (p-p 0.0240)  plant P    3549 MW
+  bus 34: VDF 1.0597 (p-p 0.0274)  plant P    3186 MW
+  bus 35: VDF 1.0578 (p-p 0.0216)  plant P    3898 MW
+  bus 36: VDF 1.0814 (p-p 0.0258)  plant P    3375 MW
+  bus 38: VDF 1.0570 (p-p 0.0484)  plant P    4975 MW
+  plants 18984 MW, Iberian units 14586 MW, PTIE +140 MW (S->F), HVDC P -1001 (neg=export), V9 0.003 pu, OOS1 0
+
+--- t = 23.00 s
+  unit  32: f  49.9716 Hz (p-p    1.8 mHz)  P     3976 MW  Q   -2355 Mvar  V 1.0320 pu  Tm*S     4035
+  unit  37: f  49.9717 Hz (p-p    2.0 mHz)  P     3419 MW  Q   -2383 Mvar  V 1.0349 pu  Tm*S     3474
+  unit  30: f  49.9720 Hz (p-p    2.7 mHz)  P     3188 MW  Q   -2109 Mvar  V 1.0509 pu  Tm*S     3228
+  unit  31: f  49.9715 Hz (p-p    1.8 mHz)  P     3892 MW  Q   +1944 Mvar  V 1.0320 pu  Tm*S     3945
+  unit 39F: f  49.9719 Hz (p-p    0.3 mHz)  P     4403 MW  Q   -2073 Mvar  V 1.0218 pu  Tm*S     4851
+  bus 33: VDF 1.0579 (p-p 0.0287)  plant P    3510 MW
+  bus 34: VDF 1.0575 (p-p 0.0321)  plant P    3103 MW
+  bus 35: VDF 1.0586 (p-p 0.0285)  plant P    3939 MW
+  bus 36: VDF 1.0819 (p-p 0.0301)  plant P    3399 MW
+  bus 38: VDF 1.0591 (p-p 0.0296)  plant P    4998 MW
+  plants 18949 MW, Iberian units 14474 MW, PTIE +188 MW (S->F), HVDC P -999 (neg=export), V9 0.003 pu, OOS1 0
+
+--- t = 24.00 s
+  unit  32: f  49.9689 Hz (p-p    1.3 mHz)  P     3941 MW  Q   -2338 Mvar  V 1.0324 pu  Tm*S     4035
+  unit  37: f  49.9689 Hz (p-p    1.4 mHz)  P     3439 MW  Q   -2357 Mvar  V 1.0354 pu  Tm*S     3476
+  unit  30: f  49.9693 Hz (p-p    2.7 mHz)  P     3196 MW  Q   -2078 Mvar  V 1.0516 pu  Tm*S     3230
+  unit  31: f  49.9690 Hz (p-p    1.3 mHz)  P     3846 MW  Q   +1957 Mvar  V 1.0324 pu  Tm*S     3945
+  unit 39F: f  49.9706 Hz (p-p    0.3 mHz)  P     4449 MW  Q   -2075 Mvar  V 1.0212 pu  Tm*S     4888
+  bus 33: VDF 1.0584 (p-p 0.0252)  plant P    3462 MW
+  bus 34: VDF 1.0551 (p-p 0.0315)  plant P    2912 MW
+  bus 35: VDF 1.0556 (p-p 0.0251)  plant P    3655 MW
+  bus 36: VDF 1.0836 (p-p 0.0282)  plant P    3665 MW
+  bus 38: VDF 1.0543 (p-p 0.0320)  plant P    4696 MW
+  plants 18391 MW, Iberian units 14422 MW, PTIE +142 MW (S->F), HVDC P -998 (neg=export), V9 0.003 pu, OOS1 0

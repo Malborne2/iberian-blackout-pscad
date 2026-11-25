@@ -1,0 +1,154 @@
+<Definition classid="UserCmpDefn" name="TestShell" group="" url="" version="" build="" crc="122554916" instances="0" key="" view="false" date="1582128731" id="795705879">
+      <paramlist><param name="Description" value="T4 shell test" /></paramlist><form name="TestShell" w="320" h="400" splitter="60">
+<categories>
+  <category name="Configuration" visible="true">
+    <parameter desc="Power per phase" name="Sbase" group="Test" unit="MW" min="0.0" max="10000.0" content_type="Variable" type="Real" helpmode="Append" intent="Input" dim="1" animate="false">
+      <value>10.0</value>
+    </parameter>
+    <parameter desc="A second parameter, unused inside, to prove more than one is carried" name="H" group="Test" unit="s" min="0.0" max="100.0" content_type="Variable" type="Real" helpmode="Append" intent="Input" dim="1" animate="false">
+      <value>3.0</value>
+    </parameter>
+  </category>
+</categories>
+</form><svg viewBox="-200 -200 200 200">
+        <port model="Natural" name="T" x="54" y="0" dim="3" mode="" type="NonRemovable">true</port>
+        <path d="M-1.000 2.000 A4 6 0 1 0 -9.000 2.000" arc="-10,-4,-1,9,0,180" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <path d="M-1.000 2.000 A4 6 0 1 0 7.000 2.000" arc="-1,-4,8,9,-180,180" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="34" y1="10" x2="45" y2="10" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="36" y1="0" x2="45" y2="0" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="34" y1="-10" x2="45" y2="-10" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="45" y1="-15" x2="45" y2="15" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="45" y1="0" x2="54" y2="0" stroke="Black" stroke-dasharray="none" stroke-width="0.6" port="" />
+        <ellipse cx="0" cy="0" rx="36" ry="36" stroke="Black" stroke-dasharray="none" stroke-width="0.2" fill-style="Hollow" fill-fg="Black" fill-bg="" port="" />
+        <text x="-1" y="-12" stroke="Black" fill="Black" font-size="Small" text-anchor="Middle">T</text>
+      </svg>
+      <script />
+      <schematic classid="UserCanvas" zoomlevel="6" scrollx="0" scrolly="0">
+        <paramlist>
+          <param name="show_signal" value="0" />
+          <param name="show_virtual" value="0" />
+          <param name="show_sequence" value="0" />
+          <param name="auto_sequence" value="1" />
+          <param name="monitor_bus_voltage" value="0" />
+          <param name="show_grid" value="0" />
+          <param name="size" value="0" />
+          <param name="orient" value="0" />
+          <param name="show_border" value="0" />
+        </paramlist>
+        <User classid="UserCmp" name="" defn="master:xnode" id="15604105" x="450" y="378" w="20" h="33" z="1" orient="0" link="-1" q="4" disable="false"><paramlist link="-1" name="" crc="37312176"><param name="Name" value="T" /></paramlist></User></schematic>
+      <references><using namespace="master" /></references><graphics>
+        <paramlist />
+        <Port id="472489986" classid="Port" x="54" y="0">
+          <paramlist>
+            <param name="name" value="N" />
+            <param name="internal" value="false" />
+            <param name="cond" value="true" />
+            <param name="mode" value="3" />
+            <param name="datatype" value="0" />
+            <param name="electype" value="0" />
+            <param name="dim" value="3" />
+          </paramlist>
+        </Port>
+        <Gfx classid="Graphics.Path" id="1127384355" x="-10" y="-4" w="9" h="13">
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="dasharray" value="0" />
+            <param name="thickness" value="0" />
+            <param name="port" value="" />
+            <param name="start" value="0" />
+            <param name="sweep" value="180" />
+            <param name="cond" value="true" />
+          </paramlist>
+        </Gfx>
+        <Gfx classid="Graphics.Path" id="1099144805" x="-1" y="-4" w="9" h="13">
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="dasharray" value="0" />
+            <param name="thickness" value="0" />
+            <param name="port" value="" />
+            <param name="start" value="-180" />
+            <param name="sweep" value="180" />
+            <param name="cond" value="true" />
+          </paramlist>
+        </Gfx>
+        <Gfx classid="Graphics.Line" id="1088491631" x="34" y="10">
+          <vertex x="0" y="0" />
+          <vertex x="11" y="0" />
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="dasharray" value="0" />
+            <param name="thickness" value="0" />
+            <param name="port" value="" />
+            <param name="cond" value="true" />
+          </paramlist>
+        </Gfx>
+        <Gfx classid="Graphics.Line" id="1049319081" x="36" y="0">
+          <vertex x="0" y="0" />
+          <vertex x="9" y="0" />
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="dasharray" value="0" />
+            <param name="thickness" value="0" />
+            <param name="port" value="" />
+            <param name="cond" value="true" />
+          </paramlist>
+        </Gfx>
+        <Gfx classid="Graphics.Line" id="1163188032" x="34" y="-10">
+          <vertex x="0" y="0" />
+          <vertex x="11" y="0" />
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="dasharray" value="0" />
+            <param name="thickness" value="0" />
+            <param name="port" value="" />
+            <param name="cond" value="true" />
+          </paramlist>
+        </Gfx>
+        <Gfx classid="Graphics.Line" id="1525182199" x="45" y="-15">
+          <vertex x="0" y="0" />
+          <vertex x="0" y="30" />
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="dasharray" value="0" />
+            <param name="thickness" value="0" />
+            <param name="port" value="" />
+            <param name="cond" value="true" />
+          </paramlist>
+        </Gfx>
+        <Gfx classid="Graphics.Line" id="724695615" x="45" y="0">
+          <vertex x="0" y="0" />
+          <vertex x="9" y="0" />
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="dasharray" value="0" />
+            <param name="thickness" value="2" />
+            <param name="port" value="" />
+            <param name="cond" value="true" />
+          </paramlist>
+        </Gfx>
+        <Gfx classid="Graphics.Ellipse" id="1739898978" x="-36" y="-36" w="72" h="72">
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="dasharray" value="0" />
+            <param name="thickness" value="0" />
+            <param name="port" value="" />
+            <param name="fill_style" value="0" />
+            <param name="fill_fg" value="Black" />
+            <param name="fill_bg" value="White" />
+            <param name="cond" value="true" />
+          </paramlist>
+        </Gfx>
+        <Gfx classid="Graphics.Text" id="1265966738" x="-1" y="-12">
+          <paramlist>
+            <param name="color" value="Black" />
+            <param name="font_size" value="0" />
+            <param name="full_font" value="Tahoma, 12world" />
+            <param name="anchor" value="1" />
+            <param name="cond" value="true" />
+            <param name="text" value="S" />
+            <param name="angle" value="0" />
+          </paramlist>
+        </Gfx>
+      </graphics>
+    </Definition>
+    

@@ -1,0 +1,89 @@
+corridor lengths (OSM border-line mean km -> hub-to-hub 1.2 x centroid km):
+    ARA-CAT   x3->3:    92 ->   167
+    ARA-MAD   x3->3:   183 ->   282
+    ARA-N     x3->3:    59 ->   263
+    ARA-VAL   x1->2:    77 ->   230
+    BAD-CAC   x3->3:   155 ->   135
+    BAD-PT-S  x1->2:    81 ->   209
+    BAD-WAN   x3->3:   105 ->   208
+    CAC-CYL   x1->2:   178 ->   193
+    CAC-MAD   x6->6:   193 ->   257
+    CAC-PT-N  x1->2:    25 ->   230
+    CAC-SCE   x3->3:   150 ->   242
+    CYL-MAD   x4->4:   169 ->   187
+    CYL-N     x3->3:   136 ->   226
+    CYL-NW    x5->5:   143 ->   193
+    CYL-PT-N  x1->2:     5 ->   254
+    GRA-SCE   x1->2:    67 ->   140
+    GRA-SE    x1->2:    59 ->   234
+    GRA-WAN   x2->2:    80 ->   156
+    MAD-VAL   x4->4:   116 ->   228
+      N-NW    x4->4:   116 ->   275
+     NW-PT-N  x3->3:    61 ->   236
+   PT-S-WAN   x1->2:    58 ->   339
+    SCE-WAN   x4->4:   175 ->   209
+     SE-VAL   x4->4:    63 ->   167
+    round 0: V err 35.0 kV (worst BAD 377.0/412)  unitQ err 2408  tieQ err 2202  PT 2529 FR 1112  flow err 1572  gen vm 1.025 1.010 1.010 1.022 1.022 1.040 1.042 1.004 1.012 1.025 1.020 0.995
+    round 250: V err 21.0 kV (worst GRA 433.0/412)  unitQ err 468  tieQ err 436  PT 2000 FR 1520  flow err 909  gen vm 1.001 0.968 0.968 1.001 0.979 1.033 1.020 0.476 1.012 1.025 1.020 0.984
+    round 500: V err 15.4 kV (worst GRA 427.4/412)  unitQ err 252  tieQ err 303  PT 2150 FR 1040  flow err 915  gen vm 0.999 0.969 0.969 1.004 0.981 1.032 1.020 0.462 1.012 1.025 1.020 0.981
+    round 599: V err 21.1 kV (worst BAD 390.9/412)  unitQ err 686  tieQ err 1122  PT 2200 FR 831  flow err 931  gen vm 1.008 0.972 0.972 1.009 0.987 1.042 1.030 0.469 1.012 1.025 1.020 0.979
+  continuation lengths 0.0 / unit-X 0.0: rounds 600
+    round 0: V err 15.7 kV (worst GRA 427.7/412)  unitQ err 741  tieQ err 467  PT 2098 FR 1011  flow err 319  gen vm 0.998 0.969 0.969 1.005 0.977 1.032 1.020 0.479 1.012 1.025 1.020 0.981
+    round 149: V err 23.0 kV (worst BAD 389.0/412)  unitQ err 703  tieQ err 1109  PT 2219 FR 776  flow err 376  gen vm 1.008 0.972 0.972 1.009 0.987 1.042 1.030 0.797 1.012 1.025 1.020 0.981
+  continuation lengths 0.1 / unit-X 0.0: rounds 750
+    round 0: V err 18.3 kV (worst GRA 430.3/412)  unitQ err 381  tieQ err 285  PT 2141 FR 983  flow err 4  gen vm 0.998 0.969 0.969 1.004 0.980 1.032 1.020 0.797 1.012 1.025 1.020 0.984
+    round 149: V err 26.0 kV (worst BAD 386.0/412)  unitQ err 757  tieQ err 1021  PT 2236 FR 720  flow err 40  gen vm 1.008 0.973 0.973 1.009 0.986 1.042 1.030 0.856 1.012 1.025 1.020 0.982
+  continuation lengths 0.2 / unit-X 0.0: rounds 900
+    round 0: V err 19.6 kV (worst GRA 431.6/412)  unitQ err 410  tieQ err 354  PT 2150 FR 975  flow err 246  gen vm 0.998 0.969 0.969 1.003 0.979 1.032 1.020 0.854 1.012 1.025 1.020 0.985
+    round 149: V err 27.7 kV (worst BAD 384.3/412)  unitQ err 776  tieQ err 808  PT 2244 FR 692  flow err 54  gen vm 1.008 0.973 0.973 1.009 0.988 1.042 1.030 0.880 1.012 1.025 1.020 0.979
+  continuation lengths 0.3 / unit-X 0.0: rounds 1050
+    round 0: V err 20.3 kV (worst GRA 432.3/412)  unitQ err 432  tieQ err 479  PT 2155 FR 962  flow err 170  gen vm 0.998 0.969 0.969 1.003 0.980 1.032 1.020 0.876 1.012 1.025 1.020 0.982
+    round 149: V err 29.5 kV (worst PT-S 371.5/401)  unitQ err 798  tieQ err 741  PT 2253 FR 662  flow err 67  gen vm 1.008 0.973 0.973 1.009 0.988 1.042 1.030 0.892 1.012 1.025 1.020 0.977
+  continuation lengths 0.4 / unit-X 0.0: rounds 1200
+    round 0: V err 21.0 kV (worst GRA 433.0/412)  unitQ err 458  tieQ err 450  PT 2159 FR 953  flow err 121  gen vm 0.998 0.969 0.969 1.003 0.980 1.032 1.020 0.888 1.012 1.025 1.020 0.980
+    round 149: V err 31.4 kV (worst PT-S 369.6/401)  unitQ err 823  tieQ err 616  PT 2261 FR 632  flow err 80  gen vm 1.008 0.973 0.973 1.009 0.988 1.042 1.030 0.903 1.012 1.025 1.020 0.975
+  continuation lengths 0.5 / unit-X 0.0: rounds 1350
+    round 0: V err 21.7 kV (worst GRA 433.7/412)  unitQ err 486  tieQ err 498  PT 2163 FR 944  flow err 87  gen vm 0.998 0.969 0.969 1.003 0.979 1.032 1.020 0.898 1.012 1.025 1.020 0.978
+    round 149: V err 33.4 kV (worst PT-S 367.6/401)  unitQ err 849  tieQ err 567  PT 2270 FR 601  flow err 92  gen vm 1.008 0.973 0.973 1.010 0.988 1.042 1.030 0.912 1.012 1.025 1.020 0.973
+  continuation lengths 0.6 / unit-X 0.0: rounds 1500
+    round 0: V err 22.4 kV (worst GRA 434.4/412)  unitQ err 516  tieQ err 482  PT 2167 FR 935  flow err 61  gen vm 0.998 0.969 0.969 1.002 0.979 1.032 1.020 0.906 1.012 1.025 1.020 0.977
+    round 149: V err 35.4 kV (worst PT-S 365.6/401)  unitQ err 876  tieQ err 424  PT 2279 FR 569  flow err 104  gen vm 1.008 0.973 0.973 1.010 0.988 1.042 1.030 0.920 1.012 1.025 1.020 0.971
+  continuation lengths 0.7 / unit-X 0.0: rounds 1650
+    round 0: V err 23.1 kV (worst GRA 435.1/412)  unitQ err 547  tieQ err 569  PT 2170 FR 926  flow err 41  gen vm 0.998 0.969 0.969 1.002 0.978 1.032 1.020 0.912 1.012 1.025 1.020 0.975
+    round 149: V err 37.6 kV (worst PT-S 363.4/401)  unitQ err 903  tieQ err 383  PT 2288 FR 537  flow err 115  gen vm 1.008 0.973 0.973 1.010 0.987 1.042 1.030 0.925 1.012 1.025 1.020 0.969
+  continuation lengths 0.8 / unit-X 0.0: rounds 1800
+    round 0: V err 23.9 kV (worst GRA 435.9/412)  unitQ err 581  tieQ err 560  PT 2173 FR 917  flow err 25  gen vm 0.998 0.969 0.969 1.002 0.977 1.032 1.020 0.917 1.012 1.025 1.020 0.974
+    round 149: V err 39.9 kV (worst PT-S 361.1/401)  unitQ err 931  tieQ err 326  PT 2297 FR 504  flow err 127  gen vm 1.008 0.973 0.973 1.010 0.987 1.042 1.030 0.929 1.012 1.025 1.020 0.968
+  continuation lengths 0.9 / unit-X 0.0: rounds 1950
+    round 0: V err 24.7 kV (worst GRA 436.7/412)  unitQ err 617  tieQ err 581  PT 2176 FR 909  flow err 12  gen vm 0.998 0.968 0.968 1.002 0.977 1.032 1.020 0.920 1.012 1.025 1.020 0.972
+    round 149: V err 42.3 kV (worst PT-S 358.7/401)  unitQ err 960  tieQ err 368  PT 2307 FR 470  flow err 139  gen vm 1.008 0.973 0.973 1.010 0.987 1.042 1.030 0.931 1.012 1.025 1.020 0.967
+  continuation lengths 1.0 / unit-X 0.0: rounds 2100
+    round 0: V err 23.8 kV (worst GRA 435.8/412)  unitQ err 534  tieQ err 430  PT 2174 FR 956  flow err 34  gen vm 0.998 0.968 0.968 1.002 0.977 1.032 1.020 0.921 1.012 1.025 1.020 0.971
+    round 149: V err 44.5 kV (worst PT-S 356.5/401)  unitQ err 994  tieQ err 452  PT 2319 FR 425  flow err 146  gen vm 1.008 0.971 0.971 1.009 0.987 1.042 1.030 0.932 1.012 1.025 1.020 0.966
+  continuation lengths 1.0 / unit-X 0.1: rounds 2250
+    round 0: V err 24.8 kV (worst GRA 436.8/412)  unitQ err 568  tieQ err 424  PT 2177 FR 948  flow err 35  gen vm 0.998 0.966 0.966 1.002 0.977 1.032 1.020 0.922 1.012 1.025 1.020 0.970
+    round 149: V err 46.8 kV (worst PT-S 354.2/401)  unitQ err 1031  tieQ err 366  PT 2333 FR 376  flow err 155  gen vm 1.008 0.970 0.970 1.009 0.987 1.042 1.030 0.932 1.012 1.025 1.020 0.965
+  continuation lengths 1.0 / unit-X 0.2: rounds 2400
+    round 0: V err 25.9 kV (worst GRA 437.9/412)  unitQ err 607  tieQ err 680  PT 2181 FR 939  flow err 37  gen vm 0.998 0.965 0.965 1.001 0.977 1.032 1.020 0.922 1.012 1.025 1.020 0.970
+    round 149: V err 49.5 kV (worst PT-S 351.5/401)  unitQ err 1074  tieQ err 384  PT 2348 FR 321  flow err 164  gen vm 1.008 0.969 0.969 1.009 0.987 1.042 1.030 0.932 1.012 1.025 1.020 0.965
+  continuation lengths 1.0 / unit-X 0.3: rounds 2550
+    round 0: V err 27.2 kV (worst GRA 439.2/412)  unitQ err 650  tieQ err 720  PT 2185 FR 928  flow err 40  gen vm 0.998 0.963 0.963 1.000 0.977 1.032 1.020 0.922 1.012 1.025 1.020 0.970
+    round 149: V err 52.6 kV (worst PT-S 348.4/401)  unitQ err 1122  tieQ err 405  PT 2365 FR 259  flow err 175  gen vm 1.008 0.968 0.968 1.008 0.987 1.042 1.030 0.932 1.012 1.025 1.020 0.965
+  continuation lengths 1.0 / unit-X 0.4: rounds 2700
+    round 0: V err 28.6 kV (worst GRA 440.6/412)  unitQ err 700  tieQ err 776  PT 2189 FR 916  flow err 42  gen vm 0.998 0.962 0.962 0.999 0.977 1.032 1.020 0.922 1.012 1.025 1.020 0.970
+    round 149: V err 56.3 kV (worst PT-S 344.7/401)  unitQ err 1179  tieQ err 467  PT 2385 FR 186  flow err 188  gen vm 1.008 0.967 0.967 1.007 0.987 1.042 1.030 0.932 1.012 1.025 1.020 0.965
+  continuation lengths 1.0 / unit-X 0.5: rounds 2850
+    round 0: V err 30.3 kV (worst GRA 442.3/412)  unitQ err 759  tieQ err 842  PT 2196 FR 899  flow err 46  gen vm 0.998 0.960 0.960 0.997 0.977 1.032 1.020 0.922 1.012 1.025 1.020 0.970
+    round 149: V err 60.9 kV (worst PT-S 340.1/401)  unitQ err 1257  tieQ err 547  PT 2409 FR 99  flow err 203  gen vm 1.008 0.966 0.966 1.007 0.987 1.042 1.030 0.932 1.012 1.025 1.020 0.965
+  continuation lengths 1.0 / unit-X 0.6: rounds 3000
+    round 0: V err 32.4 kV (worst GRA 444.4/412)  unitQ err 824  tieQ err 923  PT 2203 FR 878  flow err 51  gen vm 0.998 0.958 0.958 0.997 0.977 1.032 1.020 0.922 1.012 1.025 1.020 0.970
+    round 149: V err 66.7 kV (worst PT-S 334.3/401)  unitQ err 1361  tieQ err 568  PT 2438 FR -5  flow err 223  gen vm 1.008 0.965 0.965 1.007 0.987 1.042 1.030 0.932 1.012 1.025 1.020 0.965
+  continuation lengths 1.0 / unit-X 0.7: rounds 3150
+    round 0: V err 35.0 kV (worst GRA 447.0/412)  unitQ err 888  tieQ err 1022  PT 2213 FR 854  flow err 57  gen vm 0.998 0.956 0.956 0.997 0.977 1.032 1.020 0.922 1.012 1.025 1.020 0.970
+  continuation lengths 1.0 / unit-X 0.8 FAILED: LoadflowNotConverged; last good (1.0, np.float64(0.7))
+     BAD-CAC      x3 135 km  P   +2800 MW  146 %
+     CAC-CYL      x2 193 km  P   +2066 MW  132 %
+     GRA-SE       x2 234 km  P   +2240 MW  126 %
+     CAC-SCE      x3 242 km  P   -2077 MW  116 %
+     PT-N-PT-S    x3 250 km  P   -2021 MW  114 %
+     CAC-PT-N     x2 230 km  P   +1402 MW  88 %

@@ -1,0 +1,83 @@
+PlotType: PSOUT
+--- messages ---
+Message(text='Begin compiling with PSCAD Version 5.1.0', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=400002, classid='MessageObj')
+Message(text="Compiling 'T26_29'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T26_29', link=159241307, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T26_28'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T26_28', link=1993719147, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T25_26'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T25_26', link=696025885, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T28_29'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T28_29', link=1922756813, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T2_25'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T2_25', link=898097024, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T26_27'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T26_27', link=1548502742, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T17_27'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T17_27', link=610896872, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T1_2'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T1_2', link=132099961, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T17_18'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T17_18', link=27881116, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T2_3'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T2_3', link=270883288, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T3_18'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T3_18', link=1563545167, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T16_17'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T16_17', link=880611736, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T16_24'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T16_24', link=1607065382, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T1_39'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T1_39', link=1710875964, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T15_16'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T15_16', link=728010479, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T3_4'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T3_4', link=695244786, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T16_21'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T16_21', link=985011150, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T23_24'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T23_24', link=427332237, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T21_22'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T21_22', link=621977469, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T14_15'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T14_15', link=1092669953, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T4_14'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T4_14', link=930192587, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T4_5'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T4_5', link=519398027, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T16_19'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T16_19', link=1557250133, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T22_23'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T22_23', link=1396656488, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T5_6'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T5_6', link=466768812, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T13_14'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T13_14', link=165517550, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T5_8'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T5_8', link=539174694, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T9_39'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T9_39', link=2118373786, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T6_7'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T6_7', link=1610043783, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T6_11'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T6_11', link=658003597, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T7_8'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T7_8', link=1580598589, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T10_11'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T10_11', link=80171600, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T10_13'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T10_13', link=1190111546, group=100006, classid='CmpNavigator')
+Message(text="Compiling 'T8_9'. Generating network and data files.", label='build', status='normal', scope='Spanish_grid_model', name='T8_9', link=858753404, group=100006, classid='CmpNavigator')
+Message(text="Generating 'C:\\Users\\Ibrahim\\OneDrive - Østfold University College\\PhD Projects\\PSCAD\\Spanish_netowrk_model\\\\Spanish_grid_model.gf81_x86\\Spanish_grid_model.map'.", label='build', status='normal', scope='ieee_39_bus', name='C:\\Users\\Ibrahim\\OneDrive - Østfold University College\\PhD Projects\\PSCAD\\Spanish_netowrk_model\\\\Spanish_grid_model.gf81_x86\\Spanish_grid_model.map', link=0, group=100006, classid='FileNavigator')
+Message(text='The total number of live nodes: 147', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100015, classid='MessageObj')
+Message(text="Coding .mak file: 'C:\\Users\\Ibrahim\\OneDrive - Østfold University College\\PhD Projects\\PSCAD\\Spanish_netowrk_model\\\\Spanish_grid_model.gf81_x86\\\\SConstruct'", label='build', status='normal', scope='ieee_39_bus', name='C:\\Users\\Ibrahim\\OneDrive - Østfold University College\\PhD Projects\\PSCAD\\Spanish_netowrk_model\\\\Spanish_grid_model.gf81_x86\\\\SConstruct', link=0, group=0, classid='FileNavigator')
+Message(text='Non-professional licenses are limited to a single, electrical subsystem. Subsystem splitting has been internally disabled for this simulation.', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100001, classid='MessageObj')
+Message(text='Time for Compile: 45923ms  Make: 0ms', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=400000, classid='MessageObj')
+Message(text='Solve Time = 875ms', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=400000, classid='MessageObj')
+Message(text='Will execute (1): call C:\\Program Files\\GFortran\\8.1\\x86\\bin\\gf81vars.bat', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100016, classid='MessageObj')
+Message(text='Will execute (1): call "C:\\Program Files\\GFortran\\8.1\\x86\\bin\\gf81vars.bat"', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100016, classid='MessageObj')
+Message(text='Will execute (2): "C:\\Program Files (x86)\\PSCAD\\5.1.0\\bin\\win64\\Python.exe" -m SCons', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100016, classid='MessageObj')
+Message(text='Will execute (2): "C:\\Users\\Ibrahim\\OneDrive - Østfold University College\\PhD Projects\\PSCAD\\Spanish_netowrk_model\\\\Spanish_grid_model.gf81_x86\\Spanish_grid_model_mak.bat"', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100016, classid='MessageObj')
+Message(text='Creating EMTDC executable...', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100005, classid='MessageObj')
+Message(text='C:\\Users\\Ibrahim\\OneDrive - Ostfold University College\\PhD Projects\\PSCAD\\Spanish_netowrk_model\\Spanish_grid_model.gf81_x86>call "C:\\Program Files\\GFortran\\8.1\\x86\\bin\\gf81vars.bat" \n', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100004, classid='')
+Message(text='The system cannot find the path specified.\n', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100004, classid='')
+Message(text='scons: Reading SConscript files ...\n', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100004, classid='')
+Message(text='scons: done reading SConscript files.\n', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100004, classid='')
+Message(text='scons: Building targets ...\n', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100004, classid='')
+Message(text="scons: `.' is up to date.\n", label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100004, classid='')
+Message(text='scons: done building targets.\n', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=100004, classid='')
+Message(text='Finished compiling with PSCAD Version 5.1.0', label='build', status='normal', scope='ieee_39_bus', name='', link=0, group=400003, classid='MessageObj')
+--- output text (tail) ---
+Initializing Simulation Run
+Executing > "C:\Users\Ibrahim\OneDrive - Østfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\\Spanish_grid_model.gf81_x86\Spanish_grid_model_30000.bat"
+C:\Users\Ibrahim\OneDrive - Ostfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\Spanish_grid_model.gf81_x86>call "C:\Program Files\GFortran\8.1\x86\bin\gf81vars.bat" 
+The system cannot find the path specified.
+Communications: Connection established.
+EMTDC(tm) Version 5.10 R#93051001
+Time Summary: Start Date: 11-10-2026
+Time Summary: Start Time: 14:47:29
+The actual plot step: '100.000000' 
+Requested locale = english-us
+Current locale = English_United States.1252
+ ****
+ * EMTDC for PSCAD v5.1: Build# 20260213                 
+ ****
+ Subsystem           1  has ideal branches
+Time Summary: Stop Time: 14:47:32
+Time Summary: Elapsed Time: 00:00:02
+Time Summary: Total CPU Time: 2266ms.
+Terminating connection.
+EMTDC run completed.
+Number of Matrix Switchings in SS#   1 is:     2024
+         Input file: .\Spanish_grid_model.map                                                                                                                                                                                                                                            
+Simulation has ended. Status code = 0
+NdStartup failed with c00000bb
+Windows OS Version: 6.2
+

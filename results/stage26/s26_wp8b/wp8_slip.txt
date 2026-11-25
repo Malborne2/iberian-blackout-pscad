@@ -1,0 +1,14 @@
+# C:\PSCAD_work\s26\ib6_s26_wp8b_80_88.psout
+PTIE raw minimum               -3199 MW at t =   84.734 s
+PTIE 20 ms-mean minimum        -3198 MW at t =   84.729 s
+BRKFR first 1              84.956 s
+OOS1 first 1               84.956 s
+|dPh| = Ph39-Ph9: max   120.0 deg before the opening; at the opening   120.0 deg
+
+coherence after the opening (C4): f of the three machines still connected to Iberia
+  t=85.50  f32  52.014  f37  46.805  f30  46.668   spread    5346 mHz
+  t=86.00  f32  53.185  f37  45.072  f30  45.172   spread    8113 mHz
+  t=86.50  f32  54.357  f37  45.509  f30  45.339   spread    9018 mHz
+  t=87.00  f32  55.531  f37  44.455  f30  44.516   spread   11076 mHz
+  t=87.50  f32  56.704  f37  42.441  f30  42.439   spread   14265 mHz
+  t=88.00  f32  57.878  f37  40.555  f30  40.596   spread   17323 mHz

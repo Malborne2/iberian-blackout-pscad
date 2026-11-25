@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "pscad": {
+      "command": "C:\\Users\\Ibrahim\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+      "args": ["-m", "pscad_mcp.server"],
+      "cwd": "C:\\GitHub\\PSCAD-MCP",
+      "env": {
+        "PYTHONPATH": "C:\\GitHub\\PSCAD-MCP",
+        "PYTHONIOENCODING": "utf-8"
+      }
+    }
+  }
+}

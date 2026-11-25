@@ -1,0 +1,43 @@
+<Definition classid="UserCmpDefn" name="TestShell5" group="" url="" version="" build="" crc="0" instances="0" key="" view="false" date="0" id="1200000005">
+      <paramlist><param name="Description" value="T4 shell test" /></paramlist><form name="TestShell5" w="320" h="400" splitter="60">
+<category name="Configuration" visible="true">
+    <parameter desc="Power per phase" name="Sbase" group="Test" unit="MW" min="0.0" max="10000.0" content_type="Constant" type="Real" helpmode="Append" intent="Input" dim="1" animate="false">
+      <value>10.0</value>
+      <cond />
+      <help />
+      <vis />
+    </parameter>
+    <parameter desc="A second parameter, unused inside, to prove more than one is carried" name="H" group="Test" unit="s" min="0.0" max="100.0" content_type="Constant" type="Real" helpmode="Append" intent="Input" dim="1" animate="false">
+      <value>3.0</value>
+      <cond />
+      <help />
+      <vis />
+    </parameter>
+  </category>
+</form><svg viewBox="-200 -200 200 200">
+        <port model="Natural" name="T" x="54" y="0" dim="3" mode="" type="NonRemovable">true</port>
+        <path d="M-1.000 2.000 A4 6 0 1 0 -9.000 2.000" arc="-10,-4,-1,9,0,180" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <path d="M-1.000 2.000 A4 6 0 1 0 7.000 2.000" arc="-1,-4,8,9,-180,180" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="34" y1="10" x2="45" y2="10" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="36" y1="0" x2="45" y2="0" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="34" y1="-10" x2="45" y2="-10" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="45" y1="-15" x2="45" y2="15" stroke="Black" stroke-dasharray="none" stroke-width="0.2" port="" />
+        <line x1="45" y1="0" x2="54" y2="0" stroke="Black" stroke-dasharray="none" stroke-width="0.6" port="" />
+        <ellipse cx="0" cy="0" rx="36" ry="36" stroke="Black" stroke-dasharray="none" stroke-width="0.2" fill-style="Hollow" fill-fg="Black" fill-bg="" port="" />
+        <text x="-1" y="-12" stroke="Black" fill="Black" font-size="Small" text-anchor="Middle">T</text>
+      </svg>
+      <schematic classid="UserCanvas" zoomlevel="6" scrollx="0" scrolly="0">
+        <paramlist>
+          <param name="show_signal" value="0" />
+          <param name="show_virtual" value="0" />
+          <param name="show_sequence" value="0" />
+          <param name="auto_sequence" value="1" />
+          <param name="monitor_bus_voltage" value="0" />
+          <param name="show_grid" value="0" />
+          <param name="size" value="0" />
+          <param name="orient" value="0" />
+          <param name="show_border" value="0" />
+        </paramlist>
+        <User classid="UserCmp" name="" defn="master:xnode" id="15604105" x="450" y="378" w="20" h="33" z="1" orient="0" link="-1" q="4" disable="false"><paramlist link="-1" name="" crc="37312176"><param name="Name" value="T" /></paramlist></User></schematic>
+      <references><using namespace="master" /></references></Definition>
+    

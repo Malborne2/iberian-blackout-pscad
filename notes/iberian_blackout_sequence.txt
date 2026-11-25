@@ -1,0 +1,1829 @@
+
+===== PAGE 1 =====
+Iberian Peninsula Blackout
+28 April 2025
+Detailed Sequence of Events
+for DIgSILENT PowerFactory Simulation
+Based on:
+ENTSO-E ICS Investigation Expert Panel
+Final Report on the Grid Incident in Spain and Portugal
+on 28 April 2025
+Published: 20 March 2026
+All times in CEST (UTC+02:00)
+All data sourced from the official ENTSO-E Final Report unless otherwise noted.
+This document is prepared for academic/research simulation purposes only.
+All technical data are from the public ENTSO-E Final Report.
+
+===== PAGE 2 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Contents
+1
+Introduction and Scope
+3
+1.1
+Key Quantities at the Start of the Incident (12:32:00 CEST) . . . . . . . .
+3
+2
+Summarised Sequence of Events
+3
+2.1
+Cumulative Power Imbalance Summary . . . . . . . . . . . . . . . . . . . .
+6
+3
+Detailed Sequence of Events
+7
+3.1
+Pre-Incident Context: 09:00–12:32:00 CEST . . . . . . . . . . . . . . . . .
+7
+3.2
+Event Cluster 1 – 12:32:00 to 12:32:57: Pre-collapse Generation and Load
+Changes (ES) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+3.2.1
+Event 1 – Net Load Increase in Spanish Distribution Grids . . . . .
+7
+3.2.2
+Events 2a/2b – Fast Downward Change or Disconnection of Wind/PV
+(>1 MW)
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+7
+3.3
+Event Cluster 3 – 12:32:57.220: First Major Trip – 400/220 kV Trans-
+former, Granada (ES)
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+8
+3.4
+Events 4a/4b – 12:33:16: Badajoz Substations, 727 MW Disconnection (ES)
+9
+3.4.1
+Event 4a – 400 kV TS 1–Badajoz: 582 MW Disconnection . . . . . .
+9
+3.4.2
+Event 4b – 400 kV TS 2–Badajoz: 145 MW Disconnection . . . . . .
+9
+3.5
+Events 5a/5b – 12:33:17 to 12:33:18: Cascade of 928+ MW Disconnections
+(ES) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+10
+3.6
+Events 6a/6b – 12:33:18: Cascading Collapse, 1001+ MW (ES) . . . . . . .
+11
+3.7
+Loss of Synchronism Onset – 12:33:19.000 CEST (IP) . . . . . . . . . . . .
+13
+3.8
+Events 7–12 – 12:33:19 to 12:33:20.5: Massive Generation Loss + Pump-
+Storage Shedding . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+3.8.1
+Events 7a/7b/7c – Portugal Pump Shedding (49.5 Hz scheme) . . .
+14
+3.8.2
+Events 8a/8b – Large PV/Wind Generation Loss (Spain) . . . . . .
+14
+3.8.3
+Event 9 – 220 kV Arganda–Loeches Line Trip (Spain) . . . . . . . .
+14
+3.9
+Events 16a/16b – 12:33:20.229/12:33:20.473: Spain–Morocco AC Tie-Line
+Trips . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+3.10 Spanish Low-Frequency Defence Plan – 12:33:20.133 to 12:33:22.080 CEST
+14
+3.10.1 Automatic Pump-Storage Disconnection (Spain) . . . . . . . . . . .
+15
+3.10.2 Automatic Low-Frequency Demand Disconnection (Spain) . . . . .
+15
+3.11 Events 31a/31b – 12:33:21.407 to 12:33:21.535: France–Spain AC Intercon-
+nections Trip (Loss of Synchronism) . . . . . . . . . . . . . . . . . . . . . .
+15
+3.12 Events 41 + 46 – 12:33:22 to 12:33:23.6: Nuclear Plant Trips (Spain)
+. . .
+16
+3.13 Event 51 – 12:33:23.960: HVDC Block – Final Separation . . . . . . . . . .
+16
+4
+Transmission Line Trips: Complete Reference Table
+17
+5
+Reactive Power Balance: Quantified Changes at Key Events
+18
+6
+Voltage Evolution Timeline
+19
+7
+Protection Settings Reference for PowerFactory
+20
+8
+PowerFactory Simulation Notes and Recommendations
+21
+8.1
+Model Topology Recommendations . . . . . . . . . . . . . . . . . . . . . .
+22
+1
+
+===== PAGE 3 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+8.2
+Key Generator Modelling Parameters . . . . . . . . . . . . . . . . . . . . .
+22
+8.3
+Protection Relay Implementation . . . . . . . . . . . . . . . . . . . . . . .
+22
+8.4
+Voltage Ranges for Reference (Spanish System)
+. . . . . . . . . . . . . . .
+23
+9
+Summary: Root Causes and Contributing Factors
+23
+2
+
+===== PAGE 4 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Introduction and Scope
+This document provides a detailed and summarised reconstruction of the cascading se-
+quence of events that led to the total collapse of the Iberian Peninsula power system
+on 28 April 2025, beginning at approximately 12:32:00 CEST and ending with complete
+system separation at approximately 12:33:24 CEST—a collapse spanning less than 90
+seconds.
+The purpose of this document is to support the recreation of the event in DIgSI-
+LENT PowerFactory, including correct protection relay settings, reactive power bal-
+ance changes, voltage thresholds, and frequency trajectories.
+All page and figure references correspond to the ENTSO-E ICS Investigation Expert
+Panel Final Report, published 20 March 2026 (hereafter “the Report”).
+Key Quantities at the Start of the Incident (12:32:00 CEST)
+The following initial conditions apply to the Iberian system at 12:32:00 CEST (Report:
+Chapter 2, pp. 29–115; Management Summary pp. 9–12):
+ Frequency: 50.0 Hz (stable, minor fluctuations)
+ 400 kV voltage: Below 420 kV at all pilot nodes in Spain; within 380 kV to 420 kV
+in Portugal
+ Spain net exports: ≈5 GW (to France via AC lines and HVDC)
+ HVDC Santa Llogaia–Baixas: 2×500 MW Spain→France; AC voltage setpoint
+405 kV (Spain side), 395 kV (France side); absorbing 2×440 Mvar reactive on French
+side, injecting 7.7 Mvar on Spanish side
+ Spanish total generation: ≈27.2 GW; predominantly solar PV (≈18 GW), wind
+(≈3.5 GW), with nuclear and gas as synchronous backstop
+ Renewable generation mode: Fixed power factor (not voltage-control mode) —
+critical context
+ Two oscillatory episodes had occurred in the 30 minutes prior:
+– 12:03–12:08: Converter-driven forced oscillation at 0.63 Hz, local to Iberian
+Peninsula
+– 12:19–12:22: Inter-area oscillation at 0.2 Hz (East–Centre–West CE mode)
+ Several shunt reactors had been disconnected to address low voltages during oscil-
+lation episodes up to 12:24.
+Source: Report pp. 9–12 (Management Summary), Figures 1-2 and 1-3 (voltage pilot
+nodes), Figure 1-4 (generation map), Figure 1-5 (oscillatory episodes), Section 3.1.2.2
+(HVDC p. 136).
+Summarised Sequence of Events
+Table 1 provides a compact overview of the major event clusters. Detailed analysis of
+each cluster follows in Section 3.
+3
+
+===== PAGE 5 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 1: Summarised sequence of major event clusters (Spain = ES, Portugal = PT,
+Iberian Peninsula = IP). MW values in red indicate >500 MW imbalance; orange
+>50 MW. Source: Report Table 3-1, pp. 117–120.
+Cluster
+Time
+(CEST)
+Event
+Power
+(MW)
+∆Q
+(Mvar)
+Voltage
+1
+12:32:00–
+12:32:57
+Net load increase (ES):
+small PV
+disconnections and/or
+load increase in
+distribution grids
++317
+–
+≈412 kV rising
+2a/2b
+12:32:05–
+12:32:53
+Fast downward output
+change OR
+disconnection of
+wind/PV (>1 MW,
+TSO-connected),
+northern and southern
+Spain
++208
+–
+Rising,
+<420 kV
+3
+12:32:57.220
+First major trip:
+400/220 kV
+transformer, 400 kV
+TS 1–Granada.
+Overvoltage on 220 kV
+side. Loss of 355 MW
+PV/wind/thermo-solar
++ 165 Mvar reactive
+absorption.
++355
+−165
+417.9 kV
+(400 kV side)
+4a
+12:33:16.443
+Evacuation line trip at
+400 kV GS 1–Badajoz
+(overvoltage). Loss of
+582 MW
+PV/thermo-solar +
+165 Mvar.
++582
+−165
+≈432 kV
+4b
+12:33:16.820
+PV plant trip at
+400 kV TS 2–Badajoz
+(overvoltage). Loss of
+145 MW + 38 Mvar.
++145
+−38
+438.7 kV
+5a
+12:33:17.368–
+12:33:17.940
+Multiple trips in
+400 kV TS 1–Segovia
+and 400 kV
+TS 1–Seville
+(overvoltage). Total
+≈667 MW wind/PV.
++667
+≈−234
+436 −-444 kV
+Continued on next page
+4
+
+===== PAGE 6 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 1 continued from previous page
+Cluster
+Time
+(CEST)
+Event
+Power
+(MW)
+∆Q
+(Mvar)
+Voltage
+5b
+12:33:17.520–
+12:33:18.020
+Multiple trips at
+400 kV GS 1–Badajoz,
+220 kV TS 1–Huelva,
+220 kV TS 1–C´aceres,
+220 kV TS 3–Badajoz.
+Total ≈261 MW.
++261
+≈−45
+437 −-254 kV
+(220 kV)
+6a/6b
+12:33:18.102–
+12:33:18.951
+Cascade of overvoltage
+trips across 220 kV and
+400 kV substations
+(Seville, Badajoz,
+C´aceres, Murcia,
+C´adiz, M´alaga,
+Cuenca). Total
+≈1,001 MW PV.
+Voltage control
+fully lost.
+>+1001
+≈−100
+440 −-452 kV
+(400 kV)
+–
+12:33:19.000
+Loss of synchronism
+onset: Iberian
+Peninsula begins losing
+synchronism with
+Continental Europe.
+–
+–
+>440 kV
+7–8
+12:33:19.000–
+12:33:19.973
+Multiple PV/wind
+trips (ES) +
+Pump-storage load
+shedding initiation
+(PT, 49.5 Hz scheme).
+Large generation losses
+(>1,500 MW).
+>+1500
+–
+Collapsing
+16a/16b
+12:33:20.229–
+12:33:20.473
+Spain–Morocco AC
+tie-lines trip
+(underfrequency at
+Morocco side, 49.5 Hz
+threshold, transfer trip
+to Spain).
+–
+–
+<49 Hz
+13a/b
+12:33:20.133–
+12:33:20.506
+Pump-storage
+automatic
+disconnection (Spain,
+49.5 Hz/49.3 Hz
+schemes). Total
+≈2756 MW shed.
+−2756
+–
+<49 Hz
+Continued on next page
+5
+
+===== PAGE 7 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 1 continued from previous page
+Cluster
+Time
+(CEST)
+Event
+Power
+(MW)
+∆Q
+(Mvar)
+Voltage
+18/22/26/29/33/35/37
+12:33:20.574–
+12:33:22.080
+LFDD steps 1–6
+activated (49.0 Hz to
+48.0 Hz). Total
+≈8,505 MW demand
+shed.
+−8505
+–
+<48.5 Hz
+31a/b
+12:33:21.407–
+12:33:21.535
+France–Spain AC
+interconnections trip
+due to
+loss-of-synchronism
+protection (DRS).
+Iberian Peninsula fully
+islanded.
+–
+–
+Islanded
+41a/c,
+46
+12:33:22.702–
+12:33:23.590
+Nuclear units trip
+(Spain): total
+≈3,390 MW.
++3390
+–
+Collapsed
+51
+12:33:23.960
+HVDC
+Santa Llogaia–
+Baixas trips.
+Complete electrical
+separation of Iberian
+Peninsula from France.
+Full blackout.
+–
+–
+Collapsed
+Cumulative Power Imbalance Summary
+Based on Report Section 3.1.2 (p. 130) and Table 3-2 (p. 131):
+Category
+Imbalance
+(MW)
+Generation lost (PV +
+thermo-solar)
++3,283
+Generation lost (PV + wind
+combined)
++168
+Generation lost (wind)
++49
+Generation lost (nuclear)
++3,390
+Generation lost (combined cycle
+gas)
++719
+Total generation tripped
+(12:33:20–12:33:25)
++7,609
+Demand + pump-hydro shed
+(defence plan)
+−11,260
+Source: Report Table 3-2, p. 131.
+6
+
+===== PAGE 8 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Detailed Sequence of Events
+Pre-Incident Context: 09:00–12:32:00 CEST
+Source: Report Chapter 2, pp. 29–115; Management Summary pp. 9–12.
+From approximately 09:00 CEST, the voltage variability in Spain began to increase,
+driven by high renewable generation (solar PV ≈18 GW, wind ≈3.5 GW). At approxi-
+mately 10:30 CEST, the voltage in part of the 400 kV network briefly approached—but
+did not exceed—435 kV (the Spanish upper operational limit) at the Olmedilla node.
+Two oscillatory episodes occurred in the preceding 30 minutes:
+1. 12:03–12:08 CEST: Converter-driven forced oscillation at 0.63 Hz, primarily
+in the Spanish and Portuguese systems, with highest amplitude near Carmona–
+Almaraz.
+Triggered by an inverter-based power plant connected at the node of
+highest amplitude.
+2. 12:19–12:22 CEST: Inter-area oscillation at 0.2 Hz, East–Centre–West continen-
+tal mode. Operators applied mitigation: reduced Spain–France exports, coupled
+internal lines in southern Spain, changed HVDC operating mode.
+The mitigation measures for the oscillations increased voltages across the Iberian system
+as a side effect (reduced exports ⇒less reactive power exported ⇒higher local voltages).
+At 12:32:00 CEST, the 400 kV voltage was below 420 kV at all buses; frequency was
+nominally 50.0 Hz; no notable oscillation with amplitude above 20 mHz was detected.
+Event Cluster 1 – 12:32:00 to 12:32:57: Pre-collapse Generation and Load
+Changes (ES)
+Source: Report Table 3-1 (p. 117), Section 3.1.1 (p. 122), Section 4.3 (p. 278).
+Event 1 – Net Load Increase in Spanish Distribution Grids
+ Time: 12:32:00–12:32:57 CEST
+ Type: Net load increase (distribution level)
+ Power Imbalance: +317.3 MW
+ Reactive Power Change: Unknown/unquantified
+ Voltage at onset: ≈412 kV (Carmona PMU, Figure 3-5, p. 127)
+ Cause: Combination of: (a) disconnection of small embedded PV generators (<1 MW,
+rooftop) triggered by overvoltage inverter protection; (b) actual increase in voltage-
+dependent load due to rising voltage
+ Protection setting: Small PV inverter overvoltage protection thresholds not stan-
+dardised; two PV inverter manufacturers’ data showed correlation with 400 kV volt-
+age rise (Figure 1-13, p. 20)
+ PowerFactory note: Model as a step load increase of +317 MW at t = 0 s dis-
+tributed across the Spanish network. This can be represented as a load increase
+event or a partial disconnection of small PV units.
+Events 2a/2b – Fast Downward Change or Disconnection of Wind/PV (>1 MW)
+ Time: 12:32:05–12:32:53 CEST
+7
+
+===== PAGE 9 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+ Type: Fast downward operating point change or disconnection (cause unknown)
+ Power Imbalance: +208 MW total (individual events listed in Table 2)
+ Reactive Power Change: Proportional reduction (fixed power factor mode), un-
+quantified
+ Location: Northern Spain (2a) and southern Spain (2b)
+ Cause: Unknown; Expert Panel unable to determine exact cause due to lack of
+oscillography
+ PowerFactory note: Model as individual generator step reductions starting from
+t = +5 s through t = +53 s.
+Table 2: Individual events in cluster 2a/2b (Report Table 3-1, p. 117).
+Event
+Time (CEST)
+Power
+(MW)
+Technology
+2a
+12:32:05
+2.57
+Wind
+2a
+12:32:09
+21.62
+Wind
+2a
+12:32:09
+5.89
+Wind
+2a
+12:32:25
+19.21
+Wind
+2a
+12:32:29
+22.42
+Wind
+2a
+12:32:29
+55.63
+Wind
+2a
+12:32:45
+0.59
+PV
+2a
+12:32:49
+13.35
+Wind
+2a
+12:32:49
+1.14
+PV
+2a
+12:32:53
+11.94
+PV
+2a
+12:32:53
+19.98
+Wind
+2b
+12:32:09
+4.79
+Wind
+2b
+12:32:09
+2.86
+Wind
+2b
+12:32:25
+3.43
+Wind
+2b
+12:32:29
+2.26
+Wind
+2b
+12:32:53
+4.78
+Wind
+2b
+12:32:53
+10.01
+Wind
+2b
+12:32:53
+5.99
+Wind
+Total
+208.46
+Event Cluster 3 – 12:32:57.220: First Major Trip – 400/220 kV Transformer,
+Granada (ES)
+Source: Report Section 3.2.1.3.1 (pp. 145–147), Table 3-3 (p. 144), Section 3.1.1 (p. 122).
+ Time: 12:32:57.220 CEST (Phase B triggers first); phases A and C trip at 12:32:57.215
+ Location: 400 kV TS 1–Granada, 400/220 kV generation evacuation transformer
+(privately owned)
+ Protection Type: Overvoltage (OV) protection on the 220 kV side
+ Protection Setting: Ut = 110% Un = 242 kV (phase-to-phase), time delay t = 0 s
+(instantaneous)
+ Measured Voltage at Trip:
+– 220 kV side, Phase B: 242.9 kV (= 1.104 pu) at 12:32:57.155
+– 220 kV side, Phases A/C: 244.3 kV at 12:32:57.215
+8
+
+===== PAGE 10 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+– 400 kV side (from line relay COMTRADE): 417.9 kV (= 1.045 pu)
+– 220 kV downstream plant (oscillography): 237.5 kV (= 1.079 pu)
+ Active Power Lost: +355 MW (PV, wind, thermo-solar injecting from 220 kV
+to 400 kV)
+ Reactive Power Lost: −165 Mvar reactive absorption removed from network
+ Voltage after trip: Immediate further increase on 400 kV network; remained below
+435 kV
+ Frequency after trip: Drops to ≈49.94 Hz
+ Compliance assessment: Diverges from applicable requirements. Voltage
+at the 400 kV connection point was 417.9 kV (< 440 kV threshold). Trip is attributed
+to: (a) possible transient in measurement secondary circuit or relay measurement
+error; (b) zero time delay setting (no ride-through)
+ Generation breakdown downstream:
+V1 category:
+523 MW; V3 category:
+127 MW
+ PowerFactory note: Model as instantaneous disconnection of 355 MW generation
++ 165 Mvar reactive absorption at t = +57.22 s (i.e., 57.22 s after simulation t0 =
+12:32:00). Trip signal from OV relay on 220 kV busbar side, set at 1.10 pu with
+t = 0 s.
+Events 4a/4b – 12:33:16: Badajoz Substations, 727 MW Disconnection (ES)
+Source: Report Sections 3.2.1.3.2–3.2.1.3.3 (pp. 148–151), Table 3-3 (p. 144), Section 3.1.1
+(p. 122).
+Event 4a – 400 kV TS 1–Badajoz: 582 MW Disconnection
+ Time: 12:33:16.443 CEST
+ Location: 400 kV GS 1–Badajoz evacuation line to 400 kV GS 2–Badajoz
+ Protection Type: Overvoltage protection (exact relay unknown; generation
+connected downstream also tripped by overfrequency immediately after)
+ Protection Setting: Not delivered to Expert Panel
+ Measured Voltage at Trip:
+– 400 kV TS 1–Badajoz (SCADA, at 12:33:10): 434.0 kV (evacuation bay), 430.5 kV
+(BB1), 429.9 kV (BB2)
+– 400 kV TS 3–C´aceres PMU (at 12:33:16.420, nearby): positive sequence 431.72 kV;
+at 12:33:16.443: 432.78 kV; at 12:33:16.680: 440.0 kV
+– Estimated voltage at 400 kV GS 1–Badajoz connection point: ≈432.4 kV
+ Active Power Lost: +582 MW (PV and thermo-solar)
+ Reactive Power Lost: −165 Mvar reactive absorption removed
+ Frequency after: ≈49.9 Hz; Spain begins to deviate from CE frequency
+ Compliance assessment: Diverges from applicable requirements. Evidence
+indicates voltage was below 435 kV at the connection point at the moment of the
+trip.
+ Generation breakdown downstream: V1: 556 MW; V3: 69 MW
+Event 4b – 400 kV TS 2–Badajoz: 145 MW Disconnection
+ Time: 12:33:16.820 CEST
+9
+
+===== PAGE 11 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+ Location: PV plant at 400 kV TS 2–Badajoz (certified compliant with Order TED
+749/2020)
+ Protection Type: Overvoltage protection, two-stage
+ Protection Settings:
+– Stage 1: 435.6 kV (1.089 pu), time delay 1.5 s
+– Stage 2: 455.4 kV (1.1385 pu), time delay 0.2 s
+ Measured Voltage at Trip:
+– SCADA 400 kV TS 2–Badajoz at 12:32:52: 427.7 kV; at 12:33:16: 436.1 kV
+– COMTRADE from generator terminal (at trip): maximum 439.4 kV (1.098 pu)
+– Estimated voltage at 400 kV TS 2–Badajoz (from PMU of adjacent line):
+≈432.8 kV at pickup (1.5 s before trip); ≈438.7 kV just before trip
+– Pickup occurred when voltage was 433.9 kV (1.08 pu): 0.5% below the config-
+ured threshold
+ Active Power Lost: +145 MW (PV)
+ Reactive Power Lost: −38 Mvar reactive absorption removed (Report p. 126)
+ Compliance assessment: Diverges from applicable requirements. Settings
+at 1.089 pu diverge from the requirement to remain connected up to 1.0875 pu in-
+definitely and up to 1.10 pu for at least 20 minutes. Voltage was below the threshold
+at the pickup instant.
+ Generation breakdown downstream: V3: 150 MW
+ PowerFactory note: Model as OV relay Stage 1: 435.6 kV, t = 1.5 s. Note relay
+hysteresis effect (reset at 0.95×threshold).
+Voltage impact of events 4a+4b combined:
+After event 4b, positive-sequence volt-
+age exceeds 440 kV at least one bus in the Spanish 400 kV network; multiple buses exceed
+operational limits simultaneously. Source: Report p. 126.
+Events 5a/5b – 12:33:17 to 12:33:18: Cascade of 928+ MW Disconnections
+(ES)
+Source: Report Sections 3.2.1.3.4–3.2.1.3.10 (pp. 151–160), Table 3-3 (p. 144).
+Following events 4a and 4b, voltage rose beyond 440 kV at multiple 400 kV and 220 kV
+substations, triggering a rapid cascade. Table 3 details each trip.
+Table 3: Event cluster 5 – individual trips, 12:33:17–12:33:18.020 CEST. Source: Report
+Table 3-3 (pp. 144–145) and Sections 3.2.1.3.4–3.2.1.3.10.
+Event
+Time
+(CEST)
+Substation
+MW
+∆Q
+(Mvar)
+Voltage /
+Protection
+5a1
+12:33:17.368
+400 kV
+TS 1–Segovia
+(Wind, V1)
++22.9
+−12.3
+436.5 kV; OV
+protection on
+400/132 kV
+transformer;
+Aligns with
+requirements
+10
+
+===== PAGE 12 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 3 continued
+Event
+Time
+(CEST)
+Substation
+MW
+∆Q
+(Mvar)
+Voltage /
+Protection
+5b1
+12:33:17.520
+400 kV
+GS 1–Badajoz
+(PV, V3)
++118
+−22
+443 kV (gen.
+substation); line
+relay trip
+(unknown setting);
+Possibly aligns
+5b2
+12:33:17.547
+220 kV
+TS 1–Huelva
+(PV+Wind)
++33.7
+–
+N/A; control
+centre: OV
+protection; Setting
+1.1 pu (1.5 s),
+1.15 pu (0.2 s);
+Diverges
+5a2
+12:33:17.780
+400 kV
+TS 1–Seville (PV,
+V3: 698 MW
+downstream)
++550
+−195
+437.7 kV (TS end);
+435.8 kV (GS end);
+OV: 436.6 kV
+(1.09 pu), t = 1 s;
+Diverges
+5a3
+12:33:17.940
+400 kV
+TS 1–Segovia
+(Wind, V1)
++94
+−26.5
+443.4 kV; OV:
+1.10 pu, t = 0.5 s;
+Aligns
+5b3
+12:33:17.975
+220 kV
+TS 1–C´aceres (PV,
+V3: 106 MW)
++37.5
+−7
+250.4 kV
+(250.39 kV per
+owner); OV:
+1.10 pu (110% of
+220 kV), t = 1.5 s;
+Diverges
+5b4
+12:33:18.020
+220 kV
+TS 3–Badajoz
+(PV, V3: 124 MW)
++71.9
+−16
+≈254.9 kV (plant);
+upstream element
+tripped; setting
+unknown;
+Unknown
+Events 6a/6b – 12:33:18: Cascading Collapse, 1001+ MW (ES)
+Source: Report Sections 3.2.1.3.11–3.2.1.3.18 (pp. 161–172), Table 3-3 (pp. 144–145).
+By this stage, voltage at multiple 400 kV substations had exceeded 440 kV and was ap-
+proaching 450 kV. Voltage control was fully lost. Table 4 details the rapid cascade.
+11
+
+===== PAGE 13 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 4: Event cluster 6 – cascading overvoltage trips, 12:33:18.102–12:33:18.951 CEST.
+Voltage control fully lost. Source: Report Table 3-3 (pp. 144–145).
+Event
+Time
+(CEST)
+Substation
+MW
+∆Q
+(Mvar)
+Voltage /
+Protection
+6a1
+12:33:18.102
+220 kV
+TS 2–Seville (PV,
+RfG V2: 100 MW)
++3
+–
+246.5 kV (1.121 pu);
+remote trip; setting
+unknown;
+Diverges (below
+253 kV threshold)
+6a2
+12:33:18.220
+220 kV
+TS 3–Badajoz
+(PV, V3: 292 MW)
++20
+−4
+N/A; progressive
+power reduction;
+insufficient data
+6a3
+12:33:18.360
+400 kV
+TS 3–Badajoz
+(PV, V3: 369 MW)
++16
+−4
+447.7 kV; 440 kV
+exceeded 780 ms
+before trip; Aligns
+(V3: withstand
+≥763 ms; 780 ms
+elapsed)
+6a4
+12:33:18.410
+400 kV
+TS 2–C´aceres (PV,
+V3: 42 MW)
++41
+–
+444.3 kV
+(TS 2–C´aceres);
+OV Stage 1: 440 kV
+(1.1 pu), t = 1.5 s;
+Stage 2: 460 kV
+(1.15 pu), t = 0.6 s;
+440 kV exceeded
+only 550 ms before
+trip; Diverges
+(requires ≥898 ms)
+6a5
+12:33:18.540
+400 kV
+TS 1–Murcia (PV,
+V5: 74 MW)
++63
+–
+147.3 kV (132 kV
+level); OV cause;
+Category V5: No
+requirements
+6a6
+12:33:18.630
+220 kV TS 1–C´adiz
+(PV+Wind,
+V1:100/V2:8/V3:88)
++25.7
+–
+247.5 kV (1.125 pu);
+transformer trip;
+Diverges (V2
+must remain for
+>253 kV)
+6a7
+12:33:18.680
+220 kV TS 1–C´adiz
+(PV+Wind, same
+node)
++127.5
+–
+248.2 kV (1.128 pu);
+evacuation line trip
+(GS end);
+Diverges (V3
+must remain for
+≤253 kV)
+12
+
+===== PAGE 14 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 4 continued
+Event
+Time
+(CEST)
+Substation
+MW
+∆Q
+(Mvar)
+Voltage /
+Protection
+6a8
+12:33:18.846
+400 kV
+TS 1–M´alaga (PV,
+V3:174 MW)
++154
+–
+448.6 kV; OV:
+439.56 kV
+(1.0989 pu), t = 1 s;
+voltage at trip
+above 440 kV;
+Possibly aligns
+(pick-up threshold
+below 440 kV)
+6b
+12:33:18.951
+400 kV
+TS 1–Cuenca (PV,
+V3: 665 MW)
++530
+–
+448.6 kV (TS end);
+446.6 kV (GS end);
+OV Stage 1:
+1.088 pu, 60 min;
+Stage 2: 1.11 pu,
+t = 1.2 s; Possibly
+aligns (no pre-fault
+recording available)
+Peak voltages reached:
+At 12:33:17 the maximum 400 kV voltage reached 442.5 kV
+(1.106 pu). At 12:33:18 it reached 451.4 kV (1.128 pu) at some southern Spanish substa-
+tions. Source: Report Section 3.1.2 (p. 123).
+Loss of Synchronism Onset – 12:33:19.000 CEST (IP)
+Source: Report Section 3.1.2.1.2 (pp. 130–133), Section 3.1.1 (p. 123), Figure 3-11
+(p. 133).
+At 12:33:19.000 CEST, the Iberian Peninsula power system began losing synchronism
+with the Continental Europe Synchronous Area (CE SA).
+ Trigger: Cascading generation losses had created a generation–demand imbalance
+of at least 6.150 MW in the Iberian Peninsula
+ RoCoF: The RoCoF threshold of −1 Hz/s was reached at 12:33:20.560. At that mo-
+ment, at least 5,750 MW of generation had been disconnected and nearly 2,500 MW
+of pump-storage load had been shed in Spain; in Portugal, 2,100 MW of pumped-
+storage load had been shed
+ Mechanism: Loss of a massive amount of generation caused the Iberian Peninsula
+to import excessively from France, exceeding the stability angle (90° at the France–
+Spain border). The phase angle difference then reached and exceeded 270°, reversing
+power flow direction, then oscillating with increasing speed until AC separation
+ Frequency at onset: ≈49.8 Hz
+Events 7–12 – 12:33:19 to 12:33:20.5:
+Massive Generation Loss + Pump-
+Storage Shedding
+Source: Report Table 3-1 (pp. 117–120), Section 3.3 (pp. 197–205).
+13
+
+===== PAGE 15 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Events 7a/7b/7c – Portugal Pump Shedding (49.5 Hz scheme)
+ Time: 12:33:19.000 – 12:33:19.332 CEST
+ Type: Load shedding (pumped-storage, Portugal)
+ Protection Setting: Underfrequency at 49.5 Hz
+ Power: −221, −124, −113 MW (load shed = generation gain for balance)
+Events 8a/8b – Large PV/Wind Generation Loss (Spain)
+ Time: 12:33:19.095 – 12:33:19.973 CEST
+ Total Power Lost: ≈+1,068 MW (PV and wind combined)
+ Notable: 364 MW wind (event 8b, 12:33:19.252) and 509 MW PV (event 8b, 12:33:19.396)
+are among the largest single tripping events
+Event 9 – 220 kV Arganda–Loeches Line Trip (Spain)
+ Time: 12:33:19.971 CEST
+ Type: 220 kV overhead line trip (overvoltage protection)
+ Cause: Erroneous voltage measurement from faulty phase B capacitive voltage
+transformer (CVT) in Loeches substation (short circuits in capacitive elements)
+ Protection Setting: V > 1.20 × Vnom (120%), time delay 1 s
+ Note: Trip was undesired (primary voltage was below the protection threshold);
+however, the line disconnection had no impact on the incident development
+ Source: Report Section 3.2.2.1 (pp. 179), Table 3-6 (p. 178)
+Events 16a/16b – 12:33:20.229/12:33:20.473:
+Spain–Morocco AC Tie-Line
+Trips
+Source: Report Sections 3.2.2.2–3.2.2.3 (pp. 180–181), Table 3-6 (p. 178), Section 3.1.1
+(p. 123).
+ Event 16a: 12:33:20.229 CEST — Puerto de la Cruz (RE)–Beni Harchane (ONEE)
+400 kV trip
+ Event 16b: 12:33:20.473 CEST — Puerto de la Cruz (RE)–Melloussa (ONEE)
+400 kV trip
+ Protection Type: Underfrequency (UF) protection on Moroccan side,
+with direct transfer trip to Spanish side
+ Protection Setting: f < 49.5 Hz
+ Note: No loss of synchronism occurred between Iberian and Moroccan systems. On
+the Spanish end, a loss-of-synchronism protection was in place, but did not operate
+(correctly).
+ Assessment: Trip was aligned with protection design on Moroccan side. Iso-
+lation of Morocco prevented the disturbance propagating into the Moroccan system.
+Spanish Low-Frequency Defence Plan – 12:33:20.133 to 12:33:22.080 CEST
+Source: Report Section 3.3.1 (pp. 197–202), Tables 3-8 and 3-10.
+14
+
+===== PAGE 16 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Automatic Pump-Storage Disconnection (Spain)
+Step
+Threshold
+(Hz)
+Time of
+Activation
+Power Shed
+(MW)
+1st
+49.5
+12:33:20.180
+2,168
+2nd
+49.3
+12:33:20.500
+588
+Total
+2,756
+Automatic Low-Frequency Demand Disconnection (Spain)
+Step
+Hz
+Time of
+Activation
+Load Shed
+(MW)
+Plan Target
+(%)
+1
+49.0
+12:33:20.600
+1,176
+6%
+2
+48.8
+12:33:20.760
+1,669
+9%
+3
+48.6
+12:33:21.000
+1,575
+8%
+4
+48.4
+12:33:21.380
+1,524
+8%
+5
+48.2
+12:33:21.820
+1,294
+7%
+6
+48.0
+12:33:22.040
+1,267
+7%
+Total
+8,505
+Achieved
+28.7%;
+Target 45%
+Note: The defence plan was insufficient to arrest the frequency decline. The plan fell
+short of its target (28.7% vs 45% of load shed) due to: timing issues; some loads shed at
+wrong frequency steps; and very rapid RoCoF exceeding −2 Hz/s.
+Events 31a/31b – 12:33:21.407 to 12:33:21.535: France–Spain AC Intercon-
+nections Trip (Loss of Synchronism)
+Source: Report Sections 3.2.2.4–3.2.2.6 (pp. 182–187), Table 3-6 (p. 178).
+This is the critical event that isolated the Iberian Peninsula from the Continental Euro-
+pean system.
+ Event 31a: 12:33:21.407 CEST — Baixas (RTE)–Vic (RE) 400 kV overhead tie-line
+trips in Baixas (RTE). Vic (RE) end trips 35 ms later.
+– Protection type: DRS Loss-of-Synchronism (OST) protection
+– Setting: 2 beats (swings) required before trip
+– Operating principle: DRS measures voltage peak values; detects one “beat”
+when ≥10 consecutive decreasing semicycles followed by ≥4 consecutive in-
+creasing semicycles, provided minimum voltage dip exceeds configured thresh-
+old. Trip issued after configured number of beats.
+ Event 31b1: 12:33:21.437 CEST — Argia (RTE)–Arkale (RE) 220 kV tie-line trips
+at Arkale (RE). Argia (RTE) end did not trip (voltage fall prevented DRS from
+completing second beat count).
+– Protection type: Loss-of-Synchronism (OST) protection
+– Setting: 2 beats
+15
+
+===== PAGE 17 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+ Event 31b2: 12:33:21.535 CEST — Argia (RTE)–Hernani (RE) 400 kV tie-line
+trips at Hernani (RE). Argia (RTE) end did not trip (same reason as 31b1).
+– Protection type: Out-of-step function of distance protection, trajectory-
+based monitoring of impedance
+– Setting: 2 beats
+Assessment: All France–Spain AC tie-line trips are considered aligned with protec-
+tion system design. Isolation of France prevented propagation of the disturbance into
+the CE system and enabled faster re-energisation of Spain from France.
+RoCoF at separation: The −1 Hz/s threshold was exceeded at 12:33:20.560; the −2 Hz/s
+threshold was reached at ≈12:33:23.360.
+Events 41 + 46 – 12:33:22 to 12:33:23.6: Nuclear Plant Trips (Spain)
+Source: Report Table 3-1 (pp. 119–120), Table 3-2 (p. 131), Section 3.2.1.5 (p. 174).
+Event
+Time
+(CEST)
+Power
+(MW)
+Technology
+Cause
+41a
+12:33:22.702
++1,045
+Nuclear
+(Spain)
+Internal protection trip
+(under-/over-frequency
+collapse)
+41c
+12:33:23.515
++653
+Nuclear
+(Spain)
+Internal protection trip
+46
+12:33:23.590
++1,692
+Nuclear
+(Spain)
+Internal protection trip
+Total
++3,390
+Event 51 – 12:33:23.960: HVDC Block – Final Separation
+Source:
+Report Section 3.1.1 (p. 123), Section 3.1.2.2 (pp. 135–136), Section 3.1.3
+(p. 138).
+ Time: 12:33:23.960 CEST
+ Event: HVDC link Santa Llogaia (RE, Spain)–Baixas (RTE, France) trips due to
+voltage collapse at Santa Llogaia
+ Cause: The HVDC was set to constant power mode (2×500 MW from Spain
+to France). After the AC interconnections tripped at 12:33:21.5, the HVDC con-
+tinued to export power from the collapsing Iberian system until the AC voltage at
+Santa Llogaia collapsed. This further worsened the generation deficit in the Iberian
+system.
+ Active power at trip: HVDC flow dropped to zero
+ Result: Complete electrical separation of the Iberian Peninsula from
+France. All system parameters (voltage, frequency) of the Spanish and Portuguese
+electricity systems collapsed.
+ PowerFactory note: Model HVDC in constant-P mode (2×500 MW). HVDC will
+trip when AC voltage at Santa Llogaia collapses below operational limits.
+Transmission Line Trips: Complete Reference Table
+16
+
+===== PAGE 18 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Source: Report Table 3-6 (p. 178).
+Table 5: Performance of the transmission protection system – line and tie-line trips.
+Abbreviations: OHL = overhead line; OCHL = overhead-cable hybrid line; TIE = tie-
+line; DIST = distance protection; UF = underfrequency; OST = loss-of-synchronism; OV
+= overvoltage. Source: Report Table 3-6, p. 178.
+ID
+Time
+(CEST)
+Substation
+A
+Substation
+B
+kV
+Type
+Cause & Setting
+9
+12:33:19.971
+Arganda
+(RE)
+Loeches
+(RE)
+220
+OHL
+/ OV
+Faulty CVT
+measurement
+phase B; Setting:
+V > 1.20 Vnom,
+t = 1 s; Trip
+undesired but no
+impact
+16a
+12:33:20.229
+Puerto de la
+Cruz (RE)
+Beni
+Harchane
+(ONEE)
+400
+OCHL-
+TIE /
+UF
+Moroccan UF:
+f < 49.5 Hz +
+DTT to Spain;
+Aligned
+16b
+12:33:20.473
+Puerto de la
+Cruz (RE)
+Melloussa
+(ONEE)
+400
+OCHL-
+TIE /
+UF
+Moroccan UF:
+f < 49.5 Hz +
+DTT; Aligned
+31a
+12:33:21.407
+Baixas (RTE)
+Vic (RE)
+400
+OHL-
+TIE /
+OST
+DRS Loss-of-
+synchronism; 2
+beats; Aligned
+31b1 12:33:21.437
+Argia (RTE)
+Arkale (RE)
+220
+OHL-
+TIE /
+OST
+Loss-of-
+synchronism; 2
+beats; Spanish
+end only; Aligned
+31b2 12:33:21.535
+Argia (RTE)
+Hernani
+(RE)
+400
+OHL-
+TIE /
+OST
+Out-of-step
+(distance); 2
+beats; Spanish
+end only; Aligned
+42
+12:33:23.076
+Valdecaballeros
+(RE)
+Maguilla
+(RE)
+400
+OHL
+/ OV
+Overvoltage;
+V > 1.20 Vnom,
+t = 1 s;
+Post-collapse
+52
+12:33:23.954
+Mogadouro
+(REN)
+Central da
+Valeira
+(REN)
+220
+OHL
+/
+DIST
+Z1 trip; unstable
+voltage; Z < 80%
+line; Post-collapse
+55b
+12:33:25.144
+Cartelle (RE)
+Lindoso
+(REN) ckt 2
+400
+OHL-
+TIE /
+DIST
+Z1 trip;
+voltage/freq.
+collapse; Z < 80%;
+Post-collapse
+17
+
+===== PAGE 19 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 5 continued
+ID
+Time
+(CEST)
+Substation
+A
+Substation
+B
+kV
+Type
+Cause & Setting
+55c
+12:33:25.183
+Cartelle (RE)
+Lindoso
+(REN) ckt 1
+400
+OHL-
+TIE /
+DIST
+Z1 trip; Z < 80%;
+Post-collapse
+55d
+12:33:25.325
+Cedillo (RE)
+Falagueira
+(REN)
+400
+OHL-
+TIE /
+DIST
+Z1 trip; Z < 80%;
+Post-collapse
+55e
+12:33:25.410
+Saucelle (RE)
+Pocinho
+(REN)
+220
+OHL-
+TIE /
+DIST
+Z1 trip; Z < 80%;
+Post-collapse
+56
+12:33:25.434
+Lagoa¸ca
+(REN)
+Armamar
+(REN)
+400
+OHL
+/
+DIST
+Z1; unstable
+voltage; Z < 80%;
+Post-collapse
+55f
+12:33:26.165
+Aldead´avila
+(RE)
+Pocinho
+(REN) ckt 1
+220
+OHL-
+TIE /
+DIST
+Z1 trip; Z < 80%;
+Post-collapse
+Reactive Power Balance: Quantified Changes at Key Events
+Source: Report Sections 3.1.2.1.1 (pp. 125–126), 3.2.1.3 (various), Figure 1-12 (p. 19),
+Section 3.1.2.2 (p. 136).
+Table 6 quantifies the known reactive power changes at each major event. Positive ∆Q
+values indicate reactive power injection gained (fewer absorbing sources); negative values
+indicate reactive power absorption added to the system.
+Table 6: Reactive power balance changes at major events.
+Source: Report Sections
+3.2.1.3.1–3.2.1.3.18 and Figure 1-12.
+Event
+Time
+(CEST)
+Location
+∆Q
+(Mvar)
+Notes
+3
+12:32:57.220
+400 kV TS 1–
+Granada
+−165
+165 Mvar absorption
+removed (transformer +
+PV/wind upstream)
+4a
+12:33:16.443
+400 kV GS 1–
+Badajoz
+−165
+165 Mvar absorption
+removed; Report
+Section 3.2.1.3.2, p. 148
+4b
+12:33:16.820
+400 kV TS 2–
+Badajoz
+−38
+38 Mvar absorption
+removed; PV plant; Report
+p. 126
+5a1
+12:33:17.368
+400 kV
+TS 1–Segovia
+−12.3
+12.3 Mvar absorption
+removed (wind)
+5b1
+12:33:17.520
+400 kV GS 1–
+Badajoz
+−22
+22 Mvar absorption
+removed (PV)
+18
+
+===== PAGE 20 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 6 continued
+Event
+Time
+(CEST)
+Location
+∆Q
+(Mvar)
+Notes
+5a2
+12:33:17.780
+400 kV
+TS 1–Seville
+−195
+195 Mvar absorption
+removed (550 MW PV);
+Report Section 3.2.1.3.7
+5a3
+12:33:17.940
+400 kV
+TS 1–Segovia
+−26.5
+26.5 Mvar absorption
+removed (wind)
+5b3
+12:33:17.975
+220 kV
+TS 1–C´aceres
+−7
+7 Mvar absorption removed
+(PV)
+5b4
+12:33:18.020
+220 kV TS 3–
+Badajoz
+−16
+16 Mvar absorption
+removed (PV)
+6a2
+12:33:18.220
+220 kV TS 3–
+Badajoz
+−4
+4 Mvar absorption removed
+(PV)
+6a3
+12:33:18.360
+400 kV TS 3–
+Badajoz
+−4
+4 Mvar absorption removed
+(PV)
+Subtotal
+events 3–6b
+≈−655
+Approximate minimum
+(not all events have Q
+data)
+Reactive capacity status at 12:33:00 (South Spain)
+From Report Figure 1-12,
+p. 19
+RES generators (fixed pf)
+actual
+absorption
+−185
+Remaining capacity:
+−1,002 Mvar
+PO 7.4 generators (sync.)
+actual
+absorption
+−332
+Remaining capacity:
+−2,315 Mvar
+Shunt reactors
+actual
+absorption
+−1,300
+Remaining capacity:
+−2,700 Mvar
+Key insight: At 12:33:00 in southern Spain, the reactive power assets had a combined
+remaining absorption capacity of ≈6,017 Mvar (Figure 1-12, p. 19), but these were man-
+ually switched (shunt reactors) or operated in fixed power factor mode (RES). The loss
+of ≥655 Mvar of reactive absorption within ≈2 seconds through protection trips was the
+decisive trigger for the uncontrolled voltage rise.
+Voltage Evolution Timeline
+Source: Report Figures 1-6, 1-8, 1-10, 3-5, 3-6, 3-7, Section 3.1.2.1.1.
+19
+
+===== PAGE 21 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Time (CEST)
+Max 400 kV
+Voltage
+Event
+12:32:00
+≤420 kV
+Below operational limits;
+nominal
+12:32:57
+≈418 kV
+Event 3 (Granada); +355 MW
+loss
+12:33:10
+≈430 kV
+Voltage rising; SCADA last
+reading Badajoz
+12:33:16.443
+≈432 kV
+Event 4a (Badajoz); +582 MW
+loss
+12:33:16.680
+≥440 kV
+First bus exceeds 440 kV
+(TS 3–C´aceres)
+12:33:16.820
+≈438.7 kV
+Event 4b; +145 MW loss;
+multiple buses >435 kV
+12:33:17
+442.5 kV (max)
+Event 5a2; 930 MW+ cascade;
+voltage >440 kV widespread
+12:33:18
+451.4 kV (max)
+Event 6b; peak voltage at
+Cuenca/M´alaga/south Spain
+12:33:19
+>440 kV
+Loss of synchronism onset
+12:33:21.5
+–
+AC interconnections to France
+trip; IP islanded
+12:33:23.96
+≈0
+HVDC trips; voltage collapses
+Protection Settings Reference for PowerFactory
+Source: Report Section 3.2 (pp. 139–196), Table 3-3 (pp. 144–145), Table 3-6 (p. 178).
+Table 7 consolidates the known relay settings for PowerFactory model implementation.
+Table 7: Known protection relay settings for major tripping events. N/A = not available
+to Expert Panel. Source: Report Sections 3.2.1 and 3.2.2, various pages.
+Event
+Location
+Prot. Type
+Threshold
+Time Delay
+Notes
+3
+400/220 kV,
+TS 1–Granada
+OV (220 kV
+side)
+110% Vn =
+242 kV
+0 s (instant.)
+p. 145; trip at
+242.9 kV (Ph B)
+4b
+PV plant,
+TS 2–Badajoz
+OV Stage 1
+435.6 kV
+(1.089 pu)
+1.5 s
+p. 150; Stage 2:
+455.4 kV
+(1.139 pu) / 0.2 s
+5b2
+PV plant,
+TS 1–Huelva
+OV Stage 1
+1.10 pu
+1.5 s
+p. 154; Stage 2:
+1.15 pu / 0.2 s;
+non-compliant
+5a2
+PV plants,
+TS 1–Seville
+OV
+436.6 kV
+(1.09 pu)
+1 s
+p. 155;
+non-compliant
+5a3
+Wind,
+TS 1–Segovia
+OV
+1.10 pu
+0.5 s
+p. 158;
+compliant (V1
+plants)
+20
+
+===== PAGE 22 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Table 7 continued
+Event
+Location
+Prot. Type
+Threshold
+Time Delay
+Notes
+5b3
+PV plant,
+TS 1–C´aceres
+OV
+1.10 pu =
+242 kV
+1.5 s
+p. 159; 220 kV
+base;
+non-compliant
+6a3
+PV, TS 3–Badajoz
+OV
+1.10 pu
+(440 kV)
+–
+p. 163; trip
+780 ms after
+440 kV
+exceedance;
+compliant
+6a4
+PV, TS 2–C´aceres
+OV Stage 1
+440 kV
+(1.10 pu)
+1.5 s
+p. 164–165;
+Stage 2: 460 kV
+/ 0.6 s;
+non-compliant
+(needed 898 ms,
+got 550 ms)
+6a8
+PV, TS 1–M´alaga
+OV
+439.56 kV
+(1.0989 pu)
+1 s
+p. 169; 396 kV
+VT nominal;
+possibly
+compliant
+6b
+PV, TS 1–Cuenca
+OV Stage 1
+1.088 pu
+(60 min)
+60 min
+p. 171; Stage 2:
+1.11 pu / 1.2 s;
+possibly
+compliant
+9
+OHL
+Arganda–Loeches
+OV
+1.20 pu
+1 s
+p. 179; 220 kV
+line; undesired
+trip (CVT fault)
+16a/16b Tie-lines to
+Morocco
+UF
+f <
+49.5 Hz
+–
+p. 180;
+Moroccan side
++ DTT
+31a
+Baixas–Vic 400 kV
+DRS OST
+2 beats
+(swings)
+–
+p. 182; min
+voltage dip
+threshold
+31b1
+Argia–Arkale
+220 kV
+OST
+2 beats
+–
+p. 184; Spanish
+end only
+31b2
+Argia–Hernani
+400 kV
+Out-of-step
+(DIST)
+2 beats
+–
+p. 186; Spanish
+end only
+42
+OHL
+Valdecaballeros–
+Maguilla
+OV
+1.20 pu
+1 s
+p. 178;
+post-collapse
+52/55b-
+f/56
+Internal + tie-lines
+(PT/ES)
+DIST Z1
+Z < 80%
+line
+–
+p. 178;
+post-collapse;
+unavoidable
+PowerFactory Simulation Notes and Recommendations
+21
+
+===== PAGE 23 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+Model Topology Recommendations
+Based on the Report, the following topology elements are critical for simulation fidelity:
+ France–Spain interconnections: Three AC lines: Baixas (RTE)–Vic (RE) 400 kV,
+Argia (RTE)–Arkale (RE) 220 kV, Argia (RTE)–Hernani (RE) 400 kV; plus HVDC
+Santa Llogaia–Baixas (2×500 MW).
+ Spain–Morocco interconnections: Two 400 kV AC lines (Puerto de la Cruz–
+Beni Harchane; Puerto de la Cruz–Melloussa).
+ Key generation substations: 400 kV TS 1–Granada (355 MW PV/wind/thermal),
+400 kV TS 1/TS 2–Badajoz (727 MW PV/thermal), 400 kV TS 1–Seville (550 MW
+PV), 400 kV TS 1–Segovia (117 MW wind), 400 kV TS 1–Cuenca (530 MW PV),
+400 kV TS 1–M´alaga (154 MW PV).
+ Synchronous generation: Nuclear plants (total ≈3,390 MW in Spain), combined-
+cycle gas (≈719 MW tripped), pump-storage (≈3,031 MW in pumping mode before
+incident).
+Key Generator Modelling Parameters
+ All RES generators: Fixed power factor mode (NOT voltage control mode). This
+is the fundamental condition that prevented voltage damping.
+ Synchronous generators (PO 7.4): Voltage control (AVR) active, but Q output
+was not following Q-reference in many cases.
+ Shunt reactors: Manually switched; do NOT model as automatic voltage regula-
+tors. Model as manually connected/disconnected reactive compensation elements.
+Note: several shunt reactors had been disconnected before 12:32:00 due to low volt-
+ages during oscillations.
+Protection Relay Implementation
+1. Event 3 (Granada):
+Implement OV relay on 220 kV transformer secondary:
+threshold = 110%×220 kV = 242 kV, t = 0 s (instantaneous). This is the trigger for
+the entire cascade.
+2. Event 4b (Badajoz 2): OV relay Stage 1: 435.6 kV, t = 1.5 s. Note: actual
+operating mechanism involved relay hysteresis (reset at 95% of threshold).
+3. France–Spain OST protection (Events 31a/31b): Implement DRS loss-of-
+synchronism protection. Setting: 2 complete voltage beats (power swings).
+The relay must detect 10 decreasing then 4 increasing voltage semicycles to count
+one beat; it trips after 2 such beats.
+4. Morocco UF protection (Events 16a/16b): Underfrequency relay at 49.5 Hz
+on Moroccan side with direct transfer trip to Spanish end.
+5. Spanish LFDD (Section 3.10): Automatic load shedding at 49.0, 48.8, 48.6,
+48.4, 48.2, 48.0 Hz; pump-storage at 49.5 and 49.3 Hz.
+22
+
+===== PAGE 24 =====
+Iberian Blackout – 28 April 2025 – Sequence of EventsENTSO-E Final Report (20 March 2026)
+6. Post-collapse distance protection (Events 52, 55, 56): Zone 1 distance pro-
+tection (Z < 80% line impedance) operated on remaining transmission lines due to
+voltage/frequency collapse. These trips had no impact on outcome.
+Voltage Ranges for Reference (Spanish System)
+ 400 kV normal operating range: 375–435 kV (wider than rest of Europe)
+ 220 kV normal operating range: 200–245 kV
+ Generator disconnection allowed from (V3 category, TED 749/2020): >440 kV
+for ≤60 min; >1.10 pu indefinitely not required
+ Key insight: Spain’s wider operating range meant the margin between the opera-
+tional upper limit (435 kV) and the generator disconnection threshold (440 kV) was
+only 5 kV — extremely small.
+Summary: Root Causes and Contributing Factors
+Source: Report Section 4.6 (Root Cause Tree, p. 331), Section 9.1 (pp. 451–454).
+The Expert Panel identified the following root causes and contributing factors:
+1. Root Cause 1 – Inadequate voltage control capability: RES generators op-
+erating in fixed power factor mode did not provide reactive power control. Reactive
+power absorption was insufficient and manually operated (shunt reactors).
+2. Root Cause 2 – Protection relay settings non-compliant: Multiple gener-
+ation facilities had overvoltage protection set below the voltage levels they were
+required to withstand under applicable regulations (Order TED 749/2020 / EU
+RfG).
+3. Root Cause 3 – Converter-driven oscillations: The 0.63 Hz forced oscillation
+(converter-driven) weakened the system and, combined with mitigating measures,
+increased voltages.
+4. Root Cause 4 – Narrow operating margin: Spain’s 400 kV operational ceiling
+(435 kV) left only 5 kV before generator protection thresholds were reached.
+5. Contributing factor – HVDC constant power mode: After AC line trips, the
+HVDC continued to export power from the already-deficit Iberian system, worsening
+the imbalance.
+6. Contributing factor – Defence plan shortfall: LFDD achieved only 28.7% of
+load shed vs. 45% target.
+Document source: ENTSO-E ICS Investigation Expert Panel, “Grid Incident in Spain and Portugal
+on 28 April 2025 — Final Report”, 20 March 2026. All page numbers, figure references, and data values
+refer to this document. All times are in CEST (UTC+02:00). This analysis document is prepared solely
+for academic/research simulation purposes.
+23
