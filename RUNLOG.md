@@ -876,6 +876,70 @@ The user added three sources. [FR] stays the authority; everything is recorded w
 Not read: `Resources/Spain Portogal 28-April Blackout.pdf`. It is image-only and dated Aug 2025, so it is not one of
 the new files.
 
+### 35. pandapower v2 — France hub, Morocco knob, Fig 4-2 reactive assets: calibrated (2026-11-25, agent: claude-main)
+**Command:**
+`python iberia_eq/pp_v2.py --frsc 1500 --kres 0.2 --vkg 20 --mincirc 2 --route 1.0 --flowcal`
+(full continuation, 3,653 evaluations, ≈ 45 min). Log: `iberia_eq/cal_ls_s35b.txt`; state `iberia_eq/pp_v2_state.pkl`.
+The previous state is kept as `pp_v2_state_s34.pkl`.
+
+**Diagnosis that started it:**
+- The France AC ties ran opposite ways: west +453 MW, east **−771**.
+- The single France bus shorted Argia to Baixas, so the HVDC's 1,000 MW looped back over Vic–Baixas.
+
+**Changes in `pp_v2.py`:**
+- France ties run hub-to-hub to a French hub near Toulouse (43.6 N, 1.44 E) [inf]; `FR_HUB=0` restores the old
+  layout.
+- New targets:
+  - France 1,360 MW including the HVDC (Fig 2-41, exact; `FR_T` env);
+  - North→France 310 MW (Fig 2-41);
+  - Morocco 750 MW, with the Moroccan unit's P as a new knob;
+  - South-Spain PO 7.4 units absorb 74 Mvar (Fig 4-2).
+- **RES Q/P 0.175 → 0.135** (Fig 4-2: 2,297 Mvar on 17,020 MW).
+- Connected reactors +550 Mvar at WAN 400 / SE 150 [inf], to reach Fig 4-2's 1,300 Mvar (`REAC_FIG42=0` turns this
+  off).
+- Exponential-load iteration tightened to 0.02 MW in full solves, and `diff_step` raised to 1e-3. The fit had stalled
+  at 13 evaluations because the Jacobian was noisy.
+- The legacy PT-N resume branch was removed: it mis-fired on the new knob vector.
+- The reactive-balance printout is on by default (`QBAL`).
+
+**Result** (targets in brackets):
+
+| Quantity | Result |
+|---|---|
+| Voltages | max error **0.77 kV** (all 15 zones) |
+| ES→PT / MA / FR | **2,103 / 753 / 1,287** MW (2,100 / 750 / 1,360; FR inside the [CA] range 1,175–1,500) |
+| France ties | west **+510**, east **+233** AC: both now export |
+| Unit Q N / SW / E | −390 / −137 / −581 Mvar (−400 / −150 / −600) |
+| Tie Q FR / PT / MA | +304 / +42 / −368 Mvar (+300 / +100 / −360) |
+| Fig 4-2 South Spain | RES 2,269 Mvar on 16,807 MW (2,297 on 17,020); reactors 1,379 (1,300); PO 7.4 units 93 (74) |
+| Spanish distribution Q | **−1,749 Mvar**, now inside the unscaled Fig 4-84 band (−1.0 … −1.8 Gvar) |
+| CAC→MAD | 3,243 MW (3,227) |
+| Fault levels | BAD / WAN −2 %; north and centre hubs still +61 … +154 % |
+
+**Still open:**
+1. **Distribution shunts inject 6.8 Gvar** against 6.1 Gvar of series I²X plus 1.9 Gvar of transformer losses.
+   Line charging is 11.5 Gvar. This is the main uncertainty for the voltage rise per trip.
+   The per-line top-10 printout came out empty (a bug), so that check is still to do.
+2. Secondary corridors are still high: BAD→CAC 2,277 (1,850), GRA→SE 1,377 (900), VAL→ARA 1,674 (≈ 0),
+   CAC→CYL 1,885 (1,200).
+3. The France bus sits at 373.8 kV and Portugal's unit at 364.6 kV. Both set-points are being used to hit the tie-Q
+   targets, so they are not physical.
+
+### 36. Project put on GitHub; collaboration rules (2026-11-25, agent: claude-main)
+- The repository already existed with files staged but no commits. Committed under the owner's identity
+  (user.name `Ibrahim`) and published **public** at https://github.com/Malborne2/iberian-blackout-pscad
+  (owner's decision).
+- Everything is in except four licence-stamped IEEE/IET papers and their four `notes/` text extracts. These are kept
+  out by `.gitignore` and cited in `Resources/README.md`.
+- **`AGENTS.md`** sets the rules:
+  - agent names;
+  - branches `agent/<name>/<topic>`;
+  - a claims table at the top of `STATUS.md`;
+  - signed, append-only RUNLOG entries;
+  - no scratch work, all code committed;
+  - PSCAD only in `C:\PSCAD_work\<agent>\…`.
+- From here on, every script used is committed in the repository; nothing runs from a scratchpad.
+
 ## Session 26 — 2026-11-22/23 (evening to 02:20) — executor: WP7 as redefined in PLAN §1b.5
 
 **Scope.** Start WP7 per PLAN §1b.5: (a) 18 Hz plant ripple — the 10 µs cold-start falsifier first,
