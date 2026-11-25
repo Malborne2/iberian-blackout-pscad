@@ -206,8 +206,11 @@ for n, z, p in GEN:                                       # units behind their s
     pp.create_transformer_from_parameters(net, B[z], tb, sn_mva=PMAX[n] / 0.9, vn_hv_kv=400, vn_lv_kv=400, vk_percent=a.vkg,
                                           vkr_percent=0.3, pfe_kw=0, i0_percent=0.0, name=f"T {n}")
     pp.create_gen(net, tb, p_mw=p, vm_pu=(VT[z] / 400 if z in VT else a.vset), name=n)
+# EMB_KPF: embedded cogeneration / waste / small hydro / solar thermal follow the RD 413/2014 PF band like RES ([CA] p.66,
+# p.112); value [inf] = the Fig 4-2 RES ratio -0.135 when set to "fig42". Default 0 (S27/S28 behaviour). RUNLOG S29 sec 6
+EMB_KPF = os.environ.get("EMB_KPF", "0"); EMB_KPF = a.kpf if EMB_KPF == "fig42" else float(EMB_KPF)
 for n, sp, p in EMB:
-    for z, f in sp.items(): pp.create_sgen(net, B[z], p_mw=p * f, q_mvar=0, name=f"{n} {z}")
+    for z, f in sp.items(): pp.create_sgen(net, B[z], p_mw=p * f, q_mvar=EMB_KPF * p * f, name=f"{n} {z}")
 for n, z, p in PUMPS: pp.create_gen(net, B[z], p_mw=-p, vm_pu=VT.get({"PS-CYL": "CYL", "PS-ARA": "ARA", **({"PS-PT": "PT-N"} if os.environ.get("PUMP_PT_V", "0") == "1" else {})}.get(z, ""), 408) / 400, name=n)
 mt = pp.create_bus(net, vn_kv=400, name="Morocco term")
 pp.create_transformer_from_parameters(net, B["MA"], mt, sn_mva=PMAX["Morocco"] / 0.9, vn_hv_kv=400, vn_lv_kv=400, vk_percent=15,
@@ -415,7 +418,7 @@ TRIP_T = {"E4": float(os.environ.get("TRIP_E4", 4.9)), "E3": float(os.environ.ge
 
 
 def XNAMES():
-    return ["mor"] + (["pt"] if PTSPLIT else []) + (["vkg"] if KNOB_VKG else [])
+    return ["mor"] + (["pt"] if PTSPLIT else []) + (["fbad", "fse", "fcac"] if FLOW2 else []) + (["vkg"] if KNOB_VKG else [])
 
 
 def set_vkg(v):
@@ -443,12 +446,32 @@ def trip_dv():
 
 
 PTSPLIT = os.environ.get("PTSPLIT", "0") == "1"             # knob: Portuguese load north share; target North -> PT 200 MW (S28)
+# FLOW2=1: the remaining Fig 2-4 corridor checks become soft targets (/100 MW), each with one area-preserving shift knob
+# [liberty, user OK S27: distribution inside an area may move, totals faithful] (RUNLOG S29 sec 7):
+#   fbad: zone RES BAD hub -> WAN hub      (BAD->CAC 1,850; the Table 3-3 plants at BAD-TS stay fixed)
+#   fse : demand SE -> CAT (East area)     (GRA->SE 900)
+#   fcac: zone RES CAC -> SCE              (CAC->CYL 1,200)
+FLOW2 = os.environ.get("FLOW2", "0") == "1"
+F2 = {"fbad": 0.0, "fse": 0.0, "fcac": 0.0}                 # GW
+F2T = {"fbad": (("BAD", "CAC"), 1850), "fse": (("GRA", "SE"), 900), "fcac": (("CAC", "CYL"), 1200)}
+RESP0 = {z: net.sgen.at[RESI[z], "p_mw"] for z in ("BAD", "WAN", "CAC", "SCE")}
+P0_SE0, P0_CAT0 = P0["SE"], P0["CAT"]
+
+
+def set_f2(fb, fs, fc):
+    global P0_SE0, P0_CAT0
+    net.sgen.at[RESI["BAD"], "p_mw"] = RESP0["BAD"] - 1000 * fb; net.sgen.at[RESI["WAN"], "p_mw"] = RESP0["WAN"] + 1000 * fb
+    net.sgen.at[RESI["CAC"], "p_mw"] = RESP0["CAC"] - 1000 * fc; net.sgen.at[RESI["SCE"], "p_mw"] = RESP0["SCE"] + 1000 * fc
+    for z in ("BAD", "WAN", "CAC", "SCE"): net.sgen.at[RESI[z], "q_mvar"] = a.kpf * net.sgen.at[RESI[z], "p_mw"]
+    P0["SE"] = P0_SE0 - 1000 * fs; P0["CAT"] = P0_CAT0 + 1000 * fs
+    Q0["SE"] = a.q0 * P0["SE"]; Q0["CAT"] = a.q0 * P0["CAT"]
+    F2.update(fbad=fb, fse=fs, fcac=fc)
 
 
 def getx():
     return np.concatenate([[net.shunt.at[CAL[z], "q_mvar"] / 1000 for z in KZ], [net.gen.at[GI[n], "vm_pu"] for n in KG],
                            [scale.get("GRA", 1), scale.get("PT-N", 1), net.ext_grid.at[0, "vm_pu"], net.gen.at[iMA, "vm_pu"],
-                            (P0["MAD"] - P0_MAD0) / 1000, net.gen.at[iMA, "p_mw"] / 1000]] + ([[P0["PT-N"] / PT_LOAD]] if PTSPLIT else []) + ([[VKG[0] / 100]] if KNOB_VKG else []))
+                            (P0["MAD"] - P0_MAD0) / 1000, net.gen.at[iMA, "p_mw"] / 1000]] + ([[P0["PT-N"] / PT_LOAD]] if PTSPLIT else []) + ([[F2["fbad"], F2["fse"], F2["fcac"]]] if FLOW2 else []) + ([[VKG[0] / 100]] if KNOB_VKG else []))
 
 
 def setx(x):
@@ -464,8 +487,25 @@ def setx(x):
     if PTSPLIT and len(x) > k + 6:                                                   # Portuguese load north share (S28)
         P0["PT-N"] = PT_LOAD * x[k + 6]; P0["PT-S"] = PT_LOAD * (1 - x[k + 6])
         Q0["PT-N"] = a.q0 * P0["PT-N"]; Q0["PT-S"] = a.q0 * P0["PT-S"]
+    if FLOW2:
+        j_ = k + 6 + (1 if PTSPLIT else 0)
+        if len(x) >= j_ + 3: set_f2(x[j_], x[j_ + 1], x[j_ + 2])
     if KNOB_VKG: set_vkg(100 * x[-1])
 
+
+
+UNITQ_HV = os.environ.get("UNITQ_HV", "0") == "1"   # compare unit Q at the 400 kV side of the step-up ([FR] Figs 2-84..86 are
+                                                    # defined on the 400 kV band -> connection point [inf]); RUNLOG S29 sec 6
+def unitq():
+    """Unit Q per name (Mvar): terminal Q, or with UNITQ_HV the Q delivered into the 400 kV bus (terminal Q - step-up I2X)."""
+    q = dict(zip(net.gen.name, net.res_gen.q_mvar))
+    if UNITQ_HV:
+        vt = dict(zip(net.gen.name, net.res_gen.vm_pu)); pg = dict(zip(net.gen.name, net.res_gen.p_mw))
+        for i_, tn in zip(net.trafo.index, net.trafo.name):
+            g = tn[2:]
+            if tn.startswith("T ") and g in q and g in vt:
+                q[g] -= (pg[g] ** 2 + q[g] ** 2) / max(vt[g], 0.5) ** 2 * net.trafo.at[i_, "vk_percent"] / 100 / net.trafo.at[i_, "sn_mva"]
+    return q
 
 def resid(x):
     CNT["resid"] += 1
@@ -474,7 +514,7 @@ def resid(x):
         solve(full=True)
     except Exception:
         net.converged = False; return np.full(NRES, 50.0)
-    V = net.res_bus.vm_pu; qg = dict(zip(net.gen.name, net.res_gen.q_mvar))
+    V = net.res_bus.vm_pu; qg = unitq()
     r = [400 * (V[B[VB(z)]] - VT[z] / 400) for z in VT]                                       # kV
     r += [(sum(qg[n] for n, ar in GEN_AREA.items() if ar == A) - t) / 50 for A, t in QAREA.items()]    # 50 Mvar ~ 1 kV
     pt = sum(flow(z, {"PT-N", "PT-S"}) for z in ES); fr = sum(flow(z, {"FR"}) for z in ES) + HVDC_FR
@@ -484,6 +524,7 @@ def resid(x):
     r += [(-(qg["G1 Almaraz II"] + qg["G6 SW CCGT"] + qg["G7 E CCGT"]) - 74) / 50]   # Fig 4-2: PO 7.4 units, South Spain, 74 Mvar absorbed
     r += [(qfr - QTIE["FR"]) / 50, (qma - QTIE["MA"]) / 50, (qpt - 100) / 50]          # ES->PT tie Q now a target (Fig 2-93)
     if a.flowcal: r += [(flow("CAC", {"MAD"}) - FLOWT[("CAC", "MAD")]) / 50]
+    if FLOW2: r += [(flow(k_[0], {k_[1]}) - t_) / 100 for k_, t_ in F2T.values()]
     if PTSPLIT: r += [(flow("NW", {"PT-N"}) + flow("CYL", {"PT-N"}) - 200) / 50]       # Fig 2-41 exact: North -> Portugal 200 MW
     if OBJ2:                                                 # identifiability terms (S28): pin the null directions found by SVD=1
         for A, t in QAREA.items():                           # each unit's share of its area's Q, by |P| (as the S27 one-knob loop)
@@ -503,13 +544,13 @@ def resid(x):
 
 
 P0_MAD0, P0_WAN0 = P0["MAD"], P0["WAN"]
-NRES = len(VT) + len(QAREA) + 8 + (1 if a.flowcal else 0) + len(KZ) + (1 if PTSPLIT else 0) + (2 if TRIPCAL else 0) + ((len(GEN_AREA) + 1 + len(CAL) + 1) if OBJ2 else 0)
+NRES = len(VT) + len(QAREA) + 8 + (1 if a.flowcal else 0) + len(KZ) + (1 if PTSPLIT else 0) + (2 if TRIPCAL else 0) + (3 if FLOW2 else 0) + ((len(GEN_AREA) + 1 + len(CAL) + 1) if OBJ2 else 0)
 
 
 def calib_ls(tag=""):
     x0 = getx()
-    lo = np.concatenate([np.full(len(KZ), -6.0), np.full(len(KG), 0.85), [0.7, 0.5, 0.9, 0.85, -1.5, 3.0]] + ([[0.45]] if PTSPLIT else []) + ([[0.03]] if KNOB_VKG else []))
-    hi = np.concatenate([np.full(len(KZ), 6.0), np.full(len(KG), 1.15), [1.3, 1.5, 1.1, 1.15, 1.5, 6.0]] + ([[0.70]] if PTSPLIT else []) + ([[0.25]] if KNOB_VKG else []))
+    lo = np.concatenate([np.full(len(KZ), -6.0), np.full(len(KG), 0.85), [0.7, 0.5, 0.9, 0.85, -1.5, 3.0]] + ([[0.45]] if PTSPLIT else []) + ([[-1.0, -1.5, -1.5]] if FLOW2 else []) + ([[0.03]] if KNOB_VKG else []))
+    hi = np.concatenate([np.full(len(KZ), 6.0), np.full(len(KG), 1.15), [1.3, 1.5, 1.1, 1.15, 1.5, 6.0]] + ([[0.70]] if PTSPLIT else []) + ([[1.0, 1.5, 1.5]] if FLOW2 else []) + ([[0.25]] if KNOB_VKG else []))
     x0 = np.clip(x0, lo + 1e-6, hi - 1e-6)
     c0 = dict(CNT); t0 = time.perf_counter()
     sol = least_squares(resid, x0, bounds=(lo, hi), x_scale="jac", diff_step=float(os.environ.get("DSTEP", 1e-3)), max_nfev=400)
@@ -536,7 +577,10 @@ if RESUME and not a.quick:                                # start from the saved
     tail = dict(zip(st.get("xnames", ["mor", "pt"][:len(x_) - NB_]), x_[NB_:]))       # older states: Morocco P, then PT share
     if "vkg" in tail or st.get("vkg"): set_vkg(100 * tail.get("vkg", st.get("vkg", a.vkg) / 100))
     if TRIPCAL: KNOB_VKG = True
+    if FLOW2:
+        P0_SE0, P0_CAT0 = P0["SE"] + 1000 * tail.get("fse", 0.0), P0["CAT"] - 1000 * tail.get("fse", 0.0)
     x_ = np.concatenate([x_[:NB_], [tail.get("mor", net.gen.at[iMA, "p_mw"] / 1000)]] + ([[tail.get("pt", 0.5)]] if PTSPLIT else [])
+                        + ([[tail.get("fbad", 0.0), tail.get("fse", 0.0), tail.get("fcac", 0.0)]] if FLOW2 else [])
                         + ([[VKG[0] / 100]] if KNOB_VKG else []))
     setx(x_)
     import pandas as pd                                     # warm start from the saved solved voltages
@@ -603,8 +647,8 @@ if TRIPCAL or os.environ.get("TRIPCHK", "1") == "1":
 it = solve(full=True)
 print(f"calibration pass 3: {outer} rounds; Portuguese load x{scale.get('PT-N', 1):.3f}, Spanish demand x{scale.get('GRA', 1):.3f}")
 print("DSO shunts at 1 pu (Mvar, + absorbing): " + "  ".join(f"{z} {net.shunt.at[CAL[z], 'q_mvar']:+.0f}" for z in CAL))
-qg = dict(zip(net.gen.name, net.res_gen.q_mvar))
-print("unit Q per area: " + "  ".join(f"{A} {sum(qg[n] for n, ar in GEN_AREA.items() if ar == A):+.0f} (target {t:+d})" for A, t in QAREA.items()))
+qg = unitq()
+print(("unit Q at 400 kV" if UNITQ_HV else "unit Q") + " per area: " + "  ".join(f"{A} {sum(qg[n] for n, ar in GEN_AREA.items() if ar == A):+.0f} (target {t:+d})" for A, t in QAREA.items()))
 qload = sum(net.res_load.q_mvar[[L[z] for z in ES]]); qdso = sum(net.res_shunt.q_mvar[[CAL[z] for z in ES]])
 pload = sum(net.res_load.p_mw[[L[z] for z in ES]])
 print(f"Spanish distribution exchange: P {pload:.0f} MW, Q {qload + qdso:+.0f} Mvar (load {qload:+.0f}, DSO shunts {qdso:+.0f}); "
@@ -635,7 +679,7 @@ qt = {"FR": sum(qflow(z, {"FR"}) for z in ES), "PT": sum(qflow(z, {"PT-N", "PT-S
 if qt: print("tie Q ES->X: " + "  ".join(f"{k} {v:+.0f} (target {QTIE.get(k, 100):+d})" for k, v in qt.items()) +
       f" | set-points FR {net.ext_grid.at[0, 'vm_pu'] * 400:.1f} kV, MA {net.gen.at[iMA, 'vm_pu'] * 400:.1f} kV, PT {net.gen.at[iPT, 'vm_pu'] * 400:.1f} kV")
 if os.environ.get("QBAL", "1") == "1":                      # reactive-power balance by source (RUNLOG S27 sec 35)
-    import pandas as pd; qg_ = dict(zip(net.gen.name, net.res_gen.q_mvar))
+    import pandas as pd; qg_ = unitq()
     SW_Z = ["GRA", "WAN", "BAD", "CAC", "SCE"]; ES_B = set(ES) | {f"{z}-TS" for z in TSX}
     bn = lambda b: net.bus.at[b, "name"]
     def qsum(df, res, pred, col="q_mvar"):

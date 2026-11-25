@@ -6,9 +6,12 @@
 
 # STATUS — Session 29 banner (25 Nov 2026; agent: claude-main)
 
-- **Base v2 load flow = R2 + `OPEN_LINES` + `PUMP_PT_V`.** Run it with `python iberia_eq/base_v2.py` (resume, < 1 s
-  plus start-up); the state is `iberia_eq/pp_v2_state_s29_OLP.pkl`. Fit cost 75.1, max V err 2.8 kV, all border and
-  unit-Q targets met. VAL→ARA 753 MW; Portuguese circulating Q removed.
+- **Base v2 load flow = R2 + `OPEN_LINES` + `PUMP_PT_V` + `EMB_KPF=fig42` + `UNITQ_HV`** (S29 §2–6). Run it with
+  `python iberia_eq/base_v2.py`; the state is `iberia_eq/pp_v2_state_s29_EU.pkl`.
+  - Fit cost 62.7, max V err 2.9 kV, all border and unit-Q targets met.
+  - Spanish TSO–DSO Q +0.28 Gvar (was +1.2).
+  - VAL→ARA 753 MW; Portuguese circulating Q removed.
+  - GRA→SE and CAC→CYL are structural (S29 §7): they need corridor impedances from a full-network reduction.
 - **Open:**
   - Spanish TSO–DSO Q +0.97 Gvar absorbing, but Fig 4-84 says the DSOs inject (−1.3 Gvar at 412 kV, 400 kV interface
     only). Suspected cause: the 3.2 % unit connection X from TRIPCAL. Next: remote voltage control (AVR line-drop

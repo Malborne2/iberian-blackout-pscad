@@ -96,6 +96,43 @@ One entry per session. Every number is measured or read back, never assumed.
    transmission side.
 3. Unit Q in pp_v2 is compared at the terminal and should be at the 400 kV side: about −100 Mvar on G1–G7.
 
+### 6. Embedded-generation power factor and unit Q at 400 kV — adopted (new base `pp_v2_state_s29_EU.pkl`)
+- **`EMB_KPF=fig42`:** embedded synchronous generation E1–E3 (≈ 6.2 GW of cogeneration, waste, small hydro and solar
+  thermal) now absorbs at the Fig 4-2 RES ratio 0.135 instead of Q = 0. Basis: RD 413/2014 applies the same PF band
+  to cogeneration and waste ([CA] p.66, p.112) [inf for the ratio].
+- **`UNITQ_HV=1`:** unit Q is compared with Figs 2-84..86 at the 400 kV side of the step-up (terminal Q − I²X)
+  [inf: the reference is defined on the 400 kV band].
+- Cold fits (`cal_s29/{E,U,EU}.txt`):
+
+  | | OLP (S29 §3) | E | U | **EU (base)** |
+  |---|---|---|---|---|
+  | cost | 75.1 | 61.3 | 76.9 | **62.7** |
+  | max V err | 2.80 | 2.88 | 2.83 | 2.91 kV |
+  | Spanish TSO–DSO Q | +966 | +191 | +1,064 | **+284 Mvar** |
+  | trip gate 4a+4b / Granada | +7.04 / 18 | +7.02 / 17 | +6.96 / 17 | +7.02 kV / 17 kV/Gvar |
+
+  - The embedded PF moves ≈ 0.78 Gvar, as predicted in §5.
+  - The 400 kV comparison moves ≈ 0.1 Gvar.
+  - All border and unit-Q targets are still met: PT / FR / MA 2,104 / 1,336 / 760; unit Q −422 / −151 / −611.
+  - Granada sits at 17 kV/Gvar, just under the 18–42 band. It is a trade-off with 4a+4b inside TRIPCAL.
+- `base_v2.py` now points at EU.
+
+### 7. Fig 2-4 corridor checks as targets (`FLOW2=1`) — tried, **rejected**
+- **Method:** three area-preserving shift knobs, each bounded:
+  - BAD hub RES → WAN, for BAD→CAC 1,850;
+  - SE demand → CAT, for GRA→SE 900;
+  - CAC RES → SCE, for CAC→CYL 1,200.
+- The cold continuation diverged at lengths 0.9. A resume from EU converged (`cal_s29/F2.txt`):
+  - BAD→CAC 2,063 → **1,931** (fbad at its 1 GW bound);
+  - **GRA→SE 1,368 → 1,344** for 818 MW less SE demand;
+  - **CAC→CYL 1,942 → 1,936** for 521 MW of CAC RES moved;
+  - cost 62.7 → 94.3.
+- **Conclusion:** GRA→SE and CAC→CYL are set by the equivalent's corridor impedances (centroid distance × route),
+  not by dispatch. Chasing them by moving load or RES would distort the dispatch for nothing.
+- The remaining fix is structural: corridor impedances from a reduction of the full OSM 400 kV network (S28 §8.5,
+  REI/Ward). That would also address the north/centre fault levels.
+- The flag stays in the code, off. `pp_v2_state_s29_F2.pkl` is kept for the record.
+
 ## Session 28 — 2026-11-25 — agent: claude-mac (local macOS copy, **no PSCAD**): pandapower v2 load flow continued
 
 **Scope:** continue the pandapower v2 calibration from S27 §34 on a local copy (pandapower 3.5.6 in a venv, Python
