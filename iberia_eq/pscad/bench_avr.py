@@ -74,21 +74,27 @@ try:
     mm = cv.add_component("master", "multimeter", 18, 20, 0); MP = mm.ports(); L("multimeter ports", {k: (v.x, v.y) for k, v in MP.items()})
     mm.parameters(MeasPh="0", RMS="1", Vrms="VHV", MeasP="1", P="PHV", MeasQ="1", Q="QHV", S="1.0", BaseV="400")
     L("multimeter", {k: mm.parameters().get(k) for k in ("RMS", "Vrms", "MeasP", "P", "MeasQ", "Q", "S", "BaseV")})
-    xf = cv.add_component("master", "xfmr-3p2w", 30, 20, 0); XP = xf.ports(); L("xfmr ports", {k: (v.x, v.y) for k, v in XP.items()})
-    xf.parameters(Tmva=f"{S}", Xl="0.15 [pu]", V1="400", V2="400", NLL="0.0016 [pu]", Im1="2.0 [%]", Sat="0", YD1="0", YD2="0")
+    DIRECT = os.environ.get("DIRECT") == "1"                  # v2: Spanish units directly on the 400 kV bus, no step-up (S30, owner decision)
+    xf = None if DIRECT else cv.add_component("master", "xfmr-3p2w", 30, 20, 0); XP = {} if DIRECT else xf.ports(); L("xfmr ports", {k: (v.x, v.y) for k, v in XP.items()})
+    if xf is not None: xf.parameters(Tmva=f"{S}", Xl="0.15 [pu]", V1="400", V2="400", NLL="0.0016 [pu]", Im1="2.0 [%]", Sat="0", YD1="0", YD2="0")
     su = cv.add_component("lt7", "SyncUnit", 50, 20, 0); UP = su.ports(); L("SyncUnit ports", {k: (v.x, v.y) for k, v in UP.items()})
-    ph0 = np.arcsin(P0 * (0.15 * 400 ** 2 / S + 16.0) / 400 ** 2)
+    ph0 = np.arcsin(P0 * ((0.0 if DIRECT else 0.15) * 400 ** 2 / S + 16.0) / 400 ** 2)
     su.parameters(Sbase=f"{S}", Vbase="400", VbaseLN="230.9401", Ibase=f"{S / (3 ** 0.5 * 400):.4f}", H="3.0", P0=f"{P0}", Q0="0.0",
                   V0="1.0", Ph0=f"{ph0:.5f}", Vctl="0", Tstart="0.5", Pmec="0.0", Kgov="0.0", Tgov="2.0", GovLim="0.0",
                   KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0", **({} if os.environ.get("NOPATCH") == "1" else dict(XCc=XCc, Kdrp=Kdrp, Kiq=Kiq)))
     L("SyncUnit", {k: su.parameters().get(k) for k in ("Sbase", "P0", "Ph0")})
     pS, pM1, pM2 = P["N3"] if "N3" in P else list(P.values())[-1], MP[list(MP)[0]], MP[list(MP)[1]]
-    L("wire plan: source", (pS.x, pS.y), "-> mm", (pM1.x, pM1.y), "| mm", (pM2.x, pM2.y), "-> xf", [(v.x, v.y) for v in XP.values()])
+    L("direct" if DIRECT else "via step-up")
     # wiring from the read-back ports (probe run, RUNLOG S30): N3 (12,20) -> mm A (17,20); mm B (19,20) -> xf N1 (27,20);
     # xf N2 (32,20) -> unit T (53,20); xf neutrals G1 (29,22), G2 (30,20) grounded
-    assert (pS.x, pS.y) == (12, 20) and (MP["A"].x, MP["A"].y) == (17, 20) and (XP["N1"].x, XP["N1"].y) == (27, 20) and (UP["T"].x, UP["T"].y) == (53, 20)
-    cv.create_wire((12, 20), (17, 20)); cv.create_wire((19, 20), (27, 20)); cv.create_wire((32, 20), (53, 20))
-    cv.add_component("master", "ground", 29, 24, 0); cv.create_wire((29, 22), (29, 24))
+    assert (pS.x, pS.y) == (12, 20) and (MP["A"].x, MP["A"].y) == (17, 20) and (UP["T"].x, UP["T"].y) == (53, 20)
+    cv.create_wire((12, 20), (17, 20))
+    if DIRECT:
+        cv.create_wire((19, 20), (53, 20))
+    else:
+        assert (XP["N1"].x, XP["N1"].y) == (27, 20)
+        cv.create_wire((19, 20), (27, 20)); cv.create_wire((32, 20), (53, 20))
+        cv.add_component("master", "ground", 29, 24, 0); cv.create_wire((29, 22), (29, 24))
     cv.add_component("master", "ground", 31, 24, 0); cv.create_wire((30, 20), (30, 21), (31, 21), (31, 24)) if False else None
     for i, n in enumerate(("VHV", "QHV", "PHV", "EVS")): pgb(80, 20 + 4 * i, n)
     prj.parameters(time_duration=DUR, time_step="20", sample_step="1000", PlotType="1", StartType="0")

@@ -47,6 +47,77 @@ One entry per session. Every number is measured or read back, never assumed.
 - **Measured droop at Kdrp 3:** 76 Mvar / 9.3 kV on 1 GW ≈ 8 Mvar/kV per GW (400 kV side). The S29 §11 target is
   10–15, so v2 starts with **Kdrp ≈ 5**, XCc = −0.12, Kiq = 0.005; fine-tuned against the drift in the full model.
 
+### 3. Units directly on the 400 kV bus (owner decision) — bench lt7, `DIRECT=1`
+- **Why:** node budget. As designed, v2 came to ≈ 207 of 200 nodes. Each step-up transformer costs 3 nodes, so
+  removing the 8 unit step-ups saves 24. The network sees the same 3 % connection through AVR load compensation
+  with **positive** XC, which places the regulated point inside the machine.
+- Three cases in parallel, visible:
+
+  | case | XCc | Kdrp / Kiq | dQ unit | dV 400 kV | prediction |
+  |---|---|---|---|---|---|
+  | d0 | 0 | 0 / 0 | −238 Mvar | +2.6 kV | stiffest |
+  | d3 | +0.03 | 0 / 0 | −195 Mvar | +4.3 kV | ratio d3/d0 0.79 → measured 0.82 |
+  | d3q | +0.03 | 5 / 0.005 | −122 Mvar settled (−192 at end of ramp) | +7.3 kV | weak droop |
+
+- **Result:** +XC weakens the unit like a series connection. At Kdrp 5 the droop is ≈ 17 Mvar/kV per GW, above the
+  10–15 target, so the **v2 start is Kdrp 4**.
+- **Settings in v2:** XCc +0.03 for Spain (G1–G7), +0.05 for Portugal (G8); Kiq 0.005. Embedded machines hold their Q
+  (Kdrp 0, Kiq 0.05). Morocco keeps its 15 % transformer for the Morocco–Iberia mode.
+
+### 4. v2 skeleton generator `iberia_eq/pscad/build_v2.py`
+**Inputs:** built directly from the accepted pandapower state (`iberia_eq/cal_s29/base_vk3_net.p`, S29 §10), so the
+PSCAD case matches the load flow by construction. Generates `C:\PSCAD_work22.pscx` in a visible PSCAD and builds
+it. Every connection is a node label placed on a read-back port; there are no wires. Definitions: SyncUnit (ib6,
+patched with `add_qloop.py`), RES_Plant (ib6), PumpUnit (lt6).
+
+**Elements:**
+- **23 buses**, 22 zones plus the FR hub.
+- **33 `pi_section` lines** (SI values R, L, C).
+- **4 transformers:** the three pump stations and Morocco.
+- **17 SyncUnits**, all directly on their bus except Morocco:
+  - G1–G8 and Morocco;
+  - 8 embedded parts: E1 NW/N/CYL, E2 SCE/BAD/WAN, E3 VAL/CAT.
+  - P0, Q0, V0 and Ph0 come from the load flow (unit Q at the 400 kV side).
+  - Uniform H 5.25 s (Spain) / 5.3 s (Portugal) [inf], so that Σ H·S meets Table 2-4.
+- **7 PumpUnits behind `breaker3`:** M1 Duero, M2 Ebro, M3–M7 Portugal (Table 3-15).
+- **21 RES_Plants:**
+  - report plants R1–R12;
+  - zone aggregates;
+  - plus **ARA**, which needed a plant: its RES of 1,606 MW exceeds its load.
+  - RES_Plant scaling read from the 18 ib6 instances: Lf = 76.394/S, Cf = 0.001167·S, Ki = 489.9/S; Rf, Kv, Kmod,
+    Imax are constant. Kpf −0.135. Relays parked at 1.5 pu.
+  - One shared 800 kV DC rail (`source1`, RAILP/RAILN, v1 pattern). `upramp` Pref per plant (0.3 → 1.5 s), fed from
+    one shared `time-sig`.
+- **RES netted into the load where there is no plant:** MAD 1,237, NW 461, N 48, CAT 513, PT-N 1,788 MW. Temporary for
+  the skeleton: the netted RES gets the load's voltage dependence. To be decided before the full build.
+- **Loads and shunts as `varrlc` to ground,** constant impedance in the skeleton:
+  - per-zone load R‖L;
+  - small pumps;
+  - HVDC 1,000 MW at CAT;
+  - one net shunt per bus (Cint + reactors + DSO).
+- **France:** `source3` at the FR hub, Z 20 Ω ∠85° [inf], to be calibrated for the 4,609 MW AC peak (S29 §11 C).
+
+**Port facts read back:**
+- SyncUnit T at (+3, 0);
+- RES_Plant AC (+3, −2), DCP (+3, 0), DCN (+3, +2), Pref (−3, −2), Force (−3, 0), Trip (−3, +2);
+- PumpUnit T (+3, 0), PLD (0, +2);
+- breaker3 N1 (+2, 0), N2 (−2, 0);
+- xfmr-3p2w N1 (−3, 0), N2 (+2, 0), G1 (−1, +2);
+- pi_section N1/N2 (∓1, 0);
+- varrlc A (0, 0), B (+2, 0);
+- source1 A (−2, 0), N (+2, 0);
+- upramp I (−2, 0), O (+2, 0).
+
+The Main canvas is letter size (`85X11`); coordinates beyond it work, as in ib6.
+
+**First build:** all elements placed (33 / 4 / 17 / 7 / 21 / 54 varrlc / 1). Its only errors were the 21 `upramp`
+inputs left floating. Fixed with a shared `time-sig` (TT).
+
+**Rebuild: 0 errors, 162 live nodes** (NNODES 433, BRANCHES 1,279) of the 200 limit.
+- My budget of ≈ 4.5 nodes per RES plant was pessimistic; 38 nodes are left.
+- That headroom allows real plants for the zones whose RES is netted into the load: MAD, NW, CAT, PT-N, and N if
+  wanted (≈ 4 nodes each). Decide before the full build.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
