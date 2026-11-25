@@ -1,0 +1,3 @@
+run parameters: {'time_duration': 10.0, 'time_step': 20.0, 'sample_step': 200.0, 'PlotType': 'OUT', 'StartType': 'STANDARD', 'SnapType': 'NONE'}
+run done: 10.0 s simulated in 1190 s wall (119.0 s per simulated s)
+outputs copied to C:\PSCAD_work\v2_runs\health10

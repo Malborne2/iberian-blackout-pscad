@@ -185,8 +185,22 @@ try:
             else: put("master", "varrlc", dict(Name=f"SHC_{lab(bus)}", RLC="2", C=f"{-q / (W50 * VLL ** 2) * 1e6:.6g}"), node={"A": lab(bus)}, ground=("B",), w=8)
             count("varrlc")
     # ---------------- France source at the FR hub ----------------
-    put("master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{400 * V['FR']:.3f} [kV]", Ph=f"{A['FR']:.4f} [deg]",
-                                  F="50.0 [Hz]", F0="50.0 [Hz]"), node={"N3": lab("FR")}, ground=("N",)); count("source3")
+    # source3 voltage is Es (internal, LL rms kV, behind Z) -- Vm is ignored (S30 sec 6: a default Es 230 kV collapsed the
+    # first settle). Es/Ph from the load flow: the source supplies the ext_grid P,Q plus the 1,000 MW the HVDC delivered to
+    # France in pandapower (in PSCAD the HVDC is a 1,000 MW load at CAT). E = V + sqrt3 Z I, I = conj(S / (sqrt3 V)).
+    ZF = 20.0 * np.exp(1j * np.radians(85.0))
+    Sx = (net.res_ext_grid.p_mw.iloc[0] + 1000.0) + 1j * net.res_ext_grid.q_mvar.iloc[0]
+    Vf = 400.0 * V["FR"] * np.exp(1j * np.radians(A["FR"])); If = np.conj(Sx / (np.sqrt(3) * Vf)); Ef = Vf + np.sqrt(3) * ZF * If
+    L(f"France source: S {Sx.real:.0f} MW {Sx.imag:+.0f} Mvar, terminal {abs(Vf):.1f} kV {A['FR']:+.2f} deg -> Es {abs(Ef):.2f} kV {np.degrees(np.angle(Ef)):+.3f} deg")
+    put("master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
+                                  Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), node={"N3": lab("FR")}, ground=("N",)); count("source3")
+    # ---------------- bus voltage channels: measuring node label (0 nodes) -> pgb ----------------
+    for bus in sorted(set(BN.values())):
+        if " term" in bus and "Morocco" not in bus: continue
+        vn = "V_" + lab(bus)[2:]
+        x, y = cell(10, 9); c_ = cv.add_component("master", "nodelabel", x, y, 0); c_.parameters(Name=lab(bus), MeasV="YES", VName=vn, PU="NO")
+        g_ = cv.add_component("master", "pgb", x + 4, y + 2, 0); g_.parameters(Name=vn); gp = list(g_.ports().values())[0]; dlab(gp.x, gp.y, vn)
+        count("vchan")
     L("placed:", CNT)
     prj.parameters(time_duration="2.0", time_step="20", sample_step="1000", PlotType="1", StartType="0")
     prj.save()

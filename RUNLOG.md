@@ -147,6 +147,29 @@ inputs left floating. Fixed with a shared `time-sig` (TT).
   the load voltage law (second order: ≈ 100 MW / 70–100 Mvar per large zone at +10 % V). If a report trip wave lands in
   a netted zone, model it as a relay-switched load step (0 nodes).
 
+### 6. First v2 runs: tooling, speed, and a France source at 230 kV (2026-11-26)
+**Tooling added:**
+- `run_v2.py`: a visible run with the PATH fix; optional snapshot or start-from-snapshot; outputs copied to
+  `C:\PSCAD_work2_runs\<tag>`; the EMTDC log is printed on error.
+- `read_v2.py`: compares a run with the load flow. Bus voltages are line-to-line rms from the three phases of each
+  measuring node label (0 nodes). Machines are matched to the load-flow units by (POUT pu, |Vt|) with an optimal
+  assignment. All machine speeds are printed.
+- `build_v2.py` now adds 24 bus-voltage channels.
+
+**Speed:** 10 s simulated in 1,190 s wall, about **2 min per simulated second** (20 µs, 21 switching plants). A 95 s
+event replay is ≈ 3 h, so runs must be few, short and parallel.
+
+**health10: full collapse.**
+- Voltages sag from 0.5 s and every unit generates +0.4–1 pu Q (the load flow has them absorbing).
+- After rotor release (5 s) the machines lose synchronism: speeds 40–77 Hz by 10 s.
+- **Cause:** `source3` (France) takes its voltage from `Es`, not `Vm`, so France was a 230 kV source and the FR bus
+  read 194 kV. The trap was already in memory and was repeated.
+- **Fix:** Es and Ph from the load flow, E = V + √3·Z·I at the FR hub. The source supplies the ext_grid P,Q plus the
+  1,000 MW that the HVDC sends to France in pandapower; in PSCAD the HVDC is a 1,000 MW load at CAT.
+- `varrlc` units were checked on bench lt8 (`bench_varrlc.py`, 3 cases in parallel): R Ω, L H, C µF are all correct.
+  Each read (0.5746)²·100 = 33 MW/Mvar on a source left at Es = 230 kV, which is the same trap.
+- Rerun health12 (12 s) with the fix.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)

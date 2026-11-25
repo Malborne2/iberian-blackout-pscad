@@ -1,0 +1,2 @@
+varrlc {'Name': '', 'RLC': 'R', 'R': Value('1600'), 'L': Value('1.0'), 'C': Value('1.0'), 'E': Value('0.0'), 'dLdC': 'NO', 'I': ''}
+R: V 0.5746 pu  P +33.00 MW  Q -0.00 Mvar   (expected P +100, Q 0)
