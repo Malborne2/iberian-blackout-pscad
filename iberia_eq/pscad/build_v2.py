@@ -36,6 +36,7 @@ for nm in ("SyncUnit", "RES_Plant"):
 open(PSCX, "w", encoding="utf-8").write(ET.tostring(root, encoding="unicode"))
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_qloop.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_xt.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
+r = subprocess.run([sys.executable, os.path.join(HERE, "add_varrlc0.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())   # S30 sec 9
 v1res = {p.get("name"): p.get("value") for e in [x for x in src.find("definitions") if x.get("name") == "Main"][0].iter("User")
          if e.get("defn") == "ib6:RES_Plant" for p in e.findall("./paramlist/param")}
 
@@ -233,8 +234,8 @@ try:
         g_, gp = ctl(ZOF[bus], "master", "gain", dict(G=f"{base:.6g}"))
         ki = [k for k in gp if k in ("I", "IN")][0]; ko = [k for k in gp if k in ("O", "OUT")][0]
         dlab(gp[ki].x, gp[ki].y, f"X{sig}"); dlab(gp[ko].x, gp[ko].y, sig)
-        prm = dict(Name=f"V{tag}"[:30], RLC="0" if kind == "R" else "1"); prm["R" if kind == "R" else "L"] = sig
-        hang(bus, "master", "varrlc", prm, "A", ground=("B",), w=6); count("varrlc_exp")
+        prm = dict(Name=f"V{tag}"[:30], RLC="0" if kind == "R" else "1", X0=f"{base:.6g}"); prm["R" if kind == "R" else "L"] = sig
+        hang(bus, "v2", "varrlc0", prm, "A", ground=("B",), w=6); count("varrlc_exp")   # X0: start-up value, S30 sec 9
     ALPHA, BETA = 0.8, 4.1
     def shunt_rl(bus, Pmw, Qmvar, tag, VLL=None):
         VLL = VLL or 400.0 * V[bus]

@@ -3,20 +3,35 @@ r"""Run the built v2 case in its own visible PSCAD (S30). Copies the outputs to 
 usage: python iberia_eq\pscad\run_v2.py <tag> --dur 10 [--snap 8.0] [--from <snp>] [--sample 200] [--step 20] [--work C:\PSCAD_work\v2]
   --snap T : write a snapshot at T s (<tag>.snp, copied to the run folder)
   --from F : start from snapshot file F (copied into the build folder after the build; skill P10)
-Completion = the last .out sample reaches the end time; the EMTDC log is printed on error (S30 sec 1 fault capture).
+Completion = the last .out sample reaches the end time and EMTDC ends with status code 0.
+Error capture (S30 sec 9; the old check missed "Abnormal termination ... Status code = 2000" because that output also
+contains "Simulation has ended"): after the build and on every poll the PSCAD message list is read (status error, and the
+warnings skill P6.3 treats as errors), the EMTDC output is parsed for its status code and abort lines, and a run with no
+new samples for --stall minutes is stopped. Any of these: messages + output tail to run.log, exit code 2.
 """
-import argparse, glob, os, shutil, sys, time
+import argparse, glob, os, re, shutil, sys, time
 import mhi.pscad
 
 ap = argparse.ArgumentParser()
 ap.add_argument("tag"); ap.add_argument("--dur", type=float, default=10.0); ap.add_argument("--snap", type=float)
 ap.add_argument("--from", dest="frm"); ap.add_argument("--sample", default="200"); ap.add_argument("--step", default="20")
-ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld")
+ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld"); ap.add_argument("--stall", type=float, default=10.0)
 a = ap.parse_args()
 OUTD = os.path.join(r"C:\PSCAD_work\v2_runs", a.tag); os.makedirs(OUTD, exist_ok=True)
 BUILD = os.path.join(a.work, "v2.gf81_x86")
 log = open(os.path.join(OUTD, "run.log"), "w")
 def L(*x): print(*x, flush=True); print(*x, file=log, flush=True)
+BADW = ("short circuit", "open circuit", "floating", "unresolved", "source contention", "below range", "above range", "too small")
+def check_msgs(prj):
+    """-> (error texts, {warning text: count}) from PSCAD's message list; warnings in BADW count as errors (skill P6.3)."""
+    errs, warns = [], {}
+    for m in prj.messages():
+        st = str(getattr(m, "status", "")).lower(); tx = f"{getattr(m, 'component', '') or ''} {getattr(m, 'text', m)}".strip()
+        if st == "error": errs.append(tx)
+        elif st == "warning":
+            warns[tx] = warns.get(tx, 0) + 1
+            if any(b in tx.lower() for b in BADW) and tx not in errs: errs.append(tx)
+    return errs, warns
 os.environ["PATH"] = BUILD + os.pathsep + os.environ.get("PATH", "")      # S30 run-environment fix
 pscad = mhi.pscad.launch(minimize=False, splash=False, timeout=60)
 try:
@@ -34,24 +49,35 @@ try:
         prm.update(SnapType="0")
     prj.parameters(**prm); L("run parameters:", {k: prj.parameters().get(k) for k in prm})
     prj.build()
-    errs = [getattr(m, "text", m) for m in prj.messages() if str(getattr(m, "status", "")).lower() == "error"]
-    if errs: L("BUILD ERRORS:", errs[:10]); raise SystemExit(1)
+    errs, warns = check_msgs(prj)
+    for w, k in warns.items(): L(f"build warning x{k}: {w}")
+    if errs: L("BUILD ERRORS:"); [L("  ", e) for e in errs[:20]]; raise SystemExit(1)
     if a.frm: shutil.copy(a.frm, os.path.join(BUILD, os.path.basename(a.frm)))
-    t0 = time.time(); prj.run(); last = -1
+    t0 = time.time(); prj.run(); last = -1; t_prog = time.time(); tl_prev = None
+    def fail(why, txt):
+        L("RUN FAILED:", why); e_, w_ = check_msgs(prj)
+        for e in e_: L("  error:", e)
+        for w, k in w_.items(): L(f"  warning x{k}: {w}")
+        L("EMTDC OUTPUT (tail):"); L(txt[-3000:]); raise SystemExit(2)
     while True:
         time.sleep(10)
         txt = prj.output() or ""
-        if "stopped unexpectedly" in txt or ("error" in txt.lower() and "simulation has ended" not in txt.lower() and "run completed" not in txt.lower()):
-            L("EMTDC OUTPUT (tail):"); L(txt[-3000:]); raise SystemExit(2)
+        sc = re.findall(r"Status code\s*=\s*(-?\d+)", txt)
+        bad = [k for k in ("Abnormal termination", "Runtime Error", "stopped unexpectedly", "Simulation stopped", "ERROR:") if k in txt]
+        if bad or (sc and sc[-1] != "0"): fail(f"EMTDC: {bad} status code {sc[-1] if sc else '?'}", txt)
+        e_, _ = check_msgs(prj)
+        if e_: fail("PSCAD error messages", txt)
         outs = sorted(glob.glob(os.path.join(BUILD, "v2_*.out")))
         tl = None
         if outs and os.path.getmtime(outs[0]) > t0:
             try: tl = float(open(outs[0]).read().rstrip().split("\n")[-1].split()[0])
             except Exception: tl = None
+        if tl is not None and tl != tl_prev: t_prog = time.time(); tl_prev = tl
+        if time.time() - t_prog > 60 * a.stall: fail(f"no new samples for {a.stall} min (last t = {tl_prev})", txt)
         if tl is not None and int(tl) != last and int(time.time() - t0) % 60 < 10:
             L(f"[{time.time() - t0:5.0f} s wall] simulated {tl:.2f} s"); last = int(tl)
         if tl is not None and tl >= a.dur - 1e-3 and not pscad.is_busy(): break
-        if "run completed" in txt.lower() and tl is not None and tl >= a.dur - 0.01: break
+        if sc and sc[-1] == "0" and tl is not None and tl >= a.dur - 0.01: break
     L(f"run done: {a.dur} s simulated in {time.time() - t0:.0f} s wall ({(time.time() - t0) / a.dur:.1f} s per simulated s)")
 finally:
     pscad.quit()
