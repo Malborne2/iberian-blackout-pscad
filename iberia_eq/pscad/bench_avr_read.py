@@ -27,6 +27,14 @@ for tag in tags:
           f"end of ramp: Qgen {row[1][0]:+6.0f}  VHV {row[1][3]:6.1f} | settled: Qgen {row[2][0]:+6.0f}  QHV {row[2][1]:+6.0f}  "
           f"Vt {row[2][2]:.4f}  VHV {row[2][3]:6.1f} kV  DVR {row[2][4]:+.4f} | change: dQgen {row[2][0] - row[0][0]:+.0f} Mvar, "
           f"dVHV {row[2][3] - row[0][3]:+.2f} kV, dVt {row[2][2] - row[0][2]:+.4f}")
+    w = c.get("SyncUnit(0):Wspd")
+    if w is not None and t[-1] > 65:                         # swing after the 60 s phase step: frequency and damping (log decrement)
+        m = (t > 60.02) & (t < 72); x = w[m] - np.median(w[(t > 70) & (t < 72)]); tt = t[m]
+        pk = [i for i in range(1, len(x) - 1) if x[i] > x[i - 1] and x[i] >= x[i + 1] and x[i] > 0.05 * np.abs(x).max()]
+        if len(pk) >= 3:
+            per = np.diff(tt[pk]).mean(); dl = np.log(x[pk[0]] / x[pk[2]]) / 2; zeta = dl / np.sqrt(4 * np.pi ** 2 + dl ** 2)
+            print(f"{tag:7s} swing after 60 s step: f {1 / per:.3f} Hz, damping ratio {zeta:.3f}, first peak {x[pk[0]]:.2e} pu speed")
+        else: print(f"{tag:7s} swing: fewer than 3 peaks")
     k = max(1, len(t) // 4000)
     ax[0].plot(t[::k], q[::k], label=tag); ax[1].plot(t[::k], 400 * vhv[::k], label=tag); ax[2].plot(t[::k], vit[::k], label=tag)
 ax[0].set_ylabel("unit Q [Mvar]"); ax[1].set_ylabel("V 400 kV side [kV]"); ax[2].set_ylabel("V terminal [pu]"); ax[2].set_xlabel("t [s]")

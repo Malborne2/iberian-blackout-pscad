@@ -1,4 +1,5 @@
 SyncUnit with XCc / Kdrp / Kiq written into C:\PSCAD_work\v2\v2.pscx 
+SyncUnit reactances published (XmD XmD1 XmD2 XmQ XmQ1 XmQ2 XmP) in C:\PSCAD_work\v2\v2.pscx 
 Main canvas parameters: {'show_grid': False, 'size': '85X11', 'orient': 'LANDSCAPE', 'show_border': False, 'monitor_bus_voltage': False, 'show_signal': False, 'show_virtual': False, 'show_sequence': False, 'auto_sequence': True, 'disabled_behaviour': 'DO_NOT_ALLOW_SAFE', 'show_terminals': False, 'virtual_filter': '', 'animation_freq': 500}
 unit G1 Almaraz II          at CAC          P   660.0 Q   -75.3 S   1111 V 1.0126 ang  +44.17
 unit G2 Cat nuclear A       at CAT          P  1045.0 Q  -245.9 S   1222 V 0.9997 ang   -1.71

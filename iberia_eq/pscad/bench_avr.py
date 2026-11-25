@@ -35,6 +35,7 @@ defs.append(su)
 open(PSCX, "w", encoding="utf-8").write(ET.tostring(root, encoding="unicode"))
 if os.environ.get("NOPATCH") != "1":
     r = subprocess.run([sys.executable, os.path.join(HERE, "add_qloop.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
+    r = subprocess.run([sys.executable, os.path.join(HERE, "add_xt.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 else: L("NOPATCH: original SyncUnit")
 
 S, P0 = 1111.0, 1000.0
@@ -65,7 +66,12 @@ try:
     P = sr.ports(); L("source ports", {k: (v.x, v.y) for k, v in P.items()}); L("source", {k: sr.parameters().get(k) for k in ("Ctrl", "Type", "Imp", "Z1", "Phi1")})
     lab(P["EV"].x, P["EV"].y, "EVS"); lab(P["EF"].x, P["EF"].y, "FREQ"); lab(P["EP"].x, P["EP"].y, "EPH")
     cv.add_component("master", "ground", 8, 22, 0); cv.create_wire((8, 20), (8, 22))
-    const(20, 40, "0.0", "EPH"); const(20, 44, "50.0", "FREQ")
+    const(20, 44, "50.0", "FREQ")
+    if os.environ.get("PHSTEP") == "1":                    # grid phase step +10 deg at 60 s: excites the rotor swing (S30 sec 5)
+        ts2 = cv.add_component("master", "time-sig", 20, 34, 0); q2 = list(ts2.ports().values())[0]; lab(q2.x, q2.y, "TT2")
+        blk("compare", 30, 34, "TT2", "STP", X="60.0", OL="0.0", OH="1.0"); blk("gain", 40, 34, "STP", "EPH", G=f"{np.radians(10.0):.6f}")
+    else:
+        const(20, 40, "0.0", "EPH")
     ts = cv.add_component("master", "time-sig", 20, 50, 0); q = list(ts.ports().values())[0]; lab(q.x, q.y, "TT")
     const(20, 54, "20.0", "K20"); summ(30, 50, "TT", "K20", "T20")
     blk("gain", 40, 50, "T20", "R0", G=f"{1 / 30:.6f}"); blk("hardlimit", 50, 50, "R0", "RMP", LL="0.0", UL="1.0")
@@ -82,6 +88,11 @@ try:
     su.parameters(Sbase=f"{S}", Vbase="400", VbaseLN="230.9401", Ibase=f"{S / (3 ** 0.5 * 400):.4f}", H="3.0", P0=f"{P0}", Q0="0.0",
                   V0="1.0", Ph0=f"{ph0:.5f}", Vctl="0", Tstart="0.5", Pmec="0.0", Kgov="0.0", Tgov="2.0", GovLim="0.0",
                   KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0", **({} if os.environ.get("NOPATCH") == "1" else dict(XCc=XCc, Kdrp=Kdrp, Kiq=Kiq)))
+    XT = float(os.environ.get("XT", 0.0))                  # lumped step-up reactance (pu machine base) added to every machine reactance
+    if XT and os.environ.get("NOPATCH") != "1":
+        su.parameters(XmD=f"{1.79 + XT}", XmD1=f"{0.169 + XT}", XmD2=f"{0.135 + XT}", XmQ=f"{1.71 + XT}", XmQ1=f"{0.228 + XT}",
+                      XmQ2=f"{0.2 + XT}", XmP=f"{0.130 + XT}")
+        L("lumped Xt", XT, {k: su.parameters().get(k) for k in ("XmD", "XmD2", "XmQ2")})
     L("SyncUnit", {k: su.parameters().get(k) for k in ("Sbase", "P0", "Ph0")})
     pS, pM1, pM2 = P["N3"] if "N3" in P else list(P.values())[-1], MP[list(MP)[0]], MP[list(MP)[1]]
     L("direct" if DIRECT else "via step-up")

@@ -35,6 +35,7 @@ for nm in ("SyncUnit", "RES_Plant"):
     defs.append([d for d in src.find("definitions") if d.get("name") == nm][0])
 open(PSCX, "w", encoding="utf-8").write(ET.tostring(root, encoding="unicode"))
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_qloop.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
+r = subprocess.run([sys.executable, os.path.join(HERE, "add_xt.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 v1res = {p.get("name"): p.get("value") for e in [x for x in src.find("definitions") if x.get("name") == "Main"][0].iter("User")
          if e.get("defn") == "ib6:RES_Plant" for p in e.findall("./paramlist/param")}
 
@@ -99,11 +100,13 @@ try:
     H_ES, H_PT = 5.25, 5.3          # [inf] uniform H so that sum H*S meets Table 2-4 (Spain 97,590, Portugal 21,884 MW s)
     TERM = {BN[tr.lv_bus]: BN[tr.hv_bus] for _, tr in net.trafo.iterrows() if tr["name"].startswith("T G")}   # unit term -> zone (direct)
     QHV = {tr["name"][2:]: -net.res_trafo.at[i_, "q_hv_mvar"] for i_, tr in net.trafo.iterrows() if tr["name"].startswith("T G")}
-    def unit(name, bus, Pmw, Qmvar, S, H, XCc, Kdrp, Kiq, Kgov, gov=True):
+    XT_UNIT = 0.15                  # step-up reactance lumped into the machine (S30 sec 5: bench xreal vs xlump, swing 1.695 Hz both)
+    def unit(name, bus, Pmw, Qmvar, S, H, XCc, Kdrp, Kiq, Kgov, gov=True, xt=XT_UNIT):
         prm = dict(Sbase=f"{S:.1f}", Vbase="400", VbaseLN="230.9401", Ibase=f"{S / (3 ** 0.5 * 400):.4f}", H=f"{H}", P0=f"{Pmw:.1f}",
                    Q0=f"{Qmvar:.1f}", V0=f"{V[bus]:.5f}", Ph0=f"{math.radians(A[bus]):.6f}", Vctl="0", Tstart="0.5", Pmec="0.0",
                    Kgov=f"{Kgov}", Tgov="2.0", GovLim="0.054" if gov else "0.0", KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0",
-                   XCc=f"{XCc}", Kdrp=f"{Kdrp}", Kiq=f"{Kiq}")
+                   XCc=f"{XCc}", Kdrp=f"{Kdrp}", Kiq=f"{Kiq}",
+                   XmD=f"{1.79 + xt}", XmD1=f"{0.169 + xt}", XmD2=f"{0.135 + xt}", XmQ=f"{1.71 + xt}", XmQ1=f"{0.228 + xt}", XmQ2=f"{0.2 + xt}", XmP=f"{0.130 + xt}")
         put("v2", "SyncUnit", prm, node={"T": lab(bus)}); count("syncunit"); L(f"unit {name:22s} at {bus:12s} P {Pmw:7.1f} Q {Qmvar:+7.1f} S {S:6.0f} V {V[bus]:.4f} ang {A[bus]:+7.2f}")
     for i_, g in net.gen.iterrows():
         nm = g["name"]; gb = BN[g.bus]
@@ -111,7 +114,7 @@ try:
             zone = TERM[gb]; S = [tr.sn_mva for _, tr in net.trafo.iterrows() if tr["name"] == "T " + nm][0]
             unit(nm, zone, g.p_mw, QHV[nm], S, H_PT if "PT" in nm else H_ES, 0.05 if "PT" in nm else 0.03, 4.0, 0.005, 5.726)
         elif nm == "Morocco":
-            unit(nm, gb, g.p_mw, net.res_gen.at[i_, "q_mvar"], 5556.0, 4.0, 0.0, 0.0, 0.0, 5.726)
+            unit(nm, gb, g.p_mw, net.res_gen.at[i_, "q_mvar"], 5556.0, 4.0, 0.0, 0.0, 0.0, 5.726, xt=0.0)   # real 15 % transformer kept
     for i_, s in net.sgen.iterrows():                       # embedded synchronous generation: constant Q (outer loop, no droop)
         if s["name"].startswith("E"):
             bus = BN[s.bus]; unit(s["name"], bus, s.p_mw, s.q_mvar, s.p_mw / 0.9, H_ES, 0.0, 0.0, 0.05, 0.0, gov=False)

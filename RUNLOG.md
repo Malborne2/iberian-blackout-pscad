@@ -118,6 +118,35 @@ inputs left floating. Fixed with a shared `time-sig` (TT).
 - That headroom allows real plants for the zones whose RES is netted into the load: MAD, NW, CAT, PT-N, and N if
   wanted (≈ 4 nodes each). Decide before the full build.
 
+### 5. Step-up transformer lumped into the machine (0 nodes) — bench passed, adopted
+- **Why:** the direct connection (§3) keeps the static behaviour, but it drops the 15 % series reactance from the
+  electrical path. The units then become too stiff: fault levels (already too high in the north and centre), the
+  speed of synchronising, and swing modes including the Spain–France one. Real step-ups would cost 24 nodes.
+- **Method (`iberia_eq/pscad/add_xt.py`):** the sync_machine data (reactances plus open-circuit time constants) are
+  published as SyncUnit parameters `XmD XmD1 XmD2 XmQ XmQ1 XmQ2 XmP`, defaulting to today's values. A series Xt is
+  represented exactly by adding Xt to every reactance; the open-circuit time constants are unchanged.
+- **Bench** (`PHSTEP=1`: +10° grid phase step at 60 s, on top of the +3 % ramp; Kdrp 4, Kiq 0.005):
+  - **xreal:** 15 % transformer, XC −0.12;
+  - **xlump:** direct connection, reactances +0.15, XC +0.03.
+
+  | | xreal | xlump |
+  |---|---|---|
+  | swing frequency (FFT of P, 60.1–66 s) | **1.695 Hz** | **1.695 Hz** (prediction √(ω0·Ps/2H) ≈ 1.7) |
+  | swing shape / damping | reference | same amplitude and decay; ≈ 2 % slower phase by 63 s |
+  | slow response: dQ at 400 kV / dV 400 kV | +78 Mvar / +9.1 kV | +111 Mvar / +7.7 kV |
+  | droop at 400 kV (per GW) | ≈ 9 Mvar/kV | **≈ 14 Mvar/kV**, inside the 10–15 target |
+
+  The droop differs because the outer loop's voltage is the machine terminal: the LV side in xreal, the HV side in
+  xlump. The P offset between the cases is the bench's approximate Ph0, held at release (PMH); v2 takes exact angles
+  from the load flow.
+- My peak picker reported 3.3–3.4 Hz with negative damping. That was wrong: Wspd is in rad/s and ripple fooled it.
+  The FFT and the figure `iberia_eq/pscad/figs/bench_xt_swing.png` are the record.
+- **Adopted:** +0.15 on G1–G8 and on the embedded machines. Morocco keeps its real 15 % transformer. Node count
+  unchanged.
+- **Extra plants (owner):** not added unless they bring real value. Fewer switching plants run faster. Netted RES gets
+  the load voltage law (second order: ≈ 100 MW / 70–100 Mvar per large zone at +10 % V). If a report trip wave lands in
+  a netted zone, model it as a relay-switched load step (0 nodes).
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
