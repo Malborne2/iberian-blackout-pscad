@@ -1,0 +1,79 @@
+NOPATCH: original SyncUnit
+source ports {'EV': (8, 18), 'EF': (10, 18), 'EP': (12, 18), 'N': (8, 20), 'N3': (12, 20)}
+source {'Ctrl': 'EXTERNAL', 'Type': 'RR_L', 'Imp': 'IMPEDANCE', 'Z1': Value('16.0 [ohm]'), 'Phi1': Value('85.0 [deg]')}
+multimeter ports {'A': (17, 20), 'B': (19, 20)}
+multimeter {'RMS': 'YES_ANALOG', 'Vrms': 'VHV', 'MeasP': 'YES', 'P': 'PHV', 'MeasQ': 'YES', 'Q': 'QHV', 'S': Value('1.0'), 'BaseV': Value('230.9401')}
+xfmr ports {'G1': (29, 22), 'G2': (30, 20), 'N1': (27, 20), 'N2': (32, 20)}
+SyncUnit ports {'T': (53, 20)}
+SyncUnit {'Sbase': Value('1111.0'), 'P0': Value('1000.0'), 'Ph0': Value('0.23723')}
+wire plan: source (12, 20) -> mm (17, 20) | mm (19, 20) -> xf [(29, 22), (30, 20), (27, 20), (32, 20)]
+MSG ('warning', "Signal 'ExInit' type conversion may lose accuracy at connection 'nhold1'")
+MSG ('warning', "Signal 'L2N' type conversion may lose accuracy at connection 'nhold1'")
+MSG ('warning', "Signal 'ExInit' type conversion may lose accuracy")
+MSG ('warning', "Signal 'S2M' type conversion may lose accuracy")
+MSG ('warning', "Signal 'L2N' type conversion may lose accuracy")
+[32 s] run log tail: Initializing Simulation Run | Executing > "C:\PSCAD_work\lt7_nopatch\\lt7.gf81_x86\lt7_30000.bat" | C:\PSCAD_work\lt7_nopatch\lt7.gf81_x86>call "C:\Program Files\GFortran\8.1\x86\bin\gf81vars.bat"  | 'lt7.exe' is not recognized as an internal or external command, | operable program or batch file. | The simulation process for 'lt7' has stopped unexpectedly. | Please review runtime messages for details. | 
+[63 s] run log tail: Initializing Simulation Run | Executing > "C:\PSCAD_work\lt7_nopatch\\lt7.gf81_x86\lt7_30000.bat" | C:\PSCAD_work\lt7_nopatch\lt7.gf81_x86>call "C:\Program Files\GFortran\8.1\x86\bin\gf81vars.bat"  | 'lt7.exe' is not recognized as an internal or external command, | operable program or batch file. | The simulation process for 'lt7' has stopped unexpectedly. | Please review runtime messages for details. | 
+[94 s] run log tail: Initializing Simulation Run | Executing > "C:\PSCAD_work\lt7_nopatch\\lt7.gf81_x86\lt7_30000.bat" | C:\PSCAD_work\lt7_nopatch\lt7.gf81_x86>call "C:\Program Files\GFortran\8.1\x86\bin\gf81vars.bat"  | 'lt7.exe' is not recognized as an internal or external command, | operable program or batch file. | The simulation process for 'lt7' has stopped unexpectedly. | Please review runtime messages for details. | 
+[124 s] run log tail: Initializing Simulation Run | Executing > "C:\PSCAD_work\lt7_nopatch\\lt7.gf81_x86\lt7_30000.bat" | C:\PSCAD_work\lt7_nopatch\lt7.gf81_x86>call "C:\Program Files\GFortran\8.1\x86\bin\gf81vars.bat"  | 'lt7.exe' is not recognized as an internal or external command, | operable program or batch file. | The simulation process for 'lt7' has stopped unexpectedly. | Please review runtime messages for details. | 
+Traceback (most recent call last):
+  File "C:\Users\Ibrahim\OneDrive - Østfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\iberia_eq\pscad\bench_avr.py", line 98, in <module>
+    if any(s_.lower() == "error" for s_, _ in msgs): raise SystemExit(1)
+              ^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 266, in wrapper
+    return self._context.call(self, # pylint: disable=protected-access
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                              method.__name__, *args, **kwargs)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 907, in call
+    result = self._call(rcvr, method_name, *args, **kwargs)
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 929, in _call
+    return self._rmi(msg)
+           ~~~~~~~~~^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 995, in _rmi
+    response = self._do_rmi(msg)
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 1011, in _do_rmi
+    self._write(msg)
+    ~~~~~~~~~~~^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 1017, in _write
+    self._tx_message(buf)
+    ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 1154, in _tx_message
+    self._sock.sendall(len_buf)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Ibrahim\OneDrive - Østfold University College\PhD Projects\PSCAD\Spanish_netowrk_model\iberia_eq\pscad\bench_avr.py", line 110, in <module>
+    except Exception: pass
+    ^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\pscad\pscad.py", line 137, in quit
+    if self.version_number <= (5, 1, 0):
+       ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\functools.py", line 1026, in __get__
+    val = self.func(instance)
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\pscad\pscad.py", line 119, in version_number
+    return Version(self.version)._version
+                   ^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 213, in __get__
+    return instance._context.get_prop(instance, self._key)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 945, in get_prop
+    result = self._getprop(rcvr, attr_name)
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 953, in _getprop
+    return self._rmi(msg)
+           ~~~~~~~~~^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 995, in _rmi
+    response = self._do_rmi(msg)
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 1011, in _do_rmi
+    self._write(msg)
+    ~~~~~~~~~~~^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 1017, in _write
+    self._tx_message(buf)
+    ~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Ibrahim\AppData\Local\Programs\Python\Python313\Lib\site-packages\mhi\common\remote.py", line 1154, in _tx_message
+    self._sock.sendall(len_buf)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host

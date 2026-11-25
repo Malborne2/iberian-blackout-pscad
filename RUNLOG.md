@@ -2,6 +2,51 @@
 
 One entry per session. Every number is measured or read back, never assumed.
 
+## Session 30 — 2026-11-25 — agent: claude-main (Windows, PSCAD): v2 PSCAD build, step 1 — AVR bench (change A)
+
+### 1. Run-environment fault found: "'lt7.exe' is not recognized"
+- New cases built fine, then EMTDC stopped at once ("The simulation process … has stopped unexpectedly"). The run
+  log showed `'lt7.exe' is not recognized`. The owner's own PSCAD ran old models fine.
+- **Cause:** this Claude Code session sets `NoDefaultCurrentDirectoryInExePath=1`. Every PSCAD launched from it
+  inherits the variable, so EMTDC's `<case>_30000.bat` (`pushd <build>` then `<case>.exe`) cannot start the exe from
+  the current folder. `gf81vars.bat` (2019) and cmd AutoRun are unchanged.
+- **Fix:** keep the protection and put the build folder on the PATH of the launched PSCAD (`bench_avr.py`).
+  `stage12/run_instance.py` needs the same before the next full-model run.
+- All launches are now visible (`minimize=False`, owner request).
+- Also measured:
+  - `multimeter` P/Q with S = 1 are **3-phase totals** (PHV −1,095 MW for a 1,097 MW unit);
+  - `Vrms` is line-to-line, so BaseV = 400;
+  - `SyncUnit` `Pmec` is a trim on the held release power (a full-torque value slipped poles);
+  - PlotType 1 writes legacy `.out` files, read with the new `iberia_eq/pscad/legacy_out.py`.
+
+### 2. SyncUnit change A patch and bench lt7
+**Patch `iberia_eq/pscad/add_qloop.py`** (defaults reproduce the old unit):
+- `XCc` binds the exciter `XC`;
+- outer loop: DVR = ∫ Kiq·[(QH − QOUT) − Kdrp·(|Vt| − VH)], with QH/VH sampled at rotor release, reset before 5 s,
+  ±0.15 pu, added to VREF;
+- `|Vt|` = element 1 of the 3-element VIT, via `master:datatap`.
+
+**Bench `iberia_eq/pscad/bench_avr.py`:**
+- one unit (1,111 MVA, 1,000 MW) behind a 15 % step-up, on a 400 kV source with Z1 16 Ω;
+- grid EV ramps +3 % (12 kV) over 20–50 s;
+- 4 cases run in parallel, ≈ 40 s each;
+- readout `bench_avr_read.py`, figure `iberia_eq/pscad/figs/bench_avr.png`.
+
+| case | XCc | Kdrp / Kiq | dQ unit (settled) | dV 400 kV | dVt | prediction |
+|---|---|---|---|---|---|---|
+| base | 0 | 0 / 0 | −125 Mvar | +7.2 kV | +0.004 | −128 Mvar |
+| ldcneg | −0.12 | 0 / 0 | −226 Mvar | +2.8 kV | −0.019 | −238 Mvar |
+| ldcpos | +0.12 | 0 / 0 | −86 Mvar | +8.9 kV | +0.013 | (wrong sign) |
+| qloop | −0.12 | 3 / 0.005 | −76 Mvar (−136 at end of ramp) | +9.3 kV | +0.015 | weak droop |
+
+- **Gates passed:**
+  - clean start (all cases settled within 1 s of release);
+  - **line-drop compensation sign: XC negative**, matching the predicted dQ within 5 %;
+  - the outer loop relaxes Q over ≈ 20 s, so the seconds-scale response stays stiff and the minute-scale one is a weak
+    droop.
+- **Measured droop at Kdrp 3:** 76 Mvar / 9.3 kV on 1 GW ≈ 8 Mvar/kV per GW (400 kV side). The S29 §11 target is
+  10–15, so v2 starts with **Kdrp ≈ 5**, XCc = −0.12, Kiq = 0.005; fine-tuned against the drift in the full model.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
