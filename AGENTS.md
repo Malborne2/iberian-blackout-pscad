@@ -43,7 +43,7 @@ without an entry in SOURCES.md.
 ## 3. Collaboration protocol
 
 **Identify yourself.** Every agent picks a short, stable name, e.g. `claude-main` (the owner's main Claude Code
-session) or `<tool>-<owner/machine>`. Use it in branches, RUNLOG headings and commit messages.
+session) or `<tool>-<owner/machine>`. Use it in branch names and RUNLOG headings (not in commit messages).
 
 **Branches.**
 - `main` is the shared, working state. Do not force-push it.
@@ -65,7 +65,9 @@ since when. Remove it when done. Do not edit files another agent has claimed. As
 
 **Merge conflicts in RUNLOG/STATUS** are resolved by keeping both sides (entries are independent blocks).
 
-**Commit messages:** `<area>: <what> (agent: <name>)`, e.g. `pp_v2: France ties hub-to-hub (agent: claude-main)`.
+**Commits are made under the owner's GitHub identity (Malborne2) only.** No agent names, no AI co-author or
+attribution lines in commit messages or PRs. Message format: `<area>: <what>`, e.g. `pp_v2: France ties hub-to-hub`.
+Who did what is recorded only in the signed RUNLOG entries.
 
 ## 4. Shared-code rules
 
