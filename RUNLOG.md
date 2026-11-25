@@ -69,6 +69,33 @@ One entry per session. Every number is measured or read back, never assumed.
   - **Next:** emulate this in `fastpf` as remote voltage control (unit terminal PQ, HV bus PV with the unit's Q)
     before benching the AVR change in PSCAD.
 
+### 5. Checked before building: AVR line-drop compensation does NOT reconcile the TSO–DSO conflict
+**Equivalence.**
+- In a load flow, an AVR with line-drop compensation k·X_T on a step-up X_T is identical, on the network side, to the
+  unit sitting behind (1 − k)·X_T.
+- The k·X_T part only adds I²X between the terminal and the regulated point, so it changes the *terminal* Q
+  accounting, not the network.
+- The fitted 3.2 % connection X is therefore already the LDC model for the network. LDC matters for PSCAD (a
+  realistic 15 % transformer with the same stiffness), not for the pre-event balance.
+
+**Size** (`iberia_eq/pp_v2_unitq_side.py` on the dumped base net `cal_s29/base_net.p`):
+- Spanish units G1–G7: step-up I²X is 104 Mvar now, and would be **500 Mvar at 15 %**.
+- So at most ≈ 0.4 Gvar could move.
+- It moves at all only if Figs 2-84..2-86 are terminal quantities. The report defines them on the 400 kV band
+  (405–410 kV) for plants "connected to the transmission network", which points to the connection point [inf].
+  In that case it moves **0**.
+- The S29 §4 "≈ 1.5 Gvar" estimate was wrong: it mixed in G8, the pump and Morocco transformers, and vkg 20 %.
+
+**Where the conflict actually sits:**
+1. The TSO–DSO target `QEX` (−2.5 ± 0.5 Gvar) is **our extrapolation** of Fig 4-84, which covers only the 400 kV
+   interface (≈ 37 % of the load). It is not a report value for all of Spain. The hard report data (Fig 2-4
+   voltages, Figs 2-84..86, Fig 4-2, borders) are all met together.
+2. A physical candidate the model lacks: **embedded synchronous generation E1–E3 (≈ 6.2 GW: cogeneration, waste,
+   small hydro, solar thermal) is modelled at Q = 0**. RD 413/2014 puts cogeneration and waste under the same PF
+   band as RES ([CA] p.66, p.112). At the Fig 4-2 ratio (0.135) that is ≈ 0.8 Gvar of absorption missing from the
+   transmission side.
+3. Unit Q in pp_v2 is compared at the terminal and should be at the 400 kV side: about −100 Mvar on G1–G7.
+
 ## Session 28 — 2026-11-25 — agent: claude-mac (local macOS copy, **no PSCAD**): pandapower v2 load flow continued
 
 **Scope:** continue the pandapower v2 calibration from S27 §34 on a local copy (pandapower 3.5.6 in a venv, Python
