@@ -55,8 +55,12 @@ if m_:
 os.environ["PATH"] = BUILD + os.pathsep + os.environ.get("PATH", "")      # S30 run-environment fix
 import subprocess
 def _pscad_pids():
-    out = subprocess.run(["tasklist", "/FI", "IMAGENAME eq Pscad.exe", "/FO", "CSV", "/NH"], capture_output=True, text=True).stdout
-    return {int(r.split('","')[1]) for r in out.strip().splitlines() if r.startswith('"Pscad.exe"')}
+    """Pscad.exe processes started by THIS script (children of this python): a failed launch must not close the
+    PSCAD of another run that happened to start at the same time (rp_cascade was killed that way, S30 sec 19)."""
+    ps = ("Get-CimInstance Win32_Process -Filter \"Name='Pscad.exe'\" | Where-Object { $_.ParentProcessId -eq "
+          + str(os.getpid()) + " } | ForEach-Object { $_.ProcessId }")
+    out = subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True).stdout
+    return {int(x) for x in out.split() if x.strip().isdigit()}
 for k_ in range(4):                                                  # S30: launch races when several start together
     before_ = _pscad_pids()
     try: pscad = mhi.pscad.launch(minimize=False, splash=False, timeout=60); break
