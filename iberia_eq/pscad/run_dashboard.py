@@ -50,12 +50,12 @@ def runs(filtered=True):
         out = os.path.join(work, "v2.gf81_x86", "v2_01.out"); t0 = os.path.getctime(log)
         ts = last_t(out) if os.path.exists(out) and os.path.getmtime(out) > t0 else None
         age = now - os.path.getmtime(out) if ts is not None else None
-        if "BUILD ERRORS" in txt or "RUN FAILED" in txt: state = "failed"
+        if "BUILD ERRORS" in txt or "RUN FAILED" in txt or "Traceback" in txt: state = "failed"
         elif "run done" in txt: state = "done"
         elif ts is not None: state = "stalled?" if age > 300 else "running"
         else: state = "building"
         why = ""
-        m = re.search(r"(RUN FAILED: .*|BUILD ERRORS:.*)", txt)
+        m = re.search(r"(RUN FAILED: .*|BUILD ERRORS:.*|\w+Error: .*)", txt)
         if m: why = m.group(1)[:160]
         wall = (os.path.getmtime(log) if state in ("done", "failed") else now) - t0
         spd = wall / ts if ts else None

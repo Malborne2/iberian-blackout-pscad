@@ -34,7 +34,12 @@ def check_msgs(prj):
             if any(b in tx.lower() for b in BADW) and tx not in errs: errs.append(tx)
     return errs, warns
 os.environ["PATH"] = BUILD + os.pathsep + os.environ.get("PATH", "")      # S30 run-environment fix
-pscad = mhi.pscad.launch(minimize=False, splash=False, timeout=60)
+for k_ in range(4):                                                  # S30: launch races when several start together
+    try: pscad = mhi.pscad.launch(minimize=False, splash=False, timeout=60); break
+    except (ConnectionRefusedError, OSError) as e_:
+        L(f"launch attempt {k_ + 1} failed: {e_!r}"); time.sleep(30 + 30 * k_)
+else:
+    L("RUN FAILED: PSCAD launch failed 4 times"); raise SystemExit(3)
 try:
     if not pscad.licensed():
         c = pscad.get_available_certificates(); c = next(iter(c.values())) if isinstance(c, dict) else c[0]; pscad.get_certificate(c)
