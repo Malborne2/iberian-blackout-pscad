@@ -563,3 +563,48 @@ paths. To be re-checked against Fig 2-55 (Spain–France exchange, p.~64) and Fi
 - [CA] p.84–86: after each oscillation, embedded inverters dropped out and reconnected after **3–5 min**
   (Majadahonda 220/132 kV load bumps 12:07–12:15 and 12:25–12:29). At 11:00 there was a ≈ 1,200 MW "anomalous"
   demand rise. → supports **latching** the rooftop-PV trip in an 80 s replay (no reconnection).
+
+## 13. Defence plans and event cascade, transcribed for the v2 replay (2026-11-26, agent: claude-main) — **exact**
+
+Source: [FR] §3.3, text `notes/Final_Report_…_on_2.txt` lines 13520–14390 (pages 197–204). Event times:
+`iberia_eq/table3-1_events.csv` (Table 3-1).
+
+**Spain, pumps (Table 3-9, p.199):** 49.5 Hz → **2,168 MW** (pumps 1–24; 3 "no information"); 49.3 Hz → **588 MW**
+(pumps 25–30; pump 28 failed). Total 2,756 of 3,031 MW connected (§3.3.4, p.203).
+
+**Spain, LFDD (Table 3-8 plan, Table 3-10 actual, p.197/200):**
+
+| step | Hz | plan % of load | actual MW | actual % |
+|---|---|---|---|---|
+| 1 | 49.0 | 6 | 1,176 | 4.0 |
+| 2 | 48.8 | 9 | 1,669 | 5.6 |
+| 3 | 48.6 | 8 | 1,575 | 5.3 |
+| 4 | 48.4 | 8 | 1,524 | 5.1 |
+| 5 | 48.2 | 7 | 1,294 | 4.4 |
+| 6 | 48.0 | 7 | 1,267 | 4.3 |
+| total | | 45 | 8,505 | 28.7 |
+
+The total includes 1,402.5 MW of transmission-connected industry ([CA] p.57 / [FR] §3.3.5). Actual is below plan
+because sections with embedded generation are shed net.
+
+**Portugal (Tables 3-11 to 3-13, p.201–202):** consumption 5,865 MW at 12:33:00.
+- Pumps: 49.8 → 381, 49.7 → 450, 49.6 → 438, 49.5 → 470, 49.4 → 0, 49.3 → 359 MW (total 2,098). **These are exactly the
+  P0 of the v2 PumpUnits M3–M7** (one PumpUnit per step).
+- Electro-intensive industry: 49.2 Hz → 218 MW.
+- LFDD (preliminary): 49.0 → 315, 48.8 → 293, 48.6 → 315, 48.4 → 323, 48.2 → 282, 48.0 → 427 MW (total 1,955,
+  33.3 %; plan 42.9 %).
+- DSO generation tripped on frequency before 12:33:23 (**Table 3-4, p.173**), delay ≈ 150 ms with breaker:
+  49.5/50.5 Hz → PV 167 + wind 71 + other 337 = **575 MW**; 49.8/50.2 Hz → 2 + 109 + 210 = **321 MW** (896 MW in total; the
+  Table 3-1 event 24 estimate is 1,073 MW at 12:33:21.000).
+- Portuguese **transmission-connected** generation tripped between 12:33:23 and :37 on **f < 47.5 Hz**
+  (p.173, aligned with requirements).
+
+**France (Table 3-14, p.203):** 6 steps 49.0–48.0 Hz, 5/8/8/8/8/8 %, 45 % in total. Loss-of-synchronism relays (DRS) at
+the synchronism-zone border isolate the area (§3.2.2.4).
+
+**Cascade timing (Table 3-1):**
+- Nuclear: 41a 22.702 (1,045 MW), 41c 23.515 (653 MW), 46 23.590 (1,692 MW).
+- Ties: Morocco 16a 20.229, 16b 20.473; France 31a Vic–Baixas 21.407, 31b Arkale 21.437 and Hernani 21.535;
+  HVDC block 51 23.960.
+- The first LFDD step (event 18, "IP" 49.0 Hz, −448.8 MW) is at 20.574.
+- Generation losses 3–8b and 12a/b, 19, 21, 32 are per-plant rows, mostly PV, with times and MW.
