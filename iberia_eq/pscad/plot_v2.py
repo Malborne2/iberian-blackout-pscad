@@ -2,13 +2,14 @@ r"""Readable figures of a v2 run (S30 sec 13): smoothed bus voltages, machine fr
 
 usage: python iberia_eq\pscad\plot_v2.py <tag> [--ref <tag2>] [--build build_v2.out] [--t1 8]
 Writes iberia_eq\pscad\figs\plot_<tag>.png (and plot_<tag>_vs_<tag2>.png with --ref: mean bus V and frequency band of
-both runs on the same axes). Bus V is the line-to-line rms from the 3 phases, averaged over 20 ms (one cycle) to remove
-the converter switching ripple. Units are matched to the build-log unit list as in read_v2.py, over the last 1 s.
+both runs on the same axes). Bus V is measured like a PMU (pmu.py: one-cycle DFT positive-sequence
+phasor, 50 frames/s), which rejects the converter switching ripple as the report's PMU/SCADA data do. Units are matched to the build-log unit list as in read_v2.py, over the last 1 s.
 """
 import argparse, os, re, sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from legacy_out import load
+from pmu import pmu
 from scipy.optimize import linear_sum_assignment
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 
@@ -23,7 +24,8 @@ def run(tag):
     vb = {}
     for key in c:
         m = re.match(r"V_(.+)\[1\]$", key)
-        if m: b = m.group(1); vb[b] = sm(np.sqrt(sum(c[f"V_{b}[{j}]"] ** 2 for j in (1, 2, 3))))
+        if m:                                   # PMU-style 1-cycle DFT positive-sequence magnitude (pmu.py), S30 sec 13
+            b = m.group(1); r = pmu(t, *(c[f"V_{b}[{j}]"] for j in (1, 2, 3))); vb[b] = np.interp(t, r["t"], r["V"])
     inst = sorted({key.split(":")[0] for key in c if key.startswith("SyncUnit(")}, key=lambda s: int(re.search(r"\d+", s).group()))
     f = {i: c[f"{i}:Wspd"] / (2 * np.pi) for i in inst}
     return t, c, vb, inst, f, sm
