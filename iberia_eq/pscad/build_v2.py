@@ -37,6 +37,7 @@ open(PSCX, "w", encoding="utf-8").write(ET.tostring(root, encoding="unicode"))
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_qloop.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_xt.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_varrlc0.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())   # S30 sec 9
+r = subprocess.run([sys.executable, os.path.join(HERE, "add_pumpheld.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())   # S30 sec 10
 v1res = {p.get("name"): p.get("value") for e in [x for x in src.find("definitions") if x.get("name") == "Main"][0].iter("User")
          if e.get("defn") == "ib6:RES_Plant" for p in e.findall("./paramlist/param")}
 
@@ -186,7 +187,7 @@ try:
         hang(bus, "master", "breaker3", dict(NAME=f"BRK{m_}", BP=f"PB{m_}", OPCUR="1"), "N1", node={"N2": f"P_{m_}"}, w=6)
         hang(bus, "v2", "PumpUnit", dict(Sbase=f"{S:.1f}", Vbase="400", VbaseLN="230.9401", Ibase=f"{S / (3 ** 0.5 * 400):.4f}", H=f"{H_PT if 'PT' in bus else H_ES}",
                                           P0=f"{-mw:.1f}", Q0=f"{q:.1f}", V0=f"{V[bus]:.5f}", Ph0=f"{math.radians(A[bus]):.6f}", Vctl="0", Tstart="0.5",
-                                          Pmec=f"{-mw / S:.6f}", Kgov="0.0", Tgov="5.0", GovLim="0.0", KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0"),
+                                          Pmec="0.0", Kgov="0.0", Tgov="5.0", GovLim="0.0", KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0"),
              None, node={"T": f"P_{m_}"}, data={"PLD": "PLD0"}, w=SLOT); count("pump")
         const(0.0, f"BRK{m_}", ZOF[bus])
     # ---------------- RES plants (21) ----------------

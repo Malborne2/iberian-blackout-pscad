@@ -257,6 +257,53 @@ waiting. PSCAD messages (read with the new `iberia_eq/pscad/pscad_msgs.py <port>
 
 Results follow in §10.
 
+### 10. Collapse cause found: the pump motors lose their load at the 5 s release (2026-11-26, agent: claude-main)
+
+**Excitation and RES isolation runs (§9 table plus a second batch), all on `C:\PSCAD_work\v2` copies, 8–20 s:**
+
+| run | change | result |
+|---|---|---|
+| v2_kd2 / kd8 / kiq01 / noq | outer Q loop | identical to the digit until 5 s: QERR is 0 until the release (the loop is enabled by RQ at 5 s) |
+| v2_xcc0 | XCc 0 | pre-release swing barely changed |
+| v2_ka20 / ka10 | AVR KA 40 → 20 / 10 | pre-release swing slower and larger (peak 585–606 kV) |
+| v2_kf01 / ka20kf01 | KF 0.1 (+ KA 20) | larger swing |
+| v2_kpf0 | RES Kpf → 0 (diagnostic) | swing changed, collapse unchanged |
+| v2_imax15 | RES Imax 1.1 → 1.5 | identical to the base: the current limit is not involved |
+
+All of them collapse right after the 5 s release. The first batch (20 s runs) was stopped once the 0–5 s data
+showed the Q loop inactive. The "RUN FAILED: stopped unexpectedly" lines in those logs come from that stop, and
+they confirm that the new error capture works.
+
+**sld_health12 (single-line case, varrlc0 fix): runs, 0 errors.**
+- Before 5 s the exponential loads damp the swing: 405–417 kV mean from 2.5 s, against 380–460 kV in the
+  constant-Z case.
+- The release still collapses it: +0.7 Hz on all machines in 0.5 s, 42–84 Hz by 12 s.
+
+**Power balance at the release** (`iberia_eq/pscad/diag_release.py sld_health12 --build build_v2sld.out`):
+- Machine Pe falls from 21.1 to 12.8 GW in 0.24 s, while Tmech stays at 21.1 GW and the mean bus voltage
+  *rises* 407 → 419 kV. It is not a voltage dip.
+- The France figure from this script is unreliable: −1,604 MW against the load-flow 712 MW under the better phase
+  convention. Its trend is gradual. RES P is flat.
+- The 7 PumpUnits draw −1.48 pu until 5 s. They then speed up to 50.93 Hz in 0.2 s and turn to +0.2 pu. Their
+  TMECH is 0 at the release and creeps to −0.17 by 5.4 s.
+
+**Cause.** The lt6 PumpUnit (`stage12/make_pumpunit.py`, S27 §28) disables the held-power term PMH:
+`PMT = PTRP + PLD + TRIM`, with `TRIM = Pmec · ramp(5 → 7 s)` and PLD = 0. On the stiff bench this was harmless. In
+the network every pump motor runs unloaded from the moment it is released. About 3 GW of pumping load vanishes in
+0.2 s, and the generators race. The S27 double-count happened only because PMH *and* the full Pmec were both on.
+
+**Fix (`iberia_eq/pscad/add_pumpheld.py`):**
+- the torque-sum input D (PMH) goes back to +1, so the motor keeps the load it carried when it is released;
+- pump Pmec = 0 (trim only, as in SyncUnit) in `build_v2.py`;
+- PLD stays the input for the under-frequency pumping-shedding stages.
+
+`build_v2.py` calls the script after `add_varrlc0.py`.
+
+**Runs started:**
+- `v2_pump`: old case + fix, 12 s;
+- `v2_pump_ka80`: + KA 80, to test whether a higher gain damps the pre-release swing (lower gain made it worse);
+- `sld_settle30`: rebuilt single-line case, 30 s cold settle, snapshot at 28 s.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
