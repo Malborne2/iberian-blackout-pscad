@@ -43,6 +43,8 @@ def runs(filtered=True):
         if now - os.path.getmtime(log) > 3600 * a.hours: continue
         tag = os.path.basename(os.path.dirname(log)); txt = open(log, encoding="utf-8", errors="replace").read()
         dur = re.search(r"'time_duration': ([\d.]+)", txt); dur = float(dur.group(1)) if dur else None
+        me = re.search(r"run ([\d.]+) -> ([\d.]+) s", txt)          # snapshot restart: end time, not added length
+        if me: dur = float(me.group(2))
         snap = re.search(r"'SnapTime': '?([\d.]+)", txt)
         w = re.search(r"^work: (.+)$", txt, re.M)
         work = w.group(1).strip() if w else (os.path.join(WORK, tag) if os.path.isdir(os.path.join(WORK, tag))
