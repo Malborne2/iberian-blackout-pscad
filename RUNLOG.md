@@ -434,6 +434,34 @@ end at 3–5 s, before the release. They were deleted and not repeated; the sing
   with the machines in service, so it is a machine–RES (or AVR–RES) interaction. It is measured in `sld_drift60`.
 - The outputs of the three runs were deleted after this entry (owner rule, §13).
 
+### 16. Long-run check from the snapshot; replay elements built in (2026-11-26, agent: claude-main)
+
+**`sld_drift60`** (restart from `sld_settle30b.snp`, 28 → 60 s, 124 s wall per simulated s with a single run):
+- stable: mean f 50.0003 Hz, mean bus V 407–412 kV, unit P/Q unchanged from 28 s;
+- the spread between machines grows slowly, 12 → 24 mHz (minimum 49.982 Hz at 60 s);
+- `osc_v2.py sld_drift60 --win 50 60`: a sustained ≈ 10–13 Hz voltage oscillation of **10–11.5 kV p-p** on the southern
+  buses (BAD-TS, PT-S, BAD, WAN-TS, WAN, GRA). It is absent with the units held as sources (§15), so it is a
+  machine–RES interaction, probably the fast AVR (KA 80, TA 0.02 s). It is relevant to the replay because the RES OV
+  relays act on a lightly filtered voltage. Runs `sld_ka40`, `sld_kf01` (KF 0.1) and `sld_ka120` (cold, 20 s) test it.
+- Outputs deleted after this entry; `sld_settle30b` (the proven snapshot) is kept.
+
+**Replay elements (`build_v2.py --replay`, case `C:\PSCAD_work\v2sld_r`):**
+- France tie `breaker3` BRKFR plus multimeter (PFR, QFR, VFR, PHFR; P > 0 = export).
+- Morocco tie `breaker3` BRKMA at the Spanish end of line MA-B → MA.
+- Frequency stages (compare → integral 0..1 → compare: f < threshold for 0.15 s, then latched):
+  - pumps: M1/M2 at 49.5 Hz; M3…M7 at 49.8 / 49.7 / 49.6 / 49.5 / 49.3 Hz (their breakers);
+  - LFDD: each exponential load branch's R/L is divided by a country factor M_ES / M_PT = 1 − Σ shed fractions;
+    - Spain: Table 3-10 actual 4.0 / 5.6 / 5.3 / 5.1 / 4.4 / 4.3 % at 49.0…48.0 Hz, plus 588 MW of pumping at
+      49.3 Hz, on F_MAD;
+    - Portugal: Table 3-13 MW / 5,865 at 49.0…48.0 Hz, industry 218 MW at 49.2 Hz, DSO generation lost −321 MW at
+      49.8 Hz and −575 MW at 49.5 Hz (Table 3-4), on F_PT_N;
+  - Morocco relay: F_MA < 49.4 Hz for 50 ms [inf]. 16a was 49 ms after 49.5 Hz was crossed ([CA] p.55–57).
+- HVDC block at t0 + 83.96 s: R/L divided by MHV.
+- RES drivers: each plant's Pref is multiplied by RF_N / RF_S / RF_O = 1 − 270 MW ramp (t0 … t0 + 57 s, pro-rata [inf])
+  − the 2a (north) / 2b (south) MW steps of Table 3-1.
+- **t0 = 30 s ≙ 12:32:00.** The logic sits in its own area below the diagram.
+- First build (France elements only): 168 nodes, 0 errors. The full build is running.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)

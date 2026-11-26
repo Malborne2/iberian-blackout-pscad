@@ -98,7 +98,7 @@ try:
     for b in set(BN.values()):
         if " term" not in b or "Morocco" in b: nit(ZOF[b], 2)
     nit("PT-N", 6); nit("BAD", 3); nit("WAN", 1); nit("GRA", 2)
-    if REPLAY: nit("FR", 3)
+    if REPLAY: nit("FR", 3); nit("WAN", 1)
     SLOT = 9
     ZX, ZY = {}, {}
     y = 12
@@ -138,6 +138,9 @@ try:
         P = c_.ports()
         for port, n in (data or {}).items(): dlab(P[port].x, P[port].y, n)
         return c_, P
+    PTB = {"PT-N", "PT-S", "PS-PT"}; MAB = {"MA", "Morocco term"}
+    def CTRY(b): return "PT" if b in PTB else ("MA" if b in MAB else "ES")          # LFDD country of a bus (sec 16)
+    def RESGRP(b): return "N" if b in ("CYL", "ARA") else ("S" if b in ("BAD", "BAD-TS", "WAN", "WAN-TS", "GRA", "CAC", "SCE", "SE") else "O")
     def const(v, n, zone="CAT"):
         c_, P = ctl(zone, "master", "const", dict(Value=str(v))); dlab(list(P.values())[0].x, list(P.values())[0].y, n)
     CNT = {}
@@ -151,9 +154,13 @@ try:
     for i_, ln in net.line.iterrows():
         fa, fb = BN[ln.from_bus], BN[ln.to_bus]; nc = ln.parallel; Lkm = ln.length_km
         R = ln.r_ohm_per_km * Lkm / nc; X = ln.x_ohm_per_km * Lkm / nc; C = ln.c_nf_per_km * Lkm * nc * 1e-3   # ohm, ohm, uF
+        tie_ma = REPLAY and ln["name"] == "MA-B-MA"           # V2_EVENT_SPEC F5: Morocco tie breaker at the Spanish cable end
+        if tie_ma:
+            hang(fa, "master", "breaker3", dict(NAME="BRKMA", BP="PBMA", OPCUR="1"), "N1", node={"N2": "MA_TIE"}, w=6); count("breaker_ma")
+            const(0.0, "BRKMA", ZOF[fa])                     # 0 = closed; under-frequency logic later
         hang(fa, "master", "pi_section", dict(Name=f"L{i_}", PU="4", F="50.0", len="1.0", Rp1=f"{R:.6g}", Lp1=f"{X / W50:.6g}", Cp1=f"{max(C, 1e-6):.6g}",
                                                Rz1=f"{3 * R:.6g}", Lz1=f"{3 * X / W50:.6g}", Cz1=f"{max(0.6 * C, 1e-6):.6g}"),
-             "N1", node={"N2": lab(fb)}); count("line")
+             None if tie_ma else "N1", node={"N2": lab(fb), **({"N1": "MA_TIE"} if tie_ma else {})}); count("line")
     # ---------------- transformers kept: pump stations, Morocco ----------------
     for i_, tr in net.trafo.iterrows():
         if not (tr["name"].startswith("T PS") or tr["name"] == "T Morocco"): continue
@@ -195,7 +202,7 @@ try:
                                           P0=f"{-mw:.1f}", Q0=f"{q:.1f}", V0=f"{V[bus]:.5f}", Ph0=f"{math.radians(A[bus]):.6f}", Vctl="0", Tstart="0.5",
                                           Pmec="0.0", Kgov="0.0", Tgov="5.0", GovLim="0.0", KA="80", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0"),
              None, node={"T": f"P_{m_}"}, data={"PLD": "PLD0"}, w=SLOT); count("pump")
-        const(0.0, f"BRK{m_}", ZOF[bus])
+        if not REPLAY: const(0.0, f"BRK{m_}", ZOF[bus])      # replay: BRK<M> comes from the frequency stage (sec 16)
     # ---------------- RES plants (21) ----------------
     RESP = [("R1_Granada", "GRA", 355.0), ("R10_Malaga", "GRA", 154.0), ("A5_GRA", "GRA", 1706 + 82 - 509),
             ("R2_Badajoz4a", "BAD-TS", 582.0), ("R3_Badajoz4b", "BAD-TS", 145.0), ("R4_Badajoz5b1", "BAD-TS", 118.0), ("R7_BadajozTS3", "BAD-TS", 108.0),
@@ -216,7 +223,12 @@ try:
         prm.update(Sbase=f"{S:.2f}", Lf=f"{76.394 / S:.6g}", Cf=f"{0.001167 * S:.6g}", Ki=f"{489.9 / S:.6g}", Kpf=f"{KPF}",
                    Vt1="1.5", Vt2="1.5", Vt3="1.5", Nsub="1", Share1="1.0", Share2="0.0", Share3="0.0", CarrPh=f"{(k * 17.0) % 360:.1f}")
         up, upp = ctl(ZOF[bus], "master", "upramp", dict(X1="0.3", X2="1.5", Y2="0.9"))
-        po = max(upp.values(), key=lambda v: v.x); dlab(po.x, po.y, f"PR{k + 1}"); pi_ = min(upp.values(), key=lambda v: v.x); dlab(pi_.x, pi_.y, "TT")
+        po = max(upp.values(), key=lambda v: v.x); pi_ = min(upp.values(), key=lambda v: v.x); dlab(pi_.x, pi_.y, "TT")
+        if REPLAY:                                           # driver factor RF_<group> (F1/F2, sec 16)
+            dlab(po.x, po.y, f"PR{k + 1}u"); _, mp = ctl(ZOF[bus], "master", "mult", None)
+            dlab(mp["IN1"].x, mp["IN1"].y, f"PR{k + 1}u"); dlab(mp["IN2"].x, mp["IN2"].y, "RF_" + RESGRP(bus)); dlab(mp["OUT"].x, mp["OUT"].y, f"PR{k + 1}")
+        else:
+            dlab(po.x, po.y, f"PR{k + 1}")
         hang(bus, "v2", "RES_Plant", prm, "AC", node={"DCP": "RAILP", "DCN": "RAILN"}, data={"Pref": f"PR{k + 1}", "Force": "FRC"}, w=SLOT + 3); count("res")
         L(f"RES {nm:16s} at {bus:7s} {mw:7.1f} MW  S {S:7.1f}")
     # ---------------- loads, shunts, HVDC (varrlc to ground) ----------------
@@ -240,7 +252,12 @@ try:
         ctl(ZOF[bus], "master", "x_power_y", dict(y=f"{expo:.4f}"), data={"IN": f"VF_{sb}", "OUT": f"X{sig}"})
         g_, gp = ctl(ZOF[bus], "master", "gain", dict(G=f"{base:.6g}"))
         ki = [k for k in gp if k in ("I", "IN")][0]; ko = [k for k in gp if k in ("O", "OUT")][0]
-        dlab(gp[ki].x, gp[ki].y, f"X{sig}"); dlab(gp[ko].x, gp[ko].y, sig)
+        dlab(gp[ki].x, gp[ki].y, f"X{sig}")
+        if REPLAY:                                           # LFDD / HVDC factor (sec 16): R, L = base * V^k / m
+            dlab(gp[ko].x, gp[ko].y, f"{sig}g"); _, dp = ctl(ZOF[bus], "master", "div", None)
+            dlab(dp["IN1"].x, dp["IN1"].y, f"{sig}g"); dlab(dp["IN2"].x, dp["IN2"].y, "MHV" if "HVDC" in tag else "M_" + CTRY(bus)); dlab(dp["OUT"].x, dp["OUT"].y, sig)
+        else:
+            dlab(gp[ko].x, gp[ko].y, sig)
         prm = dict(Name=f"V{tag}"[:30], RLC="0" if kind == "R" else "1", X0=f"{base:.6g}"); prm["R" if kind == "R" else "L"] = sig
         hang(bus, "v2", "varrlc0", prm, "A", ground=("B",), w=6); count("varrlc_exp")   # X0: start-up value, S30 sec 9
     ALPHA, BETA = 0.8, 4.1
@@ -287,6 +304,76 @@ try:
     else:
         hang("FR", "master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
                                              Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), "N3", ground=("N",), w=SLOT + 2); count("source3")
+    # ---------------- replay logic (V2_EVENT_SPEC, RUNLOG S30 sec 16): signals only, own area below the diagram ----------------
+    if REPLAY:
+        T0 = 30.0                                            # model time of 12:32:00 (settle snapshot at 28 s)
+        LY0 = max(ZY.values()) + 80; LG = {"k": 0}
+        a_ = cv.add_component("master", "annotation", 10, LY0 - 6, 0)
+        a_.parameters(AL1=f"REPLAY LOGIC: defence plans (pumps, LFDD), Morocco relay, HVDC block, RES drivers; t0 = {T0:g} s = 12:32:00", AL2="")
+        def lg(nm, params=None, data=None):
+            """place a control block in the logic area (rows of 14 cells, 9 grid units wide, 6 high)."""
+            k = LG["k"]; LG["k"] = k + 1; x = 10 + (k % 14) * 9; y_ = LY0 + (k // 14) * 6
+            c_ = cv.add_component("master", nm, x, y_, 0)
+            if params: c_.parameters(**params)
+            P = c_.ports()
+            for port, n in (data or {}).items(): dlab(P[port].x, P[port].y, n)
+            return P
+        lg("const", dict(Value="0.0"), {"OUT": "ZERO"}); lg("const", dict(Value="1.0"), {"OUT": "ONE_"})
+        lg("time-sig", None, {"OUT": "TR"})
+        def ufstage(out, fsig, thr, delay=0.15):
+            """out = 1 (latched) once fsig < thr for `delay` s: compare -> integral (0..1, T = delay) -> compare."""
+            lg("compare", dict(X=f"{thr}", OL="1.0", OH="0.0"), {"I": fsig, "O": out + "c"})
+            lg("integral", dict(T=f"{delay}", YHi="1.0", YLo="0.0", Yo="0.0"), {"I": out + "c", "O": out + "i", "R": "ZERO"})
+            lg("compare", dict(X="0.999", OL="0.0", OH="1.0"), {"I": out + "i", "O": out})
+        def tstep(out, t):
+            lg("compare", dict(X=f"{t:.3f}", OL="0.0", OH="1.0"), {"I": "TR", "O": out})
+        def wsum(out, terms, base=None):
+            """out = base + sum(w * sig): gains then a chain of 2-input junctions (D add, F add)."""
+            acc = base
+            for j, (w, sg) in enumerate(terms):
+                lg("gain", dict(G=f"{w:.6g}"), {"I": sg, "O": f"{out}w{j}"})
+                if acc is None: acc = f"{out}w{j}"; continue
+                nxt = f"{out}s{j}"; lg("sumjct", dict(D="ADD", F="ADD"), {"IND": acc, "INF": f"{out}w{j}", "OUT": nxt}); acc = nxt
+            lg("gain", dict(G="1.0"), {"I": acc, "O": out})
+        # pumps (P3/P4): Spain M1/M2 at 49.5 Hz (Table 3-9: 2,168 MW of 3,031 at 49.5; the model's 2,066 MW of Spanish pump
+        # units all trip there, the 588 MW 49.3 Hz step comes from the zone loads below); Portugal one unit per step (Table 3-11)
+        for m_, fs, thr in (("M1", "F_PS_CYL", 49.5), ("M2", "F_PS_ARA", 49.5), ("M3", "F_PS_PT", 49.8), ("M4", "F_PS_PT", 49.7),
+                            ("M5", "F_PS_PT", 49.6), ("M6", "F_PS_PT", 49.5), ("M7", "F_PS_PT", 49.3)):
+            ufstage(f"BRK{m_}", fs, thr)
+        # LFDD (P5/P6), actual shed fractions of total load (Tables 3-10, 3-13), Portuguese industry (3-12) and DSO generation
+        # lost on frequency (3-4, adds load); Spanish pumping not in M1/M2: 588 MW at 49.3 Hz (Table 3-9)
+        LOAD_ES, LOAD_PT = 25240.0, 5865.0                   # Spanish demand Fig 2-41; Portuguese consumption at 12:33:00 ([FR] p.201)
+        ES = [(49.0, 0.040), (48.8, 0.056), (48.6, 0.053), (48.4, 0.051), (48.2, 0.044), (48.0, 0.043), (49.3, 588.0 / LOAD_ES)]
+        PT = [(49.0, 315 / LOAD_PT), (48.8, 293 / LOAD_PT), (48.6, 315 / LOAD_PT), (48.4, 323 / LOAD_PT), (48.2, 282 / LOAD_PT),
+              (48.0, 427 / LOAD_PT), (49.2, 218 / LOAD_PT), (49.8, -321 / LOAD_PT), (49.5, -575 / LOAD_PT)]
+        for c_, lst, fs in (("ES", ES, "F_MAD"), ("PT", PT, "F_PT_N")):
+            for j, (thr, fr) in enumerate(lst):
+                ufstage(f"S{c_}{j}", fs, thr)
+            wsum(f"M_{c_}x", [(-fr, f"S{c_}{j}") for j, (thr, fr) in enumerate(lst)], base="ONE_")
+            lg("hardlimit", dict(UL="2.0", LL="0.05"), {"I": f"M_{c_}x", "O": f"M_{c_}"})
+        lg("gain", dict(G="1.0"), {"I": "ONE_", "O": "M_MA"})  # Morocco loads are not shed by the Iberian plans
+        # Morocco tie (F5): Moroccan under-frequency relay with transfer trip, 16a at 20.229 just after 49.5 Hz was crossed
+        # at 20.180 ([CA] p.55-57) -> 49.4 Hz, 50 ms [inf]
+        ufstage("BRKMA", "F_MA", 49.4, delay=0.05)
+        # HVDC France (F7): Pmode 1, 1,000 MW export, blocked at event 51 (12:33:23.960)
+        tstep("HVB", T0 + 83.960); wsum("MHVx", [(-1.0, "HVB")], base="ONE_")
+        lg("hardlimit", dict(UL="1.0", LL="0.001"), {"I": "MHVx", "O": "MHV"})
+        # RES drivers (F1/F2): events 2a (north, wind/PV) and 2b (south) as MW steps (Table 3-1), plus the secondary-regulation
+        # set-point ramp of 270 MW over 57 s pro-rata on all plants ([CA] p.88 minus the 208 MW of 2a/2b) [inf]
+        PG = {}
+        for nm_, b_, mw_ in RESP: PG[RESGRP(b_)] = PG.get(RESGRP(b_), 0.0) + mw_
+        PSUM = sum(PG.values())
+        lg("upramp", dict(X1=f"{T0:g}", X2=f"{T0 + 57:g}", Y2=f"{270.0 / PSUM:.6f}"), {"I": "TR", "O": "RRAMP"})
+        E2 = {"N": [(5, 2.57), (9, 27.51), (25, 19.21), (29, 78.05), (45, 0.59), (49, 14.49), (53, 31.92)],
+              "S": [(9, 7.65), (25, 3.43), (29, 2.26), (53, 20.78)]}
+        for g_ in sorted(PG):
+            terms = [(-1.0, "RRAMP")]
+            for j, (ts_, mw_) in enumerate(E2.get(g_, [])):
+                tstep(f"E{g_}{j}", T0 + ts_); terms.append((-mw_ / PG[g_], f"E{g_}{j}"))
+            wsum(f"RF_{g_}", terms, base="ONE_")
+        for n_ in ("BRKM1", "BRKM3", "BRKMA", "M_ES", "M_PT", "MHV", "RF_N", "RF_S"):
+            P_ = lg("pgb", dict(Name=n_)); q_ = list(P_.values())[0]; dlab(q_.x, q_.y, n_)
+        L(f"replay logic: {LG['k']} blocks in the logic area (y from {LY0}); RES groups {{g: MW}} = {PG}")
     # ---------------- busbars, wires, named measuring stubs + voltage channels ----------------
     BUSN = {}
     for bus, pts in PORTS.items():
