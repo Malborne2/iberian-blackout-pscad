@@ -421,6 +421,19 @@ end at 3–5 s, before the release. They were deleted and not repeated; the sing
 **Running:** `sld_drift60` (snapshot restart 28 → 60 s, long-run drift); `sld_static`, `sld_static_rf2` (RES Rf ×2) and
 `sld_static_gfm` (RES Qmode 2): the 8 Hz RES-bus oscillation (§12) with all units held as ideal sources, 6 s.
 
+### 15. RES-bus oscillation with all units held as sources: none (2026-11-26, agent: claude-main)
+
+`sld_static`, `sld_static_rf2` (RES Rf ×2) and `sld_static_gfm` (RES Qmode 2): single-line case with S2M/L2N at 100 s
+(`add_switchtimes.py`), cold, 6 s. Table from `python iberia_eq/pscad/osc_v2.py sld_static sld_static_rf2 sld_static_gfm --win 4 6`
+(new script: PMU |V| peak-to-peak and dominant frequency per bus):
+- largest p-p: PT-S 3.9 kV, SE 3.8, BAD-TS 2.5, WAN-TS 1.2, ARA 1.0; all other buses ≤ 0.2 kV. The dominant frequencies
+  are 15–23 Hz, which is switching ripple leaking through the one-cycle window, not a mode;
+- Rf ×2: no change (SE 1.4, PT-S 4.1 kV);
+- grid-forming: the southern RES buses fall by 4–5 kV mean, a small 0.5 Hz wander appears, and p-p is the same order.
+- **Conclusion:** the RES plants are not unstable on their own. The ±5–8 kV ≈ 8 Hz oscillation of §12/§13 appears only
+  with the machines in service, so it is a machine–RES (or AVR–RES) interaction. It is measured in `sld_drift60`.
+- The outputs of the three runs were deleted after this entry (owner rule, §13).
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
