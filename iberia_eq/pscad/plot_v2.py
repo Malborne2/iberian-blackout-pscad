@@ -40,7 +40,7 @@ r_, c_ = linear_sum_assignment(C); U = {inst[i]: units[j] for i, j in zip(r_, c_
 cm = plt.get_cmap("tab20")
 fig, ax = plt.subplots(3, 1, figsize=(11, 11), sharex=True)
 for j, b in enumerate(sorted(vb)): ax[0].plot(t, vb[b], lw=0.9, color=cm(j % 20), label=b.replace("_", "-"))
-ax[0].set_ylabel("bus voltage, line-to-line [kV]\n(20 ms mean)"); ax[0].set_ylim(300, 460)
+ax[0].set_ylabel("bus voltage, LL [kV]\n(PMU: 1-cycle DFT, pos. seq.)"); ax[0].set_ylim(300, 460)
 ax[0].legend(ncol=6, fontsize=7, loc="lower right")
 for j, i in enumerate(inst): ax[1].plot(t, f[i], lw=0.9, color=cm(j % 20), label=U[i]["name"])
 ax[1].set_ylabel("machine frequency [Hz]"); ax[1].legend(ncol=4, fontsize=7, loc="upper left")
