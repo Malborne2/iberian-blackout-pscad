@@ -59,7 +59,15 @@ try:
     if not pscad.licensed():
         c = pscad.get_available_certificates(); c = next(iter(c.values())) if isinstance(c, dict) else c[0]; pscad.get_certificate(c)
     pscad.load(os.path.join(a.work, "v2.pscx")); prj = pscad.project("v2")
-    prm = dict(time_duration=str(a.dur), time_step=a.step, sample_step=a.sample, PlotType="1")
+    # With the clock kept on a restart, time_duration is the length ADDED (sld_snapchk ran on past 32 s, S30 sec 14):
+    # --dur stays the END time; the snapshot time is read from the run.log next to the .snp ('SnapTime').
+    tsnap = 0.0
+    if a.frm:
+        rl = os.path.join(os.path.dirname(a.frm), "run.log")
+        ms = re.search(r"'SnapTime': '?([\d.]+)", open(rl).read()) if os.path.exists(rl) else None
+        if not ms: L("RUN FAILED: snapshot time unknown (no run.log with SnapTime next to the .snp)"); raise SystemExit(5)
+        tsnap = float(ms.group(1)); L(f"snapshot time {tsnap} s: run {tsnap} -> {a.dur} s")
+    prm = dict(time_duration=f"{a.dur - tsnap:g}", time_step=a.step, sample_step=a.sample, PlotType="1")
     if a.frm:
         prm.update(StartType="1", startup_filename=os.path.basename(a.frm))
     else:
