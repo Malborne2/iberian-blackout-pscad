@@ -328,6 +328,28 @@ the network every pump motor runs unloaded from the moment it is released. About
   snapshot, open the tie, step 1,000 MW and measure RoCoF. Expected: ΔP·f0 / (2·KE) = 1,000·50 / (2·140,200) =
   −0.18 Hz/s, with Morocco connected.
 
+### 12. Pump fix confirmed; the real start-up fault: machine initialisation during the RES ramp (2026-11-26, agent: claude-main)
+
+All runs on `C:\PSCAD_work\v2_pump` (§10 pump fix) copies; read with `read_v2.py <tag> --win 4.5 5 --timeline 0.5`.
+
+| run | change | result |
+|---|---|---|
+| v2_pump | pump fix | pumps hold Tm −1.40 through the release. Voltage then sags 406 → 230 kV by 5.7 s and the case collapses. Pre-release machine P is 21.2 GW against 15.7 GW in the load flow, Vt 1.07–1.12 pu against 1.01–1.04 |
+| v2_pump_ka80 | KA 80 | pre-release swing damped (394–410 kV from 3 s); the release holds until ≈ 6 s, then collapse |
+| v2_pump_ts25 / ts40 | ExInit at 2.5 / 4.0 s (`add_exinit.py`) | first attempt: EMTDC abort "Start of ramp should be less than saturating input" (ramp end 0.51 s literal), caught by the new error capture; the script now sets both ends. Result: **worse**. With the field held, the voltage falls to ≈ 180 kV mean by 2 s |
+| v2_pump_ka80ts25 | both | same as ts25 |
+| **v2_static** | S2M and L2N at 100 s (`add_switchtimes.py`): units stay ideal sources at load-flow \|V\| and angle | **network = load flow**: all buses within 0.5 kV, unit P/Q close (e.g. G2 1,041/−248 vs 1,045/−246; Morocco 4,038/+903 vs 4,033/+810) |
+
+- **Cause:** each SyncUnit initialises its machine (field EFD0, torque, angle) from its terminal state at S2M =
+  0.52 s. At that time the RES plants are only part-way up their current ramp (Id 0.25 at 0.5 s, full at ≈ 1.25 s), so
+  the machines carry the RES shortfall. The machine state fits a non-load-flow operating point; when the RES
+  reach full output the voltage dips and swings, or with the field held collapses. The excitation and Q-loop tuning
+  (§9–§10) was treating the symptom.
+- **Side finding (open):** in the static test four RES buses (BAD_TS, WAN_TS, PT_S, SE) swing ±60–90 kV around a
+  correct mean: an RES-plant oscillation, to be looked at after the settle works.
+- **Next:** `add_switchtimes.py --s2m 2.0` plus `add_exinit.py --t 2.1`, so the machines take over after the RES are
+  at full output. Runs v2_s2m20, v2_s2m20ka80 (8 s) and v2_s2m30 (S2M 3.0, ExInit 3.1, L2N 6.0; 10 s).
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
