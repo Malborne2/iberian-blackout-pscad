@@ -15,6 +15,7 @@ import argparse, glob, json, os, re, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ap = argparse.ArgumentParser(); ap.add_argument("--port", type=int, default=8765); ap.add_argument("--hours", type=float, default=12)
+ap.add_argument("--host", default="127.0.0.1")   # e.g. the Tailscale IP to view it from the phone (tailnet only)
 a = ap.parse_args()
 RUNS, WORK = r"C:\PSCAD_work\v2_runs", r"C:\PSCAD_work"
 
@@ -96,5 +97,5 @@ class H(BaseHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store"); self.end_headers(); self.wfile.write(body)
     def log_message(self, *x): pass
 
-print(f"dashboard on http://localhost:{a.port}", flush=True)
-ThreadingHTTPServer(("127.0.0.1", a.port), H).serve_forever()
+print(f"dashboard on http://{a.host}:{a.port}", flush=True)
+ThreadingHTTPServer((a.host, a.port), H).serve_forever()
