@@ -380,6 +380,8 @@ paths. To be re-checked against Fig 2-55 (Spain–France exchange, p.~64) and Fi
 - **Table 2-4** (p.51): KE Spain 97,590 MW·s (H 2.17–2.67 s), Portugal 21,884 MW·s (2.45–2.95 s), Iberia
   119,474 MW·s. **p.50:** KE = Σ H·S over rotating generators, including solar thermal and synchronous renewables;
   loads add to H.
+  **Model use (owner decision 2026-11-26, RUNLOG S30 §11):** pump-storage units in pumping mode count in KE. The
+  v2 sum is 118.0 GWs (−1.2 %). **Open:** Morocco H 4.0 s on 5,556 MVA has no source yet.
 - **Figs 2-17 / 2-19** (p.44–45): Spanish and Portuguese generation mix at 12:30 [read].
   **Fig 2-16:** Portuguese load ≈ 5.6 GW. **Figs 2-21 / 2-22** (p.46–47): border flows at 12:32 [read].
 - **Table 4-23 / load models #1–#2** (p.292–293): exponential-load coefficients. **§4.3.4 / Fig 1-13:** rooftop-PV

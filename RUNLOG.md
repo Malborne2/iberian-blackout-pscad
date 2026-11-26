@@ -304,6 +304,30 @@ the network every pump motor runs unloaded from the moment it is released. About
 - `v2_pump_ka80`: + KA 80, to test whether a higher gain damps the pre-release swing (lower gain made it worse);
 - `sld_settle30`: rebuilt single-line case, 30 s cold settle, snapshot at 28 s.
 
+### 11. Inertia check against Table 2-4; owner decision: pump units count (2026-11-26, agent: claude-main)
+
+Σ H·S of the single-line case (`C:\PSCAD_work\v2sld\v2.pscx` instances):
+
+| group | model GWs | [FR] Table 2-4 (p.51) | diff |
+|---|---|---|---|
+| Spain: 15 generators (H 5.25) 83.6 + 2 pumps M1/M2 (H 5.25) 12.6 | 96.2 | 97.59 | −1.4 % |
+| Portugal: G8 (H 5.3) 8.8 + 5 pumps M3–M7 (H 5.3) 12.9 | 21.7 | 21.88 | −0.8 % |
+| **Iberia** | **118.0** | **119.47** | **−1.2 %** |
+| Morocco (H 4.0 on 5,556 MVA) | 22.2 | not part of the table | — |
+| France | source3, infinite inertia | — | — |
+
+- **Owner decision (2026-11-26):** the pump-storage units count in the Iberian kinetic energy. They are the main
+  addition of v2 over v1, they rotate, and they release energy when frequency falls. [FR] p.50 defines KE over
+  "rotating generators" and leaves pumps in pumping mode open. This decision closes it for the model.
+- **Gaps, recorded:**
+  - H is uniform per country [inf], not per technology. Total KE (RoCoF) is right; the inter-area mode shapes
+    are placeholders.
+  - No load inertia: the loads are static exponential. [FR] gives a range of 2.17–2.67 s that includes loads.
+  - **Morocco H 4.0 s has no SOURCES entry** (AGENTS.md §1 rule). It is to be sourced before the replay gate.
+- **Planned dynamic test:** once the France tie breaker (with the out-of-step relay) exists, start from the settle
+  snapshot, open the tie, step 1,000 MW and measure RoCoF. Expected: ΔP·f0 / (2·KE) = 1,000·50 / (2·140,200) =
+  −0.18 Hz/s, with Morocco connected.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
