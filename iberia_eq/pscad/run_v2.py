@@ -21,6 +21,7 @@ OUTD = os.path.join(r"C:\PSCAD_work\v2_runs", a.tag); os.makedirs(OUTD, exist_ok
 BUILD = os.path.join(a.work, "v2.gf81_x86")
 log = open(os.path.join(OUTD, "run.log"), "w")
 def L(*x): print(*x, flush=True); print(*x, file=log, flush=True)
+L("work:", a.work)                                                    # read by run_dashboard.py
 BADW = ("short circuit", "open circuit", "floating", "unresolved", "source contention", "below range", "above range", "too small")
 def check_msgs(prj):
     """-> (error texts, {warning text: count}) from PSCAD's message list; warnings in BADW count as errors (skill P6.3)."""
