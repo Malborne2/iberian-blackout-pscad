@@ -21,7 +21,9 @@ import numpy as np, pandapower as pp
 HERE = os.path.dirname(os.path.abspath(__file__)); IEQ = os.path.dirname(HERE)
 ap = argparse.ArgumentParser(); ap.add_argument("--probe", action="store_true"); ap.add_argument("--nobuild", action="store_true")
 ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld")
+ap.add_argument("--replay", action="store_true")     # add the V2_EVENT_SPEC replay elements (S30 sec 16)
 a = ap.parse_args()
+REPLAY = a.replay
 WORK = a.work; os.makedirs(WORK, exist_ok=True); PSCX = os.path.join(WORK, "v2.pscx")
 log = open(os.path.join(WORK, "build_v2.log"), "w")
 def L(*x): print(*x, flush=True); print(*x, file=log, flush=True)
@@ -96,6 +98,7 @@ try:
     for b in set(BN.values()):
         if " term" not in b or "Morocco" in b: nit(ZOF[b], 2)
     nit("PT-N", 6); nit("BAD", 3); nit("WAN", 1); nit("GRA", 2)
+    if REPLAY: nit("FR", 3)
     SLOT = 9
     ZX, ZY = {}, {}
     y = 12
@@ -270,8 +273,20 @@ try:
     Sx = (net.res_ext_grid.p_mw.iloc[0] + 1000.0) + 1j * net.res_ext_grid.q_mvar.iloc[0]
     Vf = 400.0 * V["FR"] * np.exp(1j * np.radians(A["FR"])); If = np.conj(Sx / (np.sqrt(3) * Vf)); Ef = Vf + np.sqrt(3) * ZF * If
     L(f"France source: S {Sx.real:.0f} MW {Sx.imag:+.0f} Mvar, terminal {abs(Vf):.1f} kV {A['FR']:+.2f} deg -> Es {abs(Ef):.2f} kV {np.degrees(np.angle(Ef)):+.3f} deg")
-    hang("FR", "master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
-                                         Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), "N3", ground=("N",), w=SLOT + 2); count("source3")
+    if REPLAY:   # V2_EVENT_SPEC P8/P9: bus FR -- breaker3 BRKFR -- FR_B -- multimeter (A side = Iberia) -- FR_S -- source3
+        hang("FR", "master", "breaker3", dict(NAME="BRKFR", BP="PBFR", OPCUR="1"), "N1", node={"N2": "FR_B"}, w=6); count("breaker_fr")
+        _, Pm = hang("FR", "master", "multimeter", dict(MeasPh="1", RMS="1", MeasP="1", MeasQ="1", S="1.0", BaseV="400",
+                                                         P="PFR", Q="QFR", Vrms="VFR", Ph="PHFR"), None, w=6)
+        ks = sorted(Pm, key=lambda k: Pm[k].x); nlab(Pm[ks[0]].x, Pm[ks[0]].y, "FR_B"); nlab(Pm[ks[-1]].x, Pm[ks[-1]].y, "FR_S"); count("meter_fr")
+        const(0.0, "BRKFR", "FR")                            # 0 = closed; the out-of-step logic drives it later (P8)
+        for n_ in ("PFR", "QFR", "PHFR", "VFR"):             # P > 0: Iberia -> France (export)
+            _, gp = ctl("FR", "master", "pgb", dict(Name=n_)); q_ = list(gp.values())[0]; dlab(q_.x, q_.y, n_)
+        hang("FR", "master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
+                                             Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), None, node={"N3": "FR_S"}, ground=("N",), w=SLOT + 2)
+        count("source3")
+    else:
+        hang("FR", "master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
+                                             Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), "N3", ground=("N",), w=SLOT + 2); count("source3")
     # ---------------- busbars, wires, named measuring stubs + voltage channels ----------------
     BUSN = {}
     for bus, pts in PORTS.items():
