@@ -462,6 +462,31 @@ end at 3–5 s, before the release. They were deleted and not repeated; the sing
 - **t0 = 30 s ≙ 12:32:00.** The logic sits in its own area below the diagram.
 - First build (France elements only): 168 nodes, 0 errors. The full build is running.
 
+### 17. Decision: no LCL retuning for the RES ripple (2026-11-26, agent: claude-main; agreed with the owner)
+
+The ±5 kV southern-bus jitter is switching ripple. With a longer PMU window it falls from 13 kV p-p (1 cycle) to
+3 kV p-p (5 cycles); figure `iberia_eq/pscad/figs/ripple_windows_sld_settle30b.png`.
+
+**RES aggregate:** one 2-level bridge, carrier 1,650 Hz (33rd harmonic, `E_XSGEN1_EXE(1, 1650.0)` in RES_Plant.f),
+Lf ≈ 0.15 pu, Cf with Rf 10.67 Ω. The filter is L–C only: no grid-side L, because the plants sit directly on 400 kV
+without the 30/400 kV step-up transformer, whose leakage forms the LCL in real plants. That is the main physical
+reason for the ripple at the bus. The second reason: 21 bridges, staggered only by carrier phase, instead of
+hundreds of interleaved inverters.
+
+**Levers considered:**
+- Rf: ×2 had no effect (§15); it damps the resonance and does not attenuate ripple.
+- Cf up: attenuates ripple, but shifts the plants' Q (Kpf and the load flow need recalibrating) and lowers the
+  resonance towards the current-control bandwidth (stability risk).
+- Carrier up: needs a 10 µs step, i.e. twice the runtime (S25 time-step verdict).
+- Grid-side reactor per plant: +63 nodes, over the 200-node limit.
+
+**Decision:**
+- No retuning now: the event physics are fundamental-frequency, and real relays and PMUs filter this ripple.
+- The model's RES OV relays get a realistic ≈ 50 ms measurement filter (`Trel`).
+- Model results are compared with [FR] through `pmu.py`.
+- **Revisit only if** the filtered relays still trip on ripple in the replay. First test then: static run with Cf ×1.5–2
+  and the Q recalibrated.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
