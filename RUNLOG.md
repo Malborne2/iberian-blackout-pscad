@@ -389,6 +389,38 @@ southern RES buses: a real fundamental-frequency oscillation (open item, §12).
 - Free space now ≈ 70 GB.
 - **Owner rule:** delete proven partial results once they are recorded.
 
+### 14. Single-line cold settle PASSES; snapshot restart proven (2026-11-26, agent: claude-main)
+
+**`sld_settle30b`** (single-line case, `build_v2.py` with every S30 fix: varrlc0, pump PMH, S2M 2.0 / ExInit 2.1 /
+L2N 5.0, KA 80; cold, 30 s, snapshot at 28 s):
+- stable over 0–26 s: machine frequency within ±0.008 Hz, spread < 10 mHz, mean bus V 404–412 kV;
+- no 0.5 Hz growth: the exponential loads damp the mode that breaks the constant-Z layout at 14 s (§13);
+- data after 26.0 s was lost to the disk-full write. `legacy_out.py` now keeps the valid prefix of a malformed file;
+- figure `iberia_eq/pscad/figs/plot_sld_settle30b.png`;
+- snapshot `C:\PSCAD_work\v2_runs\sld_settle30b\sld_settle30b.snp` (2.4 MB, t = 28 s).
+
+**Snapshot restart (`sld_snapchk`):**
+- First attempt invalid: the clock restarted at 0 and the start-up switches fired again (S25 trap: the
+  `remove_time_offset` flag, bit 32 of the project `Advanced` = 14335). `run_v2.py --from` now clears the bit
+  (14335 → 14303) and cold runs set it.
+- With the clock kept, time continues from **28.0002 s**, but `time_duration` is then the length added: the run went
+  past 32 s and was stopped by hand at 32.2 s. `run_v2.py` now sets time_duration = `--dur` − SnapTime, read from the
+  source run.log.
+- **Result, 28–32 s:** f 49.995–50.006 Hz, spread 5.2 mHz, mean bus V 406–411 kV, every unit's P/Q as before the
+  snapshot (e.g. G3 1,714 MW / −394 Mvar, Morocco 4,180 / +888). **The snapshot is proven.**
+
+**Consequence for the replay:** any added component (meters, breakers, control blocks) invalidates the snapshot
+(skill P10.4). So all replay elements of `V2_EVENT_SPEC.md` go into `build_v2.py` dormant until t0, followed by one
+new settle and snapshot. Event variants then run in parallel from that snapshot. Already instance parameters (no new
+components): RES OV relay stages `Vt1..3/Tt1..3`, forced trip `Tforce`, `Qmode` (2 = grid-forming), SyncUnit
+`Ttrip/Ptrip`.
+
+**Lost runs:** the five 16 s damping runs on the constant-Z layout (§13) were written during the disk-full moment and
+end at 3–5 s, before the release. They were deleted and not repeated; the single-line case damps the mode.
+
+**Running:** `sld_drift60` (snapshot restart 28 → 60 s, long-run drift); `sld_static`, `sld_static_rf2` (RES Rf ×2) and
+`sld_static_gfm` (RES Qmode 2): the 8 Hz RES-bus oscillation (§12) with all units held as ideal sources, 6 s.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
