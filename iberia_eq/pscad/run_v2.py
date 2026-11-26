@@ -88,5 +88,5 @@ try:
 finally:
     pscad.quit()
 for f in glob.glob(os.path.join(BUILD, "v2_*.out")) + glob.glob(os.path.join(BUILD, "v2.infx")) + glob.glob(os.path.join(BUILD, "*.snp")):
-    shutil.copy(f, OUTD)
+    (shutil.move if f.endswith(".out") else shutil.copy)(f, OUTD)   # S30: no duplicate .out (disk full 2026-11-26)
 L("outputs copied to", OUTD)
