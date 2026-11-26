@@ -40,8 +40,11 @@ def hidden():
 def runs(filtered=True):
     now = time.time(); res = []
     for log in glob.glob(os.path.join(RUNS, "*", "run.log")):
-        if now - os.path.getmtime(log) > 3600 * a.hours: continue
-        tag = os.path.basename(os.path.dirname(log)); txt = open(log, encoding="utf-8", errors="replace").read()
+        try:                                                 # a run folder may be deleted while scanning
+            if now - os.path.getmtime(log) > 3600 * a.hours: continue
+            tag = os.path.basename(os.path.dirname(log)); txt = open(log, encoding="utf-8", errors="replace").read(); t0 = os.path.getctime(log)
+        except OSError:
+            continue
         dur = re.search(r"'time_duration': ([\d.]+)", txt); dur = float(dur.group(1)) if dur else None
         me = re.search(r"run ([\d.]+) -> ([\d.]+) s", txt)          # snapshot restart: end time, not added length
         if me: dur = float(me.group(2))

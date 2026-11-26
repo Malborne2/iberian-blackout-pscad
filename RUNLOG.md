@@ -487,6 +487,18 @@ hundreds of interleaved inverters.
 - **Revisit only if** the filtered relays still trip on ripple in the replay. First test then: static run with Cf ×1.5–2
   and the Q recalibrated.
 
+### 18. AVR variants: the southern-bus jitter is not the AVR; KA 80 kept (2026-11-26, agent: claude-main)
+
+`sld_ka40`, `sld_kf01` (KF 0.1) and `sld_ka120`: cold single-line case, 20 s, compared with `sld_settle30b` (KA 80) by
+`python iberia_eq/pscad/compare_v2.py avr sld_settle30b sld_ka40 sld_kf01 sld_ka120 --buses BAD_TS PT_S CAT --t 5 20`
+(new script; figure `iberia_eq/pscad/figs/cmp_avr.png`):
+- PMU 3-cycle std of BAD-TS: 0.82 (KA 80), 0.79 (KA 40), 0.88 (KF 0.1), 0.85 kV (KA 120). PT-S: 0.74…0.82 kV;
+  CAT ≈ 0.25–0.31 kV. AVR gain and rate feedback leave the jitter unchanged, which confirms the ripple reading
+  (§16–§17).
+- Machine frequency band 5–20 s: all within ±0.01 Hz. KA 120 widens it at 13–14 s and 17–19 s.
+- **KA 80 stays.** The three runs' outputs and work folders are deleted after this entry.
+- `run_dashboard.py --clear` crashed when a run folder was deleted mid-scan; it now skips such folders.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
