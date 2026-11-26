@@ -1,7 +1,11 @@
 r"""Live PSCAD run dashboard (S30): a local web page with one progress bar per run. Reads files only, changes nothing.
 
-usage: python iberia_eq\pscad\run_dashboard.py [--port 8765] [--hours 12]
+usage: python iberia_eq\pscad\run_dashboard.py [--port 8765] [--hours 12] [--done-min 30] [--host 100.106.88.76]
+       python iberia_eq\pscad\run_dashboard.py --clear
 then open http://localhost:8765 (the page refreshes itself every 5 s).
+Shown (owner request): live runs always; a finished run for --done-min minutes; a failed run until a newer run starts in
+the same work folder (a restart) or until cleared. --clear hides every run that is not live now (list in
+C:\PSCAD_work\v2_runs\_dashboard_hidden.json) and exits; running servers pick it up on their next refresh.
 
 Sources per run tag (C:\PSCAD_work\v2_runs\<tag>\run.log, written by run_v2.py):
   - duration and snapshot time from the "run parameters" line; work folder from the "work:" line (older runs: the
@@ -15,6 +19,7 @@ import argparse, glob, json, os, re, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ap = argparse.ArgumentParser(); ap.add_argument("--port", type=int, default=8765); ap.add_argument("--hours", type=float, default=12)
+ap.add_argument("--done-min", type=float, default=30.0); ap.add_argument("--clear", action="store_true")
 ap.add_argument("--host", default="127.0.0.1")   # e.g. the Tailscale IP to view it from the phone (tailnet only)
 a = ap.parse_args()
 RUNS, WORK = r"C:\PSCAD_work\v2_runs", r"C:\PSCAD_work"
@@ -27,7 +32,12 @@ def last_t(out):
     except Exception:
         return None
 
-def runs():
+HIDDEN = os.path.join(RUNS, "_dashboard_hidden.json")
+def hidden():
+    try: return json.load(open(HIDDEN))
+    except Exception: return {}
+
+def runs(filtered=True):
     now = time.time(); res = []
     for log in glob.glob(os.path.join(RUNS, "*", "run.log")):
         if now - os.path.getmtime(log) > 3600 * a.hours: continue
@@ -51,7 +61,16 @@ def runs():
         spd = wall / ts if ts else None
         eta = spd * (dur - ts) if (spd and dur and state == "running") else None
         res.append(dict(tag=tag, state=state, t=ts, dur=dur, snap=float(snap.group(1)) if snap else None, age=age, wall=wall,
-                        spd=spd, eta=eta, why=why, start=time.strftime("%H:%M", time.localtime(t0))))
+                        spd=spd, eta=eta, why=why, start=time.strftime("%H:%M", time.localtime(t0)), work=work, t0=t0,
+                        tend=os.path.getmtime(log)))
+    if filtered:
+        hid = hidden()
+        def keep(r):
+            if hid.get(r["tag"]) == r["t0"]: return False                   # cleared (same run instance)
+            if r["state"] == "done": return now - r["tend"] < 60 * a.done_min
+            if r["state"] == "failed": return not any(o["work"] == r["work"] and o["t0"] > r["t0"] for o in res)
+            return True
+        res = [r for r in res if keep(r)]
     started = [os.path.getctime(os.path.join(RUNS, r["tag"], "run.log")) for r in res]
     for bl in glob.glob(os.path.join(WORK, "*", "build_v2.log")):
         if now - os.path.getmtime(bl) < 180 and not any(s > os.path.getmtime(bl) for s in started):
@@ -97,5 +116,10 @@ class H(BaseHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store"); self.end_headers(); self.wfile.write(body)
     def log_message(self, *x): pass
 
+if a.clear:
+    hid = hidden(); n = 0
+    for r in runs(filtered=False):
+        if r["state"] in ("done", "failed") and r.get("t0"): hid[r["tag"]] = r["t0"]; n += 1
+    json.dump(hid, open(HIDDEN, "w")); print(f"cleared {n} finished/failed runs"); raise SystemExit(0)
 print(f"dashboard on http://{a.host}:{a.port}", flush=True)
 ThreadingHTTPServer((a.host, a.port), H).serve_forever()
