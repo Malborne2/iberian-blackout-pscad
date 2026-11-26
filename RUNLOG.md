@@ -350,6 +350,45 @@ All runs on `C:\PSCAD_work\v2_pump` (§10 pump fix) copies; read with `read_v2.p
 - **Next:** `add_switchtimes.py --s2m 2.0` plus `add_exinit.py --t 2.1`, so the machines take over after the RES are
   at full output. Runs v2_s2m20, v2_s2m20ka80 (8 s) and v2_s2m30 (S2M 3.0, ExInit 3.1, L2N 6.0; 10 s).
 
+### 13. Late machine take-over adopted; 30 s settle shows a growing 0.5 Hz mode; PMU measurement; replay spec; disk cleanup (2026-11-26, agent: claude-main)
+
+**Late take-over (`add_switchtimes.py`, `add_exinit.py`):** with S2M 2.0 s, ExInit 2.1 s and L2N 5.0 s, all three
+runs hold to their end (8–10 s): frequency spread 20–27 mHz, mean bus V 400–415 kV. Best is `v2_s2m20ka80`
+(KA 80): Vt within 0.6 % of the load flow, Σ machine Q −1,881 Mvar against −1,709. Σ P is 14.7 GW against 15.7
+(−6 %); the southern embedded units are low. Adopted in `build_v2.py` (commit fcd3ca2). Figures:
+`iberia_eq/pscad/figs/plot_v2_s2m20ka80*.png`.
+
+**30 s settle, old layout (`v2_settle30b`, snapshot written at 28 s but the state collapsed):** stable until ≈ 9 s, then a
+growing ≈ 0.5 Hz mode. Mean Vt 1.026 / 0.976 / 1.096 / 0.847 / 1.133 / 0.684 pu at 9.5–14.5 s, breakup at 14.5 s.
+Q-loop DVR ≤ 0.005 and governor DPGOV ≈ 0 are not involved. It is the pre-release electrical swing mode, undamped
+once the rotors are free. Runs `v2_ls_ka160 / ka40 / kf01 / noq / kpf0` (16 s) bracket it. `sld_settle30b` (single-line
+case, exponential loads) is running.
+
+**Measurement:** `iberia_eq/pscad/pmu.py` gives a one-cycle DFT positive-sequence phasor, PMU frequency and RoCoF at
+50 frames/s. Self-test: 400.00 kV and 49.8000 Hz with 2.7 kHz ripple rejected. `plot_v2.py` uses it for bus voltages
+and has a Q panel in Mvar (+ supplying, − absorbing). With PMU filtering a ±5–8 kV ≈ 8 Hz oscillation remains on the
+southern RES buses: a real fundamental-frequency oscillation (open item, §12).
+
+**Replay preparation:**
+- `iberia_eq/V2_EVENT_SPEC.md`: emergent targets, 7 forced drivers, 10 protection / defence-plan elements, node
+  budget ≈ 171 of 200, order of work.
+- SOURCES §13: [FR] Tables 3-4 and 3-8…3-15 transcribed. The 5 Portuguese PumpUnits equal the 5 Portuguese pump
+  steps exactly.
+
+**Run tooling:**
+- `run_v2.py` retries the PSCAD launch: `v2_ls_kf01` died on `ConnectionRefusedError` when 5 launched together.
+- `run_v2.py` moves .out files instead of copying them.
+- `run_v2.py` refuses to start below 15 GB free.
+- The dashboard counts tracebacks as failures and shows free disk space.
+
+**Disk incident and cleanup:** C: reached 0 MB free during 6 parallel runs. This work held 90 GB.
+- Deleted: the build-folder duplicates of 15 finished runs (≈ 14 GB, identical copies in `v2_runs`).
+- Deleted, owner-approved: 31 old stage folders `C:\PSCAD_work\s17…s29b/f` (39.5 GB). Their 385 .pscx/.snp files are
+  archived in `C:\PSCAD_work\_old_cases`. `s29` (build_v2 reads `ib6.pscx`) and `lt6` are kept.
+- Deleted, owner-approved: the ruled-out v2 diagnostic runs and their work folders (§9–§12 results are recorded).
+- Free space now ≈ 70 GB.
+- **Owner rule:** delete proven partial results once they are recorded.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
