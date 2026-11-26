@@ -53,10 +53,17 @@ if m_:
         open(PSCX, "w", encoding="utf-8").write(txt_[:m_.start(2)] + str(new_) + txt_[m_.end(2):])
     L(f"Advanced {adv} -> {new_} (remove_time_offset {'off: time continues from the snapshot' if a.frm else 'on'})")
 os.environ["PATH"] = BUILD + os.pathsep + os.environ.get("PATH", "")      # S30 run-environment fix
+import subprocess
+def _pscad_pids():
+    out = subprocess.run(["tasklist", "/FI", "IMAGENAME eq Pscad.exe", "/FO", "CSV", "/NH"], capture_output=True, text=True).stdout
+    return {int(r.split('","')[1]) for r in out.strip().splitlines() if r.startswith('"Pscad.exe"')}
 for k_ in range(4):                                                  # S30: launch races when several start together
+    before_ = _pscad_pids()
     try: pscad = mhi.pscad.launch(minimize=False, splash=False, timeout=60); break
     except (ConnectionRefusedError, OSError) as e_:
-        L(f"launch attempt {k_ + 1} failed: {e_!r}"); time.sleep(30 + 30 * k_)
+        orphans = _pscad_pids() - before_                            # the failed attempt's window would stay open
+        for pid_ in orphans: subprocess.run(["taskkill", "/PID", str(pid_), "/F"], capture_output=True)
+        L(f"launch attempt {k_ + 1} failed: {e_!r}; closed orphan PSCAD {sorted(orphans)}"); time.sleep(30 + 30 * k_)
 else:
     L("RUN FAILED: PSCAD launch failed 4 times"); raise SystemExit(3)
 try:

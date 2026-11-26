@@ -316,7 +316,9 @@ try:
             c_ = cv.add_component("master", nm, x, y_, 0)
             if params: c_.parameters(**params)
             P = c_.ports()
-            for port, n in (data or {}).items(): dlab(P[port].x, P[port].y, n)
+            ALIAS = {"I": ("I", "IN"), "O": ("O", "OUT"), "IN": ("IN", "I"), "OUT": ("OUT", "O")}   # gain uses IN/OUT, compare I/O
+            for port, n in (data or {}).items():
+                pk = next(k for k in ALIAS.get(port, (port,)) if k in P); dlab(P[pk].x, P[pk].y, n)
             return P
         lg("const", dict(Value="0.0"), {"OUT": "ZERO"}); lg("const", dict(Value="1.0"), {"OUT": "ONE_"})
         lg("time-sig", None, {"OUT": "TR"})
