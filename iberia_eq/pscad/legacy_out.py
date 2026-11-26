@@ -19,7 +19,21 @@ def load(folder, case):
         names += [nm] if d == 1 else [f"{nm}[{k + 1}]" for k in range(d)]
     cols, t = [], None
     for f in sorted(glob.glob(os.path.join(folder, f"{case}_[0-9][0-9].out"))):
-        a = np.loadtxt(f, skiprows=1, ndmin=2)
+        try:
+            a = np.loadtxt(f, skiprows=1, ndmin=2)
+        except ValueError:                       # S30: a disk-full write left malformed rows; keep the valid prefix
+            rows, w = [], None
+            for ln in open(f, errors="replace").read().split("\n")[1:]:
+                p = ln.split()
+                if not p: continue
+                if w is None: w = len(p)
+                try:
+                    if len(p) != w: raise ValueError
+                    rows.append([float(x) for x in p])
+                except ValueError:
+                    break
+            a = np.array(rows, ndmin=2)
+            print(f"legacy_out: {os.path.basename(f)} malformed after row {len(rows)} (t = {a[-1, 0]:.4f} s); truncated")
         if t is None: t = a[:, 0]
         n = min(len(t), len(a)); t = t[:n]; cols = [c[:n] for c in cols] + [a[:n, k] for k in range(1, a.shape[1])]
     return t, dict(zip(names, cols))
