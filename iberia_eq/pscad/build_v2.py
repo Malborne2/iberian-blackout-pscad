@@ -157,7 +157,6 @@ try:
         tie_ma = REPLAY and ln["name"] == "MA-B-MA"           # V2_EVENT_SPEC F5: Morocco tie breaker at the Spanish cable end
         if tie_ma:
             hang(fa, "master", "breaker3", dict(NAME="BRKMA", BP="PBMA", OPCUR="1"), "N1", node={"N2": "MA_TIE"}, w=6); count("breaker_ma")
-            const(0.0, "BRKMA", ZOF[fa])                     # 0 = closed; under-frequency logic later
         hang(fa, "master", "pi_section", dict(Name=f"L{i_}", PU="4", F="50.0", len="1.0", Rp1=f"{R:.6g}", Lp1=f"{X / W50:.6g}", Cp1=f"{max(C, 1e-6):.6g}",
                                                Rz1=f"{3 * R:.6g}", Lz1=f"{3 * X / W50:.6g}", Cz1=f"{max(0.6 * C, 1e-6):.6g}"),
              None if tie_ma else "N1", node={"N2": lab(fb), **({"N1": "MA_TIE"} if tie_ma else {})}); count("line")
@@ -322,9 +321,11 @@ try:
             return P
         lg("const", dict(Value="0.0"), {"OUT": "ZERO"}); lg("const", dict(Value="1.0"), {"OUT": "ONE_"})
         lg("time-sig", None, {"OUT": "TR"})
+        lg("compare", dict(X="10.0", OL="0.0", OH="1.0"), {"I": "TR", "O": "UFEN"})   # under-frequency logic enabled at 10 s
         def ufstage(out, fsig, thr, delay=0.15):
             """out = 1 (latched) once fsig < thr for `delay` s: compare -> integral (0..1, T = delay) -> compare."""
-            lg("compare", dict(X=f"{thr}", OL="1.0", OH="0.0"), {"I": fsig, "O": out + "c"})
+            lg("compare", dict(X=f"{thr}", OL="1.0", OH="0.0"), {"I": fsig, "O": out + "b"})
+            lg("mult", None, {"IN1": out + "b", "IN2": "UFEN", "OUT": out + "c"})   # enabled from 10 s: meters read 0 Hz at start
             lg("integral", dict(T=f"{delay}", YHi="1.0", YLo="0.0", Yo="0.0"), {"I": out + "c", "O": out + "i", "R": "ZERO"})
             lg("compare", dict(X="0.999", OL="0.0", OH="1.0"), {"I": out + "i", "O": out})
         def tstep(out, t):
