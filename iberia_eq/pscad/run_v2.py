@@ -37,6 +37,17 @@ def check_msgs(prj):
             warns[tx] = warns.get(tx, 0) + 1
             if any(b in tx.lower() for b in BADW) and tx not in errs: errs.append(tx)
     return errs, warns
+# Snapshot restarts must keep the clock (S25 trap, RUNLOG S30 sec 14): bit 32 of the project's `Advanced` flags is
+# remove_time_offset. Set (default) = the clock restarts at 0 and the start-up switches (S2M 2 s, L2N 5 s) fire again on
+# top of the restored state. --from clears it; cold runs set it. Edited in the .pscx before loading (P12);
+# pscad_set_project_parameters rejects the flag.
+PSCX = os.path.join(a.work, "v2.pscx"); txt_ = open(PSCX, encoding="utf-8").read()
+m_ = re.search(r'(<param name="Advanced" value=")(\d+)(")', txt_)
+if m_:
+    adv = int(m_.group(2)); new_ = (adv & ~32) if a.frm else (adv | 32)
+    if new_ != adv:
+        open(PSCX, "w", encoding="utf-8").write(txt_[:m_.start(2)] + str(new_) + txt_[m_.end(2):])
+    L(f"Advanced {adv} -> {new_} (remove_time_offset {'off: time continues from the snapshot' if a.frm else 'on'})")
 os.environ["PATH"] = BUILD + os.pathsep + os.environ.get("PATH", "")      # S30 run-environment fix
 for k_ in range(4):                                                  # S30: launch races when several start together
     try: pscad = mhi.pscad.launch(minimize=False, splash=False, timeout=60); break
