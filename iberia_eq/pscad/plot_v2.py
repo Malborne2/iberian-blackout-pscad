@@ -34,7 +34,7 @@ units = []
 for ln in open(os.path.join(HERE, a.build), encoding="utf-8", errors="replace"):
     m = re.match(r"unit (.+?)\s+at (\S+(?: term)?)\s+P\s+(-?[\d.]+) Q\s+([-+\d.]+) S\s+([\d.]+) V ([\d.]+)", ln.strip())
     if m: units.append(dict(name=m.group(1).strip(), P=float(m.group(3)), Q=float(m.group(4)), S=float(m.group(5)), V=float(m.group(6))))
-t, c, vb, inst, f, sm = run(a.tag); t1 = a.t1 or t[-1]; m1 = (t > t1 - 1.0) & (t <= t1)
+t, c, vb, inst, f, sm = run(a.tag); t1 = a.t1 or min(t[-1], 5.0); m1 = (t > t1 - 1.0) & (t <= t1)   # match units before the release
 C = np.array([[abs(c[f"{i}:POUT"][m1].mean() - u["P"] / u["S"]) / 0.05 + abs(c[f"{i}:VIT[1]"][m1].mean() - u["V"]) / 0.01 for u in units] for i in inst])
 r_, c_ = linear_sum_assignment(C); U = {inst[i]: units[j] for i, j in zip(r_, c_)}
 cm = plt.get_cmap("tab20")
