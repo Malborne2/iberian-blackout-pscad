@@ -33,12 +33,12 @@ def run(tag):
 units = []
 for ln in open(os.path.join(HERE, a.build), encoding="utf-8", errors="replace"):
     m = re.match(r"unit (.+?)\s+at (\S+(?: term)?)\s+P\s+(-?[\d.]+) Q\s+([-+\d.]+) S\s+([\d.]+) V ([\d.]+)", ln.strip())
-    if m: units.append(dict(name=m.group(1).strip(), P=float(m.group(3)), S=float(m.group(5)), V=float(m.group(6))))
+    if m: units.append(dict(name=m.group(1).strip(), P=float(m.group(3)), Q=float(m.group(4)), S=float(m.group(5)), V=float(m.group(6))))
 t, c, vb, inst, f, sm = run(a.tag); t1 = a.t1 or t[-1]; m1 = (t > t1 - 1.0) & (t <= t1)
 C = np.array([[abs(c[f"{i}:POUT"][m1].mean() - u["P"] / u["S"]) / 0.05 + abs(c[f"{i}:VIT[1]"][m1].mean() - u["V"]) / 0.01 for u in units] for i in inst])
 r_, c_ = linear_sum_assignment(C); U = {inst[i]: units[j] for i, j in zip(r_, c_)}
 cm = plt.get_cmap("tab20")
-fig, ax = plt.subplots(3, 1, figsize=(11, 11), sharex=True)
+fig, ax = plt.subplots(4, 1, figsize=(11, 14), sharex=True)
 for j, b in enumerate(sorted(vb)): ax[0].plot(t, vb[b], lw=0.9, color=cm(j % 20), label=b.replace("_", "-"))
 ax[0].set_ylabel("bus voltage, LL [kV]\n(PMU: 1-cycle DFT, pos. seq.)"); ax[0].set_ylim(300, 460)
 ax[0].legend(ncol=6, fontsize=7, loc="lower right")
@@ -47,7 +47,12 @@ ax[1].set_ylabel("machine frequency [Hz]"); ax[1].legend(ncol=4, fontsize=7, loc
 for j, i in enumerate(inst):
     ax[2].plot(t, sm(c[f"{i}:POUT"]) * U[i]["S"], lw=0.9, color=cm(j % 20))
     ax[2].hlines(U[i]["P"], t[0], t[-1], colors=[cm(j % 20)], linestyles="dotted", lw=0.8)
-ax[2].set_ylabel("unit P [MW] (dotted: load flow)"); ax[2].set_xlabel("t [s]")
+ax[2].set_ylabel("unit P [MW] (dotted: load flow)")
+for j, i in enumerate(inst):
+    ax[3].plot(t, sm(c[f"{i}:QOUT"]) * U[i]["S"], lw=0.9, color=cm(j % 20))
+    ax[3].hlines(U[i]["Q"], t[0], t[-1], colors=[cm(j % 20)], linestyles="dotted", lw=0.8)
+ax[3].axhline(0, color="k", lw=0.6)
+ax[3].set_ylabel("unit Q [Mvar] (dotted: load flow)\n+ supplying, − absorbing"); ax[3].set_ylim(-900, 1200); ax[3].set_xlabel("t [s]")
 for x, lab in ((2.0, "machines take over"), (2.1, ""), (5.0, "rotors released")):
     for a_ in ax: a_.axvline(x, color="gray", lw=0.6, ls="--")
     if lab: ax[0].text(x + 0.05, 452, lab, fontsize=8, color="gray", va="top")
