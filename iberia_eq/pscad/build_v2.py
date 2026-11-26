@@ -38,6 +38,9 @@ r = subprocess.run([sys.executable, os.path.join(HERE, "add_qloop.py"), "--pscx"
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_xt.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_varrlc0.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())   # S30 sec 9
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_pumpheld.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())   # S30 sec 10
+# S30 sec 13: machines take over (S2M) only after the RES plants are at full current, exciter references after that
+r = subprocess.run([sys.executable, os.path.join(HERE, "add_switchtimes.py"), "--pscx", PSCX, "--s2m", "2.0", "--l2n", "5.0"], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
+r = subprocess.run([sys.executable, os.path.join(HERE, "add_exinit.py"), "--pscx", PSCX, "--t", "2.1"], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 v1res = {p.get("name"): p.get("value") for e in [x for x in src.find("definitions") if x.get("name") == "Main"][0].iter("User")
          if e.get("defn") == "ib6:RES_Plant" for p in e.findall("./paramlist/param")}
 
@@ -162,7 +165,7 @@ try:
     def unit(name, bus, Pmw, Qmvar, S, H, XCc, Kdrp, Kiq, Kgov, gov=True, xt=XT_UNIT):
         prm = dict(Sbase=f"{S:.1f}", Vbase="400", VbaseLN="230.9401", Ibase=f"{S / (3 ** 0.5 * 400):.4f}", H=f"{H}", P0=f"{Pmw:.1f}",
                    Q0=f"{Qmvar:.1f}", V0=f"{V[bus]:.5f}", Ph0=f"{math.radians(A[bus]):.6f}", Vctl="0", Tstart="0.5", Pmec="0.0",
-                   Kgov=f"{Kgov}", Tgov="2.0", GovLim="0.054" if gov else "0.0", KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0",
+                   Kgov=f"{Kgov}", Tgov="2.0", GovLim="0.054" if gov else "0.0", KA="80", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0",
                    XCc=f"{XCc}", Kdrp=f"{Kdrp}", Kiq=f"{Kiq}",
                    XmD=f"{1.79 + xt}", XmD1=f"{0.169 + xt}", XmD2=f"{0.135 + xt}", XmQ=f"{1.71 + xt}", XmQ1=f"{0.228 + xt}", XmQ2=f"{0.2 + xt}", XmP=f"{0.130 + xt}")
         hang(bus, "v2", "SyncUnit", prm, "T", w=SLOT + 1); count("syncunit")
@@ -187,7 +190,7 @@ try:
         hang(bus, "master", "breaker3", dict(NAME=f"BRK{m_}", BP=f"PB{m_}", OPCUR="1"), "N1", node={"N2": f"P_{m_}"}, w=6)
         hang(bus, "v2", "PumpUnit", dict(Sbase=f"{S:.1f}", Vbase="400", VbaseLN="230.9401", Ibase=f"{S / (3 ** 0.5 * 400):.4f}", H=f"{H_PT if 'PT' in bus else H_ES}",
                                           P0=f"{-mw:.1f}", Q0=f"{q:.1f}", V0=f"{V[bus]:.5f}", Ph0=f"{math.radians(A[bus]):.6f}", Vctl="0", Tstart="0.5",
-                                          Pmec="0.0", Kgov="0.0", Tgov="5.0", GovLim="0.0", KA="40", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0"),
+                                          Pmec="0.0", Kgov="0.0", Tgov="5.0", GovLim="0.0", KA="80", KF="0.03", TF="1.0", Ttrip="1e6", Ptrip="0.0"),
              None, node={"T": f"P_{m_}"}, data={"PLD": "PLD0"}, w=SLOT); count("pump")
         const(0.0, f"BRK{m_}", ZOF[bus])
     # ---------------- RES plants (21) ----------------
