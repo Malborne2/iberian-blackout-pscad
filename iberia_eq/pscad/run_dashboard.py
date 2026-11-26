@@ -15,7 +15,7 @@ Sources per run tag (C:\PSCAD_work\v2_runs\<tag>\run.log, written by run_v2.py):
   - speed and ETA from the run.log creation time.
 Case generation in progress (build_v2.py) shows from <work>\build_v2.log written in the last 3 min.
 """
-import argparse, glob, json, os, re, time
+import argparse, glob, json, os, re, shutil, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ap = argparse.ArgumentParser(); ap.add_argument("--port", type=int, default=8765); ap.add_argument("--hours", type=float, default=12)
@@ -97,8 +97,8 @@ h1{font-size:18px;margin:0 0 4px}.sub{color:var(--mut);margin-bottom:14px}
 <script>
 const C={running:'var(--run)',done:'var(--ok)',failed:'var(--bad)','stalled?':'var(--warn)',building:'var(--mut)',generating:'var(--mut)'};
 const f=(s)=>s==null?'–':s<90?s.toFixed(0)+' s':s<5400?(s/60).toFixed(0)+' min':(s/3600).toFixed(1)+' h';
-async function tick(){try{const r=await (await fetch('/api')).json();
- document.getElementById('sub').textContent=`${r.filter(x=>x.state=='running').length} running · updated ${new Date().toLocaleTimeString()}`;
+async function tick(){try{const J=await (await fetch('/api')).json();const r=J.runs;
+ const sub=document.getElementById('sub');sub.textContent=`${r.filter(x=>x.state=='running').length} running · disk C: ${J.free_gb} GB free · updated ${new Date().toLocaleTimeString()}`;sub.style.color=J.free_gb<15?'var(--bad)':'';
  document.getElementById('list').innerHTML=r.map(x=>{const p=(x.t!=null&&x.dur)?Math.min(100,100*x.t/x.dur):(x.state=='done'?100:0);
  return `<div class="card"><div class="top"><span class="tag">${x.tag}</span><span class="st" style="background:${C[x.state]||'gray'}">${x.state}</span></div>
  <div class="bar"><div class="fill" style="width:${p}%;background:${C[x.state]||'gray'}"></div>${x.snap&&x.dur?`<div class="snap" style="left:${100*x.snap/x.dur}%" title="snapshot"></div>`:''}</div>
@@ -111,7 +111,7 @@ tick();setInterval(tick,5000);
 
 class H(BaseHTTPRequestHandler):
     def do_GET(self):
-        body = json.dumps(runs()).encode() if self.path.startswith("/api") else PAGE.encode()
+        body = json.dumps(dict(runs=runs(), free_gb=round(shutil.disk_usage(WORK).free / 1e9, 1))).encode() if self.path.startswith("/api") else PAGE.encode()
         self.send_response(200); self.send_header("Content-Type", "application/json" if self.path.startswith("/api") else "text/html; charset=utf-8")
         self.send_header("Cache-Control", "no-store"); self.end_headers(); self.wfile.write(body)
     def log_message(self, *x): pass

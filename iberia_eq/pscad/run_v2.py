@@ -22,6 +22,10 @@ BUILD = os.path.join(a.work, "v2.gf81_x86")
 log = open(os.path.join(OUTD, "run.log"), "w")
 def L(*x): print(*x, flush=True); print(*x, file=log, flush=True)
 L("work:", a.work)                                                    # read by run_dashboard.py
+FREE_MIN_GB = 15.0                                                    # owner rule 2026-11-26: C: reached 0 MB with 6 runs
+free_gb = shutil.disk_usage(r"C:\PSCAD_work").free / 1e9
+if free_gb < FREE_MIN_GB:
+    L(f"RUN FAILED: only {free_gb:.1f} GB free on C: (floor {FREE_MIN_GB:.0f} GB); delete recorded run outputs first"); raise SystemExit(4)
 BADW = ("short circuit", "open circuit", "floating", "unresolved", "source contention", "below range", "above range", "too small")
 def check_msgs(prj):
     """-> (error texts, {warning text: count}) from PSCAD's message list; warnings in BADW count as errors (skill P6.3)."""
