@@ -4,7 +4,7 @@ usage: python iberia_eq\pscad\run_dashboard.py [--port 8765] [--hours 12] [--don
        python iberia_eq\pscad\run_dashboard.py --clear
 then open http://localhost:8765 (the page refreshes itself every 5 s).
 Shown (owner request): live runs always; a finished run for --done-min minutes; a failed run until a newer run starts in
-the same work folder (a restart) or until cleared. --clear hides every run that is not live now (list in
+the same work folder (a restart) or until cleared. --clear (or the page's 'Clear finished' button; × hides one run) hides every run that is not live now (list in
 C:\PSCAD_work\v2_runs\_dashboard_hidden.json) and exits; running servers pick it up on their next refresh.
 
 Sources per run tag (C:\PSCAD_work\v2_runs\<tag>\run.log, written by run_v2.py):
@@ -118,15 +118,19 @@ h1{font-size:18px;margin:0 0 4px}.sub{color:var(--mut);margin-bottom:14px}
 .st{font-size:12px;font-weight:600;padding:1px 8px;border-radius:99px;color:#fff}
 .bar{position:relative;height:12px;background:var(--bar);border-radius:6px;margin:8px 0 6px;overflow:hidden}
 .fill{height:100%;border-radius:6px}.snap{position:absolute;top:0;width:2px;height:100%;background:var(--fg);opacity:.5}
+button{font:12px system-ui;border:1px solid var(--bar);background:var(--card);color:var(--fg);border-radius:6px;padding:2px 9px;cursor:pointer}
+.x{margin-left:6px;padding:0 7px}.hdr{display:flex;align-items:center;gap:10px}
 .meta{color:var(--mut);font-size:12px;display:flex;gap:14px;flex-wrap:wrap}.why{color:var(--bad);font-size:12px;margin-top:4px}
-</style></head><body><h1>PSCAD runs</h1><div class="sub" id="sub">loading…</div><div id="list"></div>
+</style></head><body><div class="hdr"><h1>PSCAD runs</h1><button onclick="post('/clear')" title="hide every done / failed / stopped run">Clear finished</button></div><div class="sub" id="sub">loading…</div><div id="list"></div>
 <script>
 const C={running:'var(--run)',done:'var(--ok)',failed:'var(--bad)','stalled?':'var(--warn)',stopped:'var(--mut)',building:'var(--mut)',generating:'var(--mut)'};
 const f=(s)=>s==null?'–':s<90?s.toFixed(0)+' s':s<5400?(s/60).toFixed(0)+' min':(s/3600).toFixed(1)+' h';
+const FIN=['done','failed','stopped'];
+async function post(u){try{await fetch(u,{method:'POST'})}catch(e){}tick()}
 async function tick(){try{const J=await (await fetch('/api')).json();const r=J.runs;
  const sub=document.getElementById('sub');sub.textContent=`${r.filter(x=>x.state=='running').length} running · disk C: ${J.free_gb} GB free · updated ${new Date().toLocaleTimeString()}`;sub.style.color=J.free_gb<15?'var(--bad)':'';
  document.getElementById('list').innerHTML=r.map(x=>{const p=(x.t!=null&&x.dur)?Math.min(100,100*x.t/x.dur):(x.state=='done'?100:0);
- return `<div class="card"><div class="top"><span class="tag">${x.tag}</span><span class="st" style="background:${C[x.state]||'gray'}">${x.state}</span></div>
+ return `<div class="card"><div class="top"><span class="tag">${x.tag}</span><span><span class="st" style="background:${C[x.state]||'gray'}">${x.state}</span>${FIN.includes(x.state)&&x.t0?`<button class="x" title="hide this run" onclick="post('/hide?tag=${encodeURIComponent(x.tag)}&t0=${x.t0}')">×</button>`:''}</span></div>
  <div class="bar"><div class="fill" style="width:${p}%;background:${C[x.state]||'gray'}"></div>${x.snap&&x.dur?`<div class="snap" style="left:${100*x.snap/x.dur}%" title="snapshot"></div>`:''}</div>
  <div class="meta"><span>${x.t!=null?x.t.toFixed(2):'–'} / ${x.dur??'–'} s simulated (${p.toFixed(0)} %)</span><span>started ${x.start}</span><span>wall ${f(x.wall)}</span>
  <span>${x.spd?x.spd.toFixed(0)+' s wall per sim s':''}</span><span>${x.eta!=null?'ETA '+f(x.eta):''}</span><span>${x.age!=null&&x.state!='done'?'last write '+f(x.age)+' ago':''}</span></div>
@@ -140,13 +144,24 @@ class H(BaseHTTPRequestHandler):
         body = json.dumps(dict(runs=runs(), free_gb=round(shutil.disk_usage(WORK).free / 1e9, 1))).encode() if self.path.startswith("/api") else PAGE.encode()
         self.send_response(200); self.send_header("Content-Type", "application/json" if self.path.startswith("/api") else "text/html; charset=utf-8")
         self.send_header("Cache-Control", "no-store"); self.end_headers(); self.wfile.write(body)
+    def do_POST(self):                                # Clear finished / hide one run (owner request): only edits HIDDEN
+        from urllib.parse import urlparse, parse_qs
+        u = urlparse(self.path); q = parse_qs(u.query); hid = hidden(); n = 0
+        if u.path == "/clear":
+            for r in runs(filtered=False):
+                if r["state"] in ("done", "failed", "stopped") and r.get("t0"): hid[r["tag"]] = r["t0"]; n += 1
+        elif u.path == "/hide" and "tag" in q and "t0" in q:
+            hid[q["tag"][0]] = float(q["t0"][0]); n = 1
+        json.dump(hid, open(HIDDEN, "w"))
+        self.send_response(200); self.send_header("Content-Type", "application/json"); self.end_headers()
+        self.wfile.write(json.dumps(dict(hidden=n)).encode())
     def log_message(self, *x): pass
 
 if a.clear:
     hid = hidden(); n = 0
     for r in runs(filtered=False):
-        if r["state"] in ("done", "failed") and r.get("t0"): hid[r["tag"]] = r["t0"]; n += 1
-    json.dump(hid, open(HIDDEN, "w")); print(f"cleared {n} finished/failed runs"); raise SystemExit(0)
+        if r["state"] in ("done", "failed", "stopped") and r.get("t0"): hid[r["tag"]] = r["t0"]; n += 1
+    json.dump(hid, open(HIDDEN, "w")); print(f"cleared {n} finished/failed/stopped runs"); raise SystemExit(0)
 if __name__ == "__main__":                            # run_watch.py imports runs() without starting a server
     print(f"dashboard on http://{a.host}:{a.port}", flush=True)
     ThreadingHTTPServer((a.host, a.port), H).serve_forever()

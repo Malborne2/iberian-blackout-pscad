@@ -20,6 +20,7 @@ ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld"); ap.add_argument("--st
 ap.add_argument("--set", nargs="*", default=[])       # extra project settings key=value (S30 sec 23: compileF_opt_level, threads, ...)
 ap.add_argument("--affinity")                          # logical CPUs for the solver, e.g. "0" or "8,10" (0-7 = fast Zen 5 cores)
 ap.add_argument("--priority")                          # solver priority class: High / AboveNormal / Normal
+ap.add_argument("--gui-affinity")                      # logical CPUs for this run's PSCAD window, e.g. "8-23" (compact cores)
 ap.add_argument("--health-until", type=float)        # stop if the machines' frequency spread exceeds --hspread before this model time
 ap.add_argument("--hspread", type=float, default=0.5) # Hz (S30 sec 21 lesson 1)
 a = ap.parse_args()
@@ -150,7 +151,7 @@ try:
         except Exception as e_: _rerr.append(repr(e_))
     stage("rebuild + solver start", 600); t0 = time.time(); _rt = _th.Thread(target=_runner, daemon=True); _rt.start()
     last = -1; t_prog = time.time(); tl_prev = None; t_first = None; tl_first = None
-    if a.affinity or a.priority:                                      # pin / prioritise this run's solver (S30 sec 23)
+    if a.affinity or a.priority or a.gui_affinity:                                      # pin / prioritise this run's solver (S30 sec 23)
         import subprocess as _sp
         exe = os.path.join(BUILD, "v2.exe").replace("/", "\\")
         mask = sum(1 << int(x) for x in a.affinity.split(",")) if a.affinity else None
@@ -158,6 +159,10 @@ try:
                + exe + "' }; Start-Sleep -Milliseconds 500 } until ($q -or (Get-Date) -gt $t); if($q){ $pp=Get-Process -Id $q.ProcessId; "
                + (f"$pp.ProcessorAffinity=[IntPtr]{mask}; " if mask else "") + (f"$pp.PriorityClass='{a.priority}'; " if a.priority else "")
                + "'pinned ' + $q.ProcessId + ' mask ' + $pp.ProcessorAffinity + ' prio ' + $pp.PriorityClass } else { 'PIN FAILED: no v2.exe in 900 s' }")
+        if a.gui_affinity:                                            # S30 sec 23: keep the GUI off the solver's fast core
+            cpus = [x for s in a.gui_affinity.split(",") for x in (range(int(s.split("-")[0]), int(s.split("-")[1]) + 1) if "-" in s else [int(s)])]
+            ps_ += ("; Get-CimInstance Win32_Process -Filter \"Name='Pscad.exe'\" | ? { $_.ParentProcessId -eq " + str(os.getpid())
+                    + " } | % { $g=Get-Process -Id $_.ProcessId; $g.ProcessorAffinity=[IntPtr]" + str(sum(1 << c for c in cpus)) + "; ' gui ' + $g.Id + ' mask ' + $g.ProcessorAffinity }")
         def _pin():                                                   # in a thread: the progress loop must not wait for it
             _r = _sp.run(["powershell", "-NoProfile", "-Command", ps_], capture_output=True, text=True)
             L("solver:", (_r.stdout.strip() or "PIN FAILED: " + _r.stderr.strip()[-300:]), f"after {time.time() - t0:.0f} s")

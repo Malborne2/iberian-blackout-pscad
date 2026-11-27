@@ -29,6 +29,9 @@ ap.add_argument("--pv-mw", type=float, default=4447.0)  # rooftop PV < 1 MW prod
 ap.add_argument("--pv-ftrip", type=float, default=0.15) # fraction of it that trips at full band [inf, calibrated]
 ap.add_argument("--pv-dv0", type=float, default=3.0)    # trip band start above the load-flow bus voltage [kV] [inf]
 ap.add_argument("--pv-dv1", type=float, default=15.0)   # trip band end [kV] [inf]
+ap.add_argument("--no-series", action="store_true")   # TIMING TEST ONLY (S30 sec 23): replay without the France breaker/meter and the Morocco breaker
+ap.add_argument("--no-frchain", action="store_true")  # TIMING TEST ONLY: without the France breaker + multimeter
+ap.add_argument("--no-brkma", action="store_true")    # TIMING TEST ONLY: without the Morocco breaker
 ap.add_argument("--ftest")     # TEST ONLY "t1:t2:df": frequency offset ramp 0 -> df Hz (t1..t2) added to every UF stage input (S30 sec 23)
 ap.add_argument("--vtest")     # TEST ONLY "t1:t2:dv": voltage offset ramp 0 -> dv pu added to every rooftop-PV voltage input
 a = ap.parse_args()
@@ -164,7 +167,7 @@ try:
     for i_, ln in net.line.iterrows():
         fa, fb = BN[ln.from_bus], BN[ln.to_bus]; nc = ln.parallel; Lkm = ln.length_km
         R = ln.r_ohm_per_km * Lkm / nc; X = ln.x_ohm_per_km * Lkm / nc; C = ln.c_nf_per_km * Lkm * nc * 1e-3   # ohm, ohm, uF
-        tie_ma = REPLAY and ln["name"] == "MA-B-MA"           # V2_EVENT_SPEC F5: Morocco tie breaker at the Spanish cable end
+        tie_ma = REPLAY and not (a.no_series or a.no_brkma) and ln["name"] == "MA-B-MA"           # V2_EVENT_SPEC F5: Morocco tie breaker at the Spanish cable end
         if tie_ma:
             hang(fa, "master", "breaker3", dict(NAME="BRKMA", BP="PBMA", OPCUR="1"), "N1", node={"N2": "MA_TIE"}, w=6); count("breaker_ma")
         hang(fa, "master", "pi_section", dict(Name=f"L{i_}", PU="4", F="50.0", len="1.0", Rp1=f"{R:.6g}", Lp1=f"{X / W50:.6g}", Cp1=f"{max(C, 1e-6):.6g}",
@@ -303,7 +306,7 @@ try:
     Sx = (net.res_ext_grid.p_mw.iloc[0] + 1000.0) + 1j * net.res_ext_grid.q_mvar.iloc[0]
     Vf = 400.0 * V["FR"] * np.exp(1j * np.radians(A["FR"])); If = np.conj(Sx / (np.sqrt(3) * Vf)); Ef = Vf + np.sqrt(3) * ZF * If
     L(f"France source: S {Sx.real:.0f} MW {Sx.imag:+.0f} Mvar, terminal {abs(Vf):.1f} kV {A['FR']:+.2f} deg -> Es {abs(Ef):.2f} kV {np.degrees(np.angle(Ef)):+.3f} deg")
-    if REPLAY:   # V2_EVENT_SPEC P8/P9: bus FR -- breaker3 BRKFR -- FR_B -- multimeter (A side = Iberia) -- FR_S -- source3
+    if REPLAY and not (a.no_series or a.no_frchain):   # V2_EVENT_SPEC P8/P9: bus FR -- breaker3 BRKFR -- FR_B -- multimeter (A side = Iberia) -- FR_S -- source3
         hang("FR", "master", "breaker3", dict(NAME="BRKFR", BP="PBFR", OPCUR="1"), "N1", node={"N2": "FR_B"}, w=6); count("breaker_fr")
         _, Pm = hang("FR", "master", "multimeter", dict(MeasPh="1", RMS="1", MeasP="1", MeasQ="1", S="1.0", BaseV="400",
                                                          P="PFR", Q="QFR", Vrms="VFR", Ph="PHFR"), None, w=6)
