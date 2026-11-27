@@ -5,7 +5,8 @@ The relay's POI side (MeasSide 1, stage3/build_resplant.py WP6 item 4) takes the
 pu of the PEAK base, so VPOIRMS reads 1/sqrt(2) of the bus voltage (bench rly_m1: VPOIRMS 0.725 vs VDF 1.025 pu) and
 no relay with MeasSide 1 could ever trip (rp_cascade: 0 of 11). master:rms-inst scales only as Type DIGITAL, where
 OUT = RMS / Scale (Analog ignores Scale; a first try with Scale = sqrt(2) on Analog changed nothing, bench rly_m1): sets
-Type = 1 (digital, NSAM samples per 50 Hz cycle) and Scale = 1/sqrt(2) on the block of the RES_Plant definition. Constant inside the module: the build map and a snapshot of the case stay valid.
+Type = 1 (digital, NSAM samples per 50 Hz cycle) and Scale = 1/sqrt(2) on the block of the RES_Plant definition. The digital meter has other storage than the analog one: the build map changes, so a snapshot taken without the fix
+cannot be used with it (rebuild + new settle).
 """
 import argparse, math, re
 

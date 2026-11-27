@@ -731,8 +731,9 @@ no trip although VDF reached 1.07–1.08; `rp_cascade` §20: 0 of 11. Benches (c
 MeasSide 1 → none, VPOIRMS 0.725 vs VDF 1.025 pu = 1/√2: the RMS block (stage3 `build_resplant.py` WP6 item 4) takes
 VA_PU in pu of the **peak** base. `master:rms-inst` scales only as Type Digital (OUT = RMS / Scale; Analog ignores Scale
 — first try with Scale √2 on Analog changed nothing). **Fix `fix_poirms.py`** (Type 1, Scale 1/√2, 50 Hz), called by
-`build_v2.py`: VPOIRMS = VDF within 0.01 pu, all 21 trip at 0.551 s with Vt1 1.0 (commit 97bae58). Constant inside the
-module: snapshot-compatible.
+`build_v2.py`: VPOIRMS = VDF within 0.01 pu, all 21 trip at 0.551 s with Vt1 1.0 (commit 97bae58). The digital meter
+changes the storage map: **not** snapshot-compatible — the v3 settles (started before the fix) were stopped at ≈ 7 s,
+the bases rebuilt and the settles restarted.
 
 **What a trip removes (test 5, `trip_mw_check.py rly_m0`):** P → 0 in all 21 plants (|ID| < 0.005 pu); a reactive
 current of 0.06–0.12 pu of the plant rating remains: the Rf–Cf filter stays on the bus (stage3 design choice "inverters
