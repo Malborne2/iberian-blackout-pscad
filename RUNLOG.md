@@ -697,6 +697,23 @@ placement 0.8 s instead of ~8 min, whole build incl. PSCAD compile 1 min 16 s. V
 compact cores; PSCAD windows on CPUs 8–23; replay cases without the France multimeter. Expected long-run speed
 ≈ 250 s/s on a fast core vs ~1,100 s/s for the first cascade run (≈ 4×).
 
+### 24. Embedded-unit Q loop: Kiq 0.005 removes the E3 CAT mode — adopted (2026-11-27, agent: claude-main)
+
+Test of §20/§21 item 1: `rp_kiqe005` (embedded Kiq 0.05 → 0.005, 8 instances) and `rp_kiqe0` (→ 0), both variants of
+`rp_forced` (`make_v2_variant.py Kiq=0.05:…`), from the `rp_settle30` snapshot to 60 s (≈ 365 s/s, compact cores).
+Command: `python iberia_eq/pscad/emb_mode.py rp_forced rp_kiqe005 rp_kiqe0 --pout 0.904` → `figs/emb_mode.png`
+(speed of E3 CAT, the unit with POUT 0.904 pu, minus the fleet mean; p-p per 10 s window).
+
+| run | E3 CAT p-p per 10 s, 30–60 s [mHz] | after 60 s | QOUT [pu] |
+|---|---|---|---|
+| `rp_forced` (Kiq 0.05) | 7, 11, 20 | 36, 74 → slips at 86 s | −0.127 |
+| `rp_kiqe005` (Kiq 0.005) | 3, 3, 5 | — | −0.141 |
+| `rp_kiqe0` (Kiq 0) | 3, 3, 6 | — | −0.125 |
+
+The 0.1 Hz growing mode (amplitude ×1.8 per 10 s) is gone with either value; the fleet's largest relative swing is
+9 mHz at 60 s. **Adopted: embedded Kiq 0.005** (keeps a slow Q hold, same stability as 0); `build_v2.py --kiq-emb`
+(default 0.005, old 0.05). Outputs of both test runs deleted after this entry (figure kept).
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)

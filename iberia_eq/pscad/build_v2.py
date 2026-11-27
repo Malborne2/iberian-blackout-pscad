@@ -29,6 +29,7 @@ ap.add_argument("--pv-mw", type=float, default=4447.0)  # rooftop PV < 1 MW prod
 ap.add_argument("--pv-ftrip", type=float, default=0.15) # fraction of it that trips at full band [inf, calibrated]
 ap.add_argument("--pv-dv0", type=float, default=3.0)    # trip band start above the load-flow bus voltage [kV] [inf]
 ap.add_argument("--pv-dv1", type=float, default=15.0)   # trip band end [kV] [inf]
+ap.add_argument("--kiq-emb", type=float, default=0.005)   # outer Q-loop Kiq of the embedded units (S30 sec 24; old 0.05: unstable E3 CAT)
 ap.add_argument("--api", action="store_true")         # place through the PSCAD automation API (old path, ~8 min); default: offline XML (S30 sec 23)
 ap.add_argument("--no-series", action="store_true")   # TIMING TEST ONLY (S30 sec 23): replay without the France breaker/meter and the Morocco breaker
 ap.add_argument("--no-frchain", action="store_true")  # TIMING TEST ONLY: without the France breaker + multimeter
@@ -215,7 +216,7 @@ try:
             unit(nm, gb, g.p_mw, net.res_gen.at[i_, "q_mvar"], 5556.0, 4.0, 0.0, 0.0, 0.0, 5.726, xt=0.0)   # real 15 % transformer kept
     for i_, s_ in net.sgen.iterrows():                      # embedded synchronous generation: constant Q (outer loop, no droop)
         if s_["name"].startswith("E"):
-            bus = BN[s_.bus]; unit(s_["name"], bus, s_.p_mw, s_.q_mvar, s_.p_mw / 0.9, H_ES, 0.0, 0.0, 0.05, 0.0, gov=False)
+            bus = BN[s_.bus]; unit(s_["name"], bus, s_.p_mw, s_.q_mvar, s_.p_mw / 0.9, H_ES, 0.0, 0.0, a.kiq_emb, 0.0, gov=False)   # S30 sec 24: 0.05 grew a 0.1 Hz E3 CAT mode
     # ---------------- pumps: one PumpUnit per stage behind breaker3 ----------------
     PUMPS = [("M1", "PS-CYL", 1049.0), ("M2", "PS-ARA", 1017.0), ("M3", "PS-PT", 381.0), ("M4", "PS-PT", 450.0), ("M5", "PS-PT", 438.0),
              ("M6", "PS-PT", 470.0), ("M7", "PS-PT", 359.0)]
