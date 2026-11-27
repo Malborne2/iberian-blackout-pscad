@@ -31,7 +31,7 @@ import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(os.path.dirname(HERE)); DATA = os.path.join(ROOT, "data")
-ap = argparse.ArgumentParser(); ap.add_argument("tag"); ap.add_argument("--t0", type=float, default=30.0)
+ap = argparse.ArgumentParser(); ap.add_argument("tag"); ap.add_argument("--t0", type=float, default=30.0); ap.add_argument("--tw", type=float, default=1.0)
 ap.add_argument("--build", default="build_v2sld_r.out"); a = ap.parse_args()
 plt.style.use("seaborn-v0_8-whitegrid")
 CM, CR, CS = "#1f5fbf", "#111111", "#c0392b"            # model, report, report-simulation
@@ -57,10 +57,13 @@ for x in csv.DictReader(open(os.path.join(DATA, "events.csv"), encoding="utf-8")
     EV.append(dict(cl=x["cluster"], c=x["country"], t=tt, ty=x["type"], d=x["description"], mw=mw))
 
 # ------------------------------------------------------------------ model data
-t, c = load(os.path.join(r"C:\PSCAD_work\v2_runs", a.tag), "v2"); tr = t - a.t0
+t, c = load(os.path.join(r"C:\PSCAD_work\v2_runs", a.tag), "v2")
+TC = 76.0                                                   # inverse of the replay time map (S30 sec 21): report r from model m
+def RT(m): m = np.asarray(m, dtype=float); return np.where(m < a.t0 + TC / a.tw, (m - a.t0) * a.tw, TC + (m - a.t0 - TC / a.tw))
+tr = RT(t)
 def g(n): return next((c[k] for k in c if k == n or k.endswith(":" + n)), None)
 def pv(b, cyc=3):
-    r = pmu(t, *(c[f"V_{b}[{k}]"] for k in (1, 2, 3)), cycles=cyc); return r["t"] - a.t0, r["V"], r["f"]
+    r = pmu(t, *(c[f"V_{b}[{k}]"] for k in (1, 2, 3)), cycles=cyc); return RT(r["t"]), r["V"], r["f"]
 buses = sorted({k[2:-3] for k in c if k.startswith("V_") and k.endswith("[1]")})
 PV = {b: pv(b) for b in buses}; tp = PV[buses[0]][0]
 Vmax = np.max([PV[b][1] for b in buses], axis=0)
@@ -92,9 +95,16 @@ for b_ in bad: M(f"  {b_[0]} -> {b_[1]}: estimated S {b_[2]:.0f} vs {b_[3]:.0f} 
 def first_rise(x, thr=0.5):
     j = np.argmax(x > thr); return tr[j] if x[j] > thr else np.nan
 MEV = []
-for i in ri:
-    tt = first_rise(c[f"{i}:TRIP"])
-    if np.isfinite(tt): MEV.append(dict(kind="RES trip", name=MAP[i]["name"], t=tt, mw=MAP[i]["mw"]))
+TCH = [k for k in c if k.startswith("T_")]                  # named per-plant trip channels (replay v2 builds)
+if TCH:
+    MWD = {p["name"]: p["mw"] for p in RES}
+    for k in TCH:
+        tt = first_rise(c[k])
+        if np.isfinite(tt): MEV.append(dict(kind="RES trip", name=k[2:], t=tt, mw=MWD.get(k[2:], np.nan)))
+else:
+    for i in ri:
+        tt = first_rise(c[f"{i}:TRIP"])
+        if np.isfinite(tt): MEV.append(dict(kind="RES trip", name=MAP[i]["name"], t=tt, mw=MAP[i]["mw"]))
 for n_, lab in (("BRKM1", "pump M1 Duero (49.5 Hz)"), ("BRKM3", "pump M3 PT (49.8 Hz)"), ("BRKMA", "Morocco tie open")):
     v = g(n_)
     if v is not None:
@@ -120,7 +130,10 @@ def sig_metrics(name, trep, yrep, tmod, ymod):
         r = np.corrcoef(ym, yrep[m])[0, 1] if np.std(ym) > 0 and np.std(yrep[m]) > 0 else np.nan
         rows.append((ph, dict(n=int(m.sum()), bias=e.mean(), rmse=np.sqrt((e ** 2).mean()), maxe=np.abs(e).max(), r=r)))
     return name, rows
+r0 = (F37["t_sim_s"] < 3); m0 = (tp >= 0) & (tp < 3)                     # voltage RISE from 12:32:00 (lesson 4)
 SIG = [sig_metrics("400 kV maximum voltage [kV] (Fig 3-7a)", F37["t_sim_s"], F37["Vmax_400kV"], tp, Vmax),
+       sig_metrics("400 kV maximum voltage RISE from 12:32:00 [kV]", F37["t_sim_s"], F37["Vmax_400kV"] - np.nanmean(F37["Vmax_400kV"][r0]),
+                   tp, Vmax - (Vmax[m0].mean() if m0.any() else Vmax[0])),
        sig_metrics("Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5)", np.r_[F35["t_sim_s"], F110["t_sim_s"]],
                    np.r_[F35["V_carmona_kV"], F110["V_carmona_kV"]], tw, Vw),
        sig_metrics("Iberian frequency [Hz] (Fig 1-10)", F110["t_sim_s"], F110["f_iberia_Hz"], tr, Fmean),
