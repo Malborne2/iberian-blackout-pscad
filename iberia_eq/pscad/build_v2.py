@@ -32,6 +32,10 @@ ap.add_argument("--pv-dv1", type=float, default=15.0)   # trip band end [kV] [in
 ap.add_argument("--api", action="store_true")         # place through the PSCAD automation API (old path, ~8 min); default: offline XML (S30 sec 23)
 ap.add_argument("--no-series", action="store_true")   # TIMING TEST ONLY (S30 sec 23): replay without the France breaker/meter and the Morocco breaker
 ap.add_argument("--no-frchain", action="store_true")  # TIMING TEST ONLY: without the France breaker + multimeter
+ap.add_argument("--frmeter", action="store_true")    # old France tie with a series multimeter (PFR/QFR/VFR/PHFR); S30 sec 23: it cost ~42 % of
+                                                     # the solver time, so by default PFR/QFR come from the breaker BRKFR (BP/BQ)
+ap.add_argument("--no-frmeter", action="store_true") # TIMING TEST ONLY: France breaker without the multimeter
+ap.add_argument("--no-frbrk", action="store_true")   # TIMING TEST ONLY: France multimeter without the breaker
 ap.add_argument("--no-brkma", action="store_true")    # TIMING TEST ONLY: without the Morocco breaker
 ap.add_argument("--ftest")     # TEST ONLY "t1:t2:df": frequency offset ramp 0 -> df Hz (t1..t2) added to every UF stage input (S30 sec 23)
 ap.add_argument("--vtest")     # TEST ONLY "t1:t2:dv": voltage offset ramp 0 -> dv pu added to every rooftop-PV voltage input
@@ -317,12 +321,19 @@ try:
     Vf = 400.0 * V["FR"] * np.exp(1j * np.radians(A["FR"])); If = np.conj(Sx / (np.sqrt(3) * Vf)); Ef = Vf + np.sqrt(3) * ZF * If
     L(f"France source: S {Sx.real:.0f} MW {Sx.imag:+.0f} Mvar, terminal {abs(Vf):.1f} kV {A['FR']:+.2f} deg -> Es {abs(Ef):.2f} kV {np.degrees(np.angle(Ef)):+.3f} deg")
     if REPLAY and not (a.no_series or a.no_frchain):   # V2_EVENT_SPEC P8/P9: bus FR -- breaker3 BRKFR -- FR_B -- multimeter (A side = Iberia) -- FR_S -- source3
-        hang("FR", "master", "breaker3", dict(NAME="BRKFR", BP="PBFR", OPCUR="1"), "N1", node={"N2": "FR_B"}, w=6); count("breaker_fr")
-        _, Pm = hang("FR", "master", "multimeter", dict(MeasPh="1", RMS="1", MeasP="1", MeasQ="1", S="1.0", BaseV="400",
-                                                         P="PFR", Q="QFR", Vrms="VFR", Ph="PHFR"), None, w=6)
-        ks = sorted(Pm, key=lambda k: Pm[k].x); nlab(Pm[ks[0]].x, Pm[ks[0]].y, "FR_B"); nlab(Pm[ks[-1]].x, Pm[ks[-1]].y, "FR_S"); count("meter_fr")
-        for n_ in ("PFR", "QFR", "PHFR", "VFR"):             # P > 0: Iberia -> France (export)
-            _, gp = ctl("FR", "master", "pgb", dict(Name=n_)); q_ = list(gp.values())[0]; dlab(q_.x, q_.y, n_)
+        nometer = a.no_frmeter or not a.frmeter
+        if not a.no_frbrk:
+            bpq = dict(BP="PFR", BQ="QFR") if nometer and not a.no_frmeter else dict(BP="PBFR")   # P > 0: N1 (Iberia) -> N2 (France), checked S30 sec 23
+            hang("FR", "master", "breaker3", dict(NAME="BRKFR", OPCUR="1", **bpq), "N1", node={"N2": "FR_S" if nometer else "FR_B"}, w=6); count("breaker_fr")
+            if nometer and not a.no_frmeter:
+                for n_ in ("PFR", "QFR"):
+                    _, gp = ctl("FR", "master", "pgb", dict(Name=n_)); q_ = list(gp.values())[0]; dlab(q_.x, q_.y, n_)
+        if not nometer:
+            _, Pm = hang("FR", "master", "multimeter", dict(MeasPh="1", RMS="1", MeasP="1", MeasQ="1", S="1.0", BaseV="400",
+                                                             P="PFR", Q="QFR", Vrms="VFR", Ph="PHFR"), None if not a.no_frbrk else None, w=6)
+            ks = sorted(Pm, key=lambda k: Pm[k].x); nlab(Pm[ks[0]].x, Pm[ks[0]].y, "B_FR" if a.no_frbrk else "FR_B"); nlab(Pm[ks[-1]].x, Pm[ks[-1]].y, "FR_S"); count("meter_fr")
+            for n_ in ("PFR", "QFR", "PHFR", "VFR"):             # P > 0: Iberia -> France (export)
+                _, gp = ctl("FR", "master", "pgb", dict(Name=n_)); q_ = list(gp.values())[0]; dlab(q_.x, q_.y, n_)
         hang("FR", "master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
                                              Ph=f"{np.degrees(np.angle(Ef)) + a.fr_dang:.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), None, node={"N3": "FR_S"}, ground=("N",), w=SLOT + 2)
         count("source3")
