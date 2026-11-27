@@ -38,6 +38,8 @@ BUILD = os.path.join(a.work, "v2.gf81_x86")
 log = open(os.path.join(OUTD, "run.log"), "w")
 def L(*x): print(*x, flush=True); print(*x, file=log, flush=True)
 L("work:", a.work)                                                    # read by run_dashboard.py
+L(f"start: {time.time():.0f}")                                         # dashboard: Windows keeps a rewritten run.log's creation time
+for _f in glob.glob(os.path.join(BUILD, "v2_*.out")): os.remove(_f)   # no stale samples from the previous run
 def _hook(et, ev, tb):                                                # S30: any crash is visible in run.log (dashboard)
     import traceback; L("RUN FAILED: " + "".join(traceback.format_exception_only(et, ev)).strip())
     traceback.print_exception(et, ev, tb)
@@ -77,6 +79,29 @@ def _pscad_pids():
           + str(os.getpid()) + " } | ForEach-Object { $_.ProcessId }")
     out = subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True, text=True).stdout
     return {int(x) for x in out.split() if x.strip().isdigit()}
+# Stage watchdog (S30 sec 23, owner: a run that does not start must not wait for the 10-min stall check): every stage
+# has a deadline; past it the run is logged as failed, this script's PSCAD and solver are killed and the script exits.
+import threading as _thw
+_STAGE = ["launch", time.time(), 300.0]                               # name, start, limit [s]
+def stage(name, limit=None):
+    _STAGE[:] = [name, time.time(), limit]
+    if name: L(f"stage: {name} (limit {limit:.0f} s)" if limit else f"stage: {name}")
+def _kill_own():
+    ps = ("$p=Get-CimInstance Win32_Process; $k=$p|?{$_.ParentProcessId -eq " + str(os.getpid()) + "}; foreach($q in $k){ "
+          "$p|?{$_.ParentProcessId -eq $q.ProcessId}|%{Stop-Process -Id $_.ProcessId -Force -EA 0}; Stop-Process -Id $q.ProcessId -Force -EA 0 }; "
+          "$e='" + os.path.join(BUILD, "v2.exe").replace("/", "\\") + "'; $p|?{$_.Name -eq 'v2.exe' -and $_.ExecutablePath -eq $e}|%{Stop-Process -Id $_.ProcessId -Force -EA 0}")
+    subprocess.run(["powershell", "-NoProfile", "-Command", ps], capture_output=True)
+def _watchdog():
+    while True:
+        time.sleep(5)
+        nm, ts, lim = _STAGE
+        if nm and lim and time.time() - ts > lim:
+            L(f"RUN FAILED: stage '{nm}' took more than {lim:.0f} s (hung launch / dialog / solver not starting)")
+            _kill_own()
+            if os.path.exists(LOCK): os.remove(LOCK)
+            os._exit(6)
+_thw.Thread(target=_watchdog, daemon=True).start()
+stage("launch", 300)
 for k_ in range(4):                                                  # S30: launch races when several start together
     before_ = _pscad_pids()
     try: pscad = mhi.pscad.launch(minimize=False, splash=False, timeout=60); break
@@ -89,7 +114,7 @@ else:
 try:
     if not pscad.licensed():
         c = pscad.get_available_certificates(); c = next(iter(c.values())) if isinstance(c, dict) else c[0]; pscad.get_certificate(c)
-    pscad.load(os.path.join(a.work, "v2.pscx")); prj = pscad.project("v2")
+    stage("load", 300); pscad.load(os.path.join(a.work, "v2.pscx")); prj = pscad.project("v2")
     # With the clock kept on a restart, time_duration is the length ADDED (sld_snapchk ran on past 32 s, S30 sec 14):
     # --dur stays the END time; the snapshot time is read from the run.log next to the .snp ('SnapTime').
     tsnap = 0.0
@@ -109,12 +134,22 @@ try:
         prm.update(SnapType="0")
     for kv in a.set: k_, v_ = kv.split("=", 1); prm[k_] = v_
     prj.parameters(**prm); L("run parameters:", {k: prj.parameters().get(k) for k in prm})
-    prj.build()
+    stage("build", 900); prj.build(); stage(None)
     errs, warns = check_msgs(prj)
     for w, k in warns.items(): L(f"build warning x{k}: {w}")
     if errs: L("BUILD ERRORS:"); [L("  ", e) for e in errs[:20]]; raise SystemExit(1)
     if a.frm: shutil.copy(a.frm, os.path.join(BUILD, os.path.basename(a.frm)))
-    t0 = time.time(); prj.run(); last = -1; t_prog = time.time(); tl_prev = None
+    # S30 sec 23: prj.run() BLOCKS until the run ends (and rebuilds first); prj.start() after prj.build() does not start
+    # the solver at all. Before this fix the progress / stall / health loop and the solver pin acted only after the run.
+    # Now prj.run() runs in a thread and the loop below watches the output files only (no PSCAD calls during the run);
+    # to stop a bad run it kills this run's solver, which ends prj.run().
+    import threading as _th
+    _rerr = []
+    def _runner():
+        try: prj.run()
+        except Exception as e_: _rerr.append(repr(e_))
+    stage("rebuild + solver start", 600); t0 = time.time(); _rt = _th.Thread(target=_runner, daemon=True); _rt.start()
+    last = -1; t_prog = time.time(); tl_prev = None; t_first = None; tl_first = None
     if a.affinity or a.priority:                                      # pin / prioritise this run's solver (S30 sec 23)
         import subprocess as _sp
         exe = os.path.join(BUILD, "v2.exe").replace("/", "\\")
@@ -150,38 +185,62 @@ try:
             except Exception: return None
         return (max(fs) - min(fs)) if fs else None
     hbad = 0
-    def fail(why, txt):
-        L("RUN FAILED:", why); e_, w_ = check_msgs(prj)
-        for e in e_: L("  error:", e)
-        for w, k in w_.items(): L(f"  warning x{k}: {w}")
+    def kill_solver():
+        exe_ = os.path.join(BUILD, "v2.exe").replace("/", "\\")
+        subprocess.run(["powershell", "-NoProfile", "-Command", "Get-CimInstance Win32_Process -Filter \"Name='v2.exe'\" | ? { $_.ExecutablePath -eq '"
+                        + exe_ + "' } | % { Stop-Process -Id $_.ProcessId -Force }"], capture_output=True)
+        _rt.join(120)
+    def fail(why, txt=None):
+        L("RUN FAILED:", why)
+        if _rt.is_alive(): kill_solver()
+        if txt is None:
+            try: txt = prj.output() or ""
+            except Exception: txt = ""
+        try:
+            e_, w_ = check_msgs(prj)
+            for e in e_: L("  error:", e)
+            for w, k in w_.items(): L(f"  warning x{k}: {w}")
+        except Exception as x_: L("  (messages unavailable:", repr(x_), ")")
         L("EMTDC OUTPUT (tail):"); L(txt[-3000:]); raise SystemExit(2)
     while True:
-        time.sleep(10)
-        txt = prj.output() or ""
-        sc = re.findall(r"Status code\s*=\s*(-?\d+)", txt)
-        bad = [k for k in ("Abnormal termination", "Runtime Error", "stopped unexpectedly", "Simulation stopped", "ERROR:") if k in txt]
-        if bad or (sc and sc[-1] != "0"): fail(f"EMTDC: {bad} status code {sc[-1] if sc else '?'}", txt)
-        e_, _ = check_msgs(prj)
-        if e_: fail("PSCAD error messages", txt)
+        _rt.join(10)
         outs = sorted(glob.glob(os.path.join(BUILD, "v2_*.out")))
         tl = None
         if outs and os.path.getmtime(outs[0]) > t0:
+            try:
+                with open(outs[0], "rb") as fh:
+                    fh.seek(0, 2); n_ = fh.tell(); fh.seek(max(0, n_ - 3000))
+                    tl = float(fh.read().decode(errors="replace").strip().split("\n")[-2].split()[0])
+            except Exception: tl = None
+        if tl is not None and t_first is None: t_first, tl_first = time.time(), tl; L(f"solver writing after {t_first - t0:.0f} s (t = {tl:.3f} s)"); stage(None)
+        if tl is not None and tl != tl_prev: t_prog = time.time(); tl_prev = tl
+        if not _rt.is_alive():                                        # prj.run() returned: judge the end
+            txt = prj.output() or ""
+            sc = re.findall(r"Status code\s*=\s*(-?\d+)", txt)
+            bad = [k for k in ("Abnormal termination", "Runtime Error", "stopped unexpectedly", "Simulation stopped", "ERROR:") if k in txt]
+            if _rerr or bad or (sc and sc[-1] != "0"): fail(f"EMTDC: {bad} status code {sc[-1] if sc else '?'} {_rerr}", txt)
+            e_, _ = check_msgs(prj)
+            if e_: fail("PSCAD error messages", txt)
+            outs = sorted(glob.glob(os.path.join(BUILD, "v2_*.out")))
             try: tl = float(open(outs[0]).read().rstrip().split("\n")[-1].split()[0])
             except Exception: tl = None
-        if tl is not None and tl != tl_prev: t_prog = time.time(); tl_prev = tl
-        if time.time() - t_prog > 60 * a.stall: fail(f"no new samples for {a.stall} min (last t = {tl_prev})", txt)
+            if tl is None or tl < a.dur - 0.01: fail(f"run ended early at t = {tl}", txt)
+            break
+        if time.time() - t_prog > 60 * a.stall: fail(f"no new samples for {a.stall} min (last t = {tl_prev})")
         sp = _spread() if tl is not None else None
         if sp is not None and int(time.time() - t0) % 60 < 10: L(f"health: t = {tl:.2f} s, machine frequency spread {sp * 1000:.1f} mHz")
         if a.health_until and sp is not None and 8.0 < tl < a.health_until:
             hbad = hbad + 1 if sp > a.hspread else 0
-            if hbad >= 2: fail(f"health: machine frequency spread {sp * 1000:.0f} mHz > {a.hspread * 1000:.0f} mHz at t = {tl:.2f} s", txt)
+            if hbad >= 2: fail(f"health: machine frequency spread {sp * 1000:.0f} mHz > {a.hspread * 1000:.0f} mHz at t = {tl:.2f} s")
         if tl is not None and int(tl) != last and int(time.time() - t0) % 60 < 10:
             L(f"[{time.time() - t0:5.0f} s wall] simulated {tl:.2f} s"); last = int(tl)
-        if tl is not None and tl >= a.dur - 1e-3 and not pscad.is_busy(): break
-        if sc and sc[-1] == "0" and tl is not None and tl >= a.dur - 0.01: break
+    if t_first is not None and tl - tl_first > 0:
+        L(f"solver speed: {(time.time() - t_first) / (tl - tl_first):.1f} s wall per simulated s (from the first sample, build excluded)")
     L(f"run done: {a.dur} s simulated in {time.time() - t0:.0f} s wall ({(time.time() - t0) / a.dur:.1f} s per simulated s)")
 finally:
-    pscad.quit()
+    stage("quit", 120); pscad.quit(); stage(None)
 for f in glob.glob(os.path.join(BUILD, "v2_*.out")) + glob.glob(os.path.join(BUILD, "v2.infx")) + glob.glob(os.path.join(BUILD, "*.snp")):
+    dst = os.path.join(OUTD, os.path.basename(f))
+    if os.path.exists(dst): os.remove(dst)                            # rerun of the same tag
     (shutil.move if f.endswith(".out") else shutil.copy)(f, OUTD)   # S30: no duplicate .out (disk full 2026-11-26)
 L("outputs copied to", OUTD)

@@ -22,7 +22,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 ap = argparse.ArgumentParser(); ap.add_argument("--port", type=int, default=8765); ap.add_argument("--hours", type=float, default=12)
 ap.add_argument("--done-min", type=float, default=30.0); ap.add_argument("--clear", action="store_true")
 ap.add_argument("--host", default="127.0.0.1")   # e.g. the Tailscale IP to view it from the phone (tailnet only)
-a = ap.parse_args()
+a = ap.parse_args([] if __name__ != "__main__" else None)
 RUNS, WORK = r"C:\PSCAD_work\v2_runs", r"C:\PSCAD_work"
 
 def last_t(out):
@@ -69,7 +69,8 @@ def runs(filtered=True):
         w = re.search(r"^work: (.+)$", txt, re.M)
         work = w.group(1).strip() if w else (os.path.join(WORK, tag) if os.path.isdir(os.path.join(WORK, tag))
                                              else os.path.join(WORK, "v2sld" if tag.startswith("sld") else "v2"))
-        out = os.path.join(work, "v2.gf81_x86", "v2_01.out"); t0 = os.path.getctime(log)
+        st = re.search(r"^start: (\d+)", txt, re.M)               # run_v2 start time (a rewritten run.log keeps its ctime)
+        out = os.path.join(work, "v2.gf81_x86", "v2_01.out"); t0 = float(st.group(1)) if st else os.path.getctime(log)
         ts = last_t(out) if os.path.exists(out) and os.path.getmtime(out) > t0 else None
         age = now - os.path.getmtime(out) if ts is not None else None
         if "BUILD ERRORS" in txt or "RUN FAILED" in txt or "Traceback" in txt: state = "failed"
@@ -96,7 +97,7 @@ def runs(filtered=True):
             if r["state"] == "failed": return not any(o["work"] == r["work"] and o["t0"] > r["t0"] for o in res)
             return True
         res = [r for r in res if keep(r)]
-    started = [os.path.getctime(os.path.join(RUNS, r["tag"], "run.log")) for r in res]
+    started = [r["t0"] for r in res if "t0" in r]
     for bl in glob.glob(os.path.join(WORK, "*", "build_v2.log")):
         if now - os.path.getmtime(bl) < 180 and not any(s > os.path.getmtime(bl) for s in started):
             last = open(bl, encoding="utf-8", errors="replace").read().strip().split("\n")[-1][:120]
@@ -146,5 +147,6 @@ if a.clear:
     for r in runs(filtered=False):
         if r["state"] in ("done", "failed") and r.get("t0"): hid[r["tag"]] = r["t0"]; n += 1
     json.dump(hid, open(HIDDEN, "w")); print(f"cleared {n} finished/failed runs"); raise SystemExit(0)
-print(f"dashboard on http://{a.host}:{a.port}", flush=True)
-ThreadingHTTPServer((a.host, a.port), H).serve_forever()
+if __name__ == "__main__":                            # run_watch.py imports runs() without starting a server
+    print(f"dashboard on http://{a.host}:{a.port}", flush=True)
+    ThreadingHTTPServer((a.host, a.port), H).serve_forever()
