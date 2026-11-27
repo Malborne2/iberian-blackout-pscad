@@ -644,6 +644,59 @@ VAL; Murcia, Tabernas → SE; Cabra, Guadame, Manzanares → SCE; Vic → CAT.
 for the spatial pattern; the time-free V vs accumulated MW relation; per-plant trips for the 11 Table 3-3 plants;
 tolerance bands.
 
+### 23. Run-speed optimisation: fast cores, France series meter removed, run tooling fixed (2026-11-27, agent: claude-main)
+
+**Method.** 0.3 s smoke runs of the replay case (copies of `C:\PSCAD_work\tst_logic`, later fresh `build_v2.py --replay`
+cases `prf_*`), solver pinned to one logical CPU at High priority, PSCAD window pinned to the compact cores
+(`run_v2.py --affinity N --priority High --gui-affinity 8-23`), speed = `solver speed` line of run_v2 (wall s per
+simulated s from the first sample, build excluded). Model variants are compared only inside one batch run at the same
+time (the absolute values move with the number of busy fast cores: boost clock). Figure `iberia_eq/pscad/figs/opt_speed.png`
+(`opt_speed_fig.py`).
+
+**Hardware / run settings** (Ryzen AI 9 HX 370: logical CPUs 0–7 = 4 fast Zen 5 cores with SMT, 8–23 = Zen 5c):
+- fast core 478 vs compact core 923 s/s: **1.9× faster**; two solvers on one fast core (SMT siblings) 651/678 each:
+  still faster than a compact core, +44 % throughput per fast core.
+- no gain: `compileF_opt_level=3` + `-march=native` (924 vs 925, unpinned pair), `threads=1` (912), ~300 module channels
+  disabled (`trim_channels.py`, 905), coarser sample step and minimised window (earlier). `sparsity_threshold=20`: the
+  run produced no samples (unusable). Power plan set to Best performance (owner approved).
+- one PSCAD window costs ~0.85 core + ~1 core per solver it drives; a simulation set (one PSCAD, 2 solvers) saves ~30 %
+  of the window CPU (`simset_probe.py`), not run time.
+
+**Model cost (profiling, one batch each):**
+- loads frozen at their load-flow R/L (`make_profile_variant.py --freeze-loads`): 553 vs 559 — the varrlc matrix
+  updates are **not** the cost.
+- replay case vs non-replay case: 2× slower; bisected with timing-only `build_v2.py` flags: full 560, France
+  multimeter only 469, France breaker only 327, no series elements 310 (Morocco breaker ~7 %). **The series multimeter on
+  the France tie cost ~42 % of the solver time.** The extra replay logic (~300 control blocks) costs nothing measurable.
+- RES plants disabled (`prf_h`): singular matrix at the plant nodes (`Singularity ... node 105`); dropped (owner: plant
+  cost would only point to aggregation, which is out).
+
+**Adopted (commit 59d426c):** France tie P/Q from the breaker `BRKFR` itself (`BP="PFR"`, `BQ="QFR"`; `BRK_POWER` runs for
+every breaker anyway); no multimeter (`--frmeter` keeps the old tie). Check `chk_frpq.py prf_r rep_n` (same batch): P 251.9 /
+251.9 MW, Q 344.0 / 343.9 Mvar, max 20 ms-mean difference 0.1 MW / 0.4 Mvar, same sign (`figs/chk_frpq.png`); speed
+**436 → 248 s/s (1.75×)**; 168 nodes. `VFR` → use the bus channel `V_FR`; `PHFR` was unused.
+
+**Case generation (commit cae3e38):** `build_v2.py` now writes the schematic XML directly (`pscx_canvas.py`, offline
+canvas: ports from the definitions' `Port` elements with their `cond`, choice labels → indices, case-insensitive names);
+placement 0.8 s instead of ~8 min, whole build incl. PSCAD compile 1 min 16 s. Verified identical to the API-built case
+(`compare_pscx.py`: 2,473 components, 0 parameter differences, 207 wires/buses identical; 171 nodes, 1,288 branches).
+`--api` keeps the old path.
+
+**Run tooling fixes (run_v2.py, run_dashboard.py, run_watch.py; commits 32ad62d…11d79f6):**
+- `prj.run()` blocks until the run ends: before this fix the progress / stall / health checks and the solver pinning
+  acted only after the run. `prj.run()` now runs in a thread; the loop watches the output files only; a bad run is
+  stopped by killing its own solver. (`prj.start()` after `prj.build()` does not start the solver.) `prj.run()` does not
+  recompile an up-to-date case (solver writes 10–20 s after the call).
+- stage watchdog: launch / load 300 s, build 900 s, rebuild + solver start 600 s — a hung run fails within minutes.
+- `run_watch.py`: background watcher that exits on the first failed / stopped / stalled / not-started / finished run.
+- dashboard: `stopped` state (process gone), start time from run.log (`start:` line; Windows keeps a rewritten file's
+  creation time), stale `.out` files deleted at run start, Clear finished button and per-run hide, case generation shown
+  for 10 min of log silence.
+
+**Run strategy from now on:** the critical long run on a fast core alone; tests two per fast core (CPUs 0–7), then
+compact cores; PSCAD windows on CPUs 8–23; replay cases without the France multimeter. Expected long-run speed
+≈ 250 s/s on a fast core vs ~1,100 s/s for the first cascade run (≈ 4×).
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
