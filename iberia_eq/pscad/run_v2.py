@@ -19,6 +19,16 @@ ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld"); ap.add_argument("--st
 ap.add_argument("--health-until", type=float)        # stop if the machines' frequency spread exceeds --hspread before this model time
 ap.add_argument("--hspread", type=float, default=0.5) # Hz (S30 sec 21 lesson 1)
 a = ap.parse_args()
+LOCK = os.path.join(a.work, "run_v2.lock")                           # one run per work folder (S30: duplicate launches
+if os.path.exists(LOCK):                                              # wrote into the same build folder)
+    try:
+        opid = int(open(LOCK).read().split()[0])
+        import subprocess as _sp
+        alive = str(opid) in _sp.run(["tasklist", "/FI", f"PID eq {opid}", "/NH"], capture_output=True, text=True).stdout
+    except Exception: alive = False
+    if alive: print(f"REFUSED: {a.work} is in use by run_v2 PID {opid}"); raise SystemExit(6)
+open(LOCK, "w").write(f"{os.getpid()} {a.tag}")
+import atexit; atexit.register(lambda: os.path.exists(LOCK) and open(LOCK).read().split()[0] == str(os.getpid()) and os.remove(LOCK))
 OUTD = os.path.join(r"C:\PSCAD_work\v2_runs", a.tag); os.makedirs(OUTD, exist_ok=True)
 BUILD = os.path.join(a.work, "v2.gf81_x86")
 log = open(os.path.join(OUTD, "run.log"), "w")
