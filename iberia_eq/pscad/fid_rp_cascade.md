@@ -134,3 +134,7 @@ Table 3-3 trips reproduced: 0 of 11
 | minimum frequency [Hz] | 47.408 | 37.137 |
 | maximum 400 kV voltage [kV] | 446.779 | 619.231 |
 | Carmona voltage at 12:32:56 [kV] | 426.915 | 419.621 |
+
+**Primary score** (mean RMSE/tolerance of the system-level metrics, lower is better, <= 0.5 good, > 1 poor): P0 0.36  P1 2.54  P2 3.00  P3 3.00
+
+figures: iberia_eq/pscad/figs/fid_rp_cascade_overview.png, _sequence.png, _collapse.png, _score.png

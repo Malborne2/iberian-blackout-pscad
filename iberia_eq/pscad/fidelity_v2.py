@@ -307,7 +307,7 @@ for tier, name, rows in SIG:
         if d and ph != "all": PS.setdefault(ph.split()[0], []).append(min(d["rmse"] / sc, 3.0))
 pss = "  ".join(f"{k} {np.mean(v):.2f}" for k, v in PS.items())
 ax[0].set_title(f"Signal fidelity per phase (P primary = system level, bold)\nPRIMARY SCORE (mean RMSE/tol, lower is better): {pss}", fontsize=10)
-M(f"\n**Primary score** (mean RMSE/tolerance of the system-level metrics, lower is better, ≤ 0.5 good, > 1 poor): {pss}")
+M(f"\n**Primary score** (mean RMSE/tolerance of the system-level metrics, lower is better, <= 0.5 good, > 1 poor): {pss}")
 seq_err = [abs(s["tmod"] - s["trep"]) for s in SEQ if np.isfinite(s["tmod"])]
 cats = ["plant trips\nreproduced", "defence-plan\nthresholds reached", "median |timing\nerror| [s]"]
 dpr = sum(np.isfinite(tm) for _, _, tm in DP[:7])
