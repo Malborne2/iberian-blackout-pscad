@@ -16,6 +16,8 @@ ap = argparse.ArgumentParser()
 ap.add_argument("tag"); ap.add_argument("--dur", type=float, default=10.0); ap.add_argument("--snap", type=float)
 ap.add_argument("--from", dest="frm"); ap.add_argument("--sample", default="200"); ap.add_argument("--step", default="20")
 ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld"); ap.add_argument("--stall", type=float, default=10.0)
+ap.add_argument("--health-until", type=float)        # stop if the machines' frequency spread exceeds --hspread before this model time
+ap.add_argument("--hspread", type=float, default=0.5) # Hz (S30 sec 21 lesson 1)
 a = ap.parse_args()
 OUTD = os.path.join(r"C:\PSCAD_work\v2_runs", a.tag); os.makedirs(OUTD, exist_ok=True)
 BUILD = os.path.join(a.work, "v2.gf81_x86")
@@ -98,6 +100,29 @@ try:
     if errs: L("BUILD ERRORS:"); [L("  ", e) for e in errs[:20]]; raise SystemExit(1)
     if a.frm: shutil.copy(a.frm, os.path.join(BUILD, os.path.basename(a.frm)))
     t0 = time.time(); prj.run(); last = -1; t_prog = time.time(); tl_prev = None
+    import xml.etree.ElementTree as ETx
+    WS = []                                                           # (file no, column) of every SyncUnit Wspd channel
+    def _ws_index():
+        names = []
+        for an in ETx.parse(os.path.join(BUILD, "v2.infx")).getroot().iter("Analog"):
+            d = int(an.get("dim", "1")); n = an.get("name")
+            names += [n] if d == 1 else [f"{n}[{k + 1}]" for k in range(d)]
+        return [(i // 10 + 1, i % 10 + 1) for i, n in enumerate(names) if "SyncUnit(" in n and n.endswith(":Wspd")]
+    def _spread():
+        """frequency spread [Hz] of all machines at the latest common sample (S30 sec 21 lesson 1)."""
+        if not WS:
+            try: WS.extend(_ws_index())
+            except Exception: return None
+        fs = []
+        for fno, col in WS:
+            try:
+                with open(os.path.join(BUILD, f"v2_{fno:02d}.out"), "rb") as fh:
+                    fh.seek(0, 2); n = fh.tell(); fh.seek(max(0, n - 4000))
+                    ln = fh.read().decode(errors="replace").strip().split("\n")[-2].split()
+                fs.append(float(ln[col]) / (2 * 3.14159265))
+            except Exception: return None
+        return (max(fs) - min(fs)) if fs else None
+    hbad = 0
     def fail(why, txt):
         L("RUN FAILED:", why); e_, w_ = check_msgs(prj)
         for e in e_: L("  error:", e)
@@ -118,6 +143,11 @@ try:
             except Exception: tl = None
         if tl is not None and tl != tl_prev: t_prog = time.time(); tl_prev = tl
         if time.time() - t_prog > 60 * a.stall: fail(f"no new samples for {a.stall} min (last t = {tl_prev})", txt)
+        sp = _spread() if tl is not None else None
+        if sp is not None and int(time.time() - t0) % 60 < 10: L(f"health: t = {tl:.2f} s, machine frequency spread {sp * 1000:.1f} mHz")
+        if a.health_until and sp is not None and 8.0 < tl < a.health_until:
+            hbad = hbad + 1 if sp > a.hspread else 0
+            if hbad >= 2: fail(f"health: machine frequency spread {sp * 1000:.0f} mHz > {a.hspread * 1000:.0f} mHz at t = {tl:.2f} s", txt)
         if tl is not None and int(tl) != last and int(time.time() - t0) % 60 < 10:
             L(f"[{time.time() - t0:5.0f} s wall] simulated {tl:.2f} s"); last = int(tl)
         if tl is not None and tl >= a.dur - 1e-3 and not pscad.is_busy(): break

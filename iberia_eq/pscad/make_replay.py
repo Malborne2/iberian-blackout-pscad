@@ -18,10 +18,13 @@ from legacy_out import load
 from pmu import pmu
 
 ap = argparse.ArgumentParser(); ap.add_argument("name"); ap.add_argument("--settle", required=True)
-ap.add_argument("--relays", action="store_true"); ap.add_argument("--nuclear", action="store_true"); a = ap.parse_args()
-T0 = 30.0
+ap.add_argument("--relays", action="store_true"); ap.add_argument("--nuclear", action="store_true")
+ap.add_argument("--src", default=r"C:\PSCAD_work\v2sld_r"); ap.add_argument("--t0", type=float, default=30.0); ap.add_argument("--tw", type=float, default=5.0)
+a = ap.parse_args()
+T0, TW, TC = a.t0, a.tw, 76.0                                    # same time map as build_v2 --replay (S30 sec 21)
+def MT(r): return T0 + r / TW if r < TC else T0 + TC / TW + (r - TC)
 DST = os.path.join(r"C:\PSCAD_work", a.name); os.makedirs(DST, exist_ok=True); PSCX = os.path.join(DST, "v2.pscx")
-shutil.copy(r"C:\PSCAD_work\v2sld_r\v2.pscx", PSCX); rep = open(os.path.join(DST, "replay_settings.txt"), "w")
+shutil.copy(os.path.join(a.src, "v2.pscx"), PSCX); rep = open(os.path.join(DST, "replay_settings.txt"), "w")
 def R(*x): print(*x); print(*x, file=rep)
 R(f"variant {a.name} from C:\\PSCAD_work\\v2sld_r, settle {a.settle}, t0 = {T0} s = 12:32:00")
 def sup(defn, match, sets):
@@ -30,7 +33,7 @@ def sup(defn, match, sets):
     if r.returncode: raise SystemExit(1)
 if a.nuclear:                       # Table 3-1: 41a 12:33:22.702 1,045 MW; 41c 23.515 653 MW (Almaraz II, model 660); 46 23.590 1,692 MW
     for p0, s, ts in ((1045.0, 1222.2, 82.702), (660.0, 1111.1, 83.515), (1692.0, 2144.4, 83.590)):
-        sup("SyncUnit", [f"P0={p0}"], [f"Ttrip={T0 + ts:.3f}", f"Ptrip={-p0 / s:.4f}"])
+        sup("SyncUnit", [f"P0={p0}"], [f"Ttrip={MT(ts):.3f}", f"Ptrip={-p0 / s:.4f}"])
 if a.relays:
     t, c = load(os.path.join(r"C:\PSCAD_work\v2_runs", a.settle), "v2")
     def vpre(b):

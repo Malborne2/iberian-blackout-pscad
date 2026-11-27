@@ -22,6 +22,13 @@ HERE = os.path.dirname(os.path.abspath(__file__)); IEQ = os.path.dirname(HERE)
 ap = argparse.ArgumentParser(); ap.add_argument("--probe", action="store_true"); ap.add_argument("--nobuild", action="store_true")
 ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld")
 ap.add_argument("--replay", action="store_true")     # add the V2_EVENT_SPEC replay elements (S30 sec 16)
+ap.add_argument("--t0", type=float, default=30.0)    # model time of 12:32:00 (short tests: 6)
+ap.add_argument("--tw", type=float, default=5.0)     # time compression of report 0..76 s (S30 sec 21); 1 = real time
+ap.add_argument("--fr-dang", type=float, default=0.0)   # France source angle shift [deg] (S30 sec 22: -3.1 -> ~+390 MW export)
+ap.add_argument("--pv-mw", type=float, default=4447.0)  # rooftop PV < 1 MW production ([FR] 4.3.3.2.1)
+ap.add_argument("--pv-ftrip", type=float, default=0.15) # fraction of it that trips at full band [inf, calibrated]
+ap.add_argument("--pv-dv0", type=float, default=3.0)    # trip band start above the load-flow bus voltage [kV] [inf]
+ap.add_argument("--pv-dv1", type=float, default=15.0)   # trip band end [kV] [inf]
 a = ap.parse_args()
 REPLAY = a.replay
 WORK = a.work; os.makedirs(WORK, exist_ok=True); PSCX = os.path.join(WORK, "v2.pscx")
@@ -228,7 +235,9 @@ try:
             dlab(mp["IN1"].x, mp["IN1"].y, f"PR{k + 1}u"); dlab(mp["IN2"].x, mp["IN2"].y, "RF_" + RESGRP(bus)); dlab(mp["OUT"].x, mp["OUT"].y, f"PR{k + 1}")
         else:
             dlab(po.x, po.y, f"PR{k + 1}")
-        hang(bus, "v2", "RES_Plant", prm, "AC", node={"DCP": "RAILP", "DCN": "RAILN"}, data={"Pref": f"PR{k + 1}", "Force": "FRC"}, w=SLOT + 3); count("res")
+        dd = {"Pref": f"PR{k + 1}", "Force": "FRC"}
+        if REPLAY: dd["Trip"] = f"T_{nm}"                    # named per-plant trip channel (S30 sec 21 lesson 3)
+        hang(bus, "v2", "RES_Plant", prm, "AC", node={"DCP": "RAILP", "DCN": "RAILN"}, data=dd, w=SLOT + 3); count("res")
         L(f"RES {nm:16s} at {bus:7s} {mw:7.1f} MW  S {S:7.1f}")
     # ---------------- loads, shunts, HVDC (varrlc to ground) ----------------
     PLANT_ZONES = {b for _, b, _ in RESP} | {"BAD", "WAN"}
@@ -254,12 +263,13 @@ try:
         dlab(gp[ki].x, gp[ki].y, f"X{sig}")
         if REPLAY:                                           # LFDD / HVDC factor (sec 16): R, L = base * V^k / m
             dlab(gp[ko].x, gp[ko].y, f"{sig}g"); _, dp = ctl(ZOF[bus], "master", "div", None)
-            dlab(dp["IN1"].x, dp["IN1"].y, f"{sig}g"); dlab(dp["IN2"].x, dp["IN2"].y, "MHV" if "HVDC" in tag else "M_" + CTRY(bus)); dlab(dp["OUT"].x, dp["OUT"].y, sig)
+            dlab(dp["IN1"].x, dp["IN1"].y, f"{sig}g"); dlab(dp["IN2"].x, dp["IN2"].y, "MHV" if "HVDC" in tag else ("MZ_" + sb if CTRY(bus) == "ES" else "M_" + CTRY(bus))); dlab(dp["OUT"].x, dp["OUT"].y, sig)
         else:
             dlab(gp[ko].x, gp[ko].y, sig)
         prm = dict(Name=f"V{tag}"[:30], RLC="0" if kind == "R" else "1", X0=f"{base:.6g}"); prm["R" if kind == "R" else "L"] = sig
         hang(bus, "v2", "varrlc0", prm, "A", ground=("B",), w=6); count("varrlc_exp")   # X0: start-up value, S30 sec 9
     ALPHA, BETA = 0.8, 4.1
+    LOADBUS = {}                                             # Spanish exp-load buses -> P (rooftop PV, sec 22)
     def shunt_rl(bus, Pmw, Qmvar, tag, VLL=None):
         VLL = VLL or 400.0 * V[bus]
         if Pmw > 1.0: hang(bus, "master", "varrlc", dict(Name=f"R{tag}", RLC="0", R=f"{VLL ** 2 / Pmw:.6g}"), "A", ground=("B",), w=6); count("varrlc")
@@ -274,6 +284,7 @@ try:
             al, be = (0.0, 0.0) if ld["name"].startswith("HVDC") else (ALPHA, BETA)
             vlf = V[bus]
             if P_ > 1.0: exp_branch(bus, "R", 400.0 ** 2 / (P_ / vlf ** al), 2 - al, tg)
+            if P_ > 1.0 and al > 0 and CTRY(bus) == "ES": LOADBUS[bus] = LOADBUS.get(bus, 0.0) + P_
             if Q_ > 1.0: exp_branch(bus, "L", 400.0 ** 2 / (W50 * Q_ / vlf ** be), 2 - be, tg)
             if Q_ < -1.0: shunt_rl(bus, 0.0, Q_, tg + "c")      # net capacitive remainder (netted RES) stays constant Z
         else:
@@ -294,18 +305,19 @@ try:
         _, Pm = hang("FR", "master", "multimeter", dict(MeasPh="1", RMS="1", MeasP="1", MeasQ="1", S="1.0", BaseV="400",
                                                          P="PFR", Q="QFR", Vrms="VFR", Ph="PHFR"), None, w=6)
         ks = sorted(Pm, key=lambda k: Pm[k].x); nlab(Pm[ks[0]].x, Pm[ks[0]].y, "FR_B"); nlab(Pm[ks[-1]].x, Pm[ks[-1]].y, "FR_S"); count("meter_fr")
-        const(0.0, "BRKFR", "FR")                            # 0 = closed; the out-of-step logic drives it later (P8)
         for n_ in ("PFR", "QFR", "PHFR", "VFR"):             # P > 0: Iberia -> France (export)
             _, gp = ctl("FR", "master", "pgb", dict(Name=n_)); q_ = list(gp.values())[0]; dlab(q_.x, q_.y, n_)
         hang("FR", "master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
-                                             Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), None, node={"N3": "FR_S"}, ground=("N",), w=SLOT + 2)
+                                             Ph=f"{np.degrees(np.angle(Ef)) + a.fr_dang:.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), None, node={"N3": "FR_S"}, ground=("N",), w=SLOT + 2)
         count("source3")
     else:
         hang("FR", "master", "source3", dict(Type="4", Imp="IMPEDANCE", Z1="20.0 [ohm]", Phi1="85.0 [deg]", Vm=f"{abs(Ef):.3f} [kV]", Es=f"{abs(Ef):.3f} [kV]",
                                              Ph=f"{np.degrees(np.angle(Ef)):.4f} [deg]", F="50.0 [Hz]", F0="50.0 [Hz]"), "N3", ground=("N",), w=SLOT + 2); count("source3")
     # ---------------- replay logic (V2_EVENT_SPEC, RUNLOG S30 sec 16): signals only, own area below the diagram ----------------
     if REPLAY:
-        T0 = 30.0                                            # model time of 12:32:00 (settle snapshot at 28 s)
+        T0, TW, TC = a.t0, a.tw, 76.0                        # 12:32:00 at T0; report 0..TC compressed TW x, then 1:1 (sec 21)
+        def MT(r): return T0 + r / TW if r < TC else T0 + TC / TW + (r - TC)
+        L(f"replay time map: model = {T0} + r/{TW} for r < {TC} s, then real time; 12:33:16 -> {MT(TC):.3f} s, 12:33:24 -> {MT(84):.3f} s")
         LY0 = max(ZY.values()) + 80; LG = {"k": 0}
         a_ = cv.add_component("master", "annotation", 10, LY0 - 6, 0)
         a_.parameters(AL1=f"REPLAY LOGIC: defence plans (pumps, LFDD), Morocco relay, HVDC block, RES drivers; t0 = {T0:g} s = 12:32:00", AL2="")
@@ -359,22 +371,45 @@ try:
         # at 20.180 ([CA] p.55-57) -> 49.4 Hz, 50 ms [inf]
         ufstage("BRKMA", "F_MA", 49.4, delay=0.05)
         # HVDC France (F7): Pmode 1, 1,000 MW export, blocked at event 51 (12:33:23.960)
-        tstep("HVB", T0 + 83.960); wsum("MHVx", [(-1.0, "HVB")], base="ONE_")
+        tstep("HVB", MT(83.960)); wsum("MHVx", [(-1.0, "HVB")], base="ONE_")
         lg("hardlimit", dict(UL="1.0", LL="0.001"), {"I": "MHVx", "O": "MHV"})
         # RES drivers (F1/F2): events 2a (north, wind/PV) and 2b (south) as MW steps (Table 3-1), plus the secondary-regulation
         # set-point ramp of 270 MW over 57 s pro-rata on all plants ([CA] p.88 minus the 208 MW of 2a/2b) [inf]
         PG = {}
         for nm_, b_, mw_ in RESP: PG[RESGRP(b_)] = PG.get(RESGRP(b_), 0.0) + mw_
         PSUM = sum(PG.values())
-        lg("upramp", dict(X1=f"{T0:g}", X2=f"{T0 + 57:g}", Y2=f"{270.0 / PSUM:.6f}"), {"I": "TR", "O": "RRAMP"})
+        lg("upramp", dict(X1=f"{MT(0):g}", X2=f"{MT(57):g}", Y2=f"{270.0 / PSUM:.6f}"), {"I": "TR", "O": "RRAMP"})
         E2 = {"N": [(5, 2.57), (9, 27.51), (25, 19.21), (29, 78.05), (45, 0.59), (49, 14.49), (53, 31.92)],
               "S": [(9, 7.65), (25, 3.43), (29, 2.26), (53, 20.78)]}
         for g_ in sorted(PG):
             terms = [(-1.0, "RRAMP")]
             for j, (ts_, mw_) in enumerate(E2.get(g_, [])):
-                tstep(f"E{g_}{j}", T0 + ts_); terms.append((-mw_ / PG[g_], f"E{g_}{j}"))
+                tstep(f"E{g_}{j}", MT(ts_)); terms.append((-mw_ / PG[g_], f"E{g_}{j}"))
             wsum(f"RF_{g_}", terms, base="ONE_")
-        for n_ in ("BRKM1", "BRKM3", "BRKMA", "M_ES", "M_PT", "MHV", "RF_N", "RF_S"):
+        # France AC separation (P8, first version forced): event 31b Argia-Hernani 12:33:21.535
+        tstep("BRKFR", MT(81.535))
+        # rooftop PV < 1 MW (P2, sec 22): per Spanish load bus, a latched trip fraction s in [0, 1] that rises with the filtered
+        # bus voltage across [V_lf + dv0, V_lf + dv1]; the zone load factor MZ = M_ES * (1 + PV_tripped / P_load)
+        PVL = sum(LOADBUS.values()); lg("compare", dict(X=f"{MT(0):g}", OL="0.0", OH="1.0"), {"I": "TR", "O": "PVEN"})
+        for b_, pl in sorted(LOADBUS.items()):
+            sb = lab(b_)[2:]; v0 = (400 * V[b_] + a.pv_dv0) / 400; v1 = (400 * V[b_] + a.pv_dv1) / 400
+            pvmw = a.pv_mw * a.pv_ftrip * pl / PVL                 # MW that trips at s = 1 [inf: rooftop PV in proportion to load]
+            lg("gain", dict(G=f"{1.0 / (v1 - v0):.6g}"), {"I": f"VF_{sb}", "O": f"PVa_{sb}"})
+            lg("const", dict(Value=f"{v0 / (v1 - v0):.6g}"), {"OUT": f"PVo_{sb}"})
+            lg("sumjct", dict(D="ADD", F="SUBTRACT"), {"IND": f"PVa_{sb}", "INF": f"PVo_{sb}", "OUT": f"PVb_{sb}"})
+            lg("hardlimit", dict(UL="1.0", LL="0.0"), {"I": f"PVb_{sb}", "O": f"PVt_{sb}"})       # target fraction
+            lg("sumjct", dict(D="ADD", F="SUBTRACT"), {"IND": f"PVt_{sb}", "INF": f"PVs_{sb}", "OUT": f"PVe_{sb}"})
+            lg("hardlimit", dict(UL="10.0", LL="0.0"), {"I": f"PVe_{sb}", "O": f"PVu_{sb}"})       # latch: only upwards
+            lg("mult", None, {"IN1": f"PVu_{sb}", "IN2": "PVEN", "OUT": f"PVg_{sb}"})
+            lg("integral", dict(T="0.05", YHi="1.0", YLo="0.0", Yo="0.0"), {"I": f"PVg_{sb}", "O": f"PVs_{sb}", "R": "ZERO"})
+            lg("gain", dict(G=f"{pvmw / pl:.6g}"), {"I": f"PVs_{sb}", "O": f"PVf_{sb}"})
+            lg("sumjct", dict(D="ADD", F="ADD"), {"IND": "ONE_", "INF": f"PVf_{sb}", "OUT": f"PVF_{sb}"})
+            lg("mult", None, {"IN1": "M_ES", "IN2": f"PVF_{sb}", "OUT": f"MZ_{sb}"})
+            L(f"  rooftop PV {b_:6s}: load {pl:7.1f} MW, trips {pvmw:6.1f} MW across {400 * v0:.1f}..{400 * v1:.1f} kV")
+        L(f"rooftop PV: {a.pv_mw * a.pv_ftrip:.0f} MW can trip on {len(LOADBUS)} Spanish load buses")
+        for nm_, b_, mw_ in RESP:
+            P_ = lg("pgb", dict(Name=f"T_{nm_}")); q_ = list(P_.values())[0]; dlab(q_.x, q_.y, f"T_{nm_}")
+        for n_ in ("BRKM1", "BRKM3", "BRKMA", "BRKFR", "M_ES", "M_PT", "MHV", "RF_N", "RF_S", "PVF_MAD", "PVF_CAT"):
             P_ = lg("pgb", dict(Name=n_)); q_ = list(P_.values())[0]; dlab(q_.x, q_.y, n_)
         L(f"replay logic: {LG['k']} blocks in the logic area (y from {LY0}); RES groups {{g: MW}} = {PG}")
     # ---------------- busbars, wires, named measuring stubs + voltage channels ----------------
