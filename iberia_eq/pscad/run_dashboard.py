@@ -41,7 +41,10 @@ def runs(filtered=True):
     now = time.time(); res = []
     for log in glob.glob(os.path.join(RUNS, "*", "run.log")):
         try:                                                 # a run folder may be deleted while scanning
-            if now - os.path.getmtime(log) > 3600 * a.hours: continue
+            w_ = re.search(r"^work: (.+)$", open(log, encoding="utf-8", errors="replace").read(), re.M)
+            o_ = os.path.join(w_.group(1).strip(), "v2.gf81_x86", "v2_01.out") if w_ else ""
+            last_ = max(os.path.getmtime(log), os.path.getmtime(o_) if o_ and os.path.exists(o_) else 0)
+            if now - last_ > 3600 * a.hours: continue        # a long run writes its .out, not its run.log
             tag = os.path.basename(os.path.dirname(log)); txt = open(log, encoding="utf-8", errors="replace").read(); t0 = os.path.getctime(log)
         except OSError:
             continue
