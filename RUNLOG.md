@@ -533,6 +533,51 @@ snapshot at 28 s; 475 s wall per simulated s):
 - Frequency within ±0.05 Hz.
 - **Open:** P2 rooftop PV (bench first); France source angle (initial AC flow).
 
+### 20. Fidelity analysis of `rp_cascade` against the Final Report; failure: embedded unit E3 CAT pulls out of step (2026-11-27, agent: claude-main)
+
+`rp_cascade` ran to 120 s (46,369 s wall, 386 s per simulated s). `python iberia_eq/pscad/fidelity_v2.py rp_cascade` (new
+script): tables in `iberia_eq/pscad/fid_rp_cascade.md`, figures `iberia_eq/pscad/figs/fid_rp_cascade_{overview,sequence,collapse,score}.png`.
+
+**Report data used** (digitised in stage 0, t = s after 12:32:00): Fig 1-10 (Carmona V, Iberia / CE f), Fig 3-5 (Carmona V,
+Spain net exchange), Fig 3-7a (accumulated loss, 400 kV maximum), Figs 4-89/90/91 (f, V, Spain–France P: PMU and
+[FR] simulation), Table 3-1 (`data/events.csv`), [CA] p.55–57 / p.104–105.
+
+**Metrics:** per phase (P0 pre-event 0–57.2 s, P1 57.2–76.4 s, P2 cascade 76.4–79.6 s, P3 collapse 79.6–84 s):
+bias / RMSE / max error / r of each signal; event matching with timing error and Kendall τ; milestones.
+
+**P0, pre-event minute — the valid part:**
+
+| signal | bias | RMSE | r |
+|---|---|---|---|
+| 400 kV maximum | +7.9 kV | 8.6 kV | 0.84 |
+| Carmona (model bus WAN) | +3.7 kV | 6.1 kV | 0.80 |
+| Iberian frequency | +0.024 Hz | — | — |
+
+The model starts ≈ 10 kV high (420 vs 410 kV) and rises ≈ 4 kV instead of ≈ 12 kV. France export ≈ 1,100 → 730 MW
+against 1,500 → 450 (§19).
+
+**From ≈ 58 s the run is invalid.** One machine, **E3 embedded CAT** (535 MW at the CAT bus, S = P/0.9, loading 0.9 pu),
+pulls out of step:
+- its Q goes from −0.02 to −1.9 pu (under-excited) while EFD rises 1.5 → 3.2;
+- it slips at ≈ 58.5 s and its speed runs away (53 Hz at 60 s);
+- voltages and frequency are destroyed, and the defence plans act ≈ 2.2–2.6 s early, from a wrong trajectory;
+- the Morocco relay acts 13.5 s early;
+- **no RES OV relay tripped (0 of 11 Table 3-3 plants)**;
+- all P1–P3 metrics are therefore meaningless (e.g. minimum f 37 Hz vs 47.4 Hz).
+
+**Cause, measured:** E3 CAT's speed relative to the machine mean oscillates at **0.12 Hz with steadily growing
+amplitude** from the snapshot onwards: 4 → 58 mHz p-p over 55 s. The growth is identical in `rp_forced` and
+`rp_cascade` (once instances are matched per run: SyncUnit numbering differs between builds), and the slow spread
+growth of `sld_drift60` (§16) is the same mode. 0.12 Hz is too slow for a rotor mode. Suspect: the outer Q loop of the
+embedded units (Kiq 0.05 = 10 × the generators', Kdrp 0, pure integral). Test (from the `rp_settle30` snapshot, to
+t = 60 s): `rp_kiqe005` (embedded Kiq 0.005) and `rp_kiqe0` (loop off).
+
+**Analysis tooling notes:**
+- The RES instance → plant matching by amplitude(IsrcA)/ID failed (17 of 21 uncertain); it needs another key before
+  relay trips can be attributed.
+- Spain's net exchange (Fig 3-5) cannot be rebuilt from the recorded channels (no line flows); only the
+  Spain–France tie is compared.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
