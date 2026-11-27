@@ -714,6 +714,39 @@ The 0.1 Hz growing mode (amplitude ×1.8 per 10 s) is gone with either value; th
 9 mHz at 60 s. **Adopted: embedded Kiq 0.005** (keeps a slow Q hold, same stability as 0); `build_v2.py --kiq-emb`
 (default 0.005, old 0.05). Outputs of both test runs deleted after this entry (figure kept).
 
+### 25. Mechanism tests: RES OV relay POI measurement fixed; PSCAD comms over loopback; trip leaves the filter on (2026-11-27, agent: claude-main)
+
+**PSCAD ↔ EMTDC address.** PSCAD's `ip_address` setting was the Tailscale address; with the owner's Cisco AnyConnect
+VPN up every solver silently failed to connect back (prj.run blocked, 4 runs hung ~10 min, caught by the stage
+watchdog). `run_v2.py` / `build_v2.py` set `ip_address = 127.0.0.1` after launch (test with the VPN up: solver writes
+after 10 s). Runs no longer depend on Tailscale or the VPN state (commit 0072211).
+
+**tst_drv (old case, cold, t0 6, tw 20, scheduled events only):** RES driver steps, nuclear trips, BRKFR, HVDC block,
+pump / Morocco breakers and the LFDD factors all act (`figs/replay_tst_drv.png`); the collapse at the end is expected
+(forced drivers, no relays, no settle). `replay_fig.py` still plots model − t0, not the inverse time map (to fix).
+
+**RES OV relay, POI side (MeasSide 1) never tripped.** `tst_rly` (Granada 1.0275 pu / 0.5 s, Sevilla 1.0308 / 2 s):
+no trip although VDF reached 1.07–1.08; `rp_cascade` §20: 0 of 11. Benches (cold 1.2 s, all plants Vt1 0.9, Tt1 0.05,
+`add_probe.py` channels VPOIRMS VDF VMF ARM MS TRIP1): MeasSide 0 → all 21 trip at 0.551 s (ARM 0.5 + Tt1 0.05);
+MeasSide 1 → none, VPOIRMS 0.725 vs VDF 1.025 pu = 1/√2: the RMS block (stage3 `build_resplant.py` WP6 item 4) takes
+VA_PU in pu of the **peak** base. `master:rms-inst` scales only as Type Digital (OUT = RMS / Scale; Analog ignores Scale
+— first try with Scale √2 on Analog changed nothing). **Fix `fix_poirms.py`** (Type 1, Scale 1/√2, 50 Hz), called by
+`build_v2.py`: VPOIRMS = VDF within 0.01 pu, all 21 trip at 0.551 s with Vt1 1.0 (commit 97bae58). Constant inside the
+module: snapshot-compatible.
+
+**What a trip removes (test 5, `trip_mw_check.py rly_m0`):** P → 0 in all 21 plants (|ID| < 0.005 pu); a reactive
+current of 0.06–0.12 pu of the plant rating remains: the Rf–Cf filter stays on the bus (stage3 design choice "inverters
+block, main breaker closed"); ≈ 0.06 pu is its charging current at 400 kV. In the event the plants disconnected.
+A breaker per plant costs 63 nodes (168 → 231 > 200). Tried a 0-node controlled current source per phase cancelling
+ICx·TRIP (`add_cfoff.py`): sign + → numerical blow-up (NaN), sign − → grid-side current only 0.083 → 0.064 pu
+(one-step-delayed feedback). **Not adopted; recorded as a known limitation**: ≈ 0.06 pu × the tripped capacity
+(≈ 3 GW in the event) ≈ 0.2 Gvar capacitive left on the buses after the trips. Revisit (breakers on the few largest
+tripping plants, within the node budget) if the replay's post-trip voltage rise is too high.
+
+**Running:** `tst_f3` (FTEST −2.2 Hz over 10.5–20.5 s: pump / LFDD / Morocco stages) and `tst_v3` (VTEST +0.05 pu:
+rooftop PV band) — cold, t0 1000 (no scheduled events), relay fix in; v3 settles `v3a_settle` / `v3b_settle`
+(France angle −3.1 / −4.0°) to the 28 s snapshot.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
