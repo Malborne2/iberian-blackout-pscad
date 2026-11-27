@@ -402,8 +402,8 @@ try:
             lg("hardlimit", dict(UL="10.0", LL="0.0"), {"I": f"PVe_{sb}", "O": f"PVu_{sb}"})       # latch: only upwards
             lg("mult", None, {"IN1": f"PVu_{sb}", "IN2": "PVEN", "OUT": f"PVg_{sb}"})
             lg("integral", dict(T="0.05", YHi="1.0", YLo="0.0", Yo="0.0"), {"I": f"PVg_{sb}", "O": f"PVs_{sb}", "R": "ZERO"})
-            lg("gain", dict(G=f"{pvmw / pl:.6g}"), {"I": f"PVs_{sb}", "O": f"PVf_{sb}"})
-            lg("sumjct", dict(D="ADD", F="ADD"), {"IND": "ONE_", "INF": f"PVf_{sb}", "OUT": f"PVF_{sb}"})
+            lg("gain", dict(G=f"{pvmw / pl:.6g}"), {"I": f"PVs_{sb}", "O": f"PVm_{sb}"})
+            lg("sumjct", dict(D="ADD", F="ADD"), {"IND": "ONE_", "INF": f"PVm_{sb}", "OUT": f"PVF_{sb}"})
             lg("mult", None, {"IN1": "M_ES", "IN2": f"PVF_{sb}", "OUT": f"MZ_{sb}"})
             L(f"  rooftop PV {b_:6s}: load {pl:7.1f} MW, trips {pvmw:6.1f} MW across {400 * v0:.1f}..{400 * v1:.1f} kV")
         L(f"rooftop PV: {a.pv_mw * a.pv_ftrip:.0f} MW can trip on {len(LOADBUS)} Spanish load buses")
