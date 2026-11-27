@@ -14,7 +14,7 @@ import mhi.pscad
 
 ap = argparse.ArgumentParser()
 ap.add_argument("tag"); ap.add_argument("--dur", type=float, default=10.0); ap.add_argument("--snap", type=float)
-ap.add_argument("--from", dest="frm"); ap.add_argument("--sample", default="200"); ap.add_argument("--step", default="20")
+ap.add_argument("--from", dest="frm"); ap.add_argument("--sample", default="1000")   # us; S30 sec 23: 200 us made each PSCAD GUI use 1.2-1.9 cores; ap.add_argument("--step", default="20")
 ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld"); ap.add_argument("--stall", type=float, default=10.0)
 ap.add_argument("--health-until", type=float)        # stop if the machines' frequency spread exceeds --hspread before this model time
 ap.add_argument("--hspread", type=float, default=0.5) # Hz (S30 sec 21 lesson 1)
