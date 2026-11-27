@@ -17,6 +17,9 @@ ap.add_argument("tag"); ap.add_argument("--dur", type=float, default=10.0); ap.a
 ap.add_argument("--from", dest="frm"); ap.add_argument("--step", default="20")
 ap.add_argument("--sample", default="1000")   # us; S30 sec 23: at 200 us each PSCAD process used 1.2-1.9 cores
 ap.add_argument("--work", default=r"C:\PSCAD_work\v2sld"); ap.add_argument("--stall", type=float, default=10.0)
+ap.add_argument("--set", nargs="*", default=[])       # extra project settings key=value (S30 sec 23: compileF_opt_level, threads, ...)
+ap.add_argument("--affinity")                          # logical CPUs for the solver, e.g. "0" or "8,10" (0-7 = fast Zen 5 cores)
+ap.add_argument("--priority")                          # solver priority class: High / AboveNormal / Normal
 ap.add_argument("--health-until", type=float)        # stop if the machines' frequency spread exceeds --hspread before this model time
 ap.add_argument("--hspread", type=float, default=0.5) # Hz (S30 sec 21 lesson 1)
 a = ap.parse_args()
@@ -104,6 +107,7 @@ try:
         prm.update(SnapType="1", SnapTime=str(a.snap), snapshot_filename=f"{a.tag}.snp")
     else:
         prm.update(SnapType="0")
+    for kv in a.set: k_, v_ = kv.split("=", 1); prm[k_] = v_
     prj.parameters(**prm); L("run parameters:", {k: prj.parameters().get(k) for k in prm})
     prj.build()
     errs, warns = check_msgs(prj)
@@ -111,6 +115,15 @@ try:
     if errs: L("BUILD ERRORS:"); [L("  ", e) for e in errs[:20]]; raise SystemExit(1)
     if a.frm: shutil.copy(a.frm, os.path.join(BUILD, os.path.basename(a.frm)))
     t0 = time.time(); prj.run(); last = -1; t_prog = time.time(); tl_prev = None
+    if a.affinity or a.priority:                                      # pin / prioritise this run's solver (S30 sec 23)
+        import subprocess as _sp
+        exe = os.path.join(BUILD, "v2.exe").replace("/", "\\")
+        mask = sum(1 << int(x) for x in a.affinity.split(",")) if a.affinity else None
+        ps_ = ("$t=(Get-Date).AddSeconds(120); do { $q=Get-CimInstance Win32_Process -Filter \"Name='v2.exe'\" | ? { $_.ExecutablePath -eq '"
+               + exe + "' }; Start-Sleep -Milliseconds 500 } until ($q -or (Get-Date) -gt $t); if($q){ $pp=Get-Process -Id $q.ProcessId; "
+               + (f"$pp.ProcessorAffinity=[IntPtr]{mask}; " if mask else "") + (f"$pp.PriorityClass='{a.priority}'; " if a.priority else "")
+               + "'pinned ' + $q.ProcessId + ' mask ' + $pp.ProcessorAffinity + ' prio ' + $pp.PriorityClass }")
+        L("solver:", _sp.run(["powershell", "-NoProfile", "-Command", ps_], capture_output=True, text=True).stdout.strip())
     import xml.etree.ElementTree as ETx
     WS = []                                                           # (file no, column) of every SyncUnit Wspd channel
     def _ws_index():
