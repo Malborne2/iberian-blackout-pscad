@@ -75,6 +75,7 @@ import mhi.pscad
 os.environ["PATH"] = os.path.join(WORK, "v2.gf81_x86") + os.pathsep + os.environ.get("PATH", "")   # S30 run-env fix
 def _launch():
     p_ = mhi.pscad.launch(minimize=False, splash=False, timeout=60)
+    if p_.settings().get("ip_address") != "127.0.0.1": p_.settings(ip_address="127.0.0.1")   # S30 sec 25: not over Tailscale / VPN
     if not p_.licensed():
         c = p_.get_available_certificates(); c = next(iter(c.values())) if isinstance(c, dict) else c[0]; p_.get_certificate(c)
     return p_

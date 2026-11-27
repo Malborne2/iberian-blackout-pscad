@@ -9,7 +9,7 @@ contains "Simulation has ended"): after the build and on every poll the PSCAD me
 warnings skill P6.3 treats as errors), the EMTDC output is parsed for its status code and abort lines, and a run with no
 new samples for --stall minutes is stopped. Any of these: messages + output tail to run.log, exit code 2.
 """
-import argparse, glob, os, re, shutil, sys, time
+import argparse, glob, os, re, shutil, subprocess, sys, time
 import mhi.pscad
 
 ap = argparse.ArgumentParser()
@@ -113,6 +113,10 @@ for k_ in range(4):                                                  # S30: laun
 else:
     L("RUN FAILED: PSCAD launch failed 4 times"); raise SystemExit(3)
 try:
+    # S30 sec 25: PSCAD's ip_address setting was the Tailscale address, so EMTDC connected back over Tailscale: with the
+    # Cisco AnyConnect VPN up (or Tailscale down) the solver never started. Loopback works in every network state.
+    if pscad.settings().get("ip_address") != "127.0.0.1": pscad.settings(ip_address="127.0.0.1")
+    L("PSCAD ip_address:", pscad.settings().get("ip_address"))
     if not pscad.licensed():
         c = pscad.get_available_certificates(); c = next(iter(c.values())) if isinstance(c, dict) else c[0]; pscad.get_certificate(c)
     stage("load", 300); pscad.load(os.path.join(a.work, "v2.pscx")); prj = pscad.project("v2")
