@@ -68,7 +68,7 @@ buses = sorted({k[2:-3] for k in c if k.startswith("V_") and k.endswith("[1]")})
 PV = {b: pv(b) for b in buses}; tp = PV[buses[0]][0]
 Vmax = np.max([PV[b][1] for b in buses], axis=0)
 tw, Vw, fw = PV["WAN"]                                     # Carmona (Sevilla 400 kV) ~ model bus WAN
-_, _, fmad = PV["MAD"]
+tmad, Vmad, fmad = PV["MAD"]                               # La Cereal 400 kV (north of Madrid) ~ model bus MAD ([FR] p.299)
 inst = sorted({k.split(":")[0] for k in c if k.startswith("SyncUnit(")})
 Fm = np.array([c[f"{i}:Wspd"] for i in inst]) / (2 * np.pi); Fmean = Fm.mean(axis=0)
 pfr, mhv = g("PFR"), g("MHV")
@@ -137,8 +137,8 @@ SIG = [sig_metrics("400 kV maximum voltage [kV] (Fig 3-7a)", F37["t_sim_s"], F37
        sig_metrics("Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5)", np.r_[F35["t_sim_s"], F110["t_sim_s"]],
                    np.r_[F35["V_carmona_kV"], F110["V_carmona_kV"]], tw, Vw),
        sig_metrics("Iberian frequency [Hz] (Fig 1-10)", F110["t_sim_s"], F110["f_iberia_Hz"], tr, Fmean),
-       sig_metrics("Frequency vs PMU [Hz] (Fig 4-89)", F489["t_sim_s"], F489["f_pmu_Hz"], tr, Fmean),
-       sig_metrics("Voltage vs PMU [pu] (Fig 4-90, Carmona)", F490["t_sim_s"], F490["V_pmu_pu"], tw, Vw / 400.0)]
+       sig_metrics("Frequency vs PMU at La Cereal [Hz] (Fig 4-89; model MAD PMU)", F489["t_sim_s"], F489["f_pmu_Hz"], tmad, fmad),
+       sig_metrics("Voltage vs PMU at La Cereal [pu] (Fig 4-90; model MAD)", F490["t_sim_s"], F490["V_pmu_pu"], tmad, Vmad / 400.0)]
 if pfr is not None:
     SIG.append(sig_metrics("Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR)", F491["t_sim_s"], F491["P_pmu_MW"], tr, pfr + 1000.0 * mhv))
 M("\n## Signal metrics (model - report)\n\n| signal | phase | n | bias | RMSE | max abs err | r |\n|---|---|---|---|---|---|---|")
@@ -257,10 +257,10 @@ fig.tight_layout(); fig.savefig(os.path.join(HERE, "figs", f"fid_{a.tag}_sequenc
 fig, ax = plt.subplots(3, 1, figsize=(12, 11), sharex=True)
 ax[0].plot(F489["t_sim_s"], F489["f_pmu_Hz"], "o-", color=CR, ms=4, lw=1.5, label="PMU (Fig 4-89)")
 ax[0].plot(F489["t_sim_s"], F489["f_sim_Hz"], "-", color=CS, lw=1.2, label="[FR] simulation")
-ax[0].plot(tr, Fmean, color=CM, lw=1.4, label="Model: machine mean"); ax[0].set_ylabel("frequency [Hz]")
+ax[0].plot(tmad, fmad, color=CM, lw=1.4, label="Model: MAD bus PMU frequency"); ax[0].set_ylabel("frequency at La Cereal [Hz]")
 ax[1].plot(F490["t_sim_s"], F490["V_pmu_pu"], "o-", color=CR, ms=4, lw=1.5, label="PMU (Fig 4-90)")
 ax[1].plot(F490["t_sim_s"], F490["V_sim_pu"], "-", color=CS, lw=1.2, label="[FR] simulation")
-ax[1].plot(tw, Vw / 400.0, color=CM, lw=1.4, label="Model: WAN (Sevilla)"); ax[1].set_ylabel("voltage [pu]")
+ax[1].plot(tmad, Vmad / 400.0, color=CM, lw=1.4, label="Model: MAD (La Cereal zone)"); ax[1].set_ylabel("voltage at La Cereal [pu]")
 ax[2].plot(F491["t_sim_s"], F491["P_pmu_MW"], "o-", color=CR, ms=4, lw=1.5, label="PMU (Fig 4-91)")
 ax[2].plot(F491["t_sim_s"], F491["P_sim_MW"], "-", color=CS, lw=1.2, label="[FR] simulation")
 if pfr is not None: ax[2].plot(tr, pfr + 1000.0 * mhv, color=CM, lw=1.0, label="Model: AC + HVDC")
