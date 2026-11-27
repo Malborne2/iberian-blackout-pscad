@@ -62,6 +62,7 @@ r = subprocess.run([sys.executable, os.path.join(HERE, "add_pumpheld.py"), "--ps
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_switchtimes.py"), "--pscx", PSCX, "--s2m", "2.0", "--l2n", "5.0"], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_exinit.py"), "--pscx", PSCX, "--t", "2.1"], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 r = subprocess.run([sys.executable, os.path.join(HERE, "trim_channels.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())   # S30 sec 23
+r = subprocess.run([sys.executable, os.path.join(HERE, "fix_poirms.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())   # S30 sec 25: POI RMS base
 v1res = {p.get("name"): p.get("value") for e in [x for x in src.find("definitions") if x.get("name") == "Main"][0].iter("User")
          if e.get("defn") == "ib6:RES_Plant" for p in e.findall("./paramlist/param")}
 
