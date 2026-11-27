@@ -40,6 +40,10 @@ log = open(os.path.join(OUTD, "run.log"), "w")
 def L(*x): print(*x, flush=True); print(*x, file=log, flush=True)
 L("work:", a.work)                                                    # read by run_dashboard.py
 L(f"start: {time.time():.0f}")                                         # dashboard: Windows keeps a rewritten run.log's creation time
+import subprocess as _sp0                                             # S30 sec 25: a solver left over from a killed run of this folder
+_sp0.run(["powershell", "-NoProfile", "-Command", "Get-CimInstance Win32_Process -Filter \"Name='v2.exe'\" | ? { $_.ExecutablePath -eq '"
+          + os.path.join(BUILD, "v2.exe").replace("/", "\\") + "' } | % { Stop-Process -Id $_.ProcessId -Force }"], capture_output=True)   # holds v2_01.out
+time.sleep(1)
 for _f in glob.glob(os.path.join(BUILD, "v2_*.out")): os.remove(_f)   # no stale samples from the previous run
 def _hook(et, ev, tb):                                                # S30: any crash is visible in run.log (dashboard)
     import traceback; L("RUN FAILED: " + "".join(traceback.format_exception_only(et, ev)).strip())
