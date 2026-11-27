@@ -119,11 +119,14 @@ try:
         import subprocess as _sp
         exe = os.path.join(BUILD, "v2.exe").replace("/", "\\")
         mask = sum(1 << int(x) for x in a.affinity.split(",")) if a.affinity else None
-        ps_ = ("$t=(Get-Date).AddSeconds(120); do { $q=Get-CimInstance Win32_Process -Filter \"Name='v2.exe'\" | ? { $_.ExecutablePath -eq '"
+        ps_ = ("$t=(Get-Date).AddSeconds(900); do { $q=Get-CimInstance Win32_Process -Filter \"Name='v2.exe'\" | ? { $_.ExecutablePath -eq '"
                + exe + "' }; Start-Sleep -Milliseconds 500 } until ($q -or (Get-Date) -gt $t); if($q){ $pp=Get-Process -Id $q.ProcessId; "
                + (f"$pp.ProcessorAffinity=[IntPtr]{mask}; " if mask else "") + (f"$pp.PriorityClass='{a.priority}'; " if a.priority else "")
-               + "'pinned ' + $q.ProcessId + ' mask ' + $pp.ProcessorAffinity + ' prio ' + $pp.PriorityClass }")
-        L("solver:", _sp.run(["powershell", "-NoProfile", "-Command", ps_], capture_output=True, text=True).stdout.strip())
+               + "'pinned ' + $q.ProcessId + ' mask ' + $pp.ProcessorAffinity + ' prio ' + $pp.PriorityClass } else { 'PIN FAILED: no v2.exe in 900 s' }")
+        def _pin():                                                   # in a thread: the progress loop must not wait for it
+            _r = _sp.run(["powershell", "-NoProfile", "-Command", ps_], capture_output=True, text=True)
+            L("solver:", (_r.stdout.strip() or "PIN FAILED: " + _r.stderr.strip()[-300:]), f"after {time.time() - t0:.0f} s")
+        import threading as _th; _th.Thread(target=_pin, daemon=True).start()
     import xml.etree.ElementTree as ETx
     WS = []                                                           # (file no, column) of every SyncUnit Wspd channel
     def _ws_index():
