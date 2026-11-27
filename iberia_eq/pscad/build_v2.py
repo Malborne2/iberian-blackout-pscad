@@ -52,6 +52,7 @@ r = subprocess.run([sys.executable, os.path.join(HERE, "add_pumpheld.py"), "--ps
 # S30 sec 13: machines take over (S2M) only after the RES plants are at full current, exciter references after that
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_switchtimes.py"), "--pscx", PSCX, "--s2m", "2.0", "--l2n", "5.0"], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
 r = subprocess.run([sys.executable, os.path.join(HERE, "add_exinit.py"), "--pscx", PSCX, "--t", "2.1"], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())
+r = subprocess.run([sys.executable, os.path.join(HERE, "trim_channels.py"), "--pscx", PSCX], capture_output=True, text=True); L(r.stdout.strip(), r.stderr.strip())   # S30 sec 23
 v1res = {p.get("name"): p.get("value") for e in [x for x in src.find("definitions") if x.get("name") == "Main"][0].iter("User")
          if e.get("defn") == "ib6:RES_Plant" for p in e.findall("./paramlist/param")}
 
@@ -336,16 +337,15 @@ try:
         lg("const", dict(Value="0.0"), {"OUT": "ZERO"}); lg("const", dict(Value="1.0"), {"OUT": "ONE_"})
         lg("time-sig", None, {"OUT": "TR"})
         lg("compare", dict(X="10.0", OL="0.0", OH="1.0"), {"I": "TR", "O": "UFEN"})   # under-frequency logic enabled at 10 s
+        # test hooks, always built and inert (Y2 = 0) unless --ftest/--vtest; patched later with set_test.py (no rebuild)
         for opt, sig in ((a.ftest, "FTEST"), (a.vtest, "VTEST")):
-            if opt:
-                t1, t2, dd = (float(x) for x in opt.split(":"))
-                lg("upramp", dict(X1=f"{t1:g}", X2=f"{t2:g}", Y2=f"{dd:g}"), {"I": "TR", "O": sig})
-                P_ = lg("pgb", dict(Name=sig)); q_ = list(P_.values())[0]; dlab(q_.x, q_.y, sig)
-                L(f"TEST INJECTION {sig}: 0 -> {dd:g} from {t1:g} to {t2:g} s (never in a real replay)")
+            t1, t2, dd = (float(x) for x in opt.split(":")) if opt else (1000.0, 1001.0, 0.0)
+            lg("upramp", dict(Name=f"{sig}_RAMP", X1=f"{t1:g}", X2=f"{t2:g}", Y2=f"{dd:g}"), {"I": "TR", "O": sig})
+            P_ = lg("pgb", dict(Name=sig)); q_ = list(P_.values())[0]; dlab(q_.x, q_.y, sig)
+            if opt: L(f"TEST INJECTION {sig}: 0 -> {dd:g} from {t1:g} to {t2:g} s (never in a real replay)")
         def ufstage(out, fsig, thr, delay=0.15):
             """out = 1 (latched) once fsig < thr for `delay` s: compare -> integral (0..1, T = delay) -> compare."""
-            if a.ftest:                                       # test injection: the stage sees f + FTEST
-                lg("sumjct", dict(D="ADD", F="ADD"), {"IND": fsig, "INF": "FTEST", "OUT": out + "f"}); fsig = out + "f"
+            lg("sumjct", dict(D="ADD", F="ADD"), {"IND": fsig, "INF": "FTEST", "OUT": out + "f"}); fsig = out + "f"   # test hook (0 = inert)
             lg("compare", dict(X=f"{thr}", OL="1.0", OH="0.0"), {"I": fsig, "O": out + "b"})
             lg("mult", None, {"IN1": out + "b", "IN2": "UFEN", "OUT": out + "c"})   # enabled from 10 s: meters read 0 Hz at start
             lg("integral", dict(T=f"{delay}", YHi="1.0", YLo="0.0", Yo="0.0"), {"I": out + "c", "O": out + "i", "R": "ZERO"})
@@ -405,8 +405,7 @@ try:
             sb = lab(b_)[2:]; v0 = (400 * V[b_] + a.pv_dv0) / 400; v1 = (400 * V[b_] + a.pv_dv1) / 400
             pvmw = a.pv_mw * a.pv_ftrip * pl / PVL                 # MW that trips at s = 1 [inf: rooftop PV in proportion to load]
             vin = f"VF_{sb}"
-            if a.vtest:                                       # test injection: rooftop PV sees V + VTEST
-                lg("sumjct", dict(D="ADD", F="ADD"), {"IND": vin, "INF": "VTEST", "OUT": f"PVv_{sb}"}); vin = f"PVv_{sb}"
+            lg("sumjct", dict(D="ADD", F="ADD"), {"IND": vin, "INF": "VTEST", "OUT": f"PVv_{sb}"}); vin = f"PVv_{sb}"   # test hook (0 = inert)
             lg("gain", dict(G=f"{1.0 / (v1 - v0):.6g}"), {"I": vin, "O": f"PVa_{sb}"})
             lg("const", dict(Value=f"{v0 / (v1 - v0):.6g}"), {"OUT": f"PVo_{sb}"})
             lg("sumjct", dict(D="ADD", F="SUBTRACT"), {"IND": f"PVa_{sb}", "INF": f"PVo_{sb}", "OUT": f"PVb_{sb}"})
