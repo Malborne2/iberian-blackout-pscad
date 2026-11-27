@@ -14,7 +14,7 @@ Sources per run tag (C:\PSCAD_work\v2_runs\<tag>\run.log, written by run_v2.py):
     shown like a finished run), running (the .out file grows), building/starting;
   - simulated time = first column of the last line of <work>\v2.gf81_x86\v2_01.out, its age flags a stall;
   - speed and ETA from the run.log creation time.
-Case generation in progress (build_v2.py) shows from <work>\build_v2.log written in the last 3 min.
+Case generation in progress (build_v2.py) shows from <work>\build_v2.log written in the last 10 min.
 """
 import argparse, glob, json, os, re, shutil, time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -99,7 +99,7 @@ def runs(filtered=True):
         res = [r for r in res if keep(r)]
     started = [r["t0"] for r in res if "t0" in r]
     for bl in glob.glob(os.path.join(WORK, "*", "build_v2.log")):
-        if now - os.path.getmtime(bl) < 180 and not any(s > os.path.getmtime(bl) for s in started):
+        if now - os.path.getmtime(bl) < 600 and not any(s > os.path.getmtime(bl) for s in started):
             last = open(bl, encoding="utf-8", errors="replace").read().strip().split("\n")[-1][:120]
             res.append(dict(tag="generating " + os.path.basename(os.path.dirname(bl)), state="generating", t=None, dur=None,
                             snap=None, age=now - os.path.getmtime(bl), wall=None, spd=None, eta=None,

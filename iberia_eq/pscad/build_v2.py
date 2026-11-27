@@ -157,7 +157,9 @@ try:
     def const(v, n, zone="CAT"):
         c_, P = ctl(zone, "master", "const", dict(Value=str(v))); dlab(list(P.values())[0].x, list(P.values())[0].y, n)
     CNT = {}
-    def count(k): CNT[k] = CNT.get(k, 0) + 1
+    def count(k):
+        CNT[k] = CNT.get(k, 0) + 1
+        if sum(CNT.values()) % 10 == 0: L(f"placing: {sum(CNT.values())} groups so far ({k})")   # S30 sec 23: progress for the dashboard
     # titles
     for title, zs in ROWS:
         a_ = cv.add_component("master", "annotation", ZX[zs[0]], ZY[zs[0]] - 9, 0); a_.parameters(AL1=title, AL2="")
