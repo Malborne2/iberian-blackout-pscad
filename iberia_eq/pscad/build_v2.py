@@ -29,6 +29,7 @@ ap.add_argument("--pv-mw", type=float, default=4447.0)  # rooftop PV < 1 MW prod
 ap.add_argument("--pv-ftrip", type=float, default=0.15) # fraction of it that trips at full band [inf, calibrated]
 ap.add_argument("--pv-dv0", type=float, default=3.0)    # trip band start above the load-flow bus voltage [kV] [inf]
 ap.add_argument("--pv-dv1", type=float, default=15.0)   # trip band end [kV] [inf]
+ap.add_argument("--api", action="store_true")         # place through the PSCAD automation API (old path, ~8 min); default: offline XML (S30 sec 23)
 ap.add_argument("--no-series", action="store_true")   # TIMING TEST ONLY (S30 sec 23): replay without the France breaker/meter and the Morocco breaker
 ap.add_argument("--no-frchain", action="store_true")  # TIMING TEST ONLY: without the France breaker + multimeter
 ap.add_argument("--no-brkma", action="store_true")    # TIMING TEST ONLY: without the Morocco breaker
@@ -67,11 +68,18 @@ W50 = 2 * math.pi * 50
 
 import mhi.pscad
 os.environ["PATH"] = os.path.join(WORK, "v2.gf81_x86") + os.pathsep + os.environ.get("PATH", "")   # S30 run-env fix
-pscad = mhi.pscad.launch(minimize=False, splash=False, timeout=60)
+def _launch():
+    p_ = mhi.pscad.launch(minimize=False, splash=False, timeout=60)
+    if not p_.licensed():
+        c = p_.get_available_certificates(); c = next(iter(c.values())) if isinstance(c, dict) else c[0]; p_.get_certificate(c)
+    return p_
+pscad = None
 try:
-    if not pscad.licensed():
-        c = pscad.get_available_certificates(); c = next(iter(c.values())) if isinstance(c, dict) else c[0]; pscad.get_certificate(c)
-    pscad.load(PSCX); prj = pscad.project("v2"); cv = prj.canvas("Main")
+    if a.api or a.probe:
+        pscad = _launch(); pscad.load(PSCX); prj = pscad.project("v2"); cv = prj.canvas("Main")
+    else:                                                             # S30 sec 23: write the schematic XML directly (seconds)
+        sys.path.insert(0, HERE); from pscx_canvas import OfflineCanvas
+        cv = OfflineCanvas(PSCX); T_GEN = time.time()
     L("Main canvas parameters:", cv.parameters() if hasattr(cv, "parameters") else "?")
     if a.probe:
         for k, (lib, nm) in enumerate((("v2", "SyncUnit"), ("v2", "RES_Plant"), ("v2", "PumpUnit"), ("master", "breaker3"),
@@ -451,8 +459,13 @@ try:
     missing = sorted(set(BN.values()) - set(PORTS) - {b for b in BN.values() if " term" in b and "Morocco" not in b})
     if missing: L("WARNING buses without hanging elements (no busbar):", missing)
     L("placed:", CNT)
-    prj.parameters(time_duration="2.0", time_step="20", sample_step="1000", PlotType="1", StartType="0")
-    prj.save()
+    if pscad is None:                                                 # offline: write the file, then PSCAD only loads + builds
+        cv.project_parameters(time_duration="2.0", time_step="20", sample_step="1000", PlotType="1", StartType="0"); cv.save()
+        L(f"offline generation: {time.time() - T_GEN:.1f} s")
+        if not a.nobuild: pscad = _launch(); pscad.load(PSCX); prj = pscad.project("v2")
+    else:
+        prj.parameters(time_duration="2.0", time_step="20", sample_step="1000", PlotType="1", StartType="0")
+        prj.save()
     if not a.nobuild:
         prj.build()
         msgs = [(str(getattr(m, "status", "")), getattr(m, "text", m)) for m in prj.messages()]
@@ -462,4 +475,4 @@ try:
         mp = os.path.join(WORK, "v2.gf81_x86", "v2.map")
         if os.path.exists(mp): L("MAP:", [ln.strip() for ln in open(mp) if ln.strip().startswith(("NODES", "NNODES", "BRANCHES"))])
 finally:
-    pscad.quit()
+    if pscad is not None: pscad.quit()
