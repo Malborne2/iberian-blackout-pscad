@@ -45,40 +45,55 @@ RES instance matching by rating: 21 plants, scale 0.005154; uncertain matches (>
 | 67.973 | 12:33:07.973 | LFDD ES | ES load factor 0.733->0.690 |  |
 | 67.975 | 12:33:07.975 | LFDD PT | PT load factor 0.855->0.782 |  |
 
-## Signal metrics (model - report)
+## Signal metrics (model - report), by tier
 
-| signal | phase | n | bias | RMSE | max abs err | r |
-|---|---|---|---|---|---|---|
-| 400 kV maximum voltage [kV] (Fig 3-7a) | P0 pre-event | 226 | +7.92 | 8.6 | 13 | 0.84 |
-| 400 kV maximum voltage [kV] (Fig 3-7a) | P1 slow rise | 77 | -0.806 | 46.2 | 138 | -0.13 |
-| 400 kV maximum voltage [kV] (Fig 3-7a) | P2 cascade | 13 | -96.5 | 114 | 186 | -0.42 |
-| 400 kV maximum voltage [kV] (Fig 3-7a) | P3 collapse | 0 | | | | |
-| 400 kV maximum voltage [kV] (Fig 3-7a) | all | 316 | +1.5 | 33.3 | 186 | -0.29 |
-| Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | P0 pre-event | 258 | +3.72 | 6.11 | 10.4 | 0.80 |
-| Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | P1 slow rise | 104 | -43.3 | 97.6 | 349 | -0.31 |
-| Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | P2 cascade | 12 | -167 | 185 | 287 | -0.72 |
-| Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | P3 collapse | 17 | -314 | 319 | 408 | -0.01 |
-| Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | all | 398 | -27.2 | 88.9 | 408 | -0.64 |
-| Iberian frequency [Hz] (Fig 1-10) | P0 pre-event | 29 | +0.0242 | 0.0248 | 0.0311 | -0.10 |
-| Iberian frequency [Hz] (Fig 1-10) | P1 slow rise | 77 | +1.02 | 1.34 | 2.85 | -0.58 |
-| Iberian frequency [Hz] (Fig 1-10) | P2 cascade | 12 | -0.656 | 0.902 | 1.67 | 0.96 |
-| Iberian frequency [Hz] (Fig 1-10) | P3 collapse | 15 | -2.48 | 2.58 | 3.73 | 0.94 |
-| Iberian frequency [Hz] (Fig 1-10) | all | 133 | +0.257 | 1.37 | 3.73 | 0.84 |
-| Frequency vs PMU [Hz] (Fig 4-89) | P0 pre-event | 0 | | | | |
-| Frequency vs PMU [Hz] (Fig 4-89) | P1 slow rise | 0 | | | | |
-| Frequency vs PMU [Hz] (Fig 4-89) | P2 cascade | 11 | -0.695 | 0.982 | 1.57 | 0.93 |
-| Frequency vs PMU [Hz] (Fig 4-89) | P3 collapse | 12 | -2.34 | 2.43 | 3.49 | 0.91 |
-| Frequency vs PMU [Hz] (Fig 4-89) | all | 23 | -1.55 | 1.88 | 3.49 | 0.94 |
-| Voltage vs PMU [pu] (Fig 4-90, Carmona) | P0 pre-event | 0 | | | | |
-| Voltage vs PMU [pu] (Fig 4-90, Carmona) | P1 slow rise | 0 | | | | |
-| Voltage vs PMU [pu] (Fig 4-90, Carmona) | P2 cascade | 13 | -0.477 | 0.545 | 0.843 | -0.16 |
-| Voltage vs PMU [pu] (Fig 4-90, Carmona) | P3 collapse | 13 | -0.683 | 0.713 | 0.977 | -0.68 |
-| Voltage vs PMU [pu] (Fig 4-90, Carmona) | all | 28 | -0.547 | 0.612 | 0.977 | -0.55 |
-| Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | P0 pre-event | 0 | | | | |
-| Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | P1 slow rise | 0 | | | | |
-| Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | P2 cascade | 13 | +2.49e+03 | 2.71e+03 | 4.56e+03 | 0.52 |
-| Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | P3 collapse | 13 | +283 | 1.85e+03 | 5.67e+03 | 0.52 |
-| Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | all | 27 | +1.4e+03 | 2.3e+03 | 5.67e+03 | 0.45 |
+| tier | signal | phase | n | bias | RMSE | max abs err | r |
+|---|---|---|---|---|---|---|---|
+| PRIMARY | Iberian frequency [Hz] (Fig 1-10) | P0 pre-event | 29 | +0.0242 | 0.0248 | 0.0311 | -0.10 |
+| PRIMARY | Iberian frequency [Hz] (Fig 1-10) | P1 slow rise | 77 | +1.02 | 1.34 | 2.85 | -0.58 |
+| PRIMARY | Iberian frequency [Hz] (Fig 1-10) | P2 cascade | 12 | -0.656 | 0.902 | 1.67 | 0.96 |
+| PRIMARY | Iberian frequency [Hz] (Fig 1-10) | P3 collapse | 15 | -2.48 | 2.58 | 3.73 | 0.94 |
+| PRIMARY | Iberian frequency [Hz] (Fig 1-10) | all | 133 | +0.257 | 1.37 | 3.73 | 0.84 |
+| PRIMARY | RoCoF [Hz/s] (Fig 1-10 derivative) | P0 pre-event | 29 | +0.00222 | 0.0109 | 0.0444 | -0.13 |
+| PRIMARY | RoCoF [Hz/s] (Fig 1-10 derivative) | P1 slow rise | 77 | +0.0148 | 0.698 | 2.67 | 0.02 |
+| PRIMARY | RoCoF [Hz/s] (Fig 1-10 derivative) | P2 cascade | 12 | -0.703 | 0.777 | 1.17 | 0.21 |
+| PRIMARY | RoCoF [Hz/s] (Fig 1-10 derivative) | P3 collapse | 14 | -0.53 | 1.03 | 2.02 | -0.34 |
+| PRIMARY | RoCoF [Hz/s] (Fig 1-10 derivative) | all | 132 | -0.111 | 0.672 | 2.67 | 0.34 |
+| PRIMARY | Frequency at La Cereal vs PMU [Hz] (Fig 4-89; model MAD) | P0 pre-event | 0 | | | | | |
+| PRIMARY | Frequency at La Cereal vs PMU [Hz] (Fig 4-89; model MAD) | P1 slow rise | 0 | | | | | |
+| PRIMARY | Frequency at La Cereal vs PMU [Hz] (Fig 4-89; model MAD) | P2 cascade | 11 | -5.53 | 5.87 | 8.63 | 0.57 |
+| PRIMARY | Frequency at La Cereal vs PMU [Hz] (Fig 4-89; model MAD) | P3 collapse | 12 | -5.79 | 7.55 | 11.9 | -0.60 |
+| PRIMARY | Frequency at La Cereal vs PMU [Hz] (Fig 4-89; model MAD) | all | 23 | -5.66 | 6.8 | 11.9 | -0.11 |
+| PRIMARY | Accumulated loss + net load increase [MW] (Fig 3-7a) | P0 pre-event | 226 | -227 | 234 | 331 | 0.97 |
+| PRIMARY | Accumulated loss + net load increase [MW] (Fig 3-7a) | P1 slow rise | 77 | -483 | 484 | 778 | -0.00 |
+| PRIMARY | Accumulated loss + net load increase [MW] (Fig 3-7a) | P2 cascade | 13 | -2.35e+03 | 2.59e+03 | 4.31e+03 | nan |
+| PRIMARY | Accumulated loss + net load increase [MW] (Fig 3-7a) | P3 collapse | 0 | | | | | |
+| PRIMARY | Accumulated loss + net load increase [MW] (Fig 3-7a) | all | 316 | -376 | 610 | 4.31e+03 | 0.51 |
+| PRIMARY | Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | P0 pre-event | 0 | | | | | |
+| PRIMARY | Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | P1 slow rise | 0 | | | | | |
+| PRIMARY | Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | P2 cascade | 13 | +2.49e+03 | 2.71e+03 | 4.56e+03 | 0.52 |
+| PRIMARY | Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | P3 collapse | 13 | +283 | 1.85e+03 | 5.67e+03 | 0.52 |
+| PRIMARY | Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR) | all | 27 | +1.4e+03 | 2.3e+03 | 5.67e+03 | 0.45 |
+| SECONDARY | 400 kV maximum voltage RISE from 12:32:00 [kV] | P0 pre-event | 226 | -2.85 | 4.39 | 9.31 | 0.84 |
+| SECONDARY | 400 kV maximum voltage RISE from 12:32:00 [kV] | P1 slow rise | 77 | -11.6 | 47.6 | 129 | -0.13 |
+| SECONDARY | 400 kV maximum voltage RISE from 12:32:00 [kV] | P2 cascade | 13 | -107 | 124 | 197 | -0.42 |
+| SECONDARY | 400 kV maximum voltage RISE from 12:32:00 [kV] | P3 collapse | 0 | | | | | |
+| SECONDARY | 400 kV maximum voltage RISE from 12:32:00 [kV] | all | 316 | -9.27 | 34.6 | 197 | -0.29 |
+| SECONDARY | Voltage at La Cereal vs PMU [pu] (Fig 4-90; model MAD) | P0 pre-event | 0 | | | | | |
+| SECONDARY | Voltage at La Cereal vs PMU [pu] (Fig 4-90; model MAD) | P1 slow rise | 0 | | | | | |
+| SECONDARY | Voltage at La Cereal vs PMU [pu] (Fig 4-90; model MAD) | P2 cascade | 13 | -0.466 | 0.503 | 0.824 | -0.00 |
+| SECONDARY | Voltage at La Cereal vs PMU [pu] (Fig 4-90; model MAD) | P3 collapse | 13 | -0.736 | 0.771 | 1.02 | -0.85 |
+| SECONDARY | Voltage at La Cereal vs PMU [pu] (Fig 4-90; model MAD) | all | 28 | -0.571 | 0.629 | 1.02 | -0.68 |
+| TERTIARY | 400 kV maximum voltage [kV] (Fig 3-7a) | P0 pre-event | 226 | +7.92 | 8.6 | 13 | 0.84 |
+| TERTIARY | 400 kV maximum voltage [kV] (Fig 3-7a) | P1 slow rise | 77 | -0.806 | 46.2 | 138 | -0.13 |
+| TERTIARY | 400 kV maximum voltage [kV] (Fig 3-7a) | P2 cascade | 13 | -96.5 | 114 | 186 | -0.42 |
+| TERTIARY | 400 kV maximum voltage [kV] (Fig 3-7a) | P3 collapse | 0 | | | | | |
+| TERTIARY | 400 kV maximum voltage [kV] (Fig 3-7a) | all | 316 | +1.5 | 33.3 | 186 | -0.29 |
+| TERTIARY | Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | P0 pre-event | 258 | +3.72 | 6.11 | 10.4 | 0.80 |
+| TERTIARY | Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | P1 slow rise | 104 | -43.3 | 97.6 | 349 | -0.31 |
+| TERTIARY | Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | P2 cascade | 12 | -167 | 185 | 287 | -0.72 |
+| TERTIARY | Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | P3 collapse | 17 | -314 | 319 | 408 | -0.01 |
+| TERTIARY | Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5) | all | 398 | -27.2 | 88.9 | 408 | -0.64 |
 
 ## Sequence: Table 3-3 plant trips
 
@@ -119,5 +134,3 @@ Table 3-3 trips reproduced: 0 of 11
 | minimum frequency [Hz] | 47.408 | 37.137 |
 | maximum 400 kV voltage [kV] | 446.779 | 619.231 |
 | Carmona voltage at 12:32:56 [kV] | 426.915 | 419.621 |
-
-figures: iberia_eq/pscad/figs/fid_rp_cascade_overview.png, _sequence.png, _collapse.png, _score.png

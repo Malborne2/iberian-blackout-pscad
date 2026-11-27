@@ -130,26 +130,39 @@ def sig_metrics(name, trep, yrep, tmod, ymod):
         r = np.corrcoef(ym, yrep[m])[0, 1] if np.std(ym) > 0 and np.std(yrep[m]) > 0 else np.nan
         rows.append((ph, dict(n=int(m.sum()), bias=e.mean(), rmse=np.sqrt((e ** 2).mean()), maxe=np.abs(e).max(), r=r)))
     return name, rows
-r0 = (F37["t_sim_s"] < 3); m0 = (tp >= 0) & (tp < 3)                     # voltage RISE from 12:32:00 (lesson 4)
-SIG = [sig_metrics("400 kV maximum voltage [kV] (Fig 3-7a)", F37["t_sim_s"], F37["Vmax_400kV"], tp, Vmax),
-       sig_metrics("400 kV maximum voltage RISE from 12:32:00 [kV]", F37["t_sim_s"], F37["Vmax_400kV"] - np.nanmean(F37["Vmax_400kV"][r0]),
-                   tp, Vmax - (Vmax[m0].mean() if m0.any() else Vmax[0])),
-       sig_metrics("Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5)", np.r_[F35["t_sim_s"], F110["t_sim_s"]],
-                   np.r_[F35["V_carmona_kV"], F110["V_carmona_kV"]], tw, Vw),
-       sig_metrics("Iberian frequency [Hz] (Fig 1-10)", F110["t_sim_s"], F110["f_iberia_Hz"], tr, Fmean),
-       sig_metrics("Frequency vs PMU at La Cereal [Hz] (Fig 4-89; model MAD PMU)", F489["t_sim_s"], F489["f_pmu_Hz"], tmad, fmad),
-       sig_metrics("Voltage vs PMU at La Cereal [pu] (Fig 4-90; model MAD)", F490["t_sim_s"], F490["V_pmu_pu"], tmad, Vmad / 400.0)]
-if pfr is not None:
-    SIG.append(sig_metrics("Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR)", F491["t_sim_s"], F491["P_pmu_MW"], tr, pfr + 1000.0 * mhv))
-M("\n## Signal metrics (model - report)\n\n| signal | phase | n | bias | RMSE | max abs err | r |\n|---|---|---|---|---|---|---|")
-for name, rows in SIG:
-    for ph, d in rows:
-        if d: M(f"| {name} | {ph} | {d['n']} | {d['bias']:+.3g} | {d['rmse']:.3g} | {d['maxe']:.3g} | {d['r']:.2f} |")
-        else: M(f"| {name} | {ph} | 0 | | | | |")
-
-# cumulative generation loss: report Fig 3-7a vs model RES trips (+ event-1 317 MW the model would have to produce)
+# cumulative generation loss: report Fig 3-7a vs model (forced drivers + relay trips + rooftop PV)
 cumt = np.array([e["t"] for e in MEV if e["kind"] == "RES trip"]); cumw = np.array([e["mw"] for e in MEV if e["kind"] == "RES trip"])
 def mcum(x): return np.array([cumw[cumt <= xx].sum() for xx in x])
+drv = np.zeros_like(tr)
+for gname, gmw in (("RF_N", 2622.0), ("RF_S", 12943.0), ("RF_O", 5025.0)):   # MW of each driver group (build log)
+    v_ = g(gname)
+    if v_ is not None: drv = drv + (1.0 - v_) * gmw
+PVMW = np.zeros_like(tr)                                    # rooftop PV tripped [MW] from the PVF_<bus> factors is not recorded per bus;
+MCUM = drv + mcum(tr) + PVMW                                # the recorded PVF_MAD/PVF_CAT are shown in the overview only
+# RoCoF: report from the digitised Fig 1-10 Iberian frequency (0.25 s steps), model from the machine mean (0.5 s smoothing)
+rf_t = F110["t_sim_s"]; rf_r = np.gradient(F110["f_iberia_Hz"], rf_t)
+nsm = max(1, int(round(0.5 / (t[1] - t[0])))); Fs = np.convolve(Fmean, np.ones(nsm) / nsm, mode="same"); mroc = np.gradient(Fs, tr)
+
+r0 = (F37["t_sim_s"] < 3); m0 = (tp >= 0) & (tp < 3)                     # voltage RISE from 12:32:00 (lesson 4)
+# tiers (owner, 2026-11-27): PRIMARY = system-level quantities (preserved by aggregation); SECONDARY = voltage changes at zone
+# buses; TERTIARY = absolute bus voltage levels (a zone bus stands for several substations, ±5 kV inside a zone)
+SIG = [("PRIMARY",) + sig_metrics("Iberian frequency [Hz] (Fig 1-10)", F110["t_sim_s"], F110["f_iberia_Hz"], tr, Fmean),
+       ("PRIMARY",) + sig_metrics("RoCoF [Hz/s] (Fig 1-10 derivative)", rf_t, rf_r, tr, mroc),
+       ("PRIMARY",) + sig_metrics("Frequency at La Cereal vs PMU [Hz] (Fig 4-89; model MAD)", F489["t_sim_s"], F489["f_pmu_Hz"], tmad, fmad),
+       ("PRIMARY",) + sig_metrics("Accumulated loss + net load increase [MW] (Fig 3-7a)", F37["t_sim_s"], F37["cum_imbalance_MW"], tr, MCUM)]
+if pfr is not None:
+    SIG.append(("PRIMARY",) + sig_metrics("Spain-France P vs PMU [MW] (Fig 4-91, + = ES->FR)", F491["t_sim_s"], F491["P_pmu_MW"], tr, pfr + 1000.0 * mhv))
+SIG += [("SECONDARY",) + sig_metrics("400 kV maximum voltage RISE from 12:32:00 [kV]", F37["t_sim_s"], F37["Vmax_400kV"] - np.nanmean(F37["Vmax_400kV"][r0]),
+                                     tp, Vmax - (Vmax[m0].mean() if m0.any() else Vmax[0])),
+        ("SECONDARY",) + sig_metrics("Voltage at La Cereal vs PMU [pu] (Fig 4-90; model MAD)", F490["t_sim_s"], F490["V_pmu_pu"], tmad, Vmad / 400.0),
+        ("TERTIARY",) + sig_metrics("400 kV maximum voltage [kV] (Fig 3-7a)", F37["t_sim_s"], F37["Vmax_400kV"], tp, Vmax),
+        ("TERTIARY",) + sig_metrics("Carmona 400 kV voltage [kV] (Fig 1-10 + 3-5)", np.r_[F35["t_sim_s"], F110["t_sim_s"]],
+                                    np.r_[F35["V_carmona_kV"], F110["V_carmona_kV"]], tw, Vw)]
+M("\n## Signal metrics (model - report), by tier\n\n| tier | signal | phase | n | bias | RMSE | max abs err | r |\n|---|---|---|---|---|---|---|---|")
+for tier, name, rows in SIG:
+    for ph, d in rows:
+        if d: M(f"| {tier} | {name} | {ph} | {d['n']} | {d['bias']:+.3g} | {d['rmse']:.3g} | {d['maxe']:.3g} | {d['r']:.2f} |")
+        else: M(f"| {tier} | {name} | {ph} | 0 | | | | | |")
 
 # ------------------------------------------------------------------ sequence matching (Table 3-3 / 3-1)
 T33 = {"R1_Granada": "3", "R2_Badajoz4a": "4a", "R3_Badajoz4b": "4b", "R4_Badajoz5b1": "5b1", "R7_BadajozTS3": "6a3",
@@ -271,18 +284,30 @@ fig.tight_layout(); fig.savefig(os.path.join(HERE, "figs", f"fid_{a.tag}_collaps
 
 # ------------------------------------------------------------------ FIGURE 4: scorecard
 fig, ax = plt.subplots(1, 2, figsize=(14, 6.5))
-lab, val, scal = [], [], []
-for name, rows in SIG:
+lab, nv, tiers = [], [], []
+TOL = {"Iberian frequency": 0.1, "RoCoF": 0.2, "Frequency at La Cereal": 0.1, "Accumulated loss": 300.0, "Spain-France": 500.0,
+       "400 kV maximum voltage RISE": 3.0, "Voltage at La Cereal": 0.025, "400 kV maximum voltage [": 8.0, "Carmona": 8.0}
+for tier, name, rows in SIG:
+    sc = next((s for k, s in TOL.items() if name.startswith(k)), 1.0)
     for ph, d in rows:
-        if d and ph != "all": lab.append(f"{name.split('[')[0].strip()} | {ph.split()[0]}"); val.append(d["rmse"]); scal.append(name)
-unit_scale = {"400 kV": 10.0, "Carmona": 10.0, "Iberian": 0.1, "Frequency vs PMU": 0.1, "Voltage vs PMU": 0.025, "Spain-France": 500.0}
-nv = []
-for l_, v_ in zip(lab, val):
-    sc = next((s for k, s in unit_scale.items() if l_.startswith(k)), 1.0); nv.append(v_ / sc)
+        if d and ph != "all":
+            lab.append(f"{tier[0]} | {name.split('[')[0].strip()} | {ph.split()[0]}"); nv.append(min(d["rmse"] / sc, 3.0)); tiers.append(tier)
 cols_ = ["#27ae60" if x <= 0.5 else ("#f39c12" if x <= 1.0 else "#c0392b") for x in nv]
-ax[0].barh(range(len(nv)), nv, color=cols_); ax[0].set_yticks(range(len(nv))); ax[0].set_yticklabels(lab, fontsize=8)
+ax[0].barh(range(len(nv)), nv, color=cols_, edgecolor=["k" if t_ == "PRIMARY" else "none" for t_ in tiers], linewidth=1.2)
+ax[0].set_yticks(range(len(nv))); ax[0].set_yticklabels(lab, fontsize=8)
+for k, t_ in enumerate(tiers):
+    if t_ == "PRIMARY": ax[0].get_yticklabels()[k].set_fontweight("bold")
 ax[0].axvline(0.5, color="#27ae60", ls="--", lw=1); ax[0].axvline(1.0, color="#c0392b", ls="--", lw=1); ax[0].invert_yaxis()
-ax[0].set_xlabel("RMSE / tolerance  (tolerance: 10 kV, 0.1 Hz, 0.025 pu, 500 MW)"); ax[0].set_title("Signal fidelity per phase")
+ax[0].set_xlabel("RMSE / tolerance (capped at 3)\nP: 0.1 Hz, 0.2 Hz/s, 300 MW, 500 MW   S: 3 kV rise, 0.025 pu   T: 8 kV")
+PS = {}
+for tier, name, rows in SIG:
+    if tier != "PRIMARY": continue
+    sc = next((s for k, s in TOL.items() if name.startswith(k)), 1.0)
+    for ph, d in rows:
+        if d and ph != "all": PS.setdefault(ph.split()[0], []).append(min(d["rmse"] / sc, 3.0))
+pss = "  ".join(f"{k} {np.mean(v):.2f}" for k, v in PS.items())
+ax[0].set_title(f"Signal fidelity per phase (P primary = system level, bold)\nPRIMARY SCORE (mean RMSE/tol, lower is better): {pss}", fontsize=10)
+M(f"\n**Primary score** (mean RMSE/tolerance of the system-level metrics, lower is better, ≤ 0.5 good, > 1 poor): {pss}")
 seq_err = [abs(s["tmod"] - s["trep"]) for s in SEQ if np.isfinite(s["tmod"])]
 cats = ["plant trips\nreproduced", "defence-plan\nthresholds reached", "median |timing\nerror| [s]"]
 dpr = sum(np.isfinite(tm) for _, _, tm in DP[:7])

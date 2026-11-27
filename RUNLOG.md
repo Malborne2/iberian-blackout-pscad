@@ -619,6 +619,31 @@ forced frequency tests) is exercised in ≈ 20 s cold runs in parallel before th
 < 70°) → parallel compressed pre-event runs with snapshot at report 75 s → parallel 1:1 core variants → fidelity
 analysis per batch.
 
+### 22. Fidelity scoring by tiers (owner decision); La Cereal correction (2026-11-27, agent: claude-main)
+
+**Owner decision:** the system-level quantities are the main scores.
+
+**`fidelity_v2.py` tiers:**
+- **PRIMARY** (preserved by aggregation): Iberian frequency (Fig 1-10), RoCoF (derivative of Fig 1-10), frequency at
+  La Cereal vs PMU (Fig 4-89), accumulated loss + net load increase (Fig 3-7a; model = forced drivers + relay trips
+  [+ rooftop PV]), Spain–France P vs PMU (Fig 4-91), plus the event-sequence and defence-plan timing.
+- **SECONDARY** (changes at zone buses): 400 kV maximum rise from 12:32:00, La Cereal voltage in pu.
+- **TERTIARY** (absolute levels): 400 kV maximum, Carmona.
+- Tolerances: 0.1 Hz, 0.2 Hz/s, 300 MW, 500 MW; 3 kV rise, 0.025 pu; 8 kV level.
+- **Primary score** = mean RMSE/tolerance of the primary metrics per phase (≤ 0.5 good, > 1 poor), shown on the
+  scorecard figure and in `fid_<tag>.md`.
+
+**Bus mapping** (report point → model zone bus): Carmona → WAN; La Cereal → MAD; Granada, Málaga → GRA; Badajoz
+TS → BAD-TS; Sevilla / Cádiz / Huelva → WAN-TS / WAN; Cáceres, Almaraz → CAC; Segovia → CYL; Cuenca, Olmedilla →
+VAL; Murcia, Tabernas → SE; Cabra, Guadame, Manzanares → SCE; Vic → CAT.
+
+**Correction:** [FR] Figs 4-89/4-90 are measured at **La Cereal 400 kV (north of Madrid)**, [FR] p.299, not Carmona.
+§20 compared them with WAN; they now use the MAD bus (PMU frequency of the bus voltage).
+
+**Comparison strategy for aggregated buses:** primary system quantities; voltage changes rather than levels; zone ranking
+for the spatial pattern; the time-free V vs accumulated MW relation; per-plant trips for the 11 Table 3-3 plants;
+tolerance bands.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
