@@ -499,6 +499,40 @@ hundreds of interleaved inverters.
 - **KA 80 stays.** The three runs' outputs and work folders are deleted after this entry.
 - `run_dashboard.py --clear` crashed when a run folder was deleted mid-scan; it now skips such folders.
 
+### 19. First replay runs: forced pre-event minute; cascade run launched (2026-11-26/27, agent: claude-main)
+
+**Replay settle `rp_settle30`** (`build_v2.py --replay`, `C:\PSCAD_work\v2sld_r`, 171 nodes, 0 errors; cold, 30 s,
+snapshot at 28 s; 475 s wall per simulated s):
+- stable: f 49.9945–50.0057 Hz over 20–30 s;
+- all event logic dormant (BRK* = 0, M_ES = M_PT = MHV = RF_* = 1);
+- France AC tie +107 MW / +360 Mvar (report ≈ 500 MW AC at 12:32:00, [CA] p.104): low;
+- figure `iberia_eq/pscad/figs/plot_rp_settle30.png`.
+
+**Variants** (`iberia_eq/pscad/make_replay.py`, settings in `C:\PSCAD_work\<name>\replay_settings.txt`):
+- `rp_forced`: nuclear trips (G2 112.702 s / −0.855 pu; G1 113.515 / −0.594; G3 113.590 / −0.789); RES relays parked.
+- `rp_cascade`: as `rp_forced`, plus the 11 Table 3-3 relays. Threshold = model pre-event bus V (PMU mean 26–28 s) +
+  (report V at trip − report pre-event V), MeasSide 1 (POI), Trel 0.05 s, Tt1 0.1 s (Granada 0.02 s):
+  - Granada 425.7 kV;
+  - Badajoz 438.0 / 441.7 / 446.0 / 450.7 kV;
+  - Sevilla 441.6, Cádiz 454.7, Cáceres 448.4, Segovia 439.2, Málaga 450.4, Cuenca 452.2 kV.
+
+**Run incidents:**
+- A failed launch of `rp_forced` closed **rp_cascade's** freshly started PSCAD: the orphan cleanup closed every new
+  Pscad.exe. `run_v2.py` now closes only its own children (ParentProcessId = its PID). rp_cascade was relaunched.
+- The 30,000 s `timeout` wrapper killed `rp_forced` at t = 86.2 s, i.e. 12:32:56, so the pre-event minute is complete.
+  The wrapper was removed from rp_cascade (only the timeout.exe process was killed; the run continues).
+  Long replay runs need no timeout wrapper (the run_v2 stall check covers hangs).
+
+**`rp_forced` result** (`python iberia_eq/pscad/replay_fig.py rp_forced`, new script; figure
+`iberia_eq/pscad/figs/replay_rp_forced.png`), 12:32:00 → 12:32:56:
+- the drivers act: RF_N 1 → 0.92 (2a steps + ramp), RF_S 1 → 0.985;
+- **400 kV maximum 420 → 424 kV, mean 409 → 410 kV. Report: 421.8 kV at event 3. Close.**
+- France total export (AC + HVDC) ≈ 1,100 → 730 MW. Report ≈ 1,500 → 450 MW. The level is ≈ 400 MW low (AC flow
+  at the start) and the fall is a third of the report's 1,050 MW. The missing part is the ≈ 550 MW net-demand rise
+  ([CA] p.88), which needs the rooftop-PV block P2 (not built yet).
+- Frequency within ±0.05 Hz.
+- **Open:** P2 rooftop PV (bench first); France source angle (initial AC flow).
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
