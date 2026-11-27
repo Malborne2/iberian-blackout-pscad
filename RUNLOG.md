@@ -578,6 +578,47 @@ t = 60 s): `rp_kiqe005` (embedded Kiq 0.005) and `rp_kiqe0` (loop off).
 - Spain's net exchange (Fig 3-5) cannot be rebuilt from the recorded channels (no line flows); only the
   Spain–France tie is compared.
 
+### 21. Lessons from the first cascade run, and the replay plan v2 (owner approved, 2026-11-27, agent: claude-main)
+
+**Lessons:**
+1. The failure (E3 CAT growing 0.12 Hz mode) was visible in the first 10–20 s after the snapshot and in `sld_drift60`
+   (spread 12 → 24 mHz), but was logged as "watch". **Gate rule:** a settle passes only if the measured growth of the
+   inter-machine oscillation is zero or negative. Long runs get live health checks (inter-machine spread, any unit
+   drifting) and stop themselves on failure.
+2. A long run was launched with known gaps (no rooftop PV, France flow 400 MW low, start voltage 10 kV high).
+   **Rule:** pre-launch checklist; no long run with an open item.
+3. Analysis tooling was untested on the hard parts (RES instance matching failed after 12 h). **Rule:** instance →
+   unit mapping is read from the build (Main.f calls each module instance in order with literal parameters), and every
+   analysis script is tested on a short run first.
+4. The absolute 400 kV maximum depends on which buses are counted (≈ 10 kV). Use instead the voltage rise from
+   12:32:00, the Carmona level, and the time-free relation V vs accumulated MW lost (Fig 3-7).
+5. Tooling fixed already: launch race, own-child cleanup, no timeout wrapper, dashboard recency.
+
+**Accelerated timeline (owner suggestion, feasibility assessed):**
+- Report 0–76 s (12:32:00–12:33:16): driver-dominated and close to quasi-static → compressed **5×** (76 s → 15.2 s
+  model). Risk: slow Q loops lag a faster ramp. Check: compressed run vs the 1:1 `rp_forced` data, V vs driver
+  progress, within 1–2 kV.
+- Report 76–86 s (cascade, collapse): relay delays, inertia / RoCoF, defence-plan delays and out-of-step are physical
+  time → **1:1**.
+- Map: m = t0 + r/5 (r < 76 s), then m = t0 + 15.2 + (r − 76). Results are plotted on report time through the inverse
+  map. In compressed phases only quasi-static quantities are compared; in the 1:1 phase full dynamics and timing.
+- **Snapshot chaining:** a snapshot at report 75 s, then every cascade variant reruns only ≈ 10 s model (≈ 1.5 h,
+  parallel).
+
+**Changes before the next long run:** (1) E3 CAT / embedded-unit instability (Q-loop tests `rp_kiqe005`, `rp_kiqe0`;
+fallback: loading 0.75 with Σ H·S kept); (2) rooftop PV P2 as a latched voltage-dependent zone load factor (0 nodes),
+calibrated to +317 MW; (3) France: source angle for ≈ 500 MW AC at 12:32:00, Z for the 4,609 MW peak, BRKFR forced at
+31b first; (4) time warp in the replay logic; (5) instance mapping from Main.f, spread health metric and auto-stop;
+(6) fidelity tool on warped time, tested on short runs.
+
+**Test strategy (owner: "test everything in short runs thoroughly before committing to the long runs"):** a build
+option sets a small t0 (6 s), so that all replay logic (drivers, rooftop PV, time warp, BRKFR, defence plans with
+forced frequency tests) is exercised in ≈ 20 s cold runs in parallel before the real settle and replay.
+
+**Run sequence:** rebuild → cold settle 30 s (gates: growth ≤ 0, Vt within 1 % of the load flow, internal angles
+< 70°) → parallel compressed pre-event runs with snapshot at report 75 s → parallel 1:1 core variants → fidelity
+analysis per batch.
+
 ## Session 29 — 2026-11-25 — agent: claude-main (Windows, owner's machine): R2 adopted, two report-based fixes
 
 ### 1. Session 28 reviewed and reproduced; R2 adopted as the base (user decision)
